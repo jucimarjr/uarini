@@ -10,7 +10,12 @@
 	{R,0},
 ]).
 
-new([]) -> spawn fun thread().
+
+new([]) -> 
+	
+	set_atribute(R,15),
+	A=get_atribute(R),
+	spawn fun thread().
 
 thread() ->
 	receive
