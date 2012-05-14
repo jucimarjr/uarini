@@ -5,3 +5,6 @@ priv
 *.beam
 *.plt
 *.swp
+.DS_store
+uarini_lexer.erl
+uarini_parser.erl

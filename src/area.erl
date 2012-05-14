@@ -2,7 +2,7 @@
 -constructor(new/1).
 -export([ area/1 ]).
 
--def_atributes([
+-def_atributtes([
 	{R,0},
 ]).
 

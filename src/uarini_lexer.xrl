@@ -4,11 +4,10 @@ Definitions.
 
 % Begin Keywords
 
-Class = class
-Constructor = constructor
-DefAtributtes = def_atributtes
-Import = import
-
+Class = -class
+Constructor = -constructor
+DefAtributtes = -def_atributtes
+Export = -export
 
 % End Keywords
 
@@ -29,7 +28,8 @@ Dot					= \.
 Comma				= ,
 Semicolon			= ;
 
-Type = -
+Barra			= \/
+
 BeginStmt = ->
 
 % Symbols End
@@ -45,17 +45,31 @@ MultOp			= (\*|/)
 ModulusOp		= (\%)
 IncrementOp		= (\+\+|--)
 
+SendOp		= !
+
 % End Operator
+
+Digit				= [0-9]
+Identifier			= [a-zA-Z_][a-zA-Z0-9_]*
 
 WhiteSpace	= [\r|\s|\n|\t|\f]
 
 Rules.
 
 {Comment}			: skip_token.
+{WhiteSpace}+		: skip_token.
 {EndOfLineComment}	: skip_token.
 
-{Import}	: {token, {import,	TokenLine, list_to_atom(TokenChars)}}.
-{Class}		: {token, {class,	TokenLine, list_to_atom(TokenChars)}}.
+{Identifier}	: {token, {identifier, TokenLine, list_to_atom(TokenChars)}}.
+
+
+{Import}			: {token, {import, TokenLine, list_to_atom(TokenChars)}}.
+
+{Class}				: {token, {class, TokenLine, list_to_atom(TokenChars)}}.
+{Constructor}		: {token, {constructor,	TokenLine, list_to_atom(TokenChars)}}.
+{DefAtributtes}		: {token, {def_atributtes, TokenLine, list_to_atom(TokenChars)}}.
+{Export}			: {token, {export, TokenLine, list_to_atom(TokenChars)}}.
+
 {ImportAll}			: {token, {list_to_atom(TokenChars), TokenLine}}.
 {OpenParentheses}	: {token, {list_to_atom(TokenChars), TokenLine}}.
 {CloseParentheses}	: {token, {list_to_atom(TokenChars), TokenLine}}.
@@ -67,6 +81,13 @@ Rules.
 {Comma}			: {token, {list_to_atom(TokenChars), TokenLine}}.
 {Semicolon}		: {token, {list_to_atom(TokenChars), TokenLine}}.
 {AttributionOp}	: {token, {list_to_atom(TokenChars), TokenLine}}.
-{Type}	: {token, {list_to_atom(TokenChars), TokenLine}}.
+
+{SendOp}	: {token, {list_to_atom(TokenChars), TokenLine}}.
+{Barra}		: {token, {list_to_atom(TokenChars), TokenLine}}.
+{BeginStmt}	: {token, {list_to_atom(TokenChars), TokenLine}}.
+
+{Digit}+		: {token, {integer, TokenLine, list_to_integer(TokenChars)}}.
+{Digit}+\.{Digit}+	: {token, {float, TokenLine, list_to_float(TokenChars)}}.
+{Identifier}	: {token, {identifier, TokenLine, list_to_atom(TokenChars)}}.
 
 Erlang code.
