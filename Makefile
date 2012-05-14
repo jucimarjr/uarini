@@ -9,10 +9,9 @@ ERL=erl -noshell -pa $(EBIN_DIR) -pa $(TEST_EBIN_DIR)
 JAVAC=javac -verbose
 JAVA=java
 
-.PHONY: clean debug
-
 # This is the default task
-compile: ebin/jaraki.beam src/jaraki_lexer.erl src/jaraki_parser.erl test/ebin/test.beam 
+#compile: ebin/uarini.beam src/uarini_lexer.erl src/uarini_parser.erl test/ebin/test.beam 
+compile: ebin/uarini.beam src/uarini_lexer.erl 
 
 test:   compile
 	@ clear
@@ -28,7 +27,7 @@ test:   compile
 debug: ERLC += +debug_info
 debug: compile
 
-ebin/jaraki.beam: $(INCLUDE_DIR)/*.hrl src/*.erl
+ebin/uarini.beam: src/*.erl
 	@ echo Compiling Erlang source...
 	@ mkdir -p $(EBIN_DIR)
 	@ $(ERLC) -o $(EBIN_DIR) src/*.erl
@@ -41,14 +40,14 @@ $(TEST_EBIN_DIR)/test.beam : test/*.erl
 	@ $(ERLC) -o $(TEST_EBIN_DIR) test/test.erl
 	@ echo  
 
-src/jaraki_lexer.erl: src/jaraki_lexer.xrl
+src/uarini_lexer.erl: src/uarini_lexer.xrl
 	@ echo Compiling Lexer ...
 	@ $(ERL) -eval 'leex:file("$<"), halt().'
 	@ mkdir -p $(EBIN_DIR)
 	@ $(ERLC) -o $(EBIN_DIR) $@
 	@ echo
 
-src/jaraki_parser.erl: src/jaraki_parser.yrl
+src/uarini_parser.erl: src/uarini_parser.yrl
 	@ echo Compiling Parser ...
 	@ $(ERL) -eval 'yecc:file("$<", [{verbose, true}]), halt().'
 	@ mkdir -p $(EBIN_DIR)
@@ -68,8 +67,8 @@ clean:
 	rm -f erl_crash.dump
 	rm -f *.erl
 	rm -f *.java
-	rm -f $(SRC_DIR)/jaraki_lexer.erl
-	rm -f $(SRC_DIR)/jaraki_parser.erl
+	rm -f $(SRC_DIR)/uarini_lexer.erl
+	rm -f $(SRC_DIR)/uarini_parser.erl
 	rm -rf $(EBIN_DIR)/
 	rm -rf $(TEST_EBIN_DIR)/
 	rm -rf $(JAVA_CLASS_DIR)/
