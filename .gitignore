@@ -8,3 +8,6 @@ priv
 .DS_store
 uarini_lexer.erl
 uarini_parser.erl
+.metadata/
+*.log
+*.dump
