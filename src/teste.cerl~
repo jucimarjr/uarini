@@ -1,7 +1,0 @@
--class(area).
--def_atributtes([
-	{R,0},{R,0.234},{R,"teste"},{R,4}]).
--export([area/1,area/2, area/3]).
--constructor(new/1).
-
-

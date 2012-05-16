@@ -11,3 +11,4 @@ uarini_parser.erl
 .metadata/
 *.log
 *.dump
+*.*~
