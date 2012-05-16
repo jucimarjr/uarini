@@ -2,32 +2,32 @@ Nonterminals
 
 start_parser grammar
 class_definition export_definition 
-def_atributtes_definition constructor_definition
-export_list def_atributtes_list value.
+atributtes_definition constructor_definition
+export_list atributtes_list value.
 
 Terminals
 '(' ')' '[' ']' '{' '}' ',' '.' '/'
-integer float identifier text class constructor def_atributtes export.
+integer float identifier text class constructor atributtes export.
 
 Rootsymbol start_parser.
 
 start_parser -> class_definition grammar: ['$1' | '$2'].
 
-grammar -> export_definition def_atributtes_definition
+grammar -> export_definition atributtes_definition
 		: ['$1', '$2'].
-grammar -> def_atributtes_definition export_definition
+grammar -> atributtes_definition export_definition
 		: ['$1', '$2'].
-grammar -> export_definition def_atributtes_definition constructor_definition
+grammar -> export_definition atributtes_definition constructor_definition
 		: ['$1', '$2', '$3'].
-grammar -> export_definition constructor_definition def_atributtes_definition
+grammar -> export_definition constructor_definition atributtes_definition
 		: ['$1', '$2', '$3'].
-grammar -> constructor_definition export_definition def_atributtes_definition
+grammar -> constructor_definition export_definition atributtes_definition
 		: ['$1', '$2', '$3'].
-grammar -> def_atributtes_definition export_definition constructor_definition
+grammar -> atributtes_definition export_definition constructor_definition
 		: ['$1', '$2', '$3'].
-grammar -> def_atributtes_definition constructor_definition export_definition 
+grammar -> atributtes_definition constructor_definition export_definition 
 		: ['$1', '$2', '$3'].
-grammar -> constructor_definition def_atributtes_definition export_definition
+grammar -> constructor_definition atributtes_definition export_definition
 		: ['$1', '$2', '$3'].
 
 class_definition -> class '(' identifier ')' '.'
@@ -44,12 +44,12 @@ export_list -> identifier '/' integer
 export_list -> identifier '/' integer ',' export_list
 		: [{unwrap('$1'), unwrap('$3')} | '$5'].
 
-def_atributtes_definition -> def_atributtes '(' '[' def_atributtes_list ']' ')' '.'
-		: {export, '$4'}.
+atributtes_definition -> atributtes '(' '[' atributtes_list ']' ')' '.'
+		: {atributtes, '$4'}.
 
-def_atributtes_list -> '{' identifier ',' value '}'
+atributtes_list -> '{' identifier ',' value '}'
 			: [{unwrap('$2'), '$4'}]. 
-def_atributtes_list -> '{' identifier ',' value '}' ',' def_atributtes_list
+atributtes_list -> '{' identifier ',' value '}' ',' atributtes_list
 			: [{unwrap('$2'), '$4'} | '$7'].
 
 value -> integer: unwrap('$1').

@@ -1,0 +1,12 @@
+% classes de exemplo
+
+-class(principal).
+-import(area_quadrado).
+-export([main/1]).
+
+class methods.
+
+main([])->
+	A = area_quadrado.new([]),
+	Z = A.print(),
+	B = A.area(5).

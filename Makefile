@@ -63,7 +63,6 @@ java: java_src/*.java
 
 clean:
 	@ echo Cleaning...
-	rm -f erl_crash.dump
 	rm -f *.erl
 	rm -f *.java
 	rm -f $(SRC_DIR)/uarini_lexer.erl
@@ -75,4 +74,5 @@ clean:
 	find . -name  *~ -print0 | xargs -0 rm
 	find . -name  *.beam -print0 | xargs -0 rm
 	find . -name  *.class -print0 | xargs -0 rm
+	find . -name  *.dump -print0 | xargs -0 rm
 	@ echo
