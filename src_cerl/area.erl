@@ -34,6 +34,3 @@ thread() ->
 
 area(Dados)->
 	ok.
-
-
-
