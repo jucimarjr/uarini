@@ -8,14 +8,12 @@ Class			= -class
 Constructor		= -constructor
 Attributes		= -attributes
 Export			= -export
-New			= new
+Extends			= -extends
 
-ClassIdentifier		= class
-AttributesIdentifier	= attributes
-MethodsIdentifier	= methods
+ClassAttributes		= class_attributes\.
+ClassMethods		= class_methods\.
 
 %% symbols
-Match			= =
 Instance		= ::
 OpenParentheses		= \(
 CloseParentheses	= \)
@@ -49,15 +47,13 @@ Rules.
 
 {Class}		: {token, {class, TokenLine, list_to_atom(TokenChars)}}.
 {Constructor}	: {token, {constructor, TokenLine, list_to_atom(TokenChars)}}.
-{Atributtes}	: {token, {atributtes, TokenLine, list_to_atom(TokenChars)}}.
+{Attributes}	: {token, {attributes, TokenLine, list_to_atom(TokenChars)}}.
 {Export}	: {token, {export, TokenLine, list_to_atom(TokenChars)}}.
-{New}		: {token, {list_to_atom(TokenChars), TokenLine}}.
+{Extends}	: {token, {extends, TokenLine, list_to_atom(TokenChars)}}.
 
-{ClassIdentifier}	: {token, {list_to_atom(TokenChars), TokenLine}}.
-{AttributesIdentifier}	: {token, {list_to_atom(TokenChars), TokenLine}}.
-{MethodsIdentifier}	: {token, {list_to_atom(TokenChars), TokenLine}}.
+{ClassAttributes}	: {token, {list_to_atom(TokenChars), TokenLine}}.
+{ClassMethods}		: {token, {list_to_atom(TokenChars), TokenLine}}.
 
-{Match}			: {token, {list_to_atom(TokenChars), TokenLine}}.
 {Instance}		: {token, {list_to_atom(TokenChars), TokenLine}}.
 {OpenParentheses}	: {token, {list_to_atom(TokenChars), TokenLine}}.
 {CloseParentheses}	: {token, {list_to_atom(TokenChars), TokenLine}}.

@@ -1,7 +1,19 @@
 -class(area).
--constructor(new/1).
 -export([area/1,area/2, area/3]).
--atributtes([
-	{R,0},{R,0.234},{R,"teste"},{R,4}]).
+
+-extends(area).
+-constructor(new/1).
+
+class_attributes.
+
+R = NULL
+J = 0.234
+S = "teste"
+K = 4
+Z = NULL
+
+
+class_methods.
+
 
 

@@ -2,7 +2,7 @@
 -import(area_quadrado).
 -export([main/1]).
 
-class methods.
+class_methods.
 
 main([])->
 	A = area_quadrado.new([]),

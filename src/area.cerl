@@ -2,7 +2,7 @@
 -constructor([new/1]).
 -export([area/1]).
 
-class atribbuttes.
+class_atribbuttes.
 
 R = NULL
 J = 0.234
@@ -11,7 +11,7 @@ K = 4
 Z = NULL
 
 
-class methods.
+class_methods.
 
 new([]) -> 
 	spawn fun thread().
