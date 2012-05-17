@@ -16,7 +16,6 @@ class_attributes -> 'class attributes.' attribute_definition_list
 attribute_definition_list -> attribute_definition
 attribute_definition_list -> attribute_definition attribute_definition_list
 attribute_definition -> identifier '=' erlang_argument
-
 class_methods -> 'class methods.' method_definition_list
 
 method_definition_list -> method_definition

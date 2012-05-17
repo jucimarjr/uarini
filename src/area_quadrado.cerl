@@ -1,5 +1,3 @@
-% classes de exemplo
-
 -class(area_quadrado).
 -extends(area).
 -constructor([new/1]).

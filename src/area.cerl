@@ -1,5 +1,3 @@
-% classes de exemplo
-
 -class(area).
 -constructor([new/1]).
 -export([area/1]).

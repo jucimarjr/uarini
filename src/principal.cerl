@@ -1,5 +1,3 @@
-% classes de exemplo
-
 -class(principal).
 -import(area_quadrado).
 -export([main/1]).
