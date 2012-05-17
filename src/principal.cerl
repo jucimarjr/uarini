@@ -5,6 +5,6 @@
 class methods.
 
 main([])->
-	A = area_quadrado.new([]),
-	Z = A.print(),
-	B = A.area(5).
+	A = area_quadrado::new([]),
+	Z = A::print(),
+	B = A::area(5).

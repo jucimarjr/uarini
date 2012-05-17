@@ -4,8 +4,6 @@
 Definitions.
 
 %% keywords
-Erlang_body		= .*\n
-
 Class			= -class
 Constructor		= -constructor
 Export			= -export
@@ -87,7 +85,8 @@ Rules.
 {Identifier}		
 		: {token, {identifier, TokenLine, list_to_atom(TokenChars)}}.
 {StringLiteral}		: build_text(text, TokenChars, TokenLine, TokenLen).
-{WhiteSpace}+		: skip_token.
+{WhiteSpace}+	: skip_token.
+
 
 %%-----------------------------------------------------------------------------
 Erlang code.

@@ -1,8 +1,8 @@
 -class(area).
--constructor([new/1]).
+-constructor(new/1).
 -export([area/1]).
 
-class atribbuttes.
+class attributes.
 
 R = NULL
 J = 0.234

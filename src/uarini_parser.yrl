@@ -8,12 +8,16 @@ identifier_list export_list
 value
 class_methods
 method_definition_list method_definition method_signature
-argument_list argument tuple list.
+method_body method_statment_list method_statment
+oo_new_statement oo_set_statement oo_get_statement
+argument_list argument tuple list erlang_statment terminal
+add_expr mult_expr modulus_expr unary_expr.
 
 
 Terminals
 
-'=' '::' '(' ')' '[' ']' '{' '}' ',' ';' '.' '/' '->'  
+'=' '::' '(' ')' '[' ']' '{' '}' ',' ';' '.' '->' 
+'!' 'rem' '*' '/' '+' '-' '&&' '||' '<' '>'
 integer float identifier text 
 '-class' export extends constructor import null
 'class' 'attributes.' 'methods.'.
@@ -38,6 +42,9 @@ oo_definitions -> constructor_definition extends_definition  	: ['$1', '$2'].
 
 oo_definitions -> import_definition constructor_definition 	: ['$1', '$2'].
 oo_definitions -> constructor_definition import_definition  	: ['$1', '$2'].
+
+oo_definitions -> export_definition import_definition 		: ['$1', '$2'].
+oo_definitions -> import_definition export_definition  		: ['$1', '$2'].
 
 
 oo_definitions -> export_definition constructor_definition extends_definition
@@ -140,7 +147,7 @@ constructor_definition -> constructor '(' identifier '/' integer ')' '.'
 extends_definition -> extends '(' identifier ')' '.'
 		: {extends, unwrap('$3')}.
 
-export_definition -> export '(' '[' export_list ']' ')' '.'
+export_definition -> export '(' '[' export_list ']' ')' '.'	
 		: {export, '$4'}.
 
 export_list -> identifier '/' integer
@@ -148,14 +155,8 @@ export_list -> identifier '/' integer
 export_list -> identifier '/' integer ',' export_list
 		: [{unwrap('$1'), unwrap('$3')} | '$5'].
 
-class_attributes -> 'class' 'attributes.' attributes_definition_list 
-		: {'class attributes.', '$3'}.
 
-attributes_definition_list -> attributes_definition : ['$1'].
-attributes_definition_list -> attributes_definition attributes_definition_list
-				:['$1' | '$2'].
 
-attributes_definition -> identifier '=' value : {unwrap('$1'), '$3'}.
 
 import_definition -> import '(' '[' identifier_list ']' ')' '.'
 		: {import, '$4'}.
@@ -163,33 +164,103 @@ import_definition -> import '(' '[' identifier_list ']' ')' '.'
 identifier_list -> identifier : [unwrap('$1')].
 identifier_list -> identifier ',' identifier_list : [unwrap('$1') | ('$3')].
 
+
+
+
+class_attributes -> 'class' 'attributes.' attributes_definition_list 
+		: {'class attributes.', '$3', '.'}.
+
+attributes_definition_list -> attributes_definition : ['$1'].
+attributes_definition_list -> attributes_definition attributes_definition_list
+				:['$1' | '$2'].
+
+attributes_definition -> identifier '=' value : {unwrap('$1'), '$3'}.
+
+
+
 value -> integer	: unwrap('$1').
 value -> null		: unwrap('$1').
 value -> float		: unwrap('$1').	
 value -> text		: unwrap('$1').
 
 class_methods -> 'class' 'methods.' method_definition_list
-			: {'class methods.', '$3'}.
+			: {'class methods.', '$3','.'}.
 
 method_definition_list -> method_definition: ['$1'].
 method_definition_list -> method_definition method_definition_list
 			: ['$1' | '$2'].
 
-method_definition -> method_signature 
-			: {definition, {'$1'}}.
+method_definition -> method_signature method_body '.' 
+			: {definition, {'$1', '$2'}}.
 
 method_signature -> identifier '(' ')' '->'
 			: {signature, unwrap('$1'), []}.
 method_signature -> identifier '(' argument_list ')' '->'
 			: {signature, unwrap('$1'), '$3'}.
 
+method_body -> 	method_statment_list: ['$1'].
+
+method_statment_list -> method_statment : ['$1'].		
+method_statment_list -> method_statment ',' method_statment_list : ['$1' |'$3'].
+		
+method_statment	-> erlang_statment	: '$1'.	
+method_statment -> oo_new_statement	: '$1'.
+method_statment	-> oo_set_statement	: '$1'.
+method_statment	-> oo_get_statement	: '$1'.
+
+erlang_statment -> terminal			: ['$1'].		
+erlang_statment -> terminal erlang_statment	: ['$1' | '$2'].
+
+terminal ->	'='		: unwrap('$1').
+terminal ->	'(' 		: unwrap('$1').
+terminal ->	')' 		: unwrap('$1').
+terminal ->	';' 		: unwrap('$1').
+terminal ->	'/' 		: unwrap('$1').
+terminal ->	'->'  		: unwrap('$1').
+terminal ->	'!'  		: unwrap('$1').
+terminal ->	'rem'  		: unwrap('$1').
+terminal ->	'*'  		: unwrap('$1').
+terminal ->	'+'  		: unwrap('$1').
+terminal ->	'-'  		: unwrap('$1').
+terminal ->	'&&'  		: unwrap('$1').
+terminal ->	'||'  		: unwrap('$1').
+terminal ->	'<'  		: unwrap('$1').
+terminal ->	'>'  		: unwrap('$1').
+terminal ->	argument	: '$1'.
+
+oo_new_statement -> 
+	identifier '=' identifier '::' add_expr:
+	{unwrap('$1'), unwrap('$3'), '$5'}.
+oo_set_statement -> 
+	identifier '::' identifier '=' add_expr:
+	{unwrap('$1'), unwrap('$3'), '$5'}.
+oo_get_statement -> 
+	identifier '::' add_expr:
+	{unwrap('$1'), '$3'}.
+
+add_expr -> mult_expr '+' add_expr	: {'+', '$1', '$3'}.
+add_expr -> mult_expr '-' add_expr	: {'-', '$1', '$3'}.
+add_expr -> mult_expr			: '$1'.
+
+mult_expr -> modulus_expr '*' mult_expr	:{'*', '$1', '$3'}.
+mult_expr -> modulus_expr '/' mult_expr	:{'/', '$1', '$3'}.
+mult_expr -> modulus_expr		: '$1'.
+
+modulus_expr -> unary_expr 'rem' modulus_expr	:{'rem', '$1', '$3'}.
+modulus_expr -> unary_expr			: '$1'.
+
+unary_expr -> '-' argument	: {'-', '$2'}.
+unary_expr -> argument		: '$1'.
+
 argument_list -> argument			: ['$1'].
 argument_list -> argument ',' argument_list	: ['$1' |'$3'].
 
-argument -> tuple 		:'$1'.
-argument -> list 		:'$1'.
-argument -> value 		:'$1'.
-argument -> identifier 		:unwrap('$1').
+argument -> tuple 					:'$1'.
+argument -> list 					:'$1'.
+argument -> value 					:'$1'.
+argument -> identifier 					:unwrap('$1').
+argument -> identifier '(' 		 ')' 		:unwrap('$1').
+argument -> identifier '(' argument_list ')' 		:{unwrap('$1'), '$3'}.
 
 tuple -> '{' '}'		: {tuple}.
 tuple -> '{' argument_list '}'	: {tuple, '$2'}.

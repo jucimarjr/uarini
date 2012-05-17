@@ -15,14 +15,28 @@ Z = NULL
 
 class methods.
 
-main([1, "Helo Word", {2,3,4}, [[{MHA}]]])-> 
-
-area(Dados)-> 
-
-
-new([]) -> 
+main([1, "Helo Word", {2,3,4}, [[{}]]])-> dois.
 
 print() -> 
+	A = self::R.
 
 area(Dados)->
+	self::R * Dados * Dados.
 
+thread() ->
+	receive
+		{ From, { area, [Dados] } } ->
+			From ! area(Dados),
+			thread();
+		
+		{ From, { print, [] } } ->
+			From ! print(),
+			thread();
+		
+		{ From, Other } ->
+			From ! { self(), { error, Other } },
+			thread()
+	end.
+
+area(Dados)->
+	ok.
