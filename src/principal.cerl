@@ -1,8 +1,8 @@
 -class(principal).
--import(area_quadrado).
+-import([area_quadrado]).
 -export([main/1]).
 
-class_methods.
+class methods.
 
 main([])->
 	A = area_quadrado.new([]),
