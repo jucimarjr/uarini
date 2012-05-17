@@ -4,6 +4,8 @@
 Definitions.
 
 %% keywords
+Erlang_body		= .*\n
+
 Class			= -class
 Constructor		= -constructor
 Export			= -export

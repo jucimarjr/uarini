@@ -15,5 +15,14 @@ Z = NULL
 
 class methods.
 
+main([1, "Helo Word", {2,3,4}, [[{MHA}]]])-> 
 
+area(Dados)-> 
+
+
+new([]) -> 
+
+print() -> 
+
+area(Dados)->
 

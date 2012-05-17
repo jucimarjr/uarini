@@ -6,7 +6,9 @@ extends_definition export_definition constructor_definition import_definition
 class_attributes attributes_definition attributes_definition_list 
 identifier_list export_list
 value
-class_methods.
+class_methods
+method_definition_list method_definition method_signature
+argument_list argument tuple list.
 
 
 Terminals
@@ -166,7 +168,35 @@ value -> null		: unwrap('$1').
 value -> float		: unwrap('$1').	
 value -> text		: unwrap('$1').
 
-class_methods -> 'class' 'methods.' : {'class methods.'}. 
+class_methods -> 'class' 'methods.' method_definition_list
+			: {'class methods.', '$3'}.
+
+method_definition_list -> method_definition: ['$1'].
+method_definition_list -> method_definition method_definition_list
+			: ['$1' | '$2'].
+
+method_definition -> method_signature 
+			: {definition, {'$1'}}.
+
+method_signature -> identifier '(' ')' '->'
+			: {signature, unwrap('$1'), []}.
+method_signature -> identifier '(' argument_list ')' '->'
+			: {signature, unwrap('$1'), '$3'}.
+
+argument_list -> argument			: ['$1'].
+argument_list -> argument ',' argument_list	: ['$1' |'$3'].
+
+argument -> tuple 		:'$1'.
+argument -> list 		:'$1'.
+argument -> value 		:'$1'.
+argument -> identifier 		:unwrap('$1').
+
+tuple -> '{' '}'		: {tuple}.
+tuple -> '{' argument_list '}'	: {tuple, '$2'}.
+
+list -> '[' ']'			: {list}.
+list -> '[' argument_list ']'	: {list, '$2'}.
+
 
 Erlang code.
 
