@@ -1,11 +1,11 @@
 Nonterminals
 
-start_parser 
-class_definition oo_definitions
-extends_definition export_definition constructor_definition import_definition
+erlang_class
+class_name oo_definitions
+class_extends class_exports class_constructor class_import
 class_attributes attributes_definition attributes_definition_list 
-identifier_list export_list
-value
+identifier_list method_declaration_list method_declaration
+erlang_argument
 class_methods
 method_definition_list method_definition method_signature
 method_body method_statment_list method_statment
@@ -23,149 +23,144 @@ integer float identifier text
 'class' 'attributes.' 'methods.'.
 
 
-Rootsymbol start_parser.
+Rootsymbol erlang_class.
 
 
-start_parser -> class_definition oo_definitions class_methods
+erlang_class -> class_name oo_definitions class_methods
 		: ['$1', '$2', '$3'].
-start_parser -> class_definition oo_definitions class_attributes class_methods
+erlang_class -> class_name oo_definitions class_attributes class_methods
 		: ['$1', '$2', '$3', '$4'].
-start_parser -> class_definition oo_definitions : ['$1' | '$2'].
 
-oo_definitions -> export_definition 				: ['$1'].
+oo_definitions -> class_exports 				: ['$1'].
 
-oo_definitions -> export_definition constructor_definition 	: ['$1', '$2'].
-oo_definitions -> constructor_definition export_definition  	: ['$1', '$2'].
+oo_definitions -> class_exports class_constructor 	: ['$1', '$2'].
+oo_definitions -> class_constructor class_exports  	: ['$1', '$2'].
 
-oo_definitions -> extends_definition constructor_definition 	: ['$1', '$2'].
-oo_definitions -> constructor_definition extends_definition  	: ['$1', '$2'].
+oo_definitions -> class_extends class_constructor 	: ['$1', '$2'].
+oo_definitions -> class_constructor class_extends  	: ['$1', '$2'].
 
-oo_definitions -> import_definition constructor_definition 	: ['$1', '$2'].
-oo_definitions -> constructor_definition import_definition  	: ['$1', '$2'].
+oo_definitions -> class_import class_constructor 	: ['$1', '$2'].
+oo_definitions -> class_constructor class_import  	: ['$1', '$2'].
 
-oo_definitions -> export_definition import_definition 		: ['$1', '$2'].
-oo_definitions -> import_definition export_definition  		: ['$1', '$2'].
+oo_definitions -> class_exports class_import 		: ['$1', '$2'].
+oo_definitions -> class_import class_exports  		: ['$1', '$2'].
 
 
-oo_definitions -> export_definition constructor_definition extends_definition
+oo_definitions -> class_exports class_constructor class_extends
 		: ['$1', '$2', '$3'].
-oo_definitions -> export_definition extends_definition constructor_definition
+oo_definitions -> class_exports class_extends class_constructor
 		: ['$1', '$2', '$3'].
-oo_definitions -> constructor_definition export_definition extends_definition
+oo_definitions -> class_constructor class_exports class_extends
 		: ['$1', '$2', '$3'].
-oo_definitions -> constructor_definition  extends_definition export_definition
+oo_definitions -> class_constructor  class_extends class_exports
 		: ['$1', '$2', '$3'].
-oo_definitions -> extends_definition export_definition constructor_definition
+oo_definitions -> class_extends class_exports class_constructor
 		: ['$1', '$2', '$3'].
-oo_definitions -> extends_definition constructor_definition export_definition 
-		: ['$1', '$2', '$3'].
-
-oo_definitions -> export_definition import_definition extends_definition
-		: ['$1', '$2', '$3'].
-oo_definitions -> export_definition extends_definition import_definition
-		: ['$1', '$2', '$3'].
-oo_definitions -> import_definition export_definition extends_definition
-		: ['$1', '$2', '$3'].
-oo_definitions -> import_definition  extends_definition export_definition
-		: ['$1', '$2', '$3'].
-oo_definitions -> extends_definition export_definition import_definition
-		: ['$1', '$2', '$3'].
-oo_definitions -> extends_definition import_definition export_definition 
+oo_definitions -> class_extends class_constructor class_exports 
 		: ['$1', '$2', '$3'].
 
-oo_definitions -> export_definition constructor_definition import_definition
+oo_definitions -> class_exports class_import class_extends
 		: ['$1', '$2', '$3'].
-oo_definitions -> export_definition import_definition constructor_definition
+oo_definitions -> class_exports class_extends class_import
 		: ['$1', '$2', '$3'].
-oo_definitions -> constructor_definition export_definition import_definition
+oo_definitions -> class_import class_exports class_extends
 		: ['$1', '$2', '$3'].
-oo_definitions -> constructor_definition  import_definition export_definition
+oo_definitions -> class_import  class_extends class_exports
 		: ['$1', '$2', '$3'].
-oo_definitions -> import_definition export_definition constructor_definition
+oo_definitions -> class_extends class_exports class_import
 		: ['$1', '$2', '$3'].
-oo_definitions -> import_definition constructor_definition export_definition 
+oo_definitions -> class_extends class_import class_exports 
 		: ['$1', '$2', '$3'].
 
-oo_definitions -> export_definition constructor_definition extends_definition
-			import_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> export_definition constructor_definition import_definition
-			extends_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> export_definition extends_definition constructor_definition
-			import_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> export_definition extends_definition import_definition
-			constructor_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> export_definition import_definition constructor_definition
-			extends_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> export_definition import_definition extends_definition
-			constructor_definition :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_exports class_constructor class_import
+		: ['$1', '$2', '$3'].
+oo_definitions -> class_exports class_import class_constructor
+		: ['$1', '$2', '$3'].
+oo_definitions -> class_constructor class_exports class_import
+		: ['$1', '$2', '$3'].
+oo_definitions -> class_constructor  class_import class_exports
+		: ['$1', '$2', '$3'].
+oo_definitions -> class_import class_exports class_constructor
+		: ['$1', '$2', '$3'].
+oo_definitions -> class_import class_constructor class_exports 
+		: ['$1', '$2', '$3'].
 
-oo_definitions -> constructor_definition export_definition extends_definition
-			import_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> constructor_definition export_definition import_definition
-			extends_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> constructor_definition extends_definition export_definition
-			import_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> constructor_definition extends_definition import_definition
-			export_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> constructor_definition import_definition export_definition
-			extends_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> constructor_definition import_definition extends_definition
-			export_definition :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_exports class_constructor class_extends
+			class_import :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_exports class_constructor class_import
+			class_extends :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_exports class_extends class_constructor
+			class_import :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_exports class_extends class_import
+			class_constructor :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_exports class_import class_constructor
+			class_extends :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_exports class_import class_extends
+			class_constructor :['$1', '$2', '$3', '$4'].
 
-oo_definitions -> extends_definition constructor_definition export_definition
-			import_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> extends_definition constructor_definition import_definition
-			export_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> extends_definition export_definition constructor_definition
-			import_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> extends_definition export_definition import_definition
-			constructor_definition :['$1', '$2', '$3', '$4']. 
-oo_definitions -> extends_definition import_definition constructor_definition
-			export_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> extends_definition import_definition export_definition
-			constructor_definition :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_constructor class_exports class_extends
+			class_import :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_constructor class_exports class_import
+			class_extends :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_constructor class_extends class_exports
+			class_import :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_constructor class_extends class_import
+			class_exports :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_constructor class_import class_exports
+			class_extends :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_constructor class_import class_extends
+			class_exports :['$1', '$2', '$3', '$4'].
 
-oo_definitions -> import_definition constructor_definition extends_definition
-			export_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> import_definition constructor_definition export_definition
-			extends_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> import_definition extends_definition constructor_definition
-			export_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> import_definition extends_definition export_definition
-			constructor_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> import_definition export_definition constructor_definition
-			extends_definition :['$1', '$2', '$3', '$4'].
-oo_definitions -> import_definition export_definition extends_definition
-			constructor_definition :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_extends class_constructor class_exports
+			class_import :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_extends class_constructor class_import
+			class_exports :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_extends class_exports class_constructor
+			class_import :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_extends class_exports class_import
+			class_constructor :['$1', '$2', '$3', '$4']. 
+oo_definitions -> class_extends class_import class_constructor
+			class_exports :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_extends class_import class_exports
+			class_constructor :['$1', '$2', '$3', '$4'].
 
-class_definition -> '-class' '(' identifier ')' '.'
+oo_definitions -> class_import class_constructor class_extends
+			class_exports :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_import class_constructor class_exports
+			class_extends :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_import class_extends class_constructor
+			class_exports :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_import class_extends class_exports
+			class_constructor :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_import class_exports class_constructor
+			class_extends :['$1', '$2', '$3', '$4'].
+oo_definitions -> class_import class_exports class_extends
+			class_constructor :['$1', '$2', '$3', '$4'].
+
+class_name -> '-class' '(' identifier ')' '.'
 		: {class, unwrap('$3')}.
 
-constructor_definition -> constructor '(' identifier '/' integer ')' '.'
+class_constructor -> constructor '(' identifier '/' integer ')' '.'
 		: {constructor, unwrap('$3'), unwrap('$5')}.
 
-extends_definition -> extends '(' identifier ')' '.'
+class_extends -> extends '(' identifier ')' '.'
 		: {extends, unwrap('$3')}.
 
-export_definition -> export '(' '[' export_list ']' ')' '.'	
+class_exports -> export '(' '[' method_declaration_list ']' ')' '.'	
 		: {export, '$4'}.
 
-export_list -> identifier '/' integer
-		: [{unwrap('$1'), unwrap('$3')}]. 
-export_list -> identifier '/' integer ',' export_list
-		: [{unwrap('$1'), unwrap('$3')} | '$5'].
+method_declaration_list -> method_declaration 
+		: ['$1']. 
+method_declaration_list -> method_declaration ',' method_declaration_list
+		: ['$1' | '$3'].
 
+method_declaration  -> identifier '/' integer: {unwrap('$1'), unwrap('$3')}.
 
-
-
-import_definition -> import '(' '[' identifier_list ']' ')' '.'
+class_import -> import '(' '[' identifier_list ']' ')' '.'
 		: {import, '$4'}.
 
 identifier_list -> identifier : [unwrap('$1')].
 identifier_list -> identifier ',' identifier_list : [unwrap('$1') | ('$3')].
-
-
-
 
 class_attributes -> 'class' 'attributes.' attributes_definition_list 
 		: {'class attributes.', '$3', '.'}.
@@ -174,14 +169,14 @@ attributes_definition_list -> attributes_definition : ['$1'].
 attributes_definition_list -> attributes_definition attributes_definition_list
 				:['$1' | '$2'].
 
-attributes_definition -> identifier '=' value : {unwrap('$1'), '$3'}.
+attributes_definition -> identifier '=' erlang_argument : {unwrap('$1'), '$3'}.
 
 
 
-value -> integer	: unwrap('$1').
-value -> null		: unwrap('$1').
-value -> float		: unwrap('$1').	
-value -> text		: unwrap('$1').
+erlang_argument -> integer	: unwrap('$1').
+erlang_argument -> null		: unwrap('$1').
+erlang_argument -> float		: unwrap('$1').	
+erlang_argument -> text		: unwrap('$1').
 
 class_methods -> 'class' 'methods.' method_definition_list
 			: {'class methods.', '$3','.'}.
@@ -257,7 +252,7 @@ argument_list -> argument ',' argument_list	: ['$1' |'$3'].
 
 argument -> tuple 					:'$1'.
 argument -> list 					:'$1'.
-argument -> value 					:'$1'.
+argument -> erlang_argument 					:'$1'.
 argument -> identifier 					:unwrap('$1').
 argument -> identifier '(' 		 ')' 		:unwrap('$1').
 argument -> identifier '(' argument_list ')' 		:{unwrap('$1'), '$3'}.
