@@ -8,9 +8,9 @@ identifier_list method_declaration_list method_declaration
 erlang_argument
 class_methods
 method_definition_list method_definition method_signature
-method_body method_statment_list method_statment
+method_body method_statement_list method_statement
 oo_new_statement oo_set_statement oo_get_statement
-argument_list argument tuple list erlang_statment terminal
+argument_list argument tuple list erlang_statement terminal
 add_expr mult_expr modulus_expr unary_expr.
 
 
@@ -31,7 +31,7 @@ erlang_class -> class_name oo_definitions class_methods
 erlang_class -> class_name oo_definitions class_attributes class_methods
 		: ['$1', '$2', '$3', '$4'].
 
-oo_definitions -> class_exports 				: ['$1'].
+oo_definitions -> class_exports 				oo_definitions: ['$1'].
 
 oo_definitions -> class_exports class_constructor 	: ['$1', '$2'].
 oo_definitions -> class_constructor class_exports  	: ['$1', '$2'].
@@ -44,7 +44,6 @@ oo_definitions -> class_constructor class_import  	: ['$1', '$2'].
 
 oo_definitions -> class_exports class_import 		: ['$1', '$2'].
 oo_definitions -> class_import class_exports  		: ['$1', '$2'].
-
 
 oo_definitions -> class_exports class_constructor class_extends
 		: ['$1', '$2', '$3'].
@@ -171,8 +170,6 @@ attributes_definition_list -> attributes_definition attributes_definition_list
 
 attributes_definition -> identifier '=' erlang_argument : {unwrap('$1'), '$3'}.
 
-
-
 erlang_argument -> integer	: unwrap('$1').
 erlang_argument -> null		: unwrap('$1').
 erlang_argument -> float		: unwrap('$1').	
@@ -193,18 +190,18 @@ method_signature -> identifier '(' ')' '->'
 method_signature -> identifier '(' argument_list ')' '->'
 			: {signature, unwrap('$1'), '$3'}.
 
-method_body -> 	method_statment_list: ['$1'].
+method_body -> 	method_statement_list: ['$1'].
 
-method_statment_list -> method_statment : ['$1'].		
-method_statment_list -> method_statment ',' method_statment_list : ['$1' |'$3'].
+method_statement_list -> method_statement : ['$1'].		
+method_statement_list -> method_statement ',' method_statement_list : ['$1' |'$3'].
 		
-method_statment	-> erlang_statment	: '$1'.	
-method_statment -> oo_new_statement	: '$1'.
-method_statment	-> oo_set_statement	: '$1'.
-method_statment	-> oo_get_statement	: '$1'.
+method_statement	-> erlang_statement	: '$1'.	
+method_statement	-> oo_new_statement	: '$1'.
+method_statement	-> oo_set_statement	: '$1'.
+method_statement	-> oo_get_statement	: '$1'.
 
-erlang_statment -> terminal			: ['$1'].		
-erlang_statment -> terminal erlang_statment	: ['$1' | '$2'].
+erlang_statement -> terminal			: ['$1'].		
+erlang_statement -> terminal erlang_statement	: ['$1' | '$2'].
 
 terminal ->	'='		: unwrap('$1').
 terminal ->	'(' 		: unwrap('$1').
@@ -235,32 +232,32 @@ oo_get_statement ->
 
 add_expr -> mult_expr '+' add_expr	: {'+', '$1', '$3'}.
 add_expr -> mult_expr '-' add_expr	: {'-', '$1', '$3'}.
-add_expr -> mult_expr			: '$1'.
+add_expr -> mult_expr				: '$1'.
 
 mult_expr -> modulus_expr '*' mult_expr	:{'*', '$1', '$3'}.
 mult_expr -> modulus_expr '/' mult_expr	:{'/', '$1', '$3'}.
-mult_expr -> modulus_expr		: '$1'.
+mult_expr -> modulus_expr				: '$1'.
 
 modulus_expr -> unary_expr 'rem' modulus_expr	:{'rem', '$1', '$3'}.
-modulus_expr -> unary_expr			: '$1'.
+modulus_expr -> unary_expr						: '$1'.
 
 unary_expr -> '-' argument	: {'-', '$2'}.
 unary_expr -> argument		: '$1'.
 
-argument_list -> argument			: ['$1'].
+argument_list -> argument					: ['$1'].
 argument_list -> argument ',' argument_list	: ['$1' |'$3'].
 
-argument -> tuple 					:'$1'.
-argument -> list 					:'$1'.
+argument -> tuple								:'$1'.
+argument -> list								:'$1'.
 argument -> erlang_argument 					:'$1'.
-argument -> identifier 					:unwrap('$1').
-argument -> identifier '(' 		 ')' 		:unwrap('$1').
-argument -> identifier '(' argument_list ')' 		:{unwrap('$1'), '$3'}.
+argument -> identifier							:unwrap('$1').
+argument -> identifier '(' ')'					:unwrap('$1').
+argument -> identifier '(' argument_list ')' 	:{unwrap('$1'), '$3'}.
 
-tuple -> '{' '}'		: {tuple}.
+tuple -> '{' '}'				: {tuple}.
 tuple -> '{' argument_list '}'	: {tuple, '$2'}.
 
-list -> '[' ']'			: {list}.
+list -> '[' ']'					: {list}.
 list -> '[' argument_list ']'	: {list, '$2'}.
 
 
