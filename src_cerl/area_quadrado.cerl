@@ -1,12 +1,9 @@
-%%-----------------------------------------------------------------
-%% exemplo de classe em erlang
-%% essa seria uma sb classe de area
-%% herdaria todos os metodos e atributos. 
-%% redefiniria a funcao area
-%%-----------------------------------------------------------------
+-class(area_quadrado).
+-extends(area).
+-constructor(new/1).
+-export([area/1]).
 
--class( area_quadrado ).
--extends( area ).
+class methods.
 
-area(Raio)->
-	Raio * Raio.
+area(Dados)->
+	self::R * Dados * Dados.

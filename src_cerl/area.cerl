@@ -1,24 +1,34 @@
 -class(area).
 -constructor(new/1).
 -export([area/1]).
-	
--def_atributtes([
-	{R,0}
-]).
 
+class attributes.
+
+R = NULL
+J = 0.234
+S = "teste"
+K = 4
+Z = NULL
+
+
+class methods.
 
 new([]) -> 
-	set_atribute(R,15),
-	A=get_atribute(R),
-	io:format("~p~n",A),
 	spawn fun thread().
+
+print() -> 
+	A = self::R.
 
 thread() ->
 	receive
 		{ From, { area, [Dados] } } ->
 			From ! area(Dados),
 			thread();
-			
+		
+		{ From, { print, [] } } ->
+			From ! print(),
+			thread();
+		
 		{ From, Other } ->
 			From ! { self(), { error, Other } },
 			thread()
