@@ -1,4 +1,4 @@
-	-module(uarini).
+-module(uarini).
 -export([compile/1, get_version/0]).
 
 -include("../include/uarini_define.hrl").
