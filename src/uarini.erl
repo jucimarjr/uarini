@@ -1,4 +1,4 @@
--module(uarini).
+	-module(uarini).
 -export([compile/1, get_version/0]).
 
 -include("../include/uarini_define.hrl").
@@ -26,40 +26,16 @@ compile({beam, CerlFileName}) ->
 
 %%-----------------------------------------------------------------------------
 %% Interface com o usuario final. Compila vários arquivos cerl dependentes
-compile(CerlFileNameList) ->
+compile(CerlFileName) ->
 	{_, _, StartTime} = now(),
-
-	ErlangFileList = get_erl_file_list(CerlFileNameList),
+	ErlangFile = get_erl_file(CerlFileName),
 	{_, _, EndTime} = now(),
 	ElapsedTime = EndTime - StartTime,
 	io:format(
-		"~p -> ~p [ Compile time: ~p us (~p s) ]~n",
-		[[filename:basename(CerlFileName) || CerlFileName <- CerlFileNameList],
-			ErlangFileList,
+		"~p -> ~p [ Compile time: ~p us (~p s) ]~n", [CerlFileName,
+			ErlangFile,
 			ElapsedTime, ElapsedTime/1000000]
 	).
-
-%%-----------------------------------------------------------------------------
-%% gera vários arquivos .erl de vários .cerl
-get_erl_file_list(CerlFileNameList) ->
-	CerlASTList = lists:map(fun ast:get_cerl_ast/1, CerlFileNameList),
-	ClassesInfo = lists:map(fun ast:get_class_info/1, CerlASTList),
-
-	get_erl_file_list(CerlASTList, ClassesInfo, []).
-
-get_erl_file_list([], _, ErlangFileList) ->
-	lists:reverse(ErlangFileList, []);
-get_erl_file_list([CerlAST | Rest], ClassesInfo, ErlangFileList) ->
-	ErlangModuleName= get_erl_modulename(CerlAST),
-
-	ErlangFileName= get_erl_filename(ErlangModuleName),
-
-	{ok, ErlangAST} =
-		core:transform_uast_to_east(CerlAST, ErlangModuleName, ClassesInfo),
-
-	create_erl_file(ErlangAST,ErlangFileName),
-
-	get_erl_file_list(Rest, ClassesInfo, [ErlangFileName | ErlangFileList]).
 
 %%-----------------------------------------------------------------------------
 %% gera um arquivo .erl de um .cerl
