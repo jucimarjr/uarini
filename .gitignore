@@ -12,3 +12,5 @@ uarini_parser.erl
 *.log
 *.dump
 *.*~
+Makefile~
+jk~

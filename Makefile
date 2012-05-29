@@ -60,8 +60,8 @@ clean:
 	rm -f $(SRC_DIR)/uarini_parser.erl
 	rm -rf $(EBIN_DIR)/
 	rm -rf $(TEST_EBIN_DIR)/
-	find . -name  *.*~ -print0 | xargs -0
-	find . -name  *~ -print0 | xargs -0
-	find . -name  *.beam -print0 | xargs -0
-	find . -name  *.class -print0 | xargs -0
+	find . -name  *.*~ -print0 | xargs -0 rm
+	find . -name  *~ -print0 | xargs -0 rm
+	find . -name  *.beam -print0 | xargs -0 rm
+	find . -name  *.class -print0 | xargs -0 rm
 	@ echo
