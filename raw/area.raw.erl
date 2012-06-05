@@ -47,5 +47,3 @@ area(Dados)->
 
 print() -> 
 	A = self::R.
-
-

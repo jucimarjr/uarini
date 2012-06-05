@@ -1,5 +1,5 @@
 -module(core).
--export([transform_uast_to_east/3]).
+-export([transform_uast_to_east/2]).
 -import(gen_ast,
 	[
 		function/4, var/2, atom/2, call/3, rcall/4, 'case'/3, clause/4,
@@ -11,22 +11,10 @@
 %% Converte o uast em east.
 %%   uast -> arvore sintatica do cerl.
 %%   east -> arvore sintatica do erlang.
-%% TODO: tratar múltiplos arquivos, ou seja, múltiplas classes
-transform_uast_to_east(CerlAST, ErlangModuleName, ClassesInfo) ->
-	st:new(),
-	st:insert_classes_info(ClassesInfo),
-
+transform_uast_to_east(CerlAST, ErlangModuleName) ->
 	ErlangModuleBody =
 		[get_erl_body(CerlClass)|| CerlClass <- CerlAST],
-	ErlangModule = create_module(ErlangModuleName, ErlangModuleBody),
-	case st:get_errors() of
-		[] ->
-			st:destroy(),
-			{ok, ErlangModule};
-		Errors ->
-			st:destroy(),
-			throw({error, Errors})
-	end.
+	ErlangModule = create_module(ErlangModuleName, ErlangModuleBody).
 
 %%-----------------------------------------------------------------------------
 %% Extrai o corpo do modulo erlang a partir de uma classe cerl

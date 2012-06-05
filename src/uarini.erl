@@ -47,7 +47,7 @@ get_erl_file(CerlFileName) ->
 
 	ErlangFileName= get_erl_filename(ErlangModuleName),
 	{ok, ErlangAST} =
-		core:transform_uast_to_east(CerlAST, ErlangModuleName, []),
+		core:transform_uast_to_east(CerlAST, ErlangModuleName),
 	create_erl_file(ErlangAST,ErlangFileName),
 
 	ErlangFileName.

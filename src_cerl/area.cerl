@@ -1,6 +1,5 @@
 -class(area).
--constructor(new/1).
--export([area/1]).
+-export([new/1, area/1]).
 
 class attributes.
 
@@ -13,11 +12,12 @@ Z = NULL
 
 class methods.
 
+class_init()->
+	class_init(),
+	class_attributes().
+
 new([]) -> 
 	spawn fun thread().
-
-print() -> 
-	A = self::R.
 
 thread() ->
 	receive
@@ -36,3 +36,6 @@ thread() ->
 
 area(Dados)->
 	ok.
+
+print() -> 
+	A = self::R.
