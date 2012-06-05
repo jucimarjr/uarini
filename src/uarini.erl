@@ -46,10 +46,9 @@ get_erl_file(CerlFileName) ->
 	ErlangModuleName= get_erl_modulename(CerlAST),
 
 	ErlangFileName= get_erl_filename(ErlangModuleName),
-	{ok, ErlangAST} =
+	ErlangCode =
 		core:transform_uast_to_east(CerlAST, ErlangModuleName),
-	create_erl_file(ErlangAST,ErlangFileName),
-
+	create_erl_file(ErlangCode, ErlangFileName),
 	ErlangFileName.
 
 %%-----------------------------------------------------------------------------
@@ -73,8 +72,7 @@ get_erl_modulename(CerlAST) ->
 
 %%-----------------------------------------------------------------------------
 %% Cria o arquivo .erl no sistema de arquivos
-create_erl_file(ErlangAST, ErlangFileName) ->
-	ErlangCode = erl_prettypr:format(erl_syntax:form_list(ErlangAST)),
+create_erl_file(ErlangCode, ErlangFileName) ->
 	{ok, WriteDescriptor} = file:open(ErlangFileName, [raw, write]),
 	file:write(WriteDescriptor, ErlangCode),
 	file:close(WriteDescriptor).

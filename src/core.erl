@@ -12,9 +12,7 @@
 %%   uast -> arvore sintatica do cerl.
 %%   east -> arvore sintatica do erlang.
 transform_uast_to_east(CerlAST, ErlangModuleName) ->
-	ErlangModuleBody =
-		[get_erl_body(CerlClass)|| CerlClass <- CerlAST],
-	ErlangModule = create_module(ErlangModuleName, ErlangModuleBody).
+	Module = "-module(" ++ atom_to_list(ErlangModuleName) ++ ").".
 
 %%-----------------------------------------------------------------------------
 %% Extrai o corpo do modulo erlang a partir de uma classe cerl
