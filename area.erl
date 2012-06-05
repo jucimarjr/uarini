@@ -1,0 +1,2 @@
+-module(area).
+-export([new/1, area/1]).
