@@ -146,10 +146,10 @@ resolve_list_rest([Element | Rest]) ->
 resolve_method_body([Head | Rest]) ->
 	ErlangStatment =
 	case Head of
-		{} -> "ops\n"; 
-		_ -> "ok\n"
+		{} -> "ops"; 
+		_ -> "ok"
 	end,
 	case Rest of
-		[]	-> ErlangStatment ++ ".";
-		_ 	-> ErlangStatment ++ "," ++ resolve_method_body(Rest) 	
+		[]	-> ErlangStatment ++ ".\n";
+		_ 	-> ErlangStatment ++ ",\n" ++ resolve_method_body(Rest)	
 	end.
