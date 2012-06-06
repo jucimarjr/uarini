@@ -10,13 +10,21 @@ transform_uast_to_east(CerlAST, ErlangModuleName) ->
 	OO = [match_definition(Definition)|| Definition <- DefinitionList],
 	Attribute =
 	case CerlAST of
-		[_Class, _DefinitionList, 
+		[_Class, _DefinitionList1, 
 			{'class attributes.', AttributeList, '.'}, _Methods] ->
 			transform_attribute_list(AttributeList);		
 		_ -> 
 			"\n"
+	end,
+	Method =
+	case CerlAST of
+		[_Class, _DefinitionList2, 
+			_AttributeList, {'class methods.', MethodList, '.'}] ->
+			transform_method_list(MethodList);		
+		_ -> 
+			"\n"
 	end,	
-	lists:flatten(Module ++ OO ++ Attribute).
+	lists:flatten(Module ++ OO ++ Attribute ++ Method).
 
 %%------------------------------------------------------------------------------
 %% Pattern Match de Export
@@ -48,8 +56,8 @@ transform_attribute_list([{Name, Value}| Rest]) ->
 	convert_value(Value) ++
 	")" ++ 
 	transform_attribute_rest(Rest).
-
 transform_attribute_rest([{Name, Value} | Rest]) ->
+
 	",\n put({a, " ++ 
 	atom_to_list(Name) ++ "}," ++ 
 	convert_value(Value) ++
@@ -66,3 +74,7 @@ convert_value(Value) when is_atom(Value) ->
 		_	-> atom_to_list(Value)
 	end;
 convert_value(Value) when is_list(Value) -> Value.
+
+%%------------------------------------------------------------------------------
+%% Transforma lista de métodos
+transform_method_list(MethodList) -> "casou".

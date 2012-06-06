@@ -177,14 +177,14 @@ method_definition_list -> method_definition method_definition_list
 			: ['$1' | '$2'].
 
 method_definition -> method_signature method_body '.' 
-			: {definition, {'$1', '$2'}}.
+			: {'$1', '$2'}.
 
 method_signature -> identifier '(' ')' '->'
 			: {signature, unwrap('$1'), []}.
 method_signature -> identifier '(' argument_list ')' '->'
 			: {signature, unwrap('$1'), '$3'}.
 
-method_body -> 	method_statement_list: ['$1'].
+method_body -> 	method_statement_list: '$1'.
 
 method_statement_list -> method_statement : ['$1'].		
 method_statement_list -> method_statement ',' method_statement_list : ['$1' |'$3'].
