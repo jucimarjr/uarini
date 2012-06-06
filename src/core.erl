@@ -77,4 +77,7 @@ convert_value(Value) when is_list(Value) -> Value.
 
 %%------------------------------------------------------------------------------
 %% Transforma lista de métodos
-transform_method_list(MethodList) -> "casou".
+transform_method_list([]) ->
+	".\n".
+transform_method_list([[Signature, MethodBody] | Rest]) ->
+	"casou\n" ++ transform_method_list(Rest).
