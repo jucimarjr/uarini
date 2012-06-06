@@ -53,27 +53,18 @@ transform_export_rest([]) ->
 transform_attribute_list([{Name, Value}| Rest]) -> 
 	"class_attributes()-> \n put({a, " ++ 
 	atom_to_list(Name) ++ "}," ++ 
-	convert_value(Value) ++
+	resolve_param(Value) ++
 	")" ++ 
 	transform_attribute_rest(Rest).
 transform_attribute_rest([{Name, Value} | Rest]) ->
 
 	",\n put({a, " ++ 
 	atom_to_list(Name) ++ "}," ++ 
-	convert_value(Value) ++
+	resolve_param(Value) ++
 	")" ++ 
 	transform_attribute_rest(Rest); 
 transform_attribute_rest([]) ->
 	".\n".
-
-convert_value(Value) when is_integer(Value) -> integer_to_list(Value);
-convert_value(Value) when is_float(Value) -> float_to_list(Value);
-convert_value(Value) when is_atom(Value) -> 
-	case string:to_lower(atom_to_list(Value)) of
-		"null" 	-> "nil";
-		_	-> atom_to_list(Value)
-	end;
-convert_value(Value) when is_list(Value) -> Value.
 
 %%------------------------------------------------------------------------------
 %% Transforma lista de métodos
@@ -109,7 +100,9 @@ resolve_param(Value) when is_tuple(Value) ->
 		{tuple, Tuple} -> 
 			resolve_tuple(Tuple);
 		{list, List} -> 
-			resolve_list(List)
+			resolve_list(List);
+		{list, List, EndList} ->
+			resolve_list(List) ++ " | " ++ resolve_param(EndList)
 	end.
 
 %%------------------------------------------------------------------------------

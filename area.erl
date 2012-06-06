@@ -10,5 +10,5 @@ class_init() ->
 new([]) ->
 thread() ->
 area(Dados1, Dados2, Dados3, {teste, [teste1, teste2]}) ->
-print([lista1, [lista2, [lista3, lista4, lista5]]]) ->
+print([lista1, [lista2, [lista3, lista4] | lista5]]) ->
 

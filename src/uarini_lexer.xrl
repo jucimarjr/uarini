@@ -16,6 +16,7 @@ AttributesIdentifier	= attributes\.
 MethodsIdentifier	= methods\.
 %% symbols
 Instance		= ::
+Pipe			= (\s*\|\s*)
 OpenParentheses		= \(
 CloseParentheses	= \)
 OpenBrackets		= \[
@@ -31,7 +32,7 @@ BeginStm		= ->
 % Operator: one of
 AttributionOp		= =
 ComparatorOp		= (<|<=|==|>=|>|!=)
-BooleanOp		= (\&\&|!|'\|''\|')
+BooleanOp		= (\&\&|\s*\|\|\s*)
 AddOp			= (\+|-)
 MultOp			= (\*|/)
 ModulusOp		= 'rem'
@@ -70,9 +71,10 @@ Rules.
 {Barra}			: {token, {list_to_atom(TokenChars), TokenLine}}.
 {BeginStm}		: {token, {list_to_atom(TokenChars), TokenLine}}.
 
+{Pipe}			: {token, {bop(TokenChars), TokenLine}}.
 {AttributionOp}		: {token, {list_to_atom(TokenChars), TokenLine}}.
 {ComparatorOp}		: {token, {list_to_atom(TokenChars), TokenLine}}.
-{BooleanOp}		: {token, {list_to_atom(TokenChars), TokenLine}}.
+{BooleanOp}		: {token, {bop(TokenChars), TokenLine}}.
 {AddOp}			: {token, {list_to_atom(TokenChars), TokenLine}}.
 {MultOp}		: {token, {list_to_atom(TokenChars), TokenLine}}.
 {ModulusOp}		: {token, {list_to_atom(TokenChars), TokenLine}}.
@@ -128,3 +130,17 @@ detect_special_char([$\\, SpecialChar | Rest], Output) ->
 
 detect_special_char([Char|Rest], Output) ->
 	detect_special_char(Rest, [Char|Output]).
+
+op(OpChar) ->
+	case OpChar of
+		"<=" -> '=<';
+		"!=" -> '=/=';
+		"&&" -> 'and';
+		"|"  -> '|';
+		"||" -> '||';
+		"!"  -> 'not';
+		_	->	list_to_atom(OpChar)
+	end.
+
+bop(OpChar) ->
+	op(hd(string:tokens(OpChar, " "))).

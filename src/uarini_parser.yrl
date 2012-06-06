@@ -16,8 +16,8 @@ erlang_match.
 
 Terminals
 
-'=' '::' '(' ')' '[' ']' '{' '}' ',' ';' '.' '->' 
-'!' 'rem' '*' '/' '+' '-' '&&' '||' '<' '>'
+'=' '::' '(' ')' '[' ']' '{' '}' ',' ';' '.' '->'
+'!' 'rem' '*' '/' '+' '-' '&&' '||' '<' '>' '|'
 integer float identifier text 
 '-class' export extends constructor import null
 'class' 'attributes.' 'methods.'.
@@ -248,8 +248,9 @@ argument -> text						: unwrap('$1').
 tuple -> '{' '}'		: {tuple, {none}}.
 tuple -> '{' argument_list '}'	: {tuple, '$2'}.
 
-list -> '[' ']'			: {list, {none}}.
-list -> '[' argument_list ']'	: {list, '$2'}.
+list -> '[' ']'					: {list, {none}}.
+list -> '[' argument_list ']'			: {list, '$2'}.
+list -> '[' argument_list '|' argument ']'	: {list, '$2','$4'}.	
 
 Erlang code.
 
