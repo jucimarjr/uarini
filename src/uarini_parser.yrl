@@ -167,7 +167,7 @@ attributes_definition_list -> attributes_definition attributes_definition_list
 
 attributes_definition -> erlang_match: '$1'.
 
-erlang_match -> identifier '=' add_expr : {unwrap('$1'), '$3'}.
+erlang_match -> identifier '=' add_expr : {match, unwrap('$1'), '$3'}.
 
 class_methods -> 'class' 'methods.' method_definition_list
 			: {'class methods.', '$3','.'}.
@@ -197,6 +197,7 @@ method_statement	-> oo_get_statement	: '$1'.
 erlang_statement -> terminal			: ['$1'].		
 erlang_statement -> terminal erlang_statement	: ['$1' | '$2'].
 
+terminal ->	',' 		: unwrap('$1').
 terminal ->	';' 		: unwrap('$1').
 terminal ->	'->'  		: unwrap('$1').
 terminal ->	'!'  		: unwrap('$1').
@@ -234,15 +235,15 @@ unary_expr -> argument		: '$1'.
 argument_list -> argument			: ['$1'].
 argument_list -> argument ',' argument_list	: ['$1' |'$3'].
 
-argument -> tuple						:'$1'.
-argument -> list						:'$1'.
-argument -> identifier '(' argument_list ')' 			: {unwrap('$1'), '$3'}.
-argument -> identifier '(' ')'					: {unwrap('$1'), {none}}.
-argument -> identifier	 					: unwrap('$1').
-argument -> integer						: unwrap('$1').
-argument -> null						: unwrap('$1').
-argument -> float						: unwrap('$1').	
-argument -> text						: unwrap('$1').
+argument -> tuple				:'$1'.
+argument -> list				:'$1'.
+argument -> identifier '(' argument_list ')' 	: {call_function, unwrap('$1'), '$3'}.
+argument -> identifier '(' ')'			: {call_function, unwrap('$1'), {none}}.
+argument -> identifier	 			: unwrap('$1').
+argument -> integer				: unwrap('$1').
+argument -> null				: unwrap('$1').
+argument -> float				: unwrap('$1').	
+argument -> text				: {text, unwrap('$1')}.
 
 
 tuple -> '{' '}'		: {tuple, {none}}.

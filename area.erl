@@ -3,20 +3,17 @@
 class_attributes()-> 
  put({a, R},nil),
  put({a, J},2.34000000000000013545e-01),
- put({a, S},teste),
+ put({a, S},"teste"),
  put({a, K},4),
  put({a, Z},nil).
 class_init() ->
-ok,
-ok.
+class_attributes().
 new([]) ->
-ok.
+class_init() , spawn fun thread().
 thread() ->
-ok,
-ok,
-ok,
+receive {From, {area, [Dados]}} -> From ! area(Dados) , B="oi" , thread() ; {From, {print, []}} -> From ! print() , thread() ; {From, Other} -> From ! {self(), {error, Other}} , thread() end.
+area(Dados) ->
 ok.
-area(Dados1, Dados2, Dados3, {teste, [teste1, teste2]}) ->
+print() ->
 ok.
-print([lista1, [lista2, [lista3, lista4] | lista5]]) ->
-ok.
+

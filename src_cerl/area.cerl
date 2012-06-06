@@ -13,16 +13,17 @@ Z = NULL
 class methods.
 
 class_init()->
-	class_init(),
 	class_attributes().
 
-new([]) -> 
+new([]) ->
+	class_init(),
 	spawn fun thread().
 
 thread() ->
 	receive
 		{ From, { area, [Dados] } } ->
 			From ! area(Dados),
+			B = "oi",
 			thread();
 		
 		{ From, { print, [] } } ->
@@ -34,8 +35,8 @@ thread() ->
 			thread()
 	end.
 
-area(Dados1, Dados2, Dados3, {teste, [teste1, teste2]})->
+area(Dados)->
 	ok.
 
-print([lista1, [lista2, [lista3, lista4 | lista5]]]) -> 
+print() -> 
 	A = self::R.
