@@ -23,7 +23,6 @@ transform_uast_to_east(CerlAST, ErlangModuleName) ->
 match_definition({export, ExportList}) ->
 	transform_export_list(ExportList).
 
-
 %%------------------------------------------------------------------------------
 %% Transforma lista de export
 transform_export_list([{Name, Arity} | Rest]) ->
