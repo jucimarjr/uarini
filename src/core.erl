@@ -146,7 +146,7 @@ resolve_list_rest([Element | Rest]) ->
 resolve_method_body([Head | Rest]) ->
 	ErlangStatment =
 	case Head of
-		{} -> "ops"; 
+		{Name, {none}} -> atom_to_list(Name) ++ "()"; 
 		_ -> "ok"
 	end,
 	case Rest of
