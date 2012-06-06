@@ -236,9 +236,9 @@ argument_list -> argument ',' argument_list	: ['$1' |'$3'].
 
 argument -> tuple						:'$1'.
 argument -> list						:'$1'.
-argument -> identifier	 					:'$1'.
 argument -> identifier '(' argument_list ')' 			: {unwrap('$1'), '$3'}.
 argument -> identifier '(' ')'					: {unwrap('$1'), {none}}.
+argument -> identifier	 					: unwrap('$1').
 argument -> integer						: unwrap('$1').
 argument -> null						: unwrap('$1').
 argument -> float						: unwrap('$1').	
