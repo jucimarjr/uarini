@@ -251,7 +251,6 @@ tuple -> '{' argument_list '}'	: {tuple, '$2'}.
 list -> '[' ']'			: {list, {none}}.
 list -> '[' argument_list ']'	: {list, '$2'}.
 
-
 Erlang code.
 
 unwrap({_, _, Value})	-> Value;
