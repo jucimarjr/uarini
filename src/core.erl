@@ -143,4 +143,13 @@ resolve_list_rest([Element | Rest]) ->
 %%------------------------------------------------------------------------------
 %% Transforma corpo do método
 
-resolve_method_body(MethodBody) -> "ok.\n".
+resolve_method_body([Head | Rest]) ->
+	ErlangStatment =
+	case Head of
+		{} -> "ops\n"; 
+		_ -> "ok\n"
+	end,
+	case Rest of
+		[]	-> ErlangStatment ++ ".";
+		_ 	-> ErlangStatment ++ "," ++ resolve_method_body(Rest) 	
+	end.
