@@ -7,8 +7,13 @@ class_attributes()->
  put({a, K},4),
  put({a, Z},nil).
 class_init() ->
+ok.
 new([]) ->
+ok.
 thread() ->
+ok.
 area(Dados1, Dados2, Dados3, {teste, [teste1, teste2]}) ->
+ok.
 print([lista1, [lista2, [lista3, lista4] | lista5]]) ->
+ok.
 

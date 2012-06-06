@@ -72,9 +72,10 @@ transform_method_list([]) ->
 	"\n";
 transform_method_list([{Signature, MethodBody} | Rest]) ->
 	{signature, MethodName, ParameterList} = Signature,
-	Method = atom_to_list(MethodName),
-	Parameter = "(" ++ resolve_parameter(ParameterList), 	
-	Method ++ Parameter ++ transform_method_list(Rest).
+	Name = atom_to_list(MethodName),
+	Parameter = "(" ++ resolve_parameter(ParameterList),
+	Body = resolve_method_body(MethodBody), 	
+	Name ++ Parameter ++ Body ++ transform_method_list(Rest).
 
 %%------------------------------------------------------------------------------
 %% Transforma lista de parâmetros
@@ -138,3 +139,8 @@ resolve_list_rest([Element | Rest]) ->
 		_ -> resolve_param(Element) ++ ", " ++ 
 			resolve_list_rest(Rest)
 	end.
+
+%%------------------------------------------------------------------------------
+%% Transforma corpo do método
+
+resolve_method_body(MethodBody) -> "ok.\n".
