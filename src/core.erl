@@ -85,6 +85,8 @@ transform_method_list([{Signature, MethodBody} | Rest]) ->
 	Parameter = "(" ++ resolve_parameter(ParameterList), 	
 	Method ++ Parameter ++ transform_method_list(Rest).
 
+%%------------------------------------------------------------------------------
+%% Transforma lista de parâmetros
 resolve_parameter([]) -> 
 	") ->\n";
 resolve_parameter([Parameter | Rest]) ->
@@ -102,4 +104,18 @@ resolve_param(Value) when is_atom(Value) ->
 		_	-> atom_to_list(Value)
 	end;
 resolve_param(Value) when is_list(Value) -> Value;
-resolve_param(Value) when is_tuple(Value) -> "ok".
+resolve_param(Value) when is_tuple(Value) -> 
+	case Value of
+		{tuple, Tuple} -> 
+			resolve_tuple(Tuple);
+		{list, List} -> 
+			resolve_list(List)
+	end.
+
+%%------------------------------------------------------------------------------
+%% Transforma tupla
+resolve_tuple(Tuple) when is_tuple(Tuple) -> "{}".
+
+%%------------------------------------------------------------------------------
+%% Transforma lista
+resolve_list(List) when is_tuple(List) -> "[]".
