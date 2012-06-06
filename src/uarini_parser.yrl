@@ -245,10 +245,10 @@ argument -> float						: unwrap('$1').
 argument -> text						: unwrap('$1').
 
 
-tuple -> '{' '}'				: {tuple}.
+tuple -> '{' '}'		: {tuple, {none}}.
 tuple -> '{' argument_list '}'	: {tuple, '$2'}.
 
-list -> '[' ']'					: {list}.
+list -> '[' ']'			: {list, {none}}.
 list -> '[' argument_list ']'	: {list, '$2'}.
 
 

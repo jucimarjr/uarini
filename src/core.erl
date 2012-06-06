@@ -78,6 +78,28 @@ convert_value(Value) when is_list(Value) -> Value.
 %%------------------------------------------------------------------------------
 %% Transforma lista de métodos
 transform_method_list([]) ->
-	".\n".
-transform_method_list([[Signature, MethodBody] | Rest]) ->
-	"casou\n" ++ transform_method_list(Rest).
+	"\n";
+transform_method_list([{Signature, MethodBody} | Rest]) ->
+	{signature, MethodName, ParameterList} = Signature,
+	Method = atom_to_list(MethodName),
+	Parameter = "(" ++ resolve_parameter(ParameterList), 	
+	Method ++ Parameter ++ transform_method_list(Rest).
+
+resolve_parameter([]) -> 
+	") ->\n";
+resolve_parameter([Parameter | Rest]) ->
+	Param = resolve_param(Parameter),	
+	case Rest of
+		[]-> Param ++ resolve_parameter(Rest);
+		_ -> Param ++ ", " ++ resolve_parameter(Rest)
+	end.
+
+resolve_param(Value) when is_integer(Value) -> integer_to_list(Value);
+resolve_param(Value) when is_float(Value) -> float_to_list(Value);
+resolve_param(Value) when is_atom(Value) -> 
+	case string:to_lower(atom_to_list(Value)) of
+		"null" 	-> "nil";
+		_	-> atom_to_list(Value)
+	end;
+resolve_param(Value) when is_list(Value) -> Value;
+resolve_param(Value) when is_tuple(Value) -> "ok".

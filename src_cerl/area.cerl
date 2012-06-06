@@ -34,7 +34,7 @@ thread() ->
 			thread()
 	end.
 
-area(Dados)->
+area(Dados1, Dados2, Dados3)->
 	ok.
 
 print() -> 
