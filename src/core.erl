@@ -114,8 +114,34 @@ resolve_param(Value) when is_tuple(Value) ->
 
 %%------------------------------------------------------------------------------
 %% Transforma tupla
-resolve_tuple(Tuple) when is_tuple(Tuple) -> "{}".
+resolve_tuple(Tuple) when is_tuple(Tuple) -> "{}";
+resolve_tuple([Element | Rest]) ->
+	case Rest of
+		[]-> "{" ++ resolve_param(Element) ++ "}";
+		_ -> "{" ++ resolve_param(Element) ++ ", " ++ 
+			resolve_tuple_rest(Rest)
+	end.
 
+resolve_tuple_rest([Element | Rest]) ->
+	case Rest of
+		[]-> resolve_param(Element) ++ "}";
+		_ -> resolve_param(Element) ++ ", " ++ 
+			resolve_tuple_rest(Rest)
+	end.
+	
 %%------------------------------------------------------------------------------
 %% Transforma lista
-resolve_list(List) when is_tuple(List) -> "[]".
+resolve_list(List) when is_tuple(List) -> "[]";
+resolve_list([Element | Rest]) ->
+	case Rest of
+		[]-> "[" ++ resolve_param(Element) ++ "]";
+		_ -> "[" ++ resolve_param(Element) ++ ", " ++ 
+			resolve_list_rest(Rest)
+	end.
+
+resolve_list_rest([Element | Rest]) ->
+	case Rest of
+		[]-> resolve_param(Element) ++ "]";
+		_ -> resolve_param(Element) ++ ", " ++ 
+			resolve_list_rest(Rest)
+	end.
