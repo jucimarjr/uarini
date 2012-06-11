@@ -1,19 +1,19 @@
 -module(uarini).
--export([compile/1, get_version/0]).
+-export([compile/1]).
 
--include("../include/uarini_define.hrl").
-
+%%-----------------------------------------------------------------------------
+%% Interface com o usuario final. Compila vários arquivos cerl dependentes
 compile({beam, CerlFileName}) ->
+	
 	{_, _, StartTime} = now(),
 
 	ErlangFile = get_erl_file(CerlFileName),
-
 	erl_tidy:file(ErlangFile,[{backups,false}]),
-
 	compile:file(ErlangFile),
 
 	{_, _, EndTime} = now(),
 	ElapsedTime = EndTime - StartTime,
+	
 	io:format(
 		"~p -> ~p [ Compile time: ~p us (~p s) ]~n",
 		[
@@ -27,10 +27,14 @@ compile({beam, CerlFileName}) ->
 %%-----------------------------------------------------------------------------
 %% Interface com o usuario final. Compila vários arquivos cerl dependentes
 compile(CerlFileName) ->
+	
 	{_, _, StartTime} = now(),
+	
 	ErlangFile = get_erl_file(CerlFileName),
+	
 	{_, _, EndTime} = now(),
 	ElapsedTime = EndTime - StartTime,
+	
 	io:format(
 		"~p -> ~p [ Compile time: ~p us (~p s) ]~n", [CerlFileName,
 			ErlangFile,
@@ -50,13 +54,6 @@ get_erl_file(CerlFileName) ->
 		core:transform_uast_to_east(CerlAST, ErlangModuleName),
 	create_erl_file(ErlangCode, ErlangFileName),
 	ErlangFileName.
-
-%%-----------------------------------------------------------------------------
-%% Mostra a versao, autores e ano do Uarini.
-get_version() ->
-	io:format("Uarini - A Cerl compiler for Erlang VM ~n"),
-	io:format("Version: ~p~n", [?VSN]),
-	io:format("Team: ~p~n", [?TEAM]).
 
 %%-----------------------------------------------------------------------------
 %% Extrai o nome do arquivo .erl a partir do cerl ast

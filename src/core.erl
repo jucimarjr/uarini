@@ -1,30 +1,45 @@
 -module(core).
 -export([transform_uast_to_east/2]).
--include("../include/uarini_define.hrl").
 
 %%-----------------------------------------------------------------------------
 %% Converte o uast em erl.
 transform_uast_to_east(CerlAST, ErlangModuleName) ->
-	Module = "-module(" ++ atom_to_list(ErlangModuleName) ++ ").\n",
+	ModuleName = get_module_name(ErlangModuleName),
 	[_Class, DefinitionList | _] = CerlAST,	
-	OO = [match_definition(Definition)|| Definition <- DefinitionList],
-	Attribute =
-	case CerlAST of
-		[_Class, _DefinitionList1, 
+	ClassDefinition = [match_definition(Definition)|| Definition <- DefinitionList],
+	Attributes = get_attributes(CerlAST),
+	Methods = get_methods(CerlAST),
+	lists:flatten(ModuleName ++ ClassDefinition ++ Attributes ++ Methods).
+
+%%------------------------------------------------------------------------------
+%% Extrai nome do modulo
+get_module_name(ErlangModuleName) ->
+	ModuleName = "-module(" ++ atom_to_list(ErlangModuleName) ++ ").\n",
+	ModuleName.
+%%------------------------------------------------------------------------------
+%% Extrai os atributos
+get_attributes(CerlAST) ->
+	Attributes = 
+		case CerlAST of
+			[_Class, _DefinitionList1, 
 			{'class attributes.', AttributeList, '.'}, _Methods] ->
-			transform_attribute_list(AttributeList);		
-		_ -> 
-			"\n"
-	end,
-	Method =
-	case CerlAST of
-		[_Class, _DefinitionList2, 
-			_AttributeList, {'class methods.', MethodList, '.'}] ->
-			transform_method_list(MethodList);		
-		_ -> 
-			"\n"
-	end,	
-	lists:flatten(Module ++ OO ++ Attribute ++ Method).
+				transform_attribute_list(AttributeList);		
+			_ -> 
+				"\n"
+		end,
+		Attributes.
+%%------------------------------------------------------------------------------
+%% Extrai os metodos
+get_methods(CerlAST) ->
+	Methods = 
+		case CerlAST of
+			[_Class, _DefinitionList2, _AttributeList, 
+			{'class methods.', MethodList, '.'}] ->
+				transform_method_list(MethodList);		
+			_ -> 
+				"\n"
+		end,
+	Methods.
 
 %%------------------------------------------------------------------------------
 %% Pattern Match de Export
@@ -56,6 +71,7 @@ transform_attribute_list([{match, Name, Value}| Rest]) ->
 	resolve_param(Value) ++
 	")" ++ 
 	transform_attribute_rest(Rest).
+
 transform_attribute_rest([{match, Name, Value} | Rest]) ->
 
 	",\n put({a, " ++ 
@@ -63,6 +79,7 @@ transform_attribute_rest([{match, Name, Value} | Rest]) ->
 	resolve_param(Value) ++
 	")" ++ 
 	transform_attribute_rest(Rest); 
+
 transform_attribute_rest([]) ->
 	".\n".
 
