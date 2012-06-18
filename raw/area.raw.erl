@@ -13,7 +13,8 @@ class_attributes()->
 
 % gerado automaticamente para inicializar o objeto
 class_init()->
-	class_attributes().
+	class_attributes(),
+	class_methods().
 
 %% ----------------------------------------------------------------------------
 %% create by ooe - end

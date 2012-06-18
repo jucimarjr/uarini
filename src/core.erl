@@ -66,7 +66,7 @@ transform_export_rest([]) ->
 %%------------------------------------------------------------------------------
 %% Transforma lista de atributos
 transform_attribute_list([{match, Name, Value}| Rest]) -> 
-	"class_attributes()-> \n set_attribute({a, " ++ 
+	"class_attributes()-> \n ooe:det_attribute({a, " ++ 
 	atom_to_list(Name) ++ "}," ++ 
 	resolve_param(Value) ++
 	")" ++ 
@@ -74,7 +74,7 @@ transform_attribute_list([{match, Name, Value}| Rest]) ->
 
 transform_attribute_rest([{match, Name, Value} | Rest]) ->
 
-	",\n set_attribute({a, " ++ 
+	",\n ooe:det_attribute({a, " ++ 
 	atom_to_list(Name) ++ "}," ++ 
 	resolve_param(Value) ++
 	")" ++ 

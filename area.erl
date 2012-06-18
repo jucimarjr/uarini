@@ -1,11 +1,11 @@
 -module(area).
 -export([new/1, area/1]).
 class_attributes()-> 
- set_attribute({a, R},nil),
- set_attribute({a, J},2.34000000000000013545e-01),
- set_attribute({a, S},"teste"),
- set_attribute({a, K},4),
- set_attribute({a, Z},nil).
+ ooe:det_attribute({a, R},nil),
+ ooe:det_attribute({a, J},2.34000000000000013545e-01),
+ ooe:det_attribute({a, S},"teste"),
+ ooe:det_attribute({a, K},4),
+ ooe:det_attribute({a, Z},nil).
 class_init() ->
 class_attributes().
 new([]) ->
