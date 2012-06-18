@@ -74,7 +74,7 @@ transform_attribute_list([{match, Name, Value}| Rest]) ->
 
 transform_attribute_rest([{match, Name, Value} | Rest]) ->
 
-	",\n put({a, " ++ 
+	",\n set_attribute({a, " ++ 
 	atom_to_list(Name) ++ "}," ++ 
 	resolve_param(Value) ++
 	")" ++ 

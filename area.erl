@@ -2,10 +2,10 @@
 -export([new/1, area/1]).
 class_attributes()-> 
  put({a, R},nil),
- put({a, J},2.34000000000000013545e-01),
- put({a, S},"teste"),
- put({a, K},4),
- put({a, Z},nil).
+ set_attribute({a, J},2.34000000000000013545e-01),
+ set_attribute({a, S},"teste"),
+ set_attribute({a, K},4),
+ set_attribute({a, Z},nil).
 class_init() ->
 class_attributes().
 new([]) ->
@@ -21,4 +21,3 @@ area(Dados) ->
 ok.
 print() ->
 ok.
-
