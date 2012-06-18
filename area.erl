@@ -9,9 +9,14 @@ class_attributes()->
 class_init() ->
 class_attributes().
 new([]) ->
-class_init() , spawn fun thread().
+class_init(),
+spawn fun thread().
 thread() ->
-receive {From, {area, [Dados]}} -> From ! area(Dados) , B="oi" , thread() ; {From, {print, []}} -> From ! print() , thread() ; {From, Other} -> From ! {self(), {error, Other}} , thread() end.
+receive {From, {area, [Dados]}} -> From ! area(Dados),
+B="oi",
+thread() ; {From, {print, []}} -> From ! print(),
+thread() ; {From, Other} -> From ! {self(), {error, Other}},
+thread() end.
 area(Dados) ->
 ok.
 print() ->
