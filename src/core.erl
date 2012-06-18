@@ -66,7 +66,7 @@ transform_export_rest([]) ->
 %%------------------------------------------------------------------------------
 %% Transforma lista de atributos
 transform_attribute_list([{match, Name, Value}| Rest]) -> 
-	"class_attributes()-> \n put({a, " ++ 
+	"class_attributes()-> \n set_attribute({a, " ++ 
 	atom_to_list(Name) ++ "}," ++ 
 	resolve_param(Value) ++
 	")" ++ 
