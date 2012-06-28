@@ -1,0 +1,16 @@
+-class(gato).
+-extends(animal).
+-export([arranhar/0, mostrar/0]).
+
+class attributes.
+
+Raca = "Siames"
+
+class methods.
+
+arranhar() ->
+	io:format("raaaaaasg!").
+
+mostrar() ->
+	super::mostrar(),
+	io:format("Minha raca eh ~d~n",self::Idade).

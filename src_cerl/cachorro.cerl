@@ -1,0 +1,12 @@
+-class(cachorro).
+-extends(animal).
+-constructor([new/1]).
+-export([miar/0]).
+
+class methods.
+
+latir() ->
+ io:format("au!au!").
+
+ new( Nome ) ->
+	self::Nome = Nome.
