@@ -197,7 +197,6 @@ method_statement	-> oo_get_statement	: '$1'.
 erlang_statement -> terminal			: ['$1'].		
 erlang_statement -> terminal erlang_statement	: ['$1' | '$2'].
 
-terminal ->	',' 		: unwrap('$1').
 terminal ->	';' 		: unwrap('$1').
 terminal ->	'->'  		: unwrap('$1').
 terminal ->	'!'  		: unwrap('$1').

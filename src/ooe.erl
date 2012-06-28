@@ -20,4 +20,3 @@ def_attribute({Class,[Attributes]})->
 def_methods({Class,[Methods]})->
 	put({Class,methods},[Methods]),
 	ok.
-
