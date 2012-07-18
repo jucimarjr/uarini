@@ -1,0 +1,18 @@
+class(Main).
+-import([PingPong]).
+-export([run/2]).
+
+class methods.
+
+run(R, D) ->
+	Pong = PingPong::new(pong, []),
+	ping(R, D, Pong).
+
+ping(0, _, _) ->
+    done;
+ping(R, D, Pong) ->
+    Pong ! {self(), D},
+    receive
+        {Pong, D} ->
+            ping(R - 1, D, Pong)
+    end.

@@ -1,0 +1,14 @@
+-class(PingPong).
+-export([new/2, pong/1]).
+
+class_methods.
+
+new(Method, Parameters) ->
+	spawn(?CLASS, Method, Parameters).
+
+pong() ->
+    receive
+        {From, D} ->
+            From ! {self(), D},
+            pong()
+    end.

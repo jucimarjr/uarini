@@ -1,5 +1,5 @@
 -class(Ping).
--export(pingping/1).
+-export([new/2, pingping/1]).
 
 class_methods.
 
