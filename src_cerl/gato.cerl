@@ -13,4 +13,4 @@ arranhar() ->
 
 mostrar() ->
 	super::mostrar(),
-	io:format("Minha raca eh ~d~n",self::Idade).
+	io:format("Minha raca eh ~d~n",self::Raca).

@@ -12,5 +12,5 @@ respirar() ->
 	io:format("ufa! ufa!").
 
 mostrar() ->
-	io:format("Meu nome eh ~d~n",self::Nome),
-	io:format("Minha idade eh ~d~n",self::Idade).
+	io:format("Meu nome eh ~d~n", self::Nome),
+	io:format("Minha idade eh ~d~n", self::Idade).

@@ -1,7 +1,7 @@
 -class(cachorro).
 -extends(animal).
 -constructor([new/1]).
--export([miar/0]).
+-export([latir/0]).
 
 class methods.
 

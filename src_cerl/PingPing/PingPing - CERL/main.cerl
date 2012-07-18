@@ -1,0 +1,11 @@
+class(Main).
+-import([Ping]).
+-export([run/2]).
+
+class methods.
+
+run(R, D) ->
+	P1 = Ping::new(pingping, [D]),
+	P2 = Ping::new(pingping. [D]),
+	P1 ! {init, P2, R},
+    P2 ! {init, P1, R}.
