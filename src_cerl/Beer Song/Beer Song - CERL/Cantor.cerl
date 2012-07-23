@@ -1,0 +1,23 @@
+-class(Cantor).
+-import([Caneco]).
+-export([spawn_singer/1, sing_verse/1]).
+
+class methods.
+
+spawn_singer(Bottle) ->
+    Pid = self(), 
+	spawn(fun() -> Pid ! Caneco::create_verse(Bottle) end).
+
+sing_verse(Bottle) ->
+    receive
+	{_, Verse} when Bottle == 0 ->
+	    io:format(Verse);
+	{N, Verse} when Bottle == N ->
+	    io:format(Verse),
+	    sing_verse(Bottle-1)
+    after 
+	3000 ->
+	    io:format("Verse not received after 3 seconds - re-starting singer~n"),
+	    Main::spawn_singer(Bottle),
+	    sing_verse(Bottle)
+    end.

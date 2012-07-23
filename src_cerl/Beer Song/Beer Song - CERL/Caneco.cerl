@@ -1,0 +1,12 @@
+-class(Caneco).
+-export([create_verse/1]).
+
+class methods.
+
+-define(TEMPLATE_0, "~s of beer on the wall, ~s of beer.~nGo to the store and buy some more, 99 bottles of beer on the wall.~n").
+-define(TEMPLATE_N, "~s of beer on the wall, ~s of beer.~nTake one down and pass it around, ~s of beer on the wall.~n~n").
+
+create_verse(0) -> 
+	{0, io_lib:format(?TEMPLATE_0, phrase(0))};
+create_verse(Bottle) -> 
+	{Bottle, io_lib:format(?TEMPLATE_N, phrase(Bottle))}.
