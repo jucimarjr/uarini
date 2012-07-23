@@ -9,5 +9,3 @@ bottles(Bottles) -> lists:reverse(lists:seq(0,Bottles)).
 sing(Singers, Bottles) ->    
 	lists:foreach(fun Cantor::spawn_singer/1, bottles(Bottles)),
     Cantor::sing_verse(Singers).
-
-

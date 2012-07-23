@@ -1,0 +1,16 @@
+class(Nodo).
+-export([new/2, roundtrip/2]).
+
+new(Method, Parameters) ->
+	spawn(?CLASS, Method, Parameters).
+
+roundtrip(Id, Pid) ->
+	receive
+		1 ->
+			io:fwrite("fim: ~b ~p 1 ~n", [Id, Pid]),
+	        erlang:halt();
+      Token ->
+			io:fwrite("~b ~p ~p ~n", [Id, Pid, Token-1]),
+			Pid ! Token - 1,
+			roundtrip(Id, Pid)
+	end.
