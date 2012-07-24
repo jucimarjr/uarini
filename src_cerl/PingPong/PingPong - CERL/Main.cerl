@@ -5,7 +5,7 @@ class(Main).
 class methods.
 
 run(R, D) ->
-	Pong = PingPong::new(pong, []),
+	Pong = PingPong::spawn_process(pong, []),
 	ping(R, D, Pong).
 
 ping(0, _, _) ->

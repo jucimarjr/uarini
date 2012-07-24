@@ -1,9 +1,9 @@
 -class(Ping).
--export([new/2, pingping/1]).
+-export([spawn_process/2, pingping/1]).
 
-class_methods.
+class methods.
 
-new(Method, Parameters) ->
+spawn_process(Method, Parameters) ->
 	spawn(?CLASS, Method, Parameters).
 
 pingping(Data) ->
