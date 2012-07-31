@@ -1,10 +1,11 @@
 -class(PingPong).
--export([spawn_process/2, pong/1]).
+-constructor([new/1]).
+-export([new/1]).
 
 class_methods.
 
-spawn_process(Method, Parameters) ->
-	spawn(?CLASS, Method, Parameters).
+new() ->
+	spawn(?CLASS, pong, []).
 
 pong() ->
     receive

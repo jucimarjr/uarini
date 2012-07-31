@@ -1,11 +1,11 @@
-class(Main).
+-class(Main).
 -import([Ping]).
 -export([run/2]).
 
 class methods.
 
 run(R, D) ->
-	P1 = Ping::spawn_process(pingping, [D]),
-	P2 = Ping::spawn_process(pingping, [D]),
+	P1 = Ping::new(D),
+	P2 = Ping::new(D),
 	P1 ! {init, P2, R},
     P2 ! {init, P1, R}.

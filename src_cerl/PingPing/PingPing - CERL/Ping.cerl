@@ -1,10 +1,11 @@
 -class(Ping).
--export([spawn_process/2, pingping/1]).
+-constructor([new/1]).
+-export([new/1]).
 
 class methods.
 
-spawn_process(Method, Parameters) ->
-	spawn(?CLASS, Method, Parameters).
+new(Parameter) ->
+	spawn(?CLASS, pingping, [Parameter]).
 
 pingping(Data) ->
     receive

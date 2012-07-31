@@ -1,11 +1,11 @@
-class(Main).
+-class(Main).
 -import([PingPong]).
 -export([run/2]).
 
 class methods.
 
 run(R, D) ->
-	Pong = PingPong::spawn_process(pong, []),
+	Pong = PingPong::new(),
 	ping(R, D, Pong).
 
 ping(0, _, _) ->

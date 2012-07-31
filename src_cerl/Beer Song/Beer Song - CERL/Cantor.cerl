@@ -1,12 +1,19 @@
 -class(Cantor).
 -import([Caneco]).
--export([spawn_singer/1, sing_verse/1]).
+-constructor([new/0, new/1]).
+-export([new/0, new/1, sing_verse/1]).
 
 class methods.
 
-spawn_singer(Bottle) ->
-    Pid = self(), 
-	spawn(fun() -> Pid ! Caneco::create_verse(Bottle) end).
+new() ->
+	ok.
+
+new(Bottle) ->
+	spawn_singer(Bottle).
+
+spawn_singer(Bottle) ->    
+	Pid = self(),
+	spawn(fun() -> Pid ! Caneco::new(Bottle) end).
 
 sing_verse(Bottle) ->
     receive
@@ -18,6 +25,6 @@ sing_verse(Bottle) ->
     after 
 	3000 ->
 	    io:format("Verse not received after 3 seconds - re-starting singer~n"),
-	    Main::spawn_singer(Bottle),
+	    spawn_singer(Bottle),
 	    sing_verse(Bottle)
     end.

@@ -1,8 +1,12 @@
-class(Nodo).
--export([new/2, roundtrip/2]).
+-class(Nodo).
+-constructor([new/2, new/3]).
+-export([new/2, new/3, roundtrip/2]).
 
-new(Method, Parameters) ->
-	spawn(?CLASS, Method, Parameters).
+new(Id, Pid) ->
+	spawn(?CLASS, roundtrip, [Id, Pid]).
+
+new(Id, Pid, self) ->
+	roundtrip(Id, Pid).
 
 roundtrip(Id, Pid) ->
 	receive
