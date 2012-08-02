@@ -1,4 +1,4 @@
--class(Caneco).
+-class(caneco).
 -constructor([new/1]).
 -export([new/1]).
 

@@ -1,5 +1,5 @@
--class(Main).
--import([Cantor]).
+-class(main).
+-import([cantor]).
 -export([sing/2]).
 
 class methods.
@@ -8,5 +8,5 @@ bottles(Bottles) -> lists:reverse(lists:seq(0,Bottles)).
 
 sing(Singers, Bottles) ->    
 	lists:foreach(fun Cantor::new/1, bottles(Bottles)),
-	Canto = Cantor::new(),    
-	Canto::sing_verse(Singers).
+	Cantor = cantor::new(),    
+	Cantor::sing_verse(Singers).

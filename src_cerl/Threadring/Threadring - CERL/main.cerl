@@ -7,7 +7,7 @@ class methods.
 -define(RING, 12).
 
 start(Token) ->
-	H = lists:foldl(fun(Id,Pid)-> Nodo:new(Id, Pid) end, 
+	H = lists:foldl(fun(Id,Pid)-> Nodo::new(Id, Pid) end, 
       				self(), 
       				lists:seq(?RING, 2, -1)
 				),
