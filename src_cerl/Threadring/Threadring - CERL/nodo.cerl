@@ -1,6 +1,6 @@
 -class(nodo).
 -constructor([new/2, new/3]).
--export([new/2, new/3, roundtrip/2]).
+-export([roundtrip/2]).
 
 new(Id, Pid) ->
 	spawn(?CLASS, roundtrip, [Id, Pid]).

@@ -7,6 +7,6 @@ class methods.
 bottles(Bottles) -> lists:reverse(lists:seq(0,Bottles)).
 
 sing(Singers, Bottles) ->    
-	lists:foreach(fun Cantor::new/1, bottles(Bottles)),
+	lists:foreach(fun cantor::new/1, bottles(Bottles)),
 	Cantor = cantor::new(),    
 	Cantor::sing_verse(Singers).
