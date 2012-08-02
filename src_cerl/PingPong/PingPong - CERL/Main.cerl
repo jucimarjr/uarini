@@ -1,4 +1,4 @@
--class(Main).
+-class(main).
 -import([PingPong]).
 -export([run/2]).
 
@@ -15,4 +15,4 @@ ping(R, D, Pong) ->
     receive
         {Pong, D} ->
             ping(R - 1, D, Pong)
-    end.
+    end.	
