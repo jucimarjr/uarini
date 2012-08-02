@@ -1,5 +1,5 @@
--class(Main).
--import([Nodo]).
+-class(main).
+-import([nodo]).
 -export([main/1]).
 
 class methods.

@@ -1,4 +1,4 @@
--class(Nodo).
+-class(nodo).
 -constructor([new/2, new/3]).
 -export([new/2, new/3, roundtrip/2]).
 
