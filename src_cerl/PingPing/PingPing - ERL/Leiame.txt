@@ -1,0 +1,21 @@
+Execute no shell do linux:
+
+	-> erlc *.erl
+	-> erl
+
+Dentro do shell do Erlang execute:
+	
+	-> main:start_class().
+	-> ping:start_class().
+	-> main:run(10, oi).
+
+-----------------------------------
+Possivelmente as chamadas de start_class() seriam chamadas por uma script.
+O script inicia a execução dos start_class.
+
+Inicialmente oee está apenas instanciado objetos.
+Estes objetos estão sendo criados soltos na memória.
+Deverá ser desenvolvido um módulo para o gerenciamento de objetos.
+
+Então ooe seria a definição das estruturas de classes.
+Outro módulo seria responsável pelo gerenciamento dos objetos.
