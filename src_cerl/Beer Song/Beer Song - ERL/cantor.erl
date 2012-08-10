@@ -14,8 +14,8 @@ new(_Key) ->
 spawn_singer(Bottle, _Key) ->    
 	Pid = self(),
 	Caneco = ooe:constructor(caneco, {new, 1}, []),
-	spawn(fun() -> Pid ! 
-				ooe:method(caneco, {create_verse, 2}, [Bottle], Caneco) end).
+	spawn(fun() -> Pid !
+		ooe:method(caneco, {create_verse, 2}, [Bottle], Caneco) end).
 
 sing_verse(Bottle, _Key) ->
     receive

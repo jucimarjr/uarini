@@ -9,4 +9,4 @@ run() ->
 	main:start_class(),
 	cantor:start_class(),
 	caneco:start_class(),
-	main:sing(2, 3).
+	main:sing(12, 15).
