@@ -9,4 +9,4 @@ run(R, D) ->
 	P1 = ooe:constructor(ping, {new, 1}, [D]),
 	P2 = ooe:constructor(ping, {new, 1}, [D]),
 	P1 ! {init, P2, R},
-	P2 ! {init, P1, R}.
+	P2 ! {init, P1, R}.()

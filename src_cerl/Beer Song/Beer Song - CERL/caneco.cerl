@@ -9,6 +9,12 @@ class methods.
 new(Bottle)->
 	create_verse(Bottle).
 
+phrase(0)      -> ["No more bottles", "no more bottles"];
+phrase(1)      -> ["1 bottle", "1 bottle", "no more bottles"];
+phrase(2)      -> ["2 bottles", "2 bottles", "1 bottle"];
+phrase(Bottle) -> lists:duplicate(2, integer_to_list(Bottle) ++ " bottles") 
+								++ [integer_to_list(Bottle-1) ++ " bottles"].
+
 create_verse(0) -> 
 	{0, io_lib:format(?TEMPLATE_0, phrase(0))};
 create_verse(Bottle) -> 
