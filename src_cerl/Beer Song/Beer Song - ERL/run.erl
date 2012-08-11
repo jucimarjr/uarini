@@ -6,6 +6,7 @@ run() ->
 	compile:file("main.erl"),
 	compile:file("cantor.erl"),
 	compile:file("caneco.erl"),	
+	ooe:start(),	
 	main:start_class(),
 	cantor:start_class(),
 	caneco:start_class(),
