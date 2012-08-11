@@ -39,37 +39,29 @@ def_method(Class, Method, MethodFunction)->
 	ok.
 
 constructor(Class, Constructor, Parameters) ->
-	Key =
-		case get(object) of
-			undefined -> 
-				put(object, 0),
-				0;
-			Number ->
-				put(object, Number + 1),
-				Number + 1  
-		end,	
-	global:send(?SERVER, {self(), constructor, Class, Constructor}),
-	receive
-		undefined -> 
-			error;
-		Function ->
-			apply(Function, Parameters ++ [Key])
-	after 
-		1000 ->
-			error
-	end,	
+	{key, Key} = request({key}),
+	{constructor, Function} = request({constructor, {self(), constructor, Class, Constructor}}),
+	apply(Function, Parameters ++ [Key]),
 	Key.
-
+	
 method(Class, Method, Parameters, Key) ->
-	global:send(?SERVER, {self(), method, Class, Method}),
+	{method, Function} = request({method, {self(), method, Class, Method}}),
+	apply(Function, Parameters ++ [Key]).	
+
+request(Request) ->	
+	case Request of
+		{key} ->
+			global:send(?SERVER, {self(), object}),
+			key;
+		{constructor, Constructor} ->
+			global:send(?SERVER, Constructor),
+			constructor;			
+		{method, Method} ->
+			global:send(?SERVER, Method),
+			method		
+	end,
 	receive
-		undefined -> 
-			error;
-		Function ->
-			apply(Function, Parameters ++ [Key])
-	after 
-		1000 ->
-			error
+		Return -> Return 
 	end.
 
 handle() ->
@@ -87,8 +79,20 @@ handle() ->
 		{method, Class, Method, MethodFunction} ->
 			put({method, Class, Method}, MethodFunction);
 		{From, constructor, Class, Constructor} ->
-			From ! get({constructor, Class, Constructor});
+			Function = get({constructor, Class, Constructor}),
+			From ! {constructor, Function};
 		{From, method, Class, Method} ->
-			From ! get({method, Class, Method})
+			Function = get({method, Class, Method}), 			
+			From ! {method, Function};
+		{From, object} ->
+			case get(object) of
+				undefined -> 
+					put(object, 0),
+					From ! {key, 0};
+				Number ->
+					NewNumber = Number + 1,
+					put(object, NewNumber),
+					From ! {key, get(object)} 
+			end
 	end,
 	handle().

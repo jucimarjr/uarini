@@ -11,7 +11,8 @@ bottles(Bottles) -> lists:reverse(lists:seq(0, Bottles)).
 sing(Singers, Bottles) ->
 	Cantor = ooe:constructor(cantor, {new, 1}, []),
 	ooe:method(cantor, {spawn_singer, 2}, [Bottles], Cantor),
-	%lists:foreach(fun main:cantar/1, bottles(Bottles)),
+	%%lists:foreach(fun main:cantar/1, bottles(Bottles)),
+	
 	Cantor2 = ooe:constructor(cantor, {new, 1}, []),
 	ooe:method(cantor, {sing_verse, 2}, [Singers], Cantor2).
 
