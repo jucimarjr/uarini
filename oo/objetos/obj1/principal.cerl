@@ -1,6 +1,14 @@
 -class(principal).
+-export([constructor/0, main/0]).
 
 class method.
 
 main() ->
-	Bola = bola::new().
+	Bola1 = bola::new(),
+	Bola2 = bola::new(),
+	
+	Cor1 = Bola1::get_color(),
+	Cor2 = Bola2::get_color(),
+
+	io:format("~p~n", [Cor1]),
+	io:format("~p~n", [Cor2]).

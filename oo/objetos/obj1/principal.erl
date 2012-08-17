@@ -1,5 +1,5 @@
 -module(principal, []).
--compile([export_all]).
+-export([constructor/0, main/0]).
 
 constructor() ->
 	ok.

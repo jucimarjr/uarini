@@ -1,7 +1,34 @@
 -class(principal).
+-export([constructor/0, get_cor/1, get_circun/1,  get_material/1]).
 
 class attributes.
 
 cor
-circunferência
+circunferencia
 material
+
+class methods.
+
+constructor() ->
+	cor = Cor,
+	circunferencia = Circunferencia,
+	material = Material.
+
+get_cor(Key) ->
+	get({bola, cor, Key}).
+
+get_circun(Key) ->
+	get({bola, circunferencia, Key}).
+
+get_material(Key) ->
+	get({bola, material, Key}).
+
+key() ->
+	case get({bola, key}) of
+		undefined ->
+			put({bola, key}, 0),
+			0;
+		Key ->
+			put({bola, key}, Key + 1),
+			Key + 1
+	end.
