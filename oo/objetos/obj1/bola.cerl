@@ -22,13 +22,3 @@ get_circun(Key) ->
 
 get_material(Key) ->
 	get({bola, material, Key}).
-
-key() ->
-	case get({bola, key}) of
-		undefined ->
-			put({bola, key}, 0),
-			0;
-		Key ->
-			put({bola, key}, Key + 1),
-			Key + 1
-	end.
