@@ -1,0 +1,6 @@
+-class(principal).
+
+class method.
+
+main() ->
+	Bola = bola::new().
