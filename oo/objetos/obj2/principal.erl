@@ -1,11 +1,18 @@
 -module(principal, []).
--export([constructor/0, main/0]).
+-export([constructor/0, start/0, main/0]).
 
 constructor() ->
 	Key = key(),
 	Key.
 
-main() ->
+start() ->
+	spawn(fun() -> main() end).
+
+main() ->	
+	receive
+		start -> ok
+	end,
+
 	Bola1 = bola:new("Azul", "12", "Borracha"), 
 	Bola1_key = Bola1:constructor(),
 	
