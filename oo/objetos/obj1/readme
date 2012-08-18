@@ -1,6 +1,0 @@
-Executar no shell do erlang:
-
-c(principal).
-c(bola).
-M = principal:new().
-M:main().
