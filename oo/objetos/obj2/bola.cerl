@@ -3,22 +3,22 @@
 
 class attributes.
 
-cor
-circunferencia
-material
+string	cor;
+float	circunferencia;
+string	material;
 
 class methods.
 
-constructor(Cor, Circun, Material) ->
-	cor = Cor,
-	circunferencia = Circunferencia,
-	material = Material.
+constructor(string Cor, float Circun, string Material) ->
+	this.cor			= Cor,
+	this.circunferencia = Circunferencia,
+	this.material		= Material.
 
-get_cor(Key) ->
-	cor.
+get_cor() ->
+	this.cor.
 
-get_circun(Key) ->
-	circunferencia.
+get_circun() ->
+	this.circunferencia.
 
-get_material(Key) ->
-	material.
+get_material() ->
+	this.material.
