@@ -9,16 +9,16 @@ material
 
 class methods.
 
-constructor() ->
+constructor(Cor, Circun, Material) ->
 	cor = Cor,
 	circunferencia = Circunferencia,
 	material = Material.
 
 get_cor(Key) ->
-	get({bola, cor, Key}).
+	cor.
 
 get_circun(Key) ->
-	get({bola, circunferencia, Key}).
+	circunferencia.
 
 get_material(Key) ->
-	get({bola, material, Key}).
+	material.
