@@ -1,7 +1,9 @@
 -class(principal).
 -constructor([constructor/0]).
 -export([get_cor/0, get_circun/0,  get_material/0,
-			set_cor/1, set_circun/1,  set_material/1]).
+			set_cor/1, set_circun/1,  set_material/1,
+			get_fabricante_nome/0, get_fabricante_data_fabricacao/0,
+			set_fabricante_nome/1, set_fabricante_data_fabricacao/1]).
 
 class attributes.
 
@@ -41,3 +43,9 @@ get_fabricante_nome()	->
 	
 get_fabricante_data_fabricacao() ->
 	fabricante::get_data_fabricacao().
+
+set_fabricante_nome(Nome) ->
+	fabricante::set_nome(Nome).
+
+set_fabricante_data_fabricacao(Data) ->
+	fabricante::set_data_fabricacao(Data).

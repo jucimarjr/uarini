@@ -42,15 +42,30 @@ main() ->
 
 	Fab1_nome = Bola1:get_fabricante_nome(Bola1_key),
 	Fab2_nome = Bola2:get_fabricante_nome(Bola2_key),
-
+	
 	io:format("~p~n", [Fab1_nome]),
 	io:format("~p~n", [Fab2_nome]),
+	
+	F1_nome = Fab1:get_nome(Fab1_key),
+	F2_nome = Fab2:get_nome(Fab2_key),
+	
+	io:format("~p~n", [F1_nome]),
+	io:format("~p~n", [F2_nome]),
 
 	Fab1_data = Bola1:get_fabricante_data_fabricacao(Bola1_key),
 	Fab2_data = Bola2:get_fabricante_data_fabricacao(Bola2_key),
 
 	io:format("~p~n", [Fab1_data]),
-	io:format("~p~n", [Fab2_data]).
+	io:format("~p~n", [Fab2_data]),
+
+	Bola1:set_fabricante_nome("Topper", Bola1_key),
+	Bola2:set_fabricante_nome("Umbro", 	Bola2_key),
+
+	Fab3_nome = Bola1:get_fabricante_nome(Bola1_key),
+	Fab4_nome = Bola2:get_fabricante_nome(Bola2_key),
+	
+	io:format("~p~n", [Fab3_nome]),
+	io:format("~p~n", [Fab4_nome]).
 
 key() ->
 	case get({principal, key}) of

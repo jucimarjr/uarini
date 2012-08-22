@@ -1,7 +1,8 @@
 -module(bola, [Cor, Circun, Material, Fabricante]).
 -export([constructor/0, get_cor/1, get_circun/1,  get_material/1,
 			set_cor/2, set_circun/2,  set_material/2,
-			get_fabricante_nome/1, get_fabricante_data_fabricacao/1]).
+			get_fabricante_nome/1, get_fabricante_data_fabricacao/1,
+			set_fabricante_nome/2, set_fabricante_data_fabricacao/2]).
 
 constructor() ->
 	Key = key(),
@@ -36,6 +37,14 @@ get_fabricante_nome(Key) ->
 get_fabricante_data_fabricacao(Key) ->
 	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
 	Fab:get_data_fabricacao(Fab_key).
+
+set_fabricante_nome(Nome_set, Key) ->
+	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
+	Fab:set_nome(Nome_set, Fab_key).
+
+set_fabricante_data_fabricacao(Data_set, Key) ->
+	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
+	Fab:set_data_fabricacao(Data_set, Fab_key).
 
 key() ->
 	case get({bola, key}) of
