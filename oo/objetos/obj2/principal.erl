@@ -13,10 +13,16 @@ main() ->
 		start -> ok
 	end,
 
-	Bola1 = bola:new("Azul", "12", "Borracha"), 
+	Fab1 = fabricante:new("Nike", {08, 2012}),
+	Fab1_key = Fab1:constructor(),
+
+	Bola1 = bola:new("Azul", "12", "Borracha", {fabricante, Fab1, Fab1_key}),
 	Bola1_key = Bola1:constructor(),
-	
-	Bola2 = bola:new("Vermelha", "7", "Plástico"),
+
+	Fab2 = fabricante:new("Adidas", {09, 2011}),
+	Fab2_key = Fab2:constructor(),
+
+	Bola2 = bola:new("Vermelha", "7", "Plástico", {fabricante, Fab2, Fab2_key}),
 	Bola2_key = Bola2:constructor(),
 	
 	Cor1 = Bola1:get_cor(Bola1_key),
@@ -32,7 +38,19 @@ main() ->
 	Cor4 = Bola2:get_cor(Bola2_key),
 
 	io:format("~p~n", [Cor3]),
-	io:format("~p~n", [Cor4]).
+	io:format("~p~n", [Cor4]),
+
+	Fab1_nome = Bola1:get_fabricante_nome(Bola1_key),
+	Fab2_nome = Bola2:get_fabricante_nome(Bola2_key),
+
+	io:format("~p~n", [Fab1_nome]),
+	io:format("~p~n", [Fab2_nome]),
+
+	Fab1_data = Bola1:get_fabricante_data_fabricacao(Bola1_key),
+	Fab2_data = Bola2:get_fabricante_data_fabricacao(Bola2_key),
+
+	io:format("~p~n", [Fab1_data]),
+	io:format("~p~n", [Fab2_data]).
 
 key() ->
 	case get({principal, key}) of

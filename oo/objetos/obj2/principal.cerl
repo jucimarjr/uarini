@@ -4,8 +4,11 @@
 class method.
 
 main() ->
-	Bola1 = bola::new("Azul", "12", "Borracha"),
-	Bola2 = bola::new("Vermelha", "7", "Plástico"),
+	Fab1 = fabricante::new("Nike", {08, 2012}),
+	Bola1 = bola::new("Azul", "12", "Borracha", Fab1),
+
+	Fab2 = fabricante::new("Adidas", {09, 2011}),
+	Bola2 = bola::new("Vermelha", "7", "Plástico", Fab2),
 
 	Cor1 = Bola1::get_cor(),
 	Cor2 = Bola2::get_cor(),
@@ -20,4 +23,16 @@ main() ->
 	Cor4 = Bola2::get_cor(),
 
 	io:format("~p~n", [Cor3]),
-	io:format("~p~n", [Cor4]).
+	io:format("~p~n", [Cor4]),
+
+	Fab1_nome = Bola1::get_fabricante_nome(),
+	Fab2_nome = Bola2::get_fabricante_nome(),
+
+	io:format("~p~n", [Fab1_nome]),
+	io:format("~p~n", [Fab2_nome]),
+
+	Fab1_data = Bola1::get_fabricante_data_fabricacao(),
+	Fab2_data = Bola2::get_fabricante_data_fabricacao(),
+
+	io:format("~p~n", [Fab1_data]),
+	io:format("~p~n", [Fab2_daa]).

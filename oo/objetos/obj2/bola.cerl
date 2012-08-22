@@ -1,20 +1,22 @@
 -class(principal).
 -constructor([constructor/0]).
--export([get_cor/1, get_circun/1,  get_material/1,
-			set_cor/2, set_circun/2,  set_material/2]).
+-export([get_cor/0, get_circun/0,  get_material/0,
+			set_cor/1, set_circun/1,  set_material/1]).
 
 class attributes.
 
 cor;
 circunferencia;
 material;
+Fabricante fabricante;
 
 class methods.
 
-constructor(Cor, Circun, Material) ->
+constructor(Cor, Circun, Material, Fabricante) ->
 	cor				= Cor,
 	circunferencia	= Circunferencia,
-	material		= Material.
+	material		= Material,
+	fabricante		= Fabricante.
 
 get_cor() ->
 	cor.
@@ -33,3 +35,9 @@ set_circun(Circun) ->
 
 set_material(Material) ->
 	material	=	Material.
+
+get_fabricante_nome()	->
+	fabricante::get_nome().
+	
+get_fabricante_data_fabricacao() ->
+	fabricante::get_data_fabricacao().
