@@ -1,24 +1,25 @@
 -class(principal).
--export([constructor/0, get_cor/1, get_circun/1,  get_material/1]).
+-constructor([constructor/0]).
+-export([get_cor/1, get_circun/1,  get_material/1]).
 
 class attributes.
 
-string	cor;
-float	circunferencia;
-string	material;
+cor;
+circunferencia;
+material;
 
 class methods.
 
 constructor(string Cor, float Circun, string Material) ->
-	this.cor			= Cor,
-	this.circunferencia = Circunferencia,
-	this.material		= Material.
+	cor				= Cor,
+	circunferencia	= Circunferencia,
+	material		= Material.
 
 get_cor() ->
-	this.cor.
+	cor.
 
 get_circun() ->
-	this.circunferencia.
+	circunferencia.
 
 get_material() ->
-	this.material.
+	material.
