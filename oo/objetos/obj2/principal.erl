@@ -23,7 +23,16 @@ main() ->
 	Cor2 = Bola2:get_cor(Bola2_key),
 	
 	io:format("~p~n", [Cor1]),
-	io:format("~p~n", [Cor2]).
+	io:format("~p~n", [Cor2]),
+
+	Bola1:set_cor("Amarela", Bola1_key),
+	Bola2:set_cor("Preta", Bola2_key),
+
+	Cor3 = Bola1:get_cor(Bola1_key),
+	Cor4 = Bola2:get_cor(Bola2_key),
+
+	io:format("~p~n", [Cor3]),
+	io:format("~p~n", [Cor4]).
 
 key() ->
 	case get({principal, key}) of

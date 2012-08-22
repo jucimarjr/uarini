@@ -7,8 +7,17 @@ main() ->
 	Bola1 = bola::new("Azul", "12", "Borracha"),
 	Bola2 = bola::new("Vermelha", "7", "Plástico"),
 
-	Cor1 = Bola1::get_color(),
-	Cor2 = Bola2::get_color(),
+	Cor1 = Bola1::get_cor(),
+	Cor2 = Bola2::get_cor(),
 
 	io:format("~p~n", [Cor1]),
-	io:format("~p~n", [Cor2]).
+	io:format("~p~n", [Cor2]),
+
+	Bola1::set_cor("Amarela"),
+	Bola2::set_cor("Preta"),
+
+	Cor3 = Bola1::get_cor(),
+	Cor4 = Bola2::get_cor(),
+
+	io:format("~p~n", [Cor3]),
+	io:format("~p~n", [Cor4]).
