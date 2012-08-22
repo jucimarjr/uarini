@@ -1,5 +1,5 @@
--class(principal).
--constructor([constructor/0]).
+-class(bola).
+-constructor([constructor/4]).
 -export([get_cor/0, get_circun/0,  get_material/0,
 			set_cor/1, set_circun/1,  set_material/1,
 			get_fabricante_nome/0, get_fabricante_data_fabricacao/0,
