@@ -1,0 +1,30 @@
+Herança
+
+-class( animmal ).
+-constructor(new/3).
+-exports([print/0]).
+
+class_attributes.
+
+Name
+Color
+Age
+
+class_methods.
+
+new( N, C, A ) ->
+	self::Name = N,
+	self::Color = C,
+	self::Age = A.
+
+print() ->
+	io:format("I'm ~d~n",self::Name). 
+
+
+
+-class( dog ).
+-extends( mammal ).
+-exports([bark/0]).
+
+class_methods.
+	bark()->io:format("Woof! Woof!").

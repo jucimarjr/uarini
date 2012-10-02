@@ -1,0 +1,55 @@
+Polimorfismo
+
+-class( pet ).
+-exports([run/0, talk/0]).
+
+class_methods.
+
+run() ->
+	io:format("Running~n").
+
+talk() ->
+	io:format("yada-yada-yada~n").
+
+ 
+
+ 
+
+-class( dog ).
+-extends( pet ).
+-exports([run/1, talk/0]).
+
+class_methods.
+
+run(Ball)->
+	io:format("Hunting ~d ball~n”, Ball).
+
+talk()-> 
+	io:format("Woof! Woof!~n").
+
+
+ 
+-class(cat).
+-extends( pet ).
+-exports([run/1, talk/0]).
+
+class_methods.
+
+talk()->
+	io:format("Meow! Meow!~n").
+
+
+
+-class(myhouse).
+-exports([talkPet/1, main/0]).
+
+class_methods.
+
+talkPet(pet P) ->
+	P::talk().
+
+main() ->
+   M = myhouse::new(),
+   M::talkPet( pet::new() ),
+   M::talkPet( cat::new() ),
+   M::talkPet( dog::new() ).
