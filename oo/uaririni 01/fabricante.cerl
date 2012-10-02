@@ -1,4 +1,4 @@
--class(fabricante).
+-class(Fabricante).
 -constructor([constructor/2]).
 -export([get_nome/0, get_data_fabricacao/0,
 			set_nome/1, set_data_fabricacao/1]).

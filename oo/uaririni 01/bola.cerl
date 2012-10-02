@@ -1,4 +1,4 @@
--class(bola).
+-class(Bola).
 -constructor([constructor/4]).
 -export([get_cor/0, get_circun/0,  get_material/0,
 			set_cor/1, set_circun/1,  set_material/1,
@@ -10,7 +10,7 @@ class attributes.
 cor;
 circunferencia;
 material;
-public Fabricante fabricante;
+public Fabricante Fabricante;
 
 class methods.
 
@@ -40,7 +40,7 @@ set_material(Material) ->
 
 get_fabricante_nome()	->
 	fabricante::get_nome().
-	
+
 get_fabricante_data_fabricacao() ->
 	fabricante::get_data_fabricacao().
 

@@ -1,15 +1,15 @@
--class(principal).
+-class(Principal).
 -export([main/0]).
 
 class method.
 
 main() ->
-	
-	Fab1 = fabricante::new("Nike", {08, 2012}),
-	Bola1 = bola::new("Azul", "12", "Borracha", Fab1),
 
-	Fab2 = fabricante::new("Adidas", {09, 2011}),
-	Bola2 = bola::new("Vermelha", "7", "Plástico", Fab2),
+	Fab1 = Fabricante::new("Nike", {08, 2012}),
+	Bola1 = Bola::new("Azul", "12", "Borracha", Fab1),
+
+	Fab2 = Fabricante::new("Adidas", {09, 2011}),
+	Bola2 = Bola::new("Vermelha", "7", "Plástico", Fab2),
 
 	Cor1 = Bola1::get_cor(),
 	Cor2 = Bola2::get_cor(),
