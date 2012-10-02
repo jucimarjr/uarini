@@ -10,7 +10,7 @@ class attributes.
 cor;
 circunferencia;
 material;
-Fabricante fabricante;
+public Fabricante fabricante;
 
 class methods.
 
