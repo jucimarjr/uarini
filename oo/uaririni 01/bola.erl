@@ -3,6 +3,7 @@
 			set_cor/2, set_circun/2,  set_material/2,
 			get_fabricante_nome/1, get_fabricante_data_fabricacao/1,
 			set_fabricante_nome/2, set_fabricante_data_fabricacao/2]).
+-export([get_fabricante/1]).
 
 constructor() ->
 	Key = key(),
@@ -29,6 +30,10 @@ set_circun(Circun_set, Key) ->
 
 set_material(Material_set, Key) ->
 	put({bola, material, Key}, Material_set).
+
+get_fabricante(Key) ->
+	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
+	{Fab, Fab_key}.
 
 get_fabricante_nome(Key) ->
 	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),

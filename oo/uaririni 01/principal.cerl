@@ -4,6 +4,7 @@
 class method.
 
 main() ->
+	
 	Fab1 = fabricante::new("Nike", {08, 2012}),
 	Bola1 = bola::new("Azul", "12", "Borracha", Fab1),
 
@@ -50,4 +51,7 @@ main() ->
 	Fab4_nome = Bola2::get_fabricante_nome(),
 	
 	io:format("~p~n", [Fab3_nome]),
+	io:format("~p~n", [Fab4_nome]),
+
+	Fab5_nome = Bola1::fabricante::get_nome(),
 	io:format("~p~n", [Fab4_nome]).

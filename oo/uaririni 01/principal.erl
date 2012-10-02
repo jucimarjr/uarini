@@ -65,8 +65,13 @@ main() ->
 	Fab4_nome = Bola2:get_fabricante_nome(Bola2_key),
 	
 	io:format("~p~n", [Fab3_nome]),
-	io:format("~p~n", [Fab4_nome]).
+	io:format("~p~n", [Fab4_nome]),
 
+	{Fab5_nome_fabricante, Fab5_nome_fabricante_key} = 
+										Bola1:get_fabricante(Bola1_key),
+	Fab5_nome = Fab5_nome_fabricante:get_nome(Fab5_nome_fabricante_key),
+	io:format("~p~n", [Fab5_nome]).
+ 
 key() ->
 	case get({principal, key}) of
 		undefined ->
