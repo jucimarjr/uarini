@@ -5,8 +5,8 @@ constructor() ->
 	Key = key(),
 	Key.
 
-talkPet({Type, Function, Key}) ->
-	Function:talk(Key).
+talkPet({P_type, P_function, P_key}) ->
+	P_function:talk(P_key).
 
 start() ->
 	spawn(fun() -> main() end).
