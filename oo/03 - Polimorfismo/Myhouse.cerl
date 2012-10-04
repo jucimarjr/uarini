@@ -1,0 +1,13 @@
+-class(Myhouse).
+-exports([talkPet/1, main/0]).
+
+class_methods.
+
+talkPet(Pet P) ->
+	P::talk().
+
+run() ->
+   M = myhouse::new(),
+   M::talkPet(Pet::new()),
+   M::talkPet(Cat::new()),
+   M::talkPet(Dog::new()).

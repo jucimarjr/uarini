@@ -1,0 +1,15 @@
+-class(Principal).
+-export([main/0]).
+
+class method.
+
+main() ->
+
+	Dog = Dog::new("Milu", "White", 7),
+	
+	Animal = Animal::new("Tom", "Gray", 5),
+
+	Dog:bark(),
+	Dog:print(),
+	
+	Animal:print().
