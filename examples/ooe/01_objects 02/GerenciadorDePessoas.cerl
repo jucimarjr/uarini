@@ -1,0 +1,18 @@
+-class(GerenciadorDePessoas).
+-extends([main/0]).
+
+class methods.
+
+main() ->
+	PVitor = Pessoa::new("Vitor Fernando Pamplona","07/11/1983"),	
+	PVitor::receber(1000),
+	
+	DinhheiroVictor = PVitor::get_dinheiro(),
+	io:format("Dinheiro na carteira de Vitor ~p~n", [DinheiroVitor]),
+
+	PJoao = Pessoa::new("João da Silva", "18/02/1970"),	
+	PJoao::receber(500), 
+	PJoao::gastar(500),
+
+	DinheiroJoao = PJoao::get_dinheiro(),
+	io:format("Dinheiro na carteira de Joao ~p~n", [DinheiroJoao]).
