@@ -5,10 +5,10 @@ constructor() ->
 	Key = key(),
 	Key.
 
-run(Key) ->
+run({Key, self}) ->
 	io:format("Running~n").
 
-talk(Key) ->
+talk({Key, self}) ->
 	io:format("yada-yada-yada~n").
 
 key() ->

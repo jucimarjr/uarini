@@ -8,16 +8,16 @@ constructor() ->
 	put({fabricante, data_fabricacao, Key}, Data_Fabricacao),
 	Key.
 
-get_nome(Key) ->
+get_nome({Key, self}) ->
 	get({fabricante, nome, Key}).
 
-get_data_fabricacao(Key) ->
+get_data_fabricacao({Key, self}) ->
 	get({fabricante, data_fabricacao, Key}).
 
-set_nome(Nome_set, Key) ->
+set_nome(Nome_set, {Key, self}) ->
 	put({fabricante, nome, Key}, Nome_set).
 
-set_data_fabricacao(Data_Fabricacao_set, Key) ->
+set_data_fabricacao(Data_Fabricacao_set, {Key, self}) ->
 	put({fabricante, data_fabricacao, Key}, Data_Fabricacao_set).
 
 key() ->

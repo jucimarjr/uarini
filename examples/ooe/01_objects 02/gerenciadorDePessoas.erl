@@ -15,17 +15,17 @@ main() ->
 
 	PVitor = pessoa:new("Vitor Fernando Pamplona","07/11/1983"),
 	PVitor_key = PVitor:constructor(),
-	PVitor:receber(1000, PVitor_key),
+	PVitor:receber(1000, {PVitor_key, self}),
 
-	DinheiroVitor = PVitor:get_dinheiro(PVitor_key),
+	DinheiroVitor = PVitor:get_dinheiro({PVitor_key, self}),
 	io:format("Dinheiro na carteira de Vitor ~p~n", [DinheiroVitor]),
 
 	PJoao = pessoa:new("João da Silva", "18/02/1970"),
 	PJoao_key = PJoao:constructor(),
-	PJoao:receber(500, PJoao_key),
-	PJoao:gastar(500, PJoao_key),
+	PJoao:receber(500, {PJoao_key, self}),
+	PJoao:gastar(500, {PJoao_key, self}),
 
-	DinheiroJoao = PJoao:get_dinheiro(PJoao_key),
+	DinheiroJoao = PJoao:get_dinheiro({PJoao_key, self}),
 	io:format("Dinheiro na carteira de Joao ~p~n", [DinheiroJoao]).
 
 key() ->

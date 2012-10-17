@@ -8,7 +8,7 @@ constructor() ->
 	put({dog, age, Key}, Age),
 	Key.
 
-print(Key) ->
+print({Key, self}) ->
 	io:format("I'm ~p~n", [get({dog, name, Key})]).
 
 bark(Key)->

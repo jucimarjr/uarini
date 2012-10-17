@@ -9,15 +9,15 @@ constructor() ->
 	put({pessoa, dinheiroNaCarteira, Key}, 0),
 	Key.
 
-gastar(Valor, Key) ->
+gastar(Valor, {Key, self}) ->
 	put({pessoa, dinheiroNaCarteira, Key}, 
 			get({pessoa, dinheiroNaCarteira, Key}) - Valor).	
 
-receber(Valor, Key) ->
+receber(Valor, {Key, self}) ->
 	put({pessoa, dinheiroNaCarteira, Key}, 
 			get({pessoa, dinheiroNaCarteira, Key}) + Valor).
 
-get_dinheiro(Key) ->
+get_dinheiro({Key, self}) ->
 	get({pessoa, dinheiroNaCarteira, Key}).
 
 key() ->

@@ -1,11 +1,17 @@
 -module(cat, []).
--export([constructor/0, talk/1]).
+-export([constructor/0, run/1, talk/1]).
 
 constructor() ->
 	Key = key(),
 	Key.
 
-talk(Key)-> 
+run({Key, self}) ->
+	io:format("Running~n").
+
+talk({Key, super}) ->
+	io:format("yada-yada-yada~n");
+
+talk({Key, self})-> 
 	io:format("Meow! Meow!~n").
 
 key() ->

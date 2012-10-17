@@ -13,43 +13,43 @@ constructor() ->
 	put({bola, fabricante, Key}, Fabricante),	
 	Key.
 
-get_cor(Key) ->
+get_cor({Key, self}) ->
 	get({bola, cor, Key}).
 
-get_circun(Key) ->
+get_circun({Key, self}) ->
 	get({bola, circunferencia, Key}).
 
-get_material(Key) ->
+get_material({Key, self}) ->
 	get({bola, material, Key}).
 
-set_cor(Cor_set, Key) ->
+set_cor(Cor_set, {Key, self}) ->
 	put({bola, cor, Key}, Cor_set).
 
-set_circun(Circun_set, Key) ->
+set_circun(Circun_set, {Key, self}) ->
 	put({bola, circunferencia, Key}, Circun_set).
 
-set_material(Material_set, Key) ->
+set_material(Material_set, {Key, self}) ->
 	put({bola, material, Key}, Material_set).
 
-get_fabricante(Key) ->
+get_fabricante({Key, self}) ->
 	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
 	{Fab, Fab_key}.
 
-get_fabricante_nome(Key) ->
+get_fabricante_nome({Key, self}) ->
 	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
-	Fab:get_nome(Fab_key).		
+	Fab:get_nome({Fab_key, self}).		
 	
-get_fabricante_data_fabricacao(Key) ->
+get_fabricante_data_fabricacao({Key, self}) ->
 	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
-	Fab:get_data_fabricacao(Fab_key).
+	Fab:get_data_fabricacao({Fab_key, self}).
 
-set_fabricante_nome(Nome_set, Key) ->
+set_fabricante_nome(Nome_set, {Key, self}) ->
 	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
-	Fab:set_nome(Nome_set, Fab_key).
+	Fab:set_nome(Nome_set, {Fab_key, self}).
 
-set_fabricante_data_fabricacao(Data_set, Key) ->
+set_fabricante_data_fabricacao(Data_set, {Key, self}) ->
 	{fabricante, Fab, Fab_key} = get({bola, fabricante, Key}),
-	Fab:set_data_fabricacao(Data_set, Fab_key).
+	Fab:set_data_fabricacao(Data_set, {Fab_key, self}).
 
 key() ->
 	case get({bola, key}) of

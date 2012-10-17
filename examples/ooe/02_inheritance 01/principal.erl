@@ -20,9 +20,9 @@ main() ->
 	Animal_key = Animal:constructor(),
 
 	Dog:bark(Dog_key),
-	Dog:print(Dog_key),
+	Dog:print({Dog_key, self}),
 
-	Animal:print(Animal_key).
+	Animal:print({Animal_key, self}).
 	 
 key() ->
 	case get({principal, key}) of

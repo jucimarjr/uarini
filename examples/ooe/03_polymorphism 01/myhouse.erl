@@ -6,7 +6,7 @@ constructor() ->
 	Key.
 
 talkPet({P_type, P_function, P_key}) ->
-	P_function:talk(P_key).
+	P_function:talk({P_key, self}).
 
 start() ->
 	spawn(fun() -> main() end).
