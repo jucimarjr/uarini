@@ -1,0 +1,36 @@
+-class(animal).
+-export([constructor/2, get_nome/0, get_idade/0, set_nome/1, set_idade/1, falar/0]).
+
+class_attributes.
+
+nome
+idade
+cor cor
+
+class_methods.
+
+constructor(Nome, Idade, Cor) ->
+	self::nome = Nome,
+	self::idade = Idade,
+	self::cor = Cor.
+
+get_nome() ->
+	self::nome.
+
+get_idade() ->
+	self::idade.
+
+get_cor() ->
+	self::cor.
+
+set_nome(Nome) ->
+	self::nome = Nome.
+
+set_idade(Idade) ->
+	self::idade = Idade.
+
+set_cor(Cor) ->
+	self::cor = Cor.
+
+falar() ->
+	io:format("O animal está falando.~n").

@@ -1,0 +1,41 @@
+-class(house).
+-export([main/0]).
+
+main() ->
+	Cor1 = cor::constructor(255, 127, 0),
+	Animal = animal::constructor("Animal", 10, Cor1),
+	
+	io:format("Componente vermelha da cor do animal: ~p~n", [Animal::get_cor::get_R()]),
+	io:format("Componente verde da cor do animal: ~p~n", [Animal::get_cor::get_G()]),
+	io:format("Componente azul da cor do animal: ~p~n", [Animal::get_cor::get_B()]),
+
+	Cor2 = cor::constructor(200, 120, 167),
+	Dog = dog::constructor("Cachorro", 5, Cor2),
+		
+	io:format("Componente vermelha da cor do cachorro: ~p~n", [Dog::get_cor::get_R()]),
+	io:format("Componente verde da cor do cachorro: ~p~n", [Dog::get_cor::get_G()]),
+	io:format("Componente azul da cor do cachorro: ~p~n", [Dog::get_cor::get_B()]),
+		
+	Cor3 = cor::constructor(128, 87, 12),
+	Cor3::cor:set_r(10),
+	
+	Dog::set_cor(Cor3),
+
+	io:format("Nova componente vermelha da cor do cachorro: ~p~n", [Dog::get_cor::get_R()]),
+	io:format("Nova componente verde da cor do cachorro: ~p~n", [Dog::get_cor::get_G()]),
+	io:format("Nova componente azul da cor do cachorro: ~p~n", [Dog::get_cor::get_B()]),
+
+	io:format("Nome do animal: ~p~n", [Animal::get_nome()]),
+	io:format("Nome do cachorro: ~p~n", [Dog::get_nome()]),
+
+	io:format("Idade do animal: ~p~n", [Animal:get_idade()]),
+	io:format("Idade do cachorro: ~p~n", [Dog:get_idade()]),
+
+	animal:set_nome("Animal com nome mudado"),
+	dog:set_nome("Cachorro com nome mudado"),
+	
+	io:format("Nome do animal: ~p~n", [animal:get_nome()]),
+	io:format("Nome do cachorro: ~p~n", [dog:get_nome()]),
+	
+	animal:falar(Animal),
+	dog:falar(Dog).

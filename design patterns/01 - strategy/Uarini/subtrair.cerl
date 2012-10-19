@@ -1,0 +1,8 @@
+-class(subtrair).
+-implements(operacao).
+-export(calcular/2).
+
+class_methods.
+
+calcular(A, B) ->
+	A - B.

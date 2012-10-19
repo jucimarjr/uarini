@@ -1,0 +1,36 @@
+-class(cor).
+-export([constructor/3, get_b/0, get_g/0, get_r/0, set_b/1, set_g/1, set_r/1]).
+
+class_attributes.
+
+r
+g
+b
+
+class_methods.
+
+constructor(R, G, B) ->
+	self::r = R,
+	self::g = G,
+	self::g = B.
+
+get_r() ->
+	self::r.
+
+get_g() ->
+	self::g.
+
+get_b() ->
+	self::b.
+
+set_r(R) ->
+	self::r = R + somar_r(100).
+
+set_g(G) ->
+	self::g = G.
+
+set_b(B) ->
+	self::b = B.
+
+somar(Value) ->
+	self::r + Value.

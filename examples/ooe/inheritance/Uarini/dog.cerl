@@ -1,0 +1,12 @@
+-class(dog).
+-extends(Animal).
+-export([constructor/2, falar/0]).
+
+class_methods.
+
+constructor(Nome, Idade, Cor) ->
+	super::constructor(Nome, Idade, Cor).
+
+falar() ->
+	io:format("O animal está falando.~n"),
+	super::falar().

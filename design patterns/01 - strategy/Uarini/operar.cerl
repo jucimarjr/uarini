@@ -1,0 +1,19 @@
+-class(operar).
+-constructor([constructor/3]).
+-export([calcular/2]).
+
+class_attributes.
+
+a
+b
+Operacao op
+
+class_methods.
+
+constructor(A, B, Op) ->
+	self:a = A,
+	self:b = B,
+	self:op = Op.
+
+calcular() ->
+	op::calcular(a, b).

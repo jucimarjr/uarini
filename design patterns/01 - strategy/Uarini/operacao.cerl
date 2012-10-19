@@ -1,0 +1,6 @@
+-interface(operacao).
+-export(calcular/2).
+
+class_methods.
+
+calcular(A, B).

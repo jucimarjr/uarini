@@ -1,0 +1,15 @@
+-class(strategy).
+-export(main/0).
+
+main() ->
+	
+	Somar = somar::constructor(),
+	Soma = operar::constructor(10, 5, Somar),	
+	ResultadoSoma = Soma::calcular(),
+
+	Subtrair = subtrair::constructor(),
+	Subtracao = operar::constructor(10, 5, Subtrair),
+	ResultadoSubtracao = Subtracao::calcular(),
+
+	io:format("Resultado da soma", []),
+	io:format("Resultado da subtracao", []).
