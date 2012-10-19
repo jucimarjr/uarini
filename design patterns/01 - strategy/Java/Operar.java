@@ -1,5 +1,3 @@
-package strategy;
-
 public class Operar {
 	private int a;
 	private int b;
