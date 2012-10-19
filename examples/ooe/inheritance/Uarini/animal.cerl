@@ -3,34 +3,34 @@
 
 class_attributes.
 
-nome
-idade
-cor cor
+Nome
+Idade
+cor Cor
 
 class_methods.
 
 constructor(Nome, Idade, Cor) ->
-	self::nome = Nome,
-	self::idade = Idade,
-	self::cor = Cor.
+	self::Nome = Nome,
+	self::Idade = Idade,
+	self::Dor = Cor.
 
 get_nome() ->
-	self::nome.
+	self::Nome.
 
 get_idade() ->
-	self::idade.
+	self::Idade.
 
 get_cor() ->
-	self::cor.
+	self::Cor.
 
 set_nome(Nome) ->
-	self::nome = Nome.
+	self::Nome = Nome.
 
 set_idade(Idade) ->
-	self::idade = Idade.
+	self::Idade = Idade.
 
 set_cor(Cor) ->
-	self::cor = Cor.
+	self::Cor = Cor.
 
 falar() ->
 	io:format("O animal está falando.~n").

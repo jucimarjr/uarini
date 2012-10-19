@@ -4,16 +4,16 @@
 
 class_attributes.
 
-a
-b
-Operacao op
+A
+B
+operacao Op
 
 class_methods.
 
 constructor(A, B, Op) ->
-	self:a = A,
-	self:b = B,
-	self:op = Op.
+	self:A = A,
+	self:B = B,
+	self:Op = Op.
 
 calcular() ->
-	op::calcular(a, b).
+	Op::calcular(A, B).

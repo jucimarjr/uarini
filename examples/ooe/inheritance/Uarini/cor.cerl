@@ -3,34 +3,34 @@
 
 class_attributes.
 
-r
-g
-b
+R
+G
+B
 
 class_methods.
 
 constructor(R, G, B) ->
-	self::r = R,
-	self::g = G,
-	self::g = B.
+	self::R = R,
+	self::G = G,
+	self::B = B.
 
 get_r() ->
-	self::r.
+	self::R.
 
 get_g() ->
-	self::g.
+	self::G.
 
 get_b() ->
-	self::b.
+	self::B.
 
 set_r(R) ->
-	self::r = R + somar_r(100).
+	self::R = R + somar_r(100).
 
 set_g(G) ->
-	self::g = G.
+	self::G = G.
 
 set_b(B) ->
-	self::b = B.
+	self::B = B.
 
 somar(Value) ->
-	self::r + Value.
+	self::R + Value.
