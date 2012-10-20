@@ -1,0 +1,27 @@
+-class(pedidoProcessamento).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+
+	Pedido1 = pedido::constructor(),
+	Pedido1::setStatus(pedidoProcessamento::constrcutor()),
+
+	Pedido1::alterar(),
+	Pedido1::cancelar(),
+	Pedido1::enviar(),
+
+	Pedido2 = pedido::constructor(),
+	Pedido2::setStatus(pedidoCancelado::constrcutor()),
+
+	Pedido2::alterar(),
+	Pedido2::cancelar(),
+	Pedido2::enviar(),
+
+	Pedido3 = pedido::constructor(),
+	Pedido3::setStatus(pedidoEnviado::constrcutor()),
+
+	Pedido3::alterar(),
+	Pedido3::cancelar(),
+	Pedido3::enviar().

@@ -1,0 +1,16 @@
+-class(pedidoProcessamento).
+-implements([statusPedido]).
+-export([alterar/1, cancelar/1, enviar/1]).
+
+class_methods.
+
+alterar(pedido Pedido) ->
+	io:format("O pedido em processamento está sendo alterado.").
+
+cancelar(pedido Pedido) ->
+	io:format("O pedido em processamento foi cancelado."),
+	Pedido::setStatus(pedidoCancelado::constructor()).
+
+enviar(pedido Pedido) ->
+	io:format("O pedido em processamento foi enviado."),
+	Pedido::setStatus(pedidoEnviado::constructor()).

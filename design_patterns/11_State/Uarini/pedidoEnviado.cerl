@@ -1,0 +1,15 @@
+-class(pedidoEnviado).
+-implements([statusPedido]).
+-export([alterar/1, cancelar/1, enviar/1]).
+
+class_methods.
+
+alterar(pedido Pedido) ->
+	io:format("Não é possível realizar alterações. Este pedido já foi enviado.").
+
+cancelar(pedido Pedido) ->
+	io:format("Pedido enviado cancelado, será realizada a devolução do pedido."),
+	Pedido::setStatus(pedidoCancelado::constructor()).
+
+enviar(pedido Pedido) ->
+	io:format("Pedido já está em processo de envio.").

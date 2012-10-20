@@ -1,0 +1,14 @@
+-class(pedidoCancelado).
+-implements([statusPedido]).
+-export([alterar/1, cancelar/1, enviar/1]).
+
+class_methods.
+
+alterar(pedido Pedido) ->
+	io:format("Não é possível realizar alterações. Este pedido está cancelado.").
+
+cancelar(pedido Pedido) ->
+	io:format("O pedido já foi cancelado.").
+
+enviar(pedido Pedido) ->
+	io:format("Não é possível realizar o envio do pedido. Este pedido está cancelado.").
