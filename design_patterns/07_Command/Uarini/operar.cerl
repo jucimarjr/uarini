@@ -1,0 +1,6 @@
+-abstract(operar).
+-export([operar/0]).
+
+class_methods.
+
+operar().
