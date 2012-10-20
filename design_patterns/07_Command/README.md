@@ -1,3 +1,6 @@
+COMMAND
+======
+
 Este design pattern é bastante aplicado em diversos frameworks de interfaces gráficas e interfaces Web.
 Aplicamos o Command para encapsular ações que geralmente estão associadas a um objeto de interface gráfica,
 como por exemplo um botão. O fato é que o construtor da biblioteca do componente botão não tem como

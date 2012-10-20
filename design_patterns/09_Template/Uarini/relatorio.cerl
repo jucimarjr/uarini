@@ -1,0 +1,12 @@
+-abstract(relatorio).
+
+class_methods.
+
+montarRelatorio() ->
+	montarCabecalho() ++ " " ++ montarCorpo() ++ " " ++ montarRodape().
+
+montarCabecalho().
+
+montarCorpo().
+
+montarRodape().
