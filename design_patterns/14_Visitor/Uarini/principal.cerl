@@ -1,0 +1,15 @@
+-class(principal).
+-export([main/0]).
+
+main() ->
+	fala = falarVisitor::constructor(),
+	corre = correrVisitor::constructor(),
+
+	Dog = dog::constructor(),
+	Cat = cat::constructor(),
+
+	Dog::accept(fala),
+	Cat::accept(fala),
+
+	Dog::accept(corre),
+	Cat::accept(corre).
