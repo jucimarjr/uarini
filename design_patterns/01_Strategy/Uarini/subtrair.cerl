@@ -1,6 +1,6 @@
 -class(subtrair).
--implements(operacao).
--export(calcular/2).
+-implements([operacao]).
+-export([calcular/2)].
 
 class_methods.
 

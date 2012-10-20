@@ -1,5 +1,5 @@
 -class(somar).
--implements(operacao).
+-implements([operacao]).
 -export(calcular/2).
 
 class_methods.

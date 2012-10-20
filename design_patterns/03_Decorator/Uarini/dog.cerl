@@ -1,0 +1,12 @@
+-class(dog).
+-extends(animal).
+-constructor([constructor/2]).
+-extend([falar/0]).
+
+class_methods.
+
+constructor(Nome, Idade) ->
+	super(Nome, Idade).
+
+falar() ->
+	io:format("O cachorro está latindo.").

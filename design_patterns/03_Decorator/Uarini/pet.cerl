@@ -1,0 +1,17 @@
+-class(pet).
+-extends(animal).
+-constructor([constructor/2]).
+-export([falar/0]).
+
+class_attributes.
+
+animal Animal
+
+class_methods.
+
+constructor(Animal) ->
+	super(Animal::getNome(), Animal::getIdade()),
+	self::Animal = Animal.
+
+falar() ->
+	Animal::falar().

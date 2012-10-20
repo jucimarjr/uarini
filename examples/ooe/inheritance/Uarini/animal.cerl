@@ -1,5 +1,6 @@
 -class(animal).
--export([constructor/2, get_nome/0, get_idade/0, set_nome/1, set_idade/1, falar/0]).
+-constructor([constructor/2]).
+-export([get_nome/0, get_idade/0, set_nome/1, set_idade/1, falar/0]).
 
 class_attributes.
 

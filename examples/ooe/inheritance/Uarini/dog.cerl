@@ -1,6 +1,7 @@
 -class(dog).
--extends(Animal).
--export([constructor/2, falar/0]).
+-extends(animal).
+-constructor([constructor/2]).
+-export([falar/0]).
 
 class_methods.
 
