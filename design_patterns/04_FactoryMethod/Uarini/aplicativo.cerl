@@ -1,0 +1,19 @@
+-class(aplicativo).
+-export([buttonEmail_clicked/0, buttonPDF_clicked/0]).
+
+class_attributes.
+
+commandFactory CommandFactory
+
+class_methods.
+
+constructor() ->
+	CommandFactory = commandFactory::constructor().
+
+buttonEmail_clicked() ->
+	CommandEnviar = CommandFactory::create("CommandEmail"),
+	CommandEnviar::executar().
+
+buttonPDF_clicked() ->
+	CommandEnviar = CommandFactory::create("CommandPDF"),
+	CommandEnviar::executar().

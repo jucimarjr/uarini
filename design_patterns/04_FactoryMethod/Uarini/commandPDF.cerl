@@ -1,0 +1,8 @@
+-class(commandPDF).
+-implements([baseCommand]).
+-export([executar/0]).
+
+class_methods.
+
+executar() ->
+	io:format("Executar PDF").

@@ -1,0 +1,11 @@
+-class(factoryMethod).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	
+	Aplicativo = aplicativo::constructor(),
+
+	Aplicativo::buttonEmail_cliked(),
+	Aplicativo::buttonPDF_cliked().
