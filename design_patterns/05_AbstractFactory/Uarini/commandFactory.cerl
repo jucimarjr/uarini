@@ -1,0 +1,6 @@
+-interface(commandFactory).
+-export([create/1]).
+
+class_methods.
+
+create(Nome).

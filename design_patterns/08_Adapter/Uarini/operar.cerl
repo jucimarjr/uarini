@@ -1,0 +1,6 @@
+-interface(operar).
+-export([operar/2]).
+
+class_methods.
+
+operar(A, B).

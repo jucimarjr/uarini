@@ -1,0 +1,16 @@
+-class(subtrairAdapter).
+-implements([operar]).
+-export([constructor/1]).
+-export([operar/2]).
+
+class_attributes.
+
+subtrair Subtrair
+
+class_methods.
+
+constructor(subtrair Subtrair).
+	self::Subtrair = Subtrair.
+
+operar(A, B) ->
+	Subtrair::calcular(A, B).

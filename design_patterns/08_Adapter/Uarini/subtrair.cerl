@@ -1,0 +1,7 @@
+-class(subtrair).
+-export([operar/2]).
+
+class_methods.
+
+calcular(A, B) ->
+	A - B.

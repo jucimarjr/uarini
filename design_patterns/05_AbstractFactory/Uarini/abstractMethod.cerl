@@ -1,0 +1,16 @@
+-class(abstractMethod).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	
+	Aplicativo1 = aplicativo::constructor(commandFactory1::constructor),
+	Aplicativo2 = aplicativo::constructor(commandFactory2::constructor),
+
+	Aplicativo1::buttonEmail_cliked(),
+	Aplicativo1::buttonPDF_cliked(),
+
+
+	Aplicativo2::buttonEmail_cliked(),
+	Aplicativo2::buttonPDF_cliked().
