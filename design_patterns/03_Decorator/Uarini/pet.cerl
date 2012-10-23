@@ -15,3 +15,15 @@ constructor(Animal) ->
 
 falar() ->
 	Animal::falar().
+
+getNome() ->
+	Animal::getNome().
+
+getIdade() ->
+	Animal::getIdade().
+
+setNome(Nome) ->
+	Animal::setNome(Nome).
+
+setIdade(Idade) ->
+	Animal::setIdade(Idade).

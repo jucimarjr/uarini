@@ -5,10 +5,10 @@ public class Decorator {
 		
 		Animal dog = new Dog("Rex", 7);
 		
-		Cat cat = new Cat("Lili", 5);
+		Animal cat = new Cat("Lili", 5);
 		
-		Pet pet1 = new Pet(dog);
-		Pet pet2 = new Pet(cat);
+		Animal pet1 = new Pet(dog);
+		Animal pet2 = new Pet(cat);
 		
 		pet1.falar();
 		pet2.falar();

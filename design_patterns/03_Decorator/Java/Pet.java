@@ -10,4 +10,20 @@ public class Pet extends Animal{
 	public void falar(){
 		Animal.falar();
 	}
+
+	public String getNome() {
+		return Animal.getNome();
+	}
+	
+	public int getIdade() {
+		return Animal.getIdade();
+	}
+	
+	public void setNome(String nome) {
+		Animal.setNome(nome);
+	}
+	
+	public void setIdade(int idade) {
+		Animal.setIdade(idade);
+	}
 }
