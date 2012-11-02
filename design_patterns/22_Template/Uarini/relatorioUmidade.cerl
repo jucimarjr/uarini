@@ -1,0 +1,13 @@
+-class(relatorioUmidade).
+-extends(relatorio).
+
+class_methods.
+
+montarCabecalho() ->
+	"Relatório de Umidade".
+
+montarCorpo() ->
+	"Apresenta a escala de umidade".
+
+montarRodape() ->
+	"Data do acontecimento da umidade".

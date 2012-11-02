@@ -1,7 +1,0 @@
--interface(visitor).
--export([visit/1]).
-
-class_methods.
-
-visit(dog Animal).
-visit(cat Animal).

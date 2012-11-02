@@ -1,0 +1,22 @@
+-class(pedido).
+
+class_attributes.
+
+statusPedido Status
+
+class_methods.
+
+alterar() ->
+	Status::alterar(self).
+
+cancelar() ->
+	Status::cancelar(self).
+
+enviar() ->
+	Status::enviar(self).
+
+setStatus(Status) ->
+	self::Status = Status.
+
+getStatus() ->
+	self::Status.

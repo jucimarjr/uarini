@@ -1,9 +1,0 @@
--class(command).
--export([main/0]).
-
-main() ->
-	Soma = somar::constructor(),
-	Subtrair = somar::constructor(),
-
-	io:format("~p~n", [Soma::operar()]),
-	io:format("~p~n", [Subtrair::operar()]).

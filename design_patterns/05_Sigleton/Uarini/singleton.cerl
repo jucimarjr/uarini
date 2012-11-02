@@ -1,0 +1,13 @@
+-class(configManager).
+-export([main/0]).
+
+main() ->
+	configManager::getInstance()::setServerName("Nome do ConfigManager"),
+	
+	S = configManager::getInstance()::getServerName(),
+
+	ConfigManager = configManager::getInstance(),
+	SL = ConfigManager::getServerName(),
+
+	io:format("Nome: ~w~n", [S]),
+	io:format("Nome: ~w~n", [SL]).

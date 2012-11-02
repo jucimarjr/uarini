@@ -1,0 +1,10 @@
+-interface(statusPedido).
+-export([alterar/1, cancelar/1, enviar/1]).
+
+class_methods.
+
+alterar(pedido Pedido).
+
+cancelar(pedido Pedido).
+
+enviar(pedido Pedido).

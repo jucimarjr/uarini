@@ -1,8 +1,0 @@
--class(subtrair).
--extends(operar).
--export([operar/0]).
-
-class_methods.
-
-operar() ->
-	10 - 5.
