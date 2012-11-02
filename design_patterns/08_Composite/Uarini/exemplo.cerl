@@ -1,0 +1,32 @@
+-class(exemplo).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	C1 = computador::constructor(),
+
+	PlacaMae = placaMae::constructor(),
+
+	Memoria1 = memoria::constructor(),
+	Memoria2 = memoria::constructor(),
+	CPU = cpu::constructor(),
+
+	PlacaMae::add(Memoria1),
+	PlacaMae::add(Memoria2),
+	PlacaMae::add(CPU),
+
+	Hd1 =  hardDisk::constructor(),	
+	Hd2 =  hardDisk::constructor(),
+
+	C1::add(Hd1),
+	C1::add(Hd2),
+
+	io:format("Calculando preço de custo da composição:"),
+	io:format("Valor: ~p", [C1::getPrecoCusto()]),
+
+	io:format(Calculando preço com lucro mínimo:"),
+	io:format("Valor: ~p", [C1::getPrecoLucroMinimo()]),
+	
+	io:format(Calculando preço com lucro máximo:"),
+	io:format("Valor: ~p", [C1::getPrecoLucroMaximo()]).

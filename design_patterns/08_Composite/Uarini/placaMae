@@ -1,0 +1,41 @@
+-class(placamae).
+-extends(componenteComposite).
+-export([getPrecoCusto/0, getPrecoLucroMinimo/0, getPrecoLucroMaximo/0]).
+
+class_methods.
+
+getPrecoCusto() -> 
+	io:format("Calculando preço de custo de composição: "),
+	preco = calcularPrecoCusto().
+
+calcularPrecoCusto() ->
+	calcularPrecoCusto(0, Componentes).
+
+calcularPrecoCusto(Preco, [H | []]) ->
+	Preco;
+calcularPrecoCusto(Preco, [H | R]) ->
+	calcularPrecoCusto(Preco + H::getPrecoCusto(), R).
+
+getPrecoLucroMinimo() ->
+	io:format("Calculando preço de custo de composição: "),
+	preco = calcularPrecoLucroMinimo().
+
+calcularPrecoLucroMinimo() ->
+	calcularPrecoLucroMinimo(0, Componentes).
+
+calcularPrecoLucroMinimo(Preco, [H | []]) ->
+	Preco;
+calcularPrecoLucroMinimo(Preco, [H | R]) ->
+	calcularPrecoLucroMinimo(Preco + H::getPrecoLucroMinimo(), R).
+
+getPrecoLucroMaximo() ->
+	io:format("Calculando preço de custo de composição: "),
+	preco = calcularPrecoLucroMaximo().
+
+calcularPrecoLucroMaximo() ->
+	calcularPrecoLucroMaximo(0, Componentes).
+
+calcularPrecoLucroMaximo(Preco, [H | []]) ->
+	Preco;
+calcularPrecoLucroMaximo(Preco, [H | R]) ->
+	calcularPrecoLucroMaximo(Preco + H::getPrecoLucroMaximo(), R).
