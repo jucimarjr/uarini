@@ -1,0 +1,38 @@
+-class(exemplo).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	C1 = computador::constructor(),
+
+	PlacaMae = placaMae::constructor(),
+
+	Memoria1 = memoria::constructor(),
+	Memoria2 = memoria::constructor(),
+	CPU = cpu::constructor(),
+
+	PlacaMae::add(Memoria1),
+	PlacaMae::add(Memoria2),
+	PlacaMae::add(CPU),
+
+	Hd1 =  hardDisk::constructor(),	
+	Hd2 =  hardDisk::constructor(),
+
+	C1::add(Hd1),
+	C1::add(Hd2),
+	
+	I = C1::getComputadorIterator(),
+	Clista = Componente::null,
+
+	percorrerComputador(I, Clista).
+
+percorrer(computadorIterator I)
+	Clista == I::proximoComponente(),
+	if	Clista != null
+		true ->
+			io:format("Componente: ~w~n.", [Clista::getClass()::getName()]),
+			io:format("Preço de custo: ~w~n.", [Clista::getPrecoCusto()]),
+			percorrer(computadorIterator I);
+		false ->
+			nop.

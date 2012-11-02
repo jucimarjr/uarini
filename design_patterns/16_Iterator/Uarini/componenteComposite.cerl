@@ -1,0 +1,16 @@
+-abstract(componenteComposite).
+-extends(componente).
+-constructor([constructor/0]).
+-export([add/1]).
+
+class_attributes.
+
+protected list Componentes.
+
+class_methods.
+
+constructor() ->
+	ok.
+
+add(componente C) ->
+	 Componentes::add(c).

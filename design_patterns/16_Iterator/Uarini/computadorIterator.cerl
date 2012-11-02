@@ -1,0 +1,89 @@
+-class(computadorIterator).
+-constructor([constructor/1]).
+-export([proximoComponente/0, ComponenteAnterior/0]).
+
+class_attributes.
+
+computador Computador.
+Current.
+Steps.
+
+class_methods.
+
+constructor(Computador C) ->
+	self::Compuutador = C.
+
+proximoComponente() ->
+	Current = Current + 1,
+	Steps = 0,
+	R = getComponente(Computador),
+	
+	if R == null
+		true -> 
+			Current = Current - 1;
+		false ->
+			nop
+	end,
+	R.
+
+ComponenteAnterior() ->
+	Current = Current - 1,
+	Steps = 0,
+	R = getComponente(Computador),
+	
+	if R == null
+		true -> 
+			Current = Current + 1;
+		false ->
+			nop
+	end,
+	R.
+
+getComponente(componenteComposite Cl) ->
+	Retorno = Componente::null,
+	percorrerComposite(Cl, Retorno),
+	Retorno.
+
+percorrerComposite(componenteComposite [H |  []], Componente Retorno) ->
+		Retorno;
+percorrerComposite(componenteComposite [H | R], Componente Retorno) ->
+	Steps = Steps + 1,
+	Break = 0,
+	
+	if (H is componenteComposite)
+		true ->
+			if(Steps == Current)
+				true ->
+					Retorno = H,
+					Break = 1;
+				false ->
+					Cll = getComponente((componenteComposite) H)		
+					if (Cll == null) and (Steps == Current)
+						true ->	
+							Retorno = Componente::null,
+							Break = 1;
+						false ->
+							if(Cll != null) and (Steps == Current)
+								true ->
+									Retorno = CLL,
+									Break = 1;
+								false ->
+									nop
+							end
+					end
+			end;
+		false ->
+			if(Steps == Current)
+				true -> 
+					Retorno = H,
+					Break = 1;
+				false -> 
+					nop
+			end
+	end,
+	if Break == 0
+		true ->
+			percorrerComposite(componenteComposite R, Componente Retorno);
+		false ->
+			Retorno
+	end.						
