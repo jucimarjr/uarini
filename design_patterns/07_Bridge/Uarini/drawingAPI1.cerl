@@ -1,0 +1,8 @@
+-class(drawingAPI1).
+-implements([drawingAPI]).
+-export([drawCircle/3]).
+
+class_methods.
+
+drawCircle(X, Y, Radius) ->
+	io:format(¨API1.circle at ~p:~p radius ~p¨, [X, Y, Radius]).

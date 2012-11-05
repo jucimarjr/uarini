@@ -1,0 +1,24 @@
+-class(circleShape).
+-extends(shape).
+-export([draw/0, resizeByPercentage/1]).
+-constructor([constructor/4]).
+
+class_attributes.
+
+X.
+Y.
+Radius.
+
+class_methods.
+
+constructor(X, Y, Radius, drawingAPI DrawingAPI) ->
+	super::constructor(DrawingAPI),	
+	self::X = X,
+	self::Y = Y,
+	self::Radius = Radius.
+
+draw() ->
+	DrawingAPI::drawCircle(X, Y, Radius).
+
+resizeByPercentage(Pct) ->
+	Radius = Radius * pct.
