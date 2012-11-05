@@ -1,0 +1,9 @@
+-class(hardDisk).
+-extends(componente).
+-export([getPrecoCusto/0, getPrecoLucroMinimo/0, getPrecoLucroMaximo/0]).
+
+class_methods.
+
+getPrecoCusto() -> 100. 
+getPrecoLucroMinimo() -> 120. 
+getPrecoLucroMaximo() -> 200.

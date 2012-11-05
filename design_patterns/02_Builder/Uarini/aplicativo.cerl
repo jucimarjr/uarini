@@ -1,0 +1,11 @@
+-class(aplicativo).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Builder = servidorBuilder::constructor(),
+	Director = computadorDirector::constructor(),
+	Computador = Director::buildComputador(),
+	
+	Computador::getPrecoLucroMaximo().

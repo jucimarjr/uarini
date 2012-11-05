@@ -1,0 +1,17 @@
+-class(servidorBuilder).
+-constructor([constructor/1]).
+
+class_attributes.
+
+computadorBuilder Builder.
+
+class_methods.
+
+constructor(computadorBuilder Builder) ->
+	self::Builder = Builder.
+
+buildComputador() ->
+	Builder::createComputador(),
+	Builder::addPlacaMae(),
+	Builder::addHardDisk(),
+	Builder::getComputador().

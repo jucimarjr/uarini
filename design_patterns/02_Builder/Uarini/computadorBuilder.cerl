@@ -1,0 +1,16 @@
+-abstract(computadorBuilder).
+
+class_attributes.
+
+protected computador Computador.
+
+class_methods.
+
+createComputador().
+
+addPlacaMae().
+
+addHardDisk().
+
+getComputador() ->
+	self::Computador.

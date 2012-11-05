@@ -1,0 +1,9 @@
+-class(memoria).
+-extends(componente).
+-export([getPrecoCusto/0, getPrecoLucroMinimo/0, getPrecoLucroMaximo/0]).
+
+class_methods.
+
+getPrecoCusto() -> 50. 
+getPrecoLucroMinimo() -> 60. 
+getPrecoLucroMaximo() -> 120.

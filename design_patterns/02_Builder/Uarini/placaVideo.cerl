@@ -1,0 +1,9 @@
+-class(placaVideo).
+-extends(componente).
+-export([getPrecoCusto/0, getPrecoLucroMinimo/0, getPrecoLucroMaximo/0]).
+
+class_methods.
+
+getPrecoCusto() -> 170. 
+getPrecoLucroMinimo() -> 270. 
+getPrecoLucroMaximo() -> 370.

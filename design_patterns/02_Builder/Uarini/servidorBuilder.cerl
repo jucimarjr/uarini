@@ -1,0 +1,18 @@
+-class(servidorBuilder).
+-extends(computadorBuilder).
+
+class_methods.
+
+createComputador() ->
+	Computador = computador::constructor().
+
+addPlacaMae() ->
+	PlacaMae = placaMae::constructor(),
+	PlacaMae::add(memoria::constructor()),
+	PlacaMae::add(cpu::constructor()),
+	Computador::add(PlacaMae).
+
+addHardDisk() ->
+	Computador::add(hardDisk::constructor()),
+	Computador::add(hardDisk::constructor()),
+	Computador::add(hardDisk::constructor()).
