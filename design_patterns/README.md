@@ -3,6 +3,7 @@ Feitos:
 Padrões de criação
 
 	1 Abstract Factory
+	2 Builder
 	3 Factory Method
 	5 Singleton
 
@@ -25,7 +26,6 @@ A Fazer:
 
 Padrões de criação
 
-	2 Builder
 	4 Prototype
 
 Padrões estruturais
