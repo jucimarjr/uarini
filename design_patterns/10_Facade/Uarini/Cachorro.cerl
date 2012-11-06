@@ -1,0 +1,8 @@
+-class(cachorro).
+-export([falar/0]).
+
+class_methods.
+
+falar() ->
+	io:format("AU! AU!").
+

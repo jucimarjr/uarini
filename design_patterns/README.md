@@ -13,6 +13,7 @@ Padrões estruturais
 	7 Bridge
 	8 Composite
 	9 Decorator
+	10 Façade
 
 Padrões comportamentais
 
@@ -31,7 +32,6 @@ Padrões de criação
 
 Padrões estruturais
 
-	10 Facade
 	11 Flyweight	
 	12 Proxy
 

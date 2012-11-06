@@ -1,0 +1,18 @@
+-class(chamar).
+-export([chamar/0]).
+-constructor([constructor/0]).
+
+class_attributes.
+	
+cachorro Cachorro;
+gato Gato.
+
+class_methods.
+
+constructor() ->
+	self::Cachorro = cachorro::constructor(),
+	self::Gato = gato::constructor().
+	
+chamar() ->
+	cachorro::falar(),
+	gato::falar().
