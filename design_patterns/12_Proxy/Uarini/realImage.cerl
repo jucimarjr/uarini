@@ -1,0 +1,20 @@
+-interface(realImage).
+-implements([image]).
+-constrcutor([constrcutor/1]).
+-export([displayImage/0, loadImageFromDisk/0, displayImage/0]).
+
+class_attributes.
+
+Filename = "".
+
+class_methods.
+
+constructor(FILENAME) ->
+	self::Filename = FILENAME,
+	loadImageFromDisk().
+
+loadImageFromDisk() ->
+    io:format("Loading ~w~n.", [filename]).
+
+displayImage() ->
+    io:format("Displaying ~w~n.", [filename]).

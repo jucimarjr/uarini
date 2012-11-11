@@ -16,6 +16,7 @@ Padrões estruturais
 	9 Decorator
 	10 Façade
 	11 Flyweight	
+	12 Proxy
 
 Padrões comportamentais
 
@@ -27,10 +28,6 @@ Padrões comportamentais
 	23 Visitor
 
 A Fazer:
-
-Padrões estruturais
-
-	12 Proxy
 
 Padrões comportamentais
 

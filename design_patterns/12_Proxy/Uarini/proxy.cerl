@@ -1,0 +1,14 @@
+-class(proxy).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Image1 = proxyImage::constructor("HiRes_10MB_Photo1"),
+	Image2 = proxyImage::constructor("HiRes_10MB_Photo2"),
+		
+	Image1::displayImage(),
+	Image1::displayImage(),
+	Image2::displayImage(),
+	Image2::displayImage(),
+	Image1::displayImage().
