@@ -1,0 +1,9 @@
+-class(principal).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Cliente = cliente::constructor(),
+	PDF = Cliente::criarDocumento(cliente::DOCUMENTO_TIPO_PDF),
+	ASCII = Cliente::criarDocumento(cliente::DOCUMENTO_TIPO_ASCII).

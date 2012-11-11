@@ -1,0 +1,14 @@
+-abstract(doccumento).
+-implements(cloneable).
+
+class_methods.
+
+protected clone() ->
+	Clone = object::null(),
+	try
+		Clone = Super::clone();
+	catch
+		error:Error -> {error, caught, Error}
+	end
+	(Documento) clone.
+

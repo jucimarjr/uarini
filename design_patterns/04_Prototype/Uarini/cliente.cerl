@@ -1,0 +1,17 @@
+-class(cliente).
+-export([criarDocumento/1]).
+
+class_attributes.
+
+static final DOCUMENTO_TIPO_ASCII = 0;
+static final DOCUMENTO_TIPO_PDF = 1;
+
+documento ASCII = ascii::constructor().
+documento PDF = pdf::constructor().
+
+class_methods.
+
+criarDocumento(DOCUMENTO_TIPO_ASCII) ->
+	ASCII::clone().
+criarDocumento(DOCUMENTO_TIPO_PDF) ->
+	PDF::clone().

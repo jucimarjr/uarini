@@ -5,6 +5,7 @@ Padrões de criação
 	1 Abstract Factory
 	2 Builder
 	3 Factory Method
+	4 Prototype
 	5 Singleton
 
 Padrões estruturais
@@ -25,10 +26,6 @@ Padrões comportamentais
 	23 Visitor
 
 A Fazer:
-
-Padrões de criação
-
-	4 Prototype
 
 Padrões estruturais
 
