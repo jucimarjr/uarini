@@ -15,6 +15,7 @@ Padrões estruturais
 	8 Composite
 	9 Decorator
 	10 Façade
+	11 Flyweight	
 
 Padrões comportamentais
 
@@ -29,7 +30,6 @@ A Fazer:
 
 Padrões estruturais
 
-	11 Flyweight	
 	12 Proxy
 
 Padrões comportamentais

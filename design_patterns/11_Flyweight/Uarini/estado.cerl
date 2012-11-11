@@ -1,0 +1,11 @@
+-class(estado).
+-constructor([constructor/1]).
+
+class_attributes.
+
+Nome.
+
+class_methods.
+
+constructor(Nome) ->
+	self::Nome = Nome.

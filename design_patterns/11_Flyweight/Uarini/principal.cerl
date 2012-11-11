@@ -1,0 +1,14 @@
+-class(principal).
+-export([main/1]).
+
+class_methods.
+
+main() ->
+	Gerenciador = gerenciadorRemessas::constructor(),
+	Gerenciador::gerarRemessa("Amazonas"),
+	Gerenciador::gerarRemessa("Amazonas"),
+	Gerenciador::gerarRemessa("Amazonas"),
+	Gerenciador::gerarRemessa("Amazonas"),
+	Gerenciador::gerarRemessa("Amazonas"),
+	Gerenciador::gerarRemessa("Pará"),
+	Gerenciador::gerarRemessa("Pará").

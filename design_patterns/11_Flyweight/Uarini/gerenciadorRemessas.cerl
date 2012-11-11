@@ -1,0 +1,12 @@
+-class(gerenciadorRemessas).
+-export([gerarRemessa/1]).
+
+class_attributes.
+
+list Remessas.
+
+class_methods.
+
+gerarRemessa(E) ->
+	Estado = estadoFactory::getEstado(E),
+	Remessas::add(remessa::constructor(Estado)).

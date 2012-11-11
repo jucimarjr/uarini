@@ -1,0 +1,19 @@
+-class(estadoFactory).
+-export([getEstado/1]).
+
+class_attributes.
+
+Estados = dict::new().
+
+class_methods.
+
+getEstado(Nome) ->
+	Busca = dict::find(Nome, estados),
+	if Busca == error
+		true ->
+			Estado = estado::constructor(Nome),
+			dict::append(Nome, Estado, Estados)
+		false ->
+			{ok, Estado} = Busca.
+	end,
+	Estado.

@@ -11,7 +11,7 @@ documento PDF = pdf::constructor().
 
 class_methods.
 
-criarDocumento(DOCUMENTO_TIPO_ASCII) ->
+criarDocumento(self::DOCUMENTO_TIPO_ASCII) ->
 	ASCII::clone().
-criarDocumento(DOCUMENTO_TIPO_PDF) ->
+criarDocumento(self::DOCUMENTO_TIPO_PDF) ->
 	PDF::clone().

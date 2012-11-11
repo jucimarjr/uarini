@@ -1,0 +1,11 @@
+-class(remessa).
+-constructor([constructor/1]).
+
+class_attributes.
+
+estado Estado.
+
+class_methods.
+
+constructor(estado Estado) ->
+	self::Estado = Estado.
