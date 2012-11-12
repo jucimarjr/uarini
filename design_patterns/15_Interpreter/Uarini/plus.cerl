@@ -1,0 +1,18 @@
+-class(plus).
+-implements([expression]).
+-constructor([constructor/2]).
+-export([interpreter/1]).
+
+class_attributes.
+
+expression LeftOperand;
+expression RightOperand.
+
+class_methods.
+
+constructor(expression Left, expression Right) ->
+	self::LeftOperand = Left,
+	self::RightOperand = Right.
+
+interpreter(map<string, expression> Variables) ->
+	self::LeftOperand::interpreter(Variables) + self::RightOperand::interpreter(Variables).

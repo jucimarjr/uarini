@@ -22,6 +22,7 @@ Padrões comportamentais
 
 	13 Chain of Responsibility
 	14 Command
+	15 Interpreter
 	16 Iterator
 	20 State
 	21 Strategy
@@ -32,7 +33,6 @@ A Fazer:
 
 Padrões comportamentais
 
-	15 Interpreter
 	17 Mediator
 	18 Memento
 	19 Observer

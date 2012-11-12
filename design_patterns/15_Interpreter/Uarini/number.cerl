@@ -1,0 +1,16 @@
+-class(number).
+-implements([expression]).
+-constructor([constructor/1]).
+-export([interpreter/1]).
+
+class_attributes.
+
+Number.
+
+class_methods.
+
+constructor(Number) ->
+	self::Number = Number.
+
+interpreter(map<string, expression> Variables) ->
+	self::Number.

@@ -1,0 +1,21 @@
+-class(number).
+-implements([expression]).
+-constructor([constructor/1]).
+-export([interpreter/1]).
+
+class_attributes.
+
+Name.
+
+class_methods.
+
+constructor(Name) ->
+	self::Name = Name.
+
+interpreter(map<string, expression> Variables) ->
+	if Variables::get(self::Name) == null
+		true ->
+			0;
+		false ->
+			Variables::get(self::Name)::interpreter(Variables).
+	end.

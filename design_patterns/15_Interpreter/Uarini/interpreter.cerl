@@ -1,0 +1,18 @@
+-class(interpreter).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Expression = ¨w x z - +¨,
+	
+	Sentence = evaluator::constructor(Expression),
+
+	Variables = hashMap<string, expression>::constructor(),
+	
+	Variables::put(¨w¨, Number::constructor(5)),
+   	Variables::put(¨x¨, Number::constructor(10)),
+	Variables::put(¨z¨, Number::constructor(42)),    
+    
+	Result = Sentence::interpret(Variables),   
+	io:format(¨~w~n¨, [Result]).

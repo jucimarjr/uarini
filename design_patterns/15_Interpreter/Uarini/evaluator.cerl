@@ -1,0 +1,35 @@
+-class(evaluator).
+-implements([expression]).
+-constructor([constructor/1]).
+-export([interpreter/1]).
+
+class_attributes.
+
+expression SyntaxTree.
+
+class_methods.
+
+constructor(Expression) ->
+	ExpressionStack = stack<expression>::constructor(),
+	for(Expression, ExpressionStack),
+	self::SyntaxTree = ExpressionStack::pop().
+
+for([_| []], ExpressionStack) ->
+	ok;
+for([¨+¨ | R], ExpressionStack) ->
+	SubExpression = plus::constructor(ExpressionStack::pop(), ExpressionStack::pop()),
+	ExpressionStack::push(SubExpression),
+	for(R, ExpressionStack);
+for([¨-¨ | R], ExpressionStack) ->
+	SubExpression = MINUS::constructor(ExpressionStack::pop(), ExpressionStack::pop()),
+	ExpressionStack::push(SubExpression),
+	for(R, ExpressionStack);
+for([¨ ¨ | R], ExpressionStack) ->
+	for(R, ExpressionStack);
+for([Token | R], ExpressionStack) ->
+	ExpressionStack::push(variable::constructor(Token)),
+	for(R, ExpressionStack).
+
+interpreter(map<string, expression> Context) ->
+	self::SyntaxTree::interpreter(Context).
+	
