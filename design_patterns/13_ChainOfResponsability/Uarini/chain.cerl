@@ -1,0 +1,15 @@
+-class(chain).
+-export([main/0]).
+
+class_methods.
+
+
+main() ->
+	Logger = stdoutLogger::constructor(logger::DEBUG),
+    Logger1 = Logger::setNext(emailLogger::constructor(logger::NOTICE)),
+	Logger2 = Logger1::setNext(stderrLogger::constructor(logger::ERR)),
+	
+	Logger::message("Entering function y.", logger::DEBUG),
+	Logger::message("Step1 completed.", logger::NOTICE),
+	Logger::message("An error has occurred.", logger::ERR).
+

@@ -1,0 +1,33 @@
+-abstract(logger).
+-export([setNext/1, message/2, writeMessage/1]).
+
+class_attributes.
+
+public static final ERR = 3;
+public static final NOTICE = 5;
+public static final DEBUG = 7;
+
+protected Mask;
+protected logger Next.
+
+class_methods.
+	
+setNext(logger Log) ->
+	self::Next = Log,
+	Log.
+	
+message(Msg, Priority) ->
+	if (Priority <= self::Mask)
+		true ->
+			writeMessage(Msg);
+		false ->
+			nop
+	end,
+	if (self::Next =!= null)
+		true ->
+			self::Next::message(msg, priority);
+		false ->
+			nop
+	end.
+
+abstract protected writeMessage(String msg).

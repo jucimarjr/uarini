@@ -1,0 +1,12 @@
+-class(emailLogger).
+-extends(logger).
+-constrcutor([constructor/1]).
+
+class_methods.
+
+constrcutor(Mask) ->
+	self::Mask = Mask.
+
+protected writeMessage(Msg) ->
+	io:format("Sendig via email: ~p", [msg]).
+
