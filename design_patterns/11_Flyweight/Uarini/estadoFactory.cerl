@@ -3,17 +3,17 @@
 
 class_attributes.
 
-Estados = dict::new().
+Estados = hashMap<string, estado>::constructor().
 
 class_methods.
 
 getEstado(Nome) ->
-	Busca = dict::find(Nome, estados),
-	if Busca == error
+	Busca = Estados::get(Nome),
+	if Busca == null
 		true ->
 			Estado = estado::constructor(Nome),
-			dict::append(Nome, Estado, Estados)
+			Estados::put(Nome, Estado);
 		false ->
-			{ok, Estado} = Busca.
+			Estado = Busca.
 	end,
 	Estado.
