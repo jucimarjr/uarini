@@ -1,0 +1,13 @@
+-interface(iMediator).
+-export([book/0, view/0, search/0]).
+-export([registerBook/1, registerView/1, registerSearch/1, registerDisplay/1]).
+
+class_methods.
+
+book().
+view().
+search().
+registerBook(btnBook B).    
+registerSearch(btnSearch S). 
+registerView(btnView V).
+registerDisplay(lblDisplay D).

@@ -1,0 +1,16 @@
+-class(mediatorDemo).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Med = mediator::constructor(),
+    BtnBook = btnBook::constructor(Med),
+    BtnSearch = btnSearch::constructor(Med),
+    BtnView = btnView::constructor(Med),
+    Label = new LblDisplay(Med),
+   	
+    Med::book(),
+    Med::search(),
+    Med::view(),
+    Label::setText("Hello Word").

@@ -1,0 +1,6 @@
+-interface(command).
+-export([execute/0]).
+
+class_methods.
+
+execute().

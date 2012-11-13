@@ -1,0 +1,25 @@
+-class(btnSearch).
+-implements(command).
+-constructor([constructor/1]).
+-export([execute/0, setEnabled/1]).
+
+class_attributes.
+
+iMediator Med.
+
+class_methods.
+
+constructor(iMediator M) ->
+	self::Med = M,
+	self::Med::registerSearch(self).
+
+execute() ->
+	self::Med::search().
+	
+setEnabled(B) ->
+	if(B =:= true)
+		true ->
+			io:format("BtnSearch Enabled");
+		false ->
+			io:format("BtnSearch Disabled")
+	end.

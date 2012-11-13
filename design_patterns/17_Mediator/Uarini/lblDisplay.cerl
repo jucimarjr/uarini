@@ -1,0 +1,19 @@
+-class(lblDisplay).
+-implements(command).
+-constructor([constructor/1]).
+-export([setText/1]).
+
+class_attributes.
+
+iMediator Med.
+
+class_methods.
+
+constructor(iMediator M) ->
+	self::Med = M,
+	self::Med::registerDisplay(self).
+
+setText(Text) ->
+	io:format(¨~w¨, [Text]).
+
+

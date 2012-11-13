@@ -1,0 +1,25 @@
+-class(btnView).
+-implements(command).
+-constructor([constructor/1]).
+-export([execute/0, setEnabled/1]).
+
+class_attributes.
+
+iMediator Med.
+
+class_methods.
+
+constructor(iMediator M) ->
+	self::Med = M,
+	self::Med::registerView(self).
+
+execute() ->
+	self::Med::view().
+	
+setEnabled(B) ->
+	if(B =:= true)
+		true ->
+			io:format("BtnView Enabled");
+		false ->
+			io:format("BtnView Disabled")
+	end.
