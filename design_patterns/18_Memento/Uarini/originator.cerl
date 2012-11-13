@@ -1,0 +1,37 @@
+-class(originator).
+-export([set/1, saveMemento/0, restoreFromMemento/1]).
+
+class_attributes
+
+State.
+
+class_methods.
+ 
+set(State) -> 
+	io:format("Originator: Setting state to ~w~n", [State]),
+    self::State = State.
+ 
+saveToMemento() ->
+	io:format("Originator: Saving to Memento."),
+    memento::constructor(self::State).
+ 
+restoreFromMemento(memento Memento) ->
+	self::State = Memento::getSavedState(),
+    System.out.println("Originator: State after restoring from Memento: ~w~n", [self::State]).
+
+static_subclass.
+
+-class(Memento).
+-constructor([constructor/1]).
+
+class_attributes.
+
+final State.
+
+class_methods. 
+       
+constructor(StateToSave) ->
+	self::State = stateToSave.
+ 
+getSavedState() ->
+	self::State.

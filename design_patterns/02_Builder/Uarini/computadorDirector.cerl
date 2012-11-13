@@ -1,4 +1,4 @@
--class(servidorBuilder).
+-class(computadorDirector).
 -constructor([constructor/1]).
 
 class_attributes.

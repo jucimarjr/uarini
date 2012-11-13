@@ -1,0 +1,19 @@
+-class(caretaker).
+-export([main/0]).
+
+class_methods.
+
+main() -> 
+	SavedStates = arrayList<Originator.Memento>::constructor(),
+ 	
+	Originator = new Originator(),
+    Originator::set("State1"),
+    Originator::set("State2"),
+    SavedStates::add(originator.saveToMemento()),
+   
+	Originator::set("State3"),
+    SavedStates::add(originator.saveToMemento()),
+    Originator::set("State4"),
+ 
+   Originator::restoreFromMemento(savedStates.get(1)).   
+

@@ -25,6 +25,7 @@ Padrões comportamentais
 	15 Interpreter
 	16 Iterator
 	17 Mediator
+	18 Memento
 	20 State
 	21 Strategy
 	22 Template Method
@@ -34,5 +35,4 @@ A Fazer:
 
 Padrões comportamentais
 
-	18 Memento
 	19 Observer
