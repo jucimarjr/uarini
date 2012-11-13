@@ -17,7 +17,7 @@ saveToMemento() ->
  
 restoreFromMemento(memento Memento) ->
 	self::State = Memento::getSavedState(),
-    System.out.println("Originator: State after restoring from Memento: ~w~n", [self::State]).
+	io:format("Originator: State after restoring from Memento: ~w~n", [self::State]).
 
 static_subclass.
 
@@ -29,9 +29,9 @@ class_attributes.
 final State.
 
 class_methods. 
-       
+
 constructor(StateToSave) ->
 	self::State = stateToSave.
- 
+
 getSavedState() ->
 	self::State.
