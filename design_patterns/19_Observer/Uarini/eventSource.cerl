@@ -1,0 +1,21 @@
+-class(eventSource).
+-extends(observable).
+-implements(runnable).
+-export([run/0]).
+
+class_methods.
+
+run() ->
+	try
+		Isr = inputStreamReader::constructor(system::In),
+		Br = bufferedReader::constructor(Isr),
+		wait(Br)
+	catch
+		error:Error -> {error, caught, Error}
+	end.
+	
+wait(Br) ->
+	Response = Br::readLine(),
+	setChanged(),
+	notifyObserver(Response),
+	wait(Br).

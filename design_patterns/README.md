@@ -1,5 +1,3 @@
-Feitos:
-
 Padrões de criação
 
 	1 Abstract Factory
@@ -26,13 +24,9 @@ Padrões comportamentais
 	16 Iterator
 	17 Mediator
 	18 Memento
+	19 Observer
 	20 State
 	21 Strategy
 	22 Template Method
 	23 Visitor
 
-A Fazer:
-
-Padrões comportamentais
-
-	19 Observer
