@@ -3,7 +3,7 @@
 
 class_attributes.
 
-Estados = hashMap<string, estado>::constructor().
+hashMap<string, estado> Estados = hashMap<string, estado>::constructor().
 
 class_methods.
 
@@ -14,6 +14,6 @@ getEstado(Nome) ->
 			Estado = estado::constructor(Nome),
 			Estados::put(Nome, Estado);
 		false ->
-			Estado = Busca.
+			Estado = Busca
 	end,
 	Estado.

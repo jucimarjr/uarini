@@ -1,8 +1,9 @@
 -class(pedido).
+-export([alterar/0, cancelar/0, enviar/0, setStatus/1, getStatus/0]).
 
 class_attributes.
 
-statusPedido Status
+statusPedido Status.
 
 class_methods.
 
@@ -15,7 +16,7 @@ cancelar() ->
 enviar() ->
 	Status::enviar(self).
 
-setStatus(Status) ->
+setStatus(statusPedido Status) ->
 	self::Status = Status.
 
 getStatus() ->

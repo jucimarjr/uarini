@@ -1,11 +1,10 @@
--class(correrVisitor).
+﻿-class(correrVisitor).
 -implements([visitor/1]).
 -export([visit/1]).
 
 class_methods.
 
 visit(dog Animal) ->
-	Animal::correr("O cachorro está correndo").
-
+	Animal::correr("O cachorro está correndo");
 visit(cat Animal) ->
 	Animal::correr("O gato está correndo").

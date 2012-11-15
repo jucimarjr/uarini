@@ -1,9 +1,9 @@
 -class(Template).
+-export([main/0]).
 
 class_methods.
 
 main() ->
-	
 	Terremoto = relatorioTerremoto::constructor(),
 	Umidade = relatorioUmidade::constructor(),
 

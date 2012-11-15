@@ -4,8 +4,8 @@
 
 class_attributes.
 
-Nome
-Idade
+Nome;
+Idade.
 
 class_methods.
 

@@ -2,6 +2,8 @@
 -extends(animal).
 -export([falar/1, correr/1, accept/1]).
 
+class_methods.
+
 falar(Text) ->
 	io:format("~w~n", [Text]).
 

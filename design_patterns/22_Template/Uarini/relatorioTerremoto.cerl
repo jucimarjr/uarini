@@ -1,5 +1,6 @@
--class(relatorioTerremoto).
+﻿-class(relatorioTerremoto).
 -extends(relatorio).
+-export([montarRelatorio/0, montarCabecalho/0, montarCorpo/0, montarRodape/0]).
 
 class_methods.
 

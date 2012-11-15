@@ -5,7 +5,7 @@
 
 class_attributes.
 
-protected Componentes = arrayList<Componente>::constructor().
+protected arrayList<Componente> Componentes = arrayList<Componente>::constructor().
 
 class_methods.
 

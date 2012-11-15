@@ -1,4 +1,5 @@
 -class(decorator).
+-export([main/0]).
 
 class_methods.
 

@@ -1,11 +1,11 @@
 -class(pet).
 -extends(animal).
 -constructor([constructor/2]).
--export([falar/0]).
+-export([falar/0, getNome/0, getIdade/0, setNome/1, SetIdade/1]).
 
 class_attributes.
 
-animal Animal
+animal Animal.
 
 class_methods.
 

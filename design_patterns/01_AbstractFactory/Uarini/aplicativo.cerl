@@ -3,7 +3,7 @@
 
 class_attributes.
 
-commandFactory CommandFactory
+commandFactory CommandFactory.
 
 class_methods.
 

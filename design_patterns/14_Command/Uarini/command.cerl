@@ -3,7 +3,7 @@
 
 main() ->
 	Soma = somar::constructor(),
-	Subtrair = somar::constructor(),
+	Subtrair = subtrair::constructor(),
 
 	io:format("~p~n", [Soma::operar()]),
 	io:format("~p~n", [Subtrair::operar()]).

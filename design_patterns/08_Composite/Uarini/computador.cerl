@@ -1,4 +1,4 @@
--class(computador).
+﻿-class(computador).
 -extends(componenteComposite).
 -export([getPrecoCusto/0, getPrecoLucroMinimo/0, getPrecoLucroMaximo/0]).
 

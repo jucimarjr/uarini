@@ -1,11 +1,19 @@
 -class(adapter).
--export([main/0]).
+-
+export([main/0]).
+
+
 
 class_methods.
 
+
+
 main() ->
 	Soma = soma::constructor();
+	
 	Subtracao = subtracaoAdapter::constructor(subtrair::constructor());
 
+
 	io:format("Resultado da soma: " + Soma::operar(10, 5)),
+	
 	io:format("Resultado da subtracao: " + Subtracao::operar(10, 5)).
