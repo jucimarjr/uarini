@@ -1,0 +1,8 @@
+-class(Dog).
+-extends(Animal).
+-exports([bark/0]).
+
+class_methods.
+
+bark()->
+	io:format("Woof! Woof!~n").

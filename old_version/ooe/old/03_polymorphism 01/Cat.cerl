@@ -1,0 +1,8 @@
+-class(Cat).
+-extends(Pet).
+-exports([talk/0]).
+
+class_methods.
+
+talk()->
+	io:format("Meow! Meow!~n").

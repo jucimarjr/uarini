@@ -1,0 +1,19 @@
+-class(Animmal).
+-constructor(new/3).
+-exports([print/0]).
+
+class_attributes.
+
+name
+color
+age
+
+class_methods.
+
+new( N, C, A ) ->
+	self::name = N,
+	self::color = C,
+	self::age = A.
+
+print() ->
+	io:format("I'm ~p~n", [self::name]).

@@ -1,0 +1,11 @@
+-class(Dog).
+-extends(Pet).
+-exports([run/1, talk/0]).
+
+class_methods.
+
+run(Ball)->
+	io:format("Hunting ~d ball~n”, [Ball]).
+
+talk()-> 
+	io:format("Woof! Woof!~n").

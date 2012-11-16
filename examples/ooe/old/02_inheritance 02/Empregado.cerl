@@ -1,7 +1,0 @@
--class(Empregado).
--exports([get_salario/0]).
-
-class_methods.
-
-getSalario() ->
-	-1.

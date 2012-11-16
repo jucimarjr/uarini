@@ -1,0 +1,24 @@
+-class(Pessoa).
+-constructor([constructor/2]).
+-extends([gastar/1, receber/1]).
+
+class attributes.
+
+nome;
+nascimento;
+dinheiroNaCarteira;
+
+class methods.
+
+constructor(Nome, Nasc) ->
+	self::nome = Nome,
+	self::nascimento = Nasc.
+
+gastar(Valor) ->
+	dinheiroNaCarteira = dinheiroNaCarteira - Valor.
+
+receber(Valor) ->
+	dinheiroNaCarteira = dinheiroNaCarteira + Valor.
+
+get_dinheiro() ->
+	dinheiroNaCarteira.

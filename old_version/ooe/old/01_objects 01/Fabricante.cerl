@@ -1,0 +1,27 @@
+-class(Fabricante).
+-constructor([constructor/2]).
+-export([get_nome/0, get_data_fabricacao/0,
+			set_nome/1, set_data_fabricacao/1]).
+
+class attributes.
+
+nome;
+data_fabricacao;
+
+class methods.
+
+constructor(Nome, Data_Fabricacao) ->
+	nome			= Nome,
+	data_fabricacao	= Data_Fabricacao.
+	
+get_nome() ->
+	nome.
+
+get_data_fabricacao() ->
+	data_fabricacao.
+
+set_nome(Nome) ->
+	nome = Nome.
+
+set_data_fabricacao(Data_Fabricacao) ->
+	data_fabricacao = Data_Fabricacao.
