@@ -1,0 +1,7 @@
+-class(horista).
+-extends(empregado).
+
+class_methods.  
+
+getSalario() ->
+	return self::Salario/220.

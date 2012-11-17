@@ -1,0 +1,7 @@
+-class(mensalista).
+-extends(empregado).
+
+class_methods.  
+
+getSalario() ->
+	return self::Salario.

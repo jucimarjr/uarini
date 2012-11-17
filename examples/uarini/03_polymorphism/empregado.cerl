@@ -1,0 +1,12 @@
+-abstract(empregado).
+
+class_attributes.
+
+protected Salario.
+
+class_methods.
+
+getSalario().
+  
+setSalario(Value)->
+	self::Salario = Value.

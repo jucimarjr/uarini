@@ -1,0 +1,7 @@
+-class(empregado).
+-export([getSalario/0]).
+
+class_methods.
+
+getSalario() -> -1.
+

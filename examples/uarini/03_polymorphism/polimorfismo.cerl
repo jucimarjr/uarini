@@ -1,0 +1,15 @@
+-class(polimorfismo).
+
+class_methods.
+
+main() ->
+      	H = horista::constructor(),  
+      	M = mensalista::constructor(),
+  
+      	H::setSalario( 2240.00 ),  
+	    M::setSalario( 2240.00 ),  
+      
+		E = H,  
+		io:format( "Salario em horas: ~p", [E::getSalario()]),  
+	    E = M,  
+		io:format( "Salario em horas: ~p", [E::getSalario()]).
