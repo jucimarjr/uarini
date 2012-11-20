@@ -22,6 +22,10 @@
 
 Nonterminals
 form
+
+oo_attributes oo_attribute % ooe
+oo_modifier oo_access oo_var %ooe
+
 attribute attr_val
 function function_clauses function_clause
 clause_args clause_guard clause_body
@@ -62,6 +66,11 @@ char integer float atom string var
 '==' '/=' '=<' '<' '>=' '>' '=:=' '=/=' '<='
 '<<' '>>'
 '!' '=' '::' '..' '...'
+
+'class_attributes' 'class_methods' % oo_markup
+'public' 'protected' 'private' % oo_visibility
+'final' 'static' % oo_access
+
 'spec' 'callback' % helper
 dot.
 
@@ -72,6 +81,29 @@ Rootsymbol form.
 form -> attribute dot : '$1'.
 form -> function dot : '$1'.
 form -> rule dot : '$1'.
+form -> 'class_attributes' dot : '$1'.
+form ->      oo_attributes dot : '$1'.
+form ->    'class_methods' dot : '$1'.
+
+oo_attributes -> oo_attribute : ['$1'].
+oo_attributes -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
+
+oo_attribute -> oo_var : {[], '$1'}.
+oo_attribute -> oo_modifier oo_var : {'$1','$2'}.
+
+oo_modifier -> oo_access                  : ['$1'].
+oo_modifier -> oo_access 'static'         : ['$1','$2'].
+oo_modifier -> oo_access 'static' 'final' : ['$1','$2','$3'].
+oo_modifier -> oo_access 'final'          : ['$1','$2'].
+
+oo_access -> 'public' : '$1'.
+oo_access -> 'private' : '$1'.
+oo_access -> 'protected' : '$1'.
+
+oo_var -> var                : {{atom, ?line('$1'), 'NoType'}, '$1'}.
+oo_var -> atom var           : {'$1', '$2'}.
+oo_var -> var '=' exprs      : {{atom, ?line('$1'), 'NoType'}, {match,?line('$2'),'$1','$3'}}.
+oo_var -> atom var '=' exprs : {$1, {match,?line('$3'),'$2','$4'}}.
 
 attribute -> '-' atom attr_val               : build_attribute('$2', '$3').
 attribute -> '-' atom typed_attr_val         : build_typed_attribute('$2','$3').
@@ -253,6 +285,8 @@ expr_700 -> function_call : '$1'.
 expr_700 -> record_expr : '$1'.
 expr_700 -> expr_800 : '$1'.
 
+expr_800 -> expr_900 '::' expr_max :
+	{oo_remote,?line('$2'),'$1','$3'}.
 expr_800 -> expr_900 ':' expr_max :
 	{remote,?line('$2'),'$1','$3'}.
 expr_800 -> expr_900 : '$1'.
