@@ -1,4 +1,4 @@
--class(gerenciaddorDePessoas).
+-class(gerenciadorDePessoas).
 -export([main/0]).
 
 class_methods.

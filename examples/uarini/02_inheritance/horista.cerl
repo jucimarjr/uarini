@@ -8,7 +8,7 @@ getSalario() ->
 	-2.  
 
 calcular() ->
-	io:format("Salario da superclasse: ~p ", [super::getSalario()]),  
+    io:format("Salario da superclasse: ~p ", [super::getSalario()]),
     io:format("Salario da subclasse: ~p", [this::getSalario()]).
  
 main()  

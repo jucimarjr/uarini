@@ -4,4 +4,4 @@
 class_methods.  
 
 getSalario() ->
-	return self::Salario/220.
+    self::Salario/220.

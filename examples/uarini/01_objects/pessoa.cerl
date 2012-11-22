@@ -2,7 +2,7 @@
 -constructor([constructor/2]).
 -export([gastar/1, receber/1]).
 
-class_attribtutes.
+class_attributes.
 
 Nome;
 Nascimento;

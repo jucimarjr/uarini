@@ -6,12 +6,12 @@ class_attributes.
 static final DOCUMENTO_TIPO_ASCII = 0;
 static final DOCUMENTO_TIPO_PDF = 1;
 
-documento ASCII = ascii::constructor().
+documento ASCII = ascii::constructor();
 documento PDF = pdf::constructor().
 
 class_methods.
 
 criarDocumento(self::DOCUMENTO_TIPO_ASCII) ->
-	ASCII::clone().
+	ASCII::clone();
 criarDocumento(self::DOCUMENTO_TIPO_PDF) ->
 	PDF::clone().
