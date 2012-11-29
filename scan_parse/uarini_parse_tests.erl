@@ -53,13 +53,13 @@ uarini_var_test() ->
            }}],
     Exp3 = [{
         [{public,1}],
-	{{atom,1,'NoType'}, {var,1,'MyVar'}}}],
+    {{atom,1,'NoType'}, {var,1,'MyVar'}}}],
     Exp4 = [{
         [{private,1}],
-	{{atom,1, car},{var,1,'Fusca'}}}],
+    {{atom,1, car},{var,1,'Fusca'}}}],
     Exp5 = [{
         [{protected,1},{static,1},{final,1}],
-	{{atom,1, car}, {var,1,'Ferrari'} }}],
+    {{atom,1, car}, {var,1,'Ferrari'} }}],
 
     Form1 = uarini_parse:parse(get_tokens("MyVar.")),
     Form2 = uarini_parse:parse(get_tokens("car Fusca.")),
@@ -72,3 +72,10 @@ uarini_var_test() ->
      ?assertEqual(?OK(Exp3), Form3),
      ?assertEqual(?OK(Exp4), Form4),
      ?assertEqual(?OK(Exp5), Form5)].
+
+uarini_method_test() ->
+    Exp1 = {function,1, method,0,[{abst_clause, 1, []}]},
+
+    Form1 = uarini_parse:parse(get_tokens("method().")),
+
+    [?assertEqual(?OK(Exp1), Form1)].

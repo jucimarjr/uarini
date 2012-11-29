@@ -240,7 +240,7 @@ function_clauses -> function_clause : ['$1'].
 function_clauses -> function_clause ';' function_clauses : ['$1'|'$3'].
 
 function_clause -> atom clause_args clause_guard clause_body :
-	{clause,?line('$1'),element(3, '$1'),'$2','$3','$4'}.
+	abstract_method({clause,?line('$1'),element(3, '$1'),'$2','$3','$4'}).
 
 
 clause_args -> argument_list : element(1, '$1').
@@ -249,6 +249,7 @@ clause_guard -> 'when' guard : '$2'.
 clause_guard -> '$empty' : [].
 
 clause_body -> '->' exprs: '$2'.
+clause_body -> '$empty'  : [].
 
 
 expr -> 'catch' expr : {'catch',?line('$1'),'$2'}.
@@ -890,8 +891,14 @@ build_fun(Line, Cs) ->
     {'fun',Line,{clauses,check_clauses(Cs, 'fun', Arity)}}.
 
 check_clauses(Cs, Name, Arity) ->
-     mapl(fun ({clause,L,N,As,G,B}) when N =:= Name, length(As) =:= Arity ->
+     mapl(
+         fun (
+         {clause,L,N,As,G,B}) when N =:= Name, length(As) =:= Arity ->
 		 {clause,L,As,G,B};
+         ({abst_clause,L,N,As,[]}) when N =:= Name ->
+         {abst_clause,L,As};
+         ({abst_clause,L,_N,_As,_G}) ->
+         ret_err(L, "invalid abstract method");
 	     ({clause,L,_N,_As,_G,_B}) ->
 		 ret_err(L, "head mismatch") end, Cs).
 
@@ -1138,3 +1145,9 @@ get_attribute(L, Name) ->
 
 get_attributes(L) ->
     erl_scan:attributes_info(L).
+
+%%% Uarini Specific Code
+abstract_method({clause,Line,Name,Args,Guards,[]}) ->
+    {abst_clause, Line,Name,Args,Guards};
+abstract_method(FunNode) ->
+    FunNode.
