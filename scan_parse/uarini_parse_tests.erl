@@ -45,8 +45,30 @@ uarini_markup_test() ->
      ?assertEqual(?OK(Exp2), Form2)].
 
 uarini_var_test() ->
-    Exp1 = [{[],[],{atom,1,'NoType'}, {var,1,'MyVar'}}],
+    Exp1 = [{[],
+             {{atom,1,'NoType'}, {var,1,'MyVar'}
+           }}],
+    Exp2 = [{[],
+             {{atom,1, car}, {var,1,'Fusca'}
+           }}],
+    Exp3 = [{
+        [{public,1}],
+	{{atom,1,'NoType'}, {var,1,'MyVar'}}}],
+    Exp4 = [{
+        [{private,1}],
+	{{atom,1, car},{var,1,'Fusca'}}}],
+    Exp5 = [{
+        [{protected,1},{static,1},{final,1}],
+	{{atom,1, car}, {var,1,'Ferrari'} }}],
 
     Form1 = uarini_parse:parse(get_tokens("MyVar.")),
+    Form2 = uarini_parse:parse(get_tokens("car Fusca.")),
+    Form3 = uarini_parse:parse(get_tokens("public MyVar.")),
+    Form4 = uarini_parse:parse(get_tokens("private car Fusca.")),
+    Form5 = uarini_parse:parse(get_tokens("protected static final car Ferrari.")),
 
-    [?assertEqual(?OK(Exp1), Form1)].
+    [?assertEqual(?OK(Exp1), Form1),
+     ?assertEqual(?OK(Exp2), Form2),
+     ?assertEqual(?OK(Exp3), Form3),
+     ?assertEqual(?OK(Exp4), Form4),
+     ?assertEqual(?OK(Exp5), Form5)].
