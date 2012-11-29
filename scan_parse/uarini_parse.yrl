@@ -88,7 +88,7 @@ form ->    'class_methods' dot : '$1'.
 oo_attributes -> oo_attribute : ['$1'].
 oo_attributes -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
 
-oo_attribute -> oo_var : {[], '$1'}.
+oo_attribute -> oo_var : {[],'$1'}.
 oo_attribute -> oo_modifier oo_var : {'$1','$2'}.
 
 oo_modifier -> oo_access               : '$1'.
@@ -101,6 +101,7 @@ oo_visibility -> 'protected' : '$1'.
 oo_access -> 'static' 'final' : ['$1','$2'].
 oo_access -> 'static'         : ['$1'].
 oo_access -> 'final'          : ['$1'].
+oo_access -> '$empty'         : [].
 
 oo_var -> var                : {{atom, ?line('$1'), 'NoType'}, '$1'}.
 oo_var -> atom var           : {'$1', '$2'}.
