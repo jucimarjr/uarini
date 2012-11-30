@@ -1,16 +1,16 @@
--export(horista).
+-class(horista).
 -extends(empregado).
 -export([getSalario/0, calcular/0, main/0]).
 
 class_methods.
 
-getSalario() -> 
-	-2.  
+getSalario() ->
+    -2.
 
 calcular() ->
     io:format("Salario da superclasse: ~p ", [super::getSalario()]),
     io:format("Salario da subclasse: ~p", [this::getSalario()]).
- 
-main()  
-    H = horista::constructor(),  
+
+main() ->
+    H = horista::constructor(),
     H::calcular().
