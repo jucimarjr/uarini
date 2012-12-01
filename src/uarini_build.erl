@@ -4,10 +4,9 @@
 %%-----------------------------------------------------------------------------
 %%Gera os analisadores lexico e sintatico e compila o compilador
 build() ->
-	leex:file(uarini_lexer),
-	yecc:file(uarini_parser),
-	compile:file(uarini_lexer),
-	compile:file(uarini_parser),
+	yecc:file(uarini_parse),
+	compile:file(uarini_scan),
+	compile:file(uarini_parse),
 	ok.
 
 
@@ -15,7 +14,7 @@ build() ->
 %% Extrai a Java Abstract Syntax Tree de um arquivo .java
 get_ast(ErlangClassFileName) ->
 	Tokens = get_tokens(ErlangClassFileName),
-	{ok, AST} = uarini_parser:parse(Tokens),
+	{ok, AST} = uarini_parse:parse(Tokens),
 	AST.
 
 %%-------------------------------------------	----------------------------------
@@ -23,5 +22,5 @@ get_ast(ErlangClassFileName) ->
 get_tokens(ErlangClassFileName) ->
 	{ok, FileContent} = file:read_file(ErlangClassFileName),
 	Program = binary_to_list(FileContent),
-	{ok, Tokens, _EndLine} = uarini_lexer:string(Program),
+	{ok, Tokens, _EndLine} = uarini_scan:string(Program),
 	Tokens.
