@@ -17,5 +17,5 @@ constructor(Nome, Nasc) ->
 gastar(Valor) -> 
     self::DinheiroNaCarteira = self::DinheiroNaCarteira - Valor.
     
-receber(double Valor) ->  
+receber(Valor) ->  
     self::DinheiroNaCarteira = self::dinheiroNaCarteira + Valor.
