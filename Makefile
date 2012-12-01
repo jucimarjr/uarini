@@ -9,17 +9,15 @@ ERL=erl -noshell -pa $(EBIN_DIR) -pa $(TEST_EBIN_DIR)
 .PHONY: clean debug
 
 # This is the default task
-compile: ebin/uarini.beam src/uarini_lexer.erl src/uarini_parser.erl test/ebin/test.beam 
+compile: ebin/uarini.beam src/uarini_scan.erl src/uarini_parse.erl test/ebin/test.beam 
 
 test:   compile
-	@ clear
 	@ echo EUnit testing...
 	@ rm -rf $(TEST_EBIN_DIR)/
 	@ mkdir -p $(TEST_EBIN_DIR)
-	@ $(ERLC) -o $(TEST_EBIN_DIR) test/test.erl
-	@ $(ERL) -eval 'eunit:test("test/ebin", [verbose]), halt().'
-	@ mv *.erl $(TEST_EBIN_DIR)
-	@ mv *.beam $(TEST_EBIN_DIR)
+	@ $(ERLC) -o $(TEST_EBIN_DIR) test/*.erl
+	@ $(ERL) -pa $(EBIN_DIR) -pa $(TEST_EBIN_DIR) \
+		-eval 'eunit:test([uarini_scan_tests,uarini_parse_tests], [verbose]), halt().'
 
 # This is the task when you intend to debug
 debug: ERLC += +debug_info
@@ -38,14 +36,7 @@ $(TEST_EBIN_DIR)/test.beam : test/*.erl
 	@ $(ERLC) -o $(TEST_EBIN_DIR) test/test.erl
 	@ echo  
 
-src/uarini_lexer.erl: src/uarini_lexer.xrl
-	@ echo Compiling Lexer ...
-	@ $(ERL) -eval 'leex:file("$<"), halt().'
-	@ mkdir -p $(EBIN_DIR)
-	@ $(ERLC) -o $(EBIN_DIR) $@
-	@ echo
-
-src/uarini_parser.erl: src/uarini_parser.yrl
+src/uarini_parse.erl: src/uarini_parse.yrl
 	@ echo Compiling Parser ...
 	@ $(ERL) -eval 'yecc:file("$<", [{verbose, true}]), halt().'
 	@ mkdir -p $(EBIN_DIR)
@@ -56,12 +47,7 @@ clean:
 	@ echo Cleaning...
 	rm -f erl_crash.dump
 	rm -f *.erl
-	rm -f $(SRC_DIR)/uarini_lexer.erl
-	rm -f $(SRC_DIR)/uarini_parser.erl
+	rm -f $(SRC_DIR)/uarini_parse.erl
 	rm -rf $(EBIN_DIR)/
 	rm -rf $(TEST_EBIN_DIR)/
-	find . -name  *.*~ -print0 | xargs -0 rm
-	find . -name  *~ -print0 | xargs -0 rm
-	find . -name  *.beam -print0 | xargs -0 rm
-	find . -name  *.class -print0 | xargs -0 rm
 	@ echo
