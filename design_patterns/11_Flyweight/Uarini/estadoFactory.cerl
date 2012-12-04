@@ -9,7 +9,7 @@ class_methods.
 
 getEstado(Nome) ->
 	Busca = Estados::get(Nome),
-	if Busca == null
+	case Busca == null of
 		true ->
 			Estado = estado::constructor(Nome),
 			Estados::put(Nome, Estado);

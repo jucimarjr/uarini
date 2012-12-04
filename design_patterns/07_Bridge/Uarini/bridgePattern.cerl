@@ -4,8 +4,8 @@
 class_methods.
 
 main() ->
-	Shape1 = circleShape::constructor(1,2,3 DrawingAPI1()),
-	Shape2 = circleShape::constructor(1,2,3 DrawingAPI2()),
+	Shape1 = circleShape::constructor(1,2,3, DrawingAPI1()),
+	Shape2 = circleShape::constructor(1,2,3, DrawingAPI2()),
 
 	Shape1::resizeByPercentage(2.5),
 	Shape1::draw(),

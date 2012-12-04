@@ -3,8 +3,8 @@
 
 class_attributes.
 
-configManager Instance
-ServerName
+configManager Instance;
+ServerName.
 
 class_methods.
 
@@ -12,7 +12,7 @@ constructor() ->
 	nop.
 
 static getInstance()->
-	if (Instance == null)
+	case (Instance == null) of
 		true ->
 			Instance = configManager::constructor();
 		false ->

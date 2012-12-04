@@ -14,7 +14,7 @@ constructor(FILENAME) ->
 	self::Filename = FILENAME.
 
 displayImage() ->
-	if self::Image == image::null
+	case self::Image == image::null of
 		true ->
 			self::Image = realImage::constructor(self::FileName);
 		false ->

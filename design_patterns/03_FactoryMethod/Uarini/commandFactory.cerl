@@ -6,11 +6,11 @@ class_methods.
 create(Nome) ->
 	Command = null,
 	
-	if Nome == "CommandEmail"
+	case Nome == "CommandEmail" of
 		true ->
 			Command = commandEmail::constructor();
 		false ->
-			if Nome == "CommandPDF"
+			case Nome == "CommandPDF" of
 				true ->
 					Command = commandPDF::constructor();
 				false ->

@@ -1,4 +1,4 @@
--abstract(doccumento).
+-abstract(documento).
 -implements(cloneable).
 
 class_methods.

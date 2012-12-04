@@ -1,4 +1,4 @@
--class(configManager).
+-class(singleton).
 -export([main/0]).
 
 main() ->

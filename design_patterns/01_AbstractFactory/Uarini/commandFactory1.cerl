@@ -6,12 +6,12 @@ class_methods.
 create(Nome) ->
 	Command = null,
 	
-	if Nome == "CommandEmail"
+    case Nome == "CommandEmail" of
 		true ->
 			io:format("Do Aplicativo 1"),
 			Command = commandEmail::constructor();
 		false ->
-			if Nome == "CommandPDF"
+			case Nome == "CommandPDF" of
 				true ->
 					io:format("Do Aplicativo 1"),
 					Command = commandPDF::constructor();

@@ -5,4 +5,4 @@
 class_methods.
 
 drawCircle(X, Y, Radius) ->
-	io:format(¨API2.circle at ~p:~p radius ~p¨, [X, Y, Radius]).
+	io:format("API2.circle at ~p:~p radius ~p", [X, Y, Radius]).

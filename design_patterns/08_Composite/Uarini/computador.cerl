@@ -11,7 +11,7 @@ getPrecoCusto() ->
 calcularPrecoCusto() ->
 	calcularPrecoCusto(0, Componentes).
 
-calcularPrecoCusto(Preco, [H | []]) ->
+calcularPrecoCusto(Preco, []) ->
 	Preco;
 calcularPrecoCusto(Preco, [H | R]) ->
 	calcularPrecoCusto(Preco + H::getPrecoCusto(), R).
@@ -23,7 +23,7 @@ getPrecoLucroMinimo() ->
 calcularPrecoLucroMinimo() ->
 	calcularPrecoLucroMinimo(0, Componentes).
 
-calcularPrecoLucroMinimo(Preco, [H | []]) ->
+calcularPrecoLucroMinimo(Preco, []) ->
 	Preco;
 calcularPrecoLucroMinimo(Preco, [H | R]) ->
 	calcularPrecoLucroMinimo(Preco + H::getPrecoLucroMinimo(), R).
@@ -35,7 +35,7 @@ getPrecoLucroMaximo() ->
 calcularPrecoLucroMaximo() ->
 	calcularPrecoLucroMaximo(0, Componentes).
 
-calcularPrecoLucroMaximo(Preco, [H | []]) ->
+calcularPrecoLucroMaximo(Preco, []) ->
 	Preco;
 calcularPrecoLucroMaximo(Preco, [H | R]) ->
 	calcularPrecoLucroMaximo(Preco + H::getPrecoLucroMaximo(), R).

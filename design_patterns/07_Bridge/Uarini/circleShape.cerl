@@ -12,7 +12,7 @@ Radius.
 class_methods.
 
 constructor(X, Y, Radius, drawingAPI DrawingAPI) ->
-	super::constructor(DrawingAPI),	
+	super::constructor(DrawingAPI),
 	self::X = X,
 	self::Y = Y,
 	self::Radius = Radius.

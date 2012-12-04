@@ -1,15 +1,15 @@
 -class(subtrairAdapter).
 -implements([operar]).
--export([constructor/1]).
+-constructor([constructor/1])
 -export([operar/2]).
 
 class_attributes.
 
-subtrair Subtrair
+subtrair Subtrair.
 
 class_methods.
 
-constructor(subtrair Subtrair).
+constructor(subtrair Subtrair) ->
 	self::Subtrair = Subtrair.
 
 operar(A, B) ->
