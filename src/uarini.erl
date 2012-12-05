@@ -5,13 +5,13 @@
 %% Interface com o usuario final. Compila vários arquivos cerl dependentes
 compile({beam, CerlFileName}) ->
 	
-	{_, _, StartTime} = now(),
+	StartTime = time_microseconds(),
 
 	ErlangFile = get_erl_file(CerlFileName),
 	erl_tidy:file(ErlangFile,[{backups,false}]),
 	compile:file(ErlangFile),
 
-	{_, _, EndTime} = now(),
+	EndTime = time_microseconds(),
 	ElapsedTime = EndTime - StartTime,
 	
 	io:format(
@@ -28,11 +28,12 @@ compile({beam, CerlFileName}) ->
 %% Interface com o usuario final. Compila vários arquivos cerl dependentes
 compile(CerlFileName) ->
 	
-	{_, _, StartTime} = now(),
+	StartTime = time_microseconds(),
 	
 	ErlangFile = get_erl_file(CerlFileName),
 	
-	{_, _, EndTime} = now(),
+	EndTime = time_microseconds(),
+	
 	ElapsedTime = EndTime - StartTime,
 	
 	io:format(
@@ -73,3 +74,11 @@ create_erl_file(ErlangCode, ErlangFileName) ->
 	{ok, WriteDescriptor} = file:open(ErlangFileName, [raw, write]),
 	file:write(WriteDescriptor, ErlangCode),
 	file:close(WriteDescriptor).
+	
+	
+%%-----------------------------------------------------------------------------
+%% funcao para calcular os microssegundos
+
+time_microseconds() ->
+    {MS, S, US} = now(),
+    (MS * 1.0e+12) + (S * 1.0e+6) + US.
