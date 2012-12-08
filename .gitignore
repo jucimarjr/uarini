@@ -6,8 +6,7 @@ priv
 *.plt
 *.swp
 .DS_store
-uarini_lexer.erl
-uarini_parser.erl
+src/uarini_parser.erl
 .metadata/
 *.log
 *.dump
