@@ -1,6 +1,6 @@
 -module(uarini_parse).
 -export([parse/1, parse_and_scan/1, format_error/1]).
--file("src/uarini_parse.yrl", 547).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 547).
 
 -export([parse_form/1,parse_exprs/1,parse_term/1]).
 -export([normalise/1,abstract/1,tokens/1,tokens/2]).
@@ -792,7 +792,7 @@ yecctoken2string(Other) ->
 
 
 
--file("src/uarini_parse.erl", 795).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 795).
 
 yeccpars2(0=S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_0(S, Cat, Ss, Stack, T, Ts, Tzr);
@@ -8695,7 +8695,7 @@ yeccgoto_typed_record_fields(481=_S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_465(_S, Cat, Ss, Stack, T, Ts, Tzr).
 
 -compile({inline,yeccpars2_1_/1}).
--file("src/uarini_parse.yrl", 532).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 532).
 yeccpars2_1_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8703,7 +8703,7 @@ yeccpars2_1_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_2_/1}).
--file("src/uarini_parse.yrl", 534).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 534).
 yeccpars2_2_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8711,7 +8711,7 @@ yeccpars2_2_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_4_/1}).
--file("src/uarini_parse.yrl", 91).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 91).
 yeccpars2_4_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8719,7 +8719,7 @@ yeccpars2_4_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_5_/1}).
--file("src/uarini_parse.yrl", 87).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 87).
 yeccpars2_5_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8727,7 +8727,7 @@ yeccpars2_5_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_8_/1}).
--file("src/uarini_parse.yrl", 84).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 84).
 yeccpars2_8_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8735,7 +8735,7 @@ yeccpars2_8_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_10_/1}).
--file("src/uarini_parse.yrl", 233).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 233).
 yeccpars2_10_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8743,7 +8743,7 @@ yeccpars2_10_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_11_/1}).
--file("src/uarini_parse.yrl", 235).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 235).
 yeccpars2_11_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8751,7 +8751,7 @@ yeccpars2_11_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_19_/1}).
--file("src/uarini_parse.yrl", 100).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 100).
 yeccpars2_19_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8759,25 +8759,25 @@ yeccpars2_19_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_23_/1}).
--file("src/uarini_parse.yrl", 99).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 99).
 yeccpars2_23_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
    [ __1 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 8769).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8769).
 -compile({inline,yeccpars2_24_/1}).
--file("src/uarini_parse.yrl", 102).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 102).
 yeccpars2_24_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
    { { atom , ? line ( __1 ) , 'NoType' } , __1 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 8778).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8778).
 -compile({inline,yeccpars2_38_/1}).
--file("src/uarini_parse.yrl", 104).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 104).
 yeccpars2_38_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8785,34 +8785,34 @@ yeccpars2_38_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_51_/1}).
--file("src/uarini_parse.yrl", 483).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 483).
 yeccpars2_51_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
    [ __1 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 8795).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8795).
 -compile({inline,yeccpars2_81_/1}).
--file("src/uarini_parse.yrl", 364).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 364).
 yeccpars2_81_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { tuple , ? line ( __1 ) , [ ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 8804).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8804).
 -compile({inline,yeccpars2_82_/1}).
--file("src/uarini_parse.yrl", 365).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 365).
 yeccpars2_82_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { tuple , ? line ( __1 ) , __2 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 8813).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8813).
 -compile({inline,yeccpars2_84_/1}).
--file("src/uarini_parse.yrl", 453).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 453).
 yeccpars2_84_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8820,14 +8820,14 @@ yeccpars2_84_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_88_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_88_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_/1}).
--file("src/uarini_parse.yrl", 416).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 416).
 yeccpars2_90_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8835,16 +8835,16 @@ yeccpars2_90_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_92_/1}).
--file("src/uarini_parse.yrl", 417).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 417).
 yeccpars2_92_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 8845).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8845).
 -compile({inline,yeccpars2_93_/1}).
--file("src/uarini_parse.yrl", 451).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 451).
 yeccpars2_93_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8852,14 +8852,14 @@ yeccpars2_93_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_94_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_94_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_96_/1}).
--file("src/uarini_parse.yrl", 244).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 244).
 yeccpars2_96_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8867,7 +8867,7 @@ yeccpars2_96_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_97_/1}).
--file("src/uarini_parse.yrl", 486).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 486).
 yeccpars2_97_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8875,16 +8875,16 @@ yeccpars2_97_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_99_/1}).
--file("src/uarini_parse.yrl", 487).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 487).
 yeccpars2_99_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 8885).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8885).
 -compile({inline,yeccpars2_100_/1}).
--file("src/uarini_parse.yrl", 420).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 420).
 yeccpars2_100_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8892,7 +8892,7 @@ yeccpars2_100_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_102_/1}).
--file("src/uarini_parse.yrl", 247).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 247).
 yeccpars2_102_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8900,7 +8900,7 @@ yeccpars2_102_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_104_/1}).
--file("src/uarini_parse.yrl", 462).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 462).
 yeccpars2_104_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -8908,29 +8908,29 @@ yeccpars2_104_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_105_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_105_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_109_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_109_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_110_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_110_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 8931).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8931).
 -compile({inline,yeccpars2_111_/1}).
--file("src/uarini_parse.yrl", 472).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 472).
 yeccpars2_111_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8939,22 +8939,22 @@ yeccpars2_111_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_113_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_113_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_114_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_114_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 8955).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8955).
 -compile({inline,yeccpars2_115_/1}).
--file("src/uarini_parse.yrl", 469).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 469).
 yeccpars2_115_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8963,15 +8963,15 @@ yeccpars2_115_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_116_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_116_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 8972).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 8972).
 -compile({inline,yeccpars2_117_/1}).
--file("src/uarini_parse.yrl", 466).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 466).
 yeccpars2_117_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8980,7 +8980,7 @@ yeccpars2_117_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_119_/1}).
--file("src/uarini_parse.yrl", 463).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 463).
 yeccpars2_119_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8988,7 +8988,7 @@ yeccpars2_119_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_121_/1}).
--file("src/uarini_parse.yrl", 456).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 456).
 yeccpars2_121_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -8996,7 +8996,7 @@ yeccpars2_121_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_123_/1}).
--file("src/uarini_parse.yrl", 458).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 458).
 yeccpars2_123_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9004,16 +9004,16 @@ yeccpars2_123_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_125_/1}).
--file("src/uarini_parse.yrl", 460).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 460).
 yeccpars2_125_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { [ ] , __2 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9014).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9014).
 -compile({inline,yeccpars2_126_/1}).
--file("src/uarini_parse.yrl", 497).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 497).
 yeccpars2_126_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9021,24 +9021,24 @@ yeccpars2_126_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_129_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_129_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 9030).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9030).
 -compile({inline,yeccpars2_131_/1}).
--file("src/uarini_parse.yrl", 425).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 425).
 yeccpars2_131_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { 'receive' , ? line ( __1 ) , [ ] , __3 , __4 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9039).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9039).
 -compile({inline,yeccpars2_133_/1}).
--file("src/uarini_parse.yrl", 423).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 423).
 yeccpars2_133_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9046,15 +9046,15 @@ yeccpars2_133_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_134_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_134_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 9055).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9055).
 -compile({inline,yeccpars2_136_/1}).
--file("src/uarini_parse.yrl", 427).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 427).
 yeccpars2_136_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9062,25 +9062,25 @@ yeccpars2_136_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_142_/1}).
--file("src/uarini_parse.yrl", 357).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 357).
 yeccpars2_142_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
    [ __1 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9072).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9072).
 -compile({inline,yeccpars2_146_/1}).
--file("src/uarini_parse.yrl", 362).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 362).
 yeccpars2_146_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { b_generate , ? line ( __2 ) , __1 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9081).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9081).
 -compile({inline,yeccpars2_148_/1}).
--file("src/uarini_parse.yrl", 361).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 361).
 yeccpars2_148_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9088,25 +9088,25 @@ yeccpars2_148_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_150_/1}).
--file("src/uarini_parse.yrl", 358).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 358).
 yeccpars2_150_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9098).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9098).
 -compile({inline,yeccpars2_151_/1}).
--file("src/uarini_parse.yrl", 354).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 354).
 yeccpars2_151_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { lc , ? line ( __1 ) , __2 , __4 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9107).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9107).
 -compile({inline,yeccpars2_152_/1}).
--file("src/uarini_parse.yrl", 476).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 476).
 yeccpars2_152_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9114,7 +9114,7 @@ yeccpars2_152_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_154_/1}).
--file("src/uarini_parse.yrl", 406).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 406).
 yeccpars2_154_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9122,15 +9122,15 @@ yeccpars2_154_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_155_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_155_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 9131).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9131).
 -compile({inline,yeccpars2_156_/1}).
--file("src/uarini_parse.yrl", 410).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 410).
 yeccpars2_156_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9138,16 +9138,16 @@ yeccpars2_156_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_158_/1}).
--file("src/uarini_parse.yrl", 407).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 407).
 yeccpars2_158_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9148).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9148).
 -compile({inline,yeccpars2_159_/1}).
--file("src/uarini_parse.yrl", 404).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 404).
 yeccpars2_159_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9155,7 +9155,7 @@ yeccpars2_159_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_161_/1}).
--file("src/uarini_parse.yrl", 443).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 443).
 yeccpars2_161_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9163,33 +9163,33 @@ yeccpars2_161_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_163_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_163_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 9172).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9172).
 -compile({inline,yeccpars2_168_/1}).
--file("src/uarini_parse.yrl", 431).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 431).
 yeccpars2_168_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { 'fun' , ? line ( __1 ) , { function , element ( 3 , __2 ) , element ( 3 , __4 ) } }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9181).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9181).
 -compile({inline,yeccpars2_170_/1}).
--file("src/uarini_parse.yrl", 479).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 479).
 yeccpars2_170_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { [ ] , ? line ( __1 ) }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9190).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9190).
 -compile({inline,yeccpars2_171_/1}).
--file("src/uarini_parse.yrl", 480).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 480).
 yeccpars2_171_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9197,14 +9197,14 @@ yeccpars2_171_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_172_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_172_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_173_/1}).
--file("src/uarini_parse.yrl", 447).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 447).
 yeccpars2_173_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9212,9 +9212,9 @@ yeccpars2_173_(__Stack0) ->
     { clause , Pos , 'fun' , Args , __2 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9215).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9215).
 -compile({inline,yeccpars2_178_/1}).
--file("src/uarini_parse.yrl", 433).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 433).
 yeccpars2_178_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9222,70 +9222,70 @@ yeccpars2_178_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_182_/1}).
--file("src/uarini_parse.yrl", 444).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 444).
 yeccpars2_182_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9232).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9232).
 -compile({inline,yeccpars2_183_/1}).
--file("src/uarini_parse.yrl", 435).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 435).
 yeccpars2_183_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    build_fun ( ? line ( __1 ) , __2 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9241).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9241).
 -compile({inline,yeccpars2_184_/1}).
--file("src/uarini_parse.yrl", 251).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 251).
 yeccpars2_184_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { 'catch' , ? line ( __1 ) , __2 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9250).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9250).
 -compile({inline,yeccpars2_188_/1}).
--file("src/uarini_parse.yrl", 414).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 414).
 yeccpars2_188_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { 'case' , ? line ( __1 ) , __2 , __4 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9259).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9259).
 -compile({inline,yeccpars2_190_/1}).
--file("src/uarini_parse.yrl", 309).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 309).
 yeccpars2_190_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { block , ? line ( __1 ) , __2 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9268).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9268).
 -compile({inline,yeccpars2_192_/1}).
--file("src/uarini_parse.yrl", 318).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 318).
 yeccpars2_192_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { nil , ? line ( __1 ) }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9277).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9277).
 -compile({inline,yeccpars2_193_/1}).
--file("src/uarini_parse.yrl", 319).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 319).
 yeccpars2_193_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { cons , ? line ( __1 ) , __2 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9286).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9286).
 -compile({inline,yeccpars2_195_/1}).
--file("src/uarini_parse.yrl", 321).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 321).
 yeccpars2_195_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9293,16 +9293,16 @@ yeccpars2_195_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_198_/1}).
--file("src/uarini_parse.yrl", 322).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 322).
 yeccpars2_198_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    __2
   end | __Stack].
 
--file("src/uarini_parse.erl", 9303).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9303).
 -compile({inline,yeccpars2_200_/1}).
--file("src/uarini_parse.yrl", 323).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 323).
 yeccpars2_200_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9310,23 +9310,23 @@ yeccpars2_200_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_203_/1}).
--file("src/uarini_parse.yrl", 339).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 339).
 yeccpars2_203_(__Stack0) ->
  [begin
    default
   end | __Stack0].
 
 -compile({inline,yeccpars2_206_/1}).
--file("src/uarini_parse.yrl", 329).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 329).
 yeccpars2_206_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
    [ __1 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9327).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9327).
 -compile({inline,yeccpars2_207_/1}).
--file("src/uarini_parse.yrl", 326).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 326).
 yeccpars2_207_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9334,25 +9334,25 @@ yeccpars2_207_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_209_/1}).
--file("src/uarini_parse.yrl", 330).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 330).
 yeccpars2_209_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9344).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9344).
 -compile({inline,yeccpars2_210_/1}).
--file("src/uarini_parse.yrl", 327).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 327).
 yeccpars2_210_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { bin , ? line ( __1 ) , __2 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9353).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9353).
 -compile({inline,yeccpars2_213_/1}).
--file("src/uarini_parse.yrl", 356).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 356).
 yeccpars2_213_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9360,23 +9360,23 @@ yeccpars2_213_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_214_/1}).
--file("src/uarini_parse.yrl", 342).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 342).
 yeccpars2_214_(__Stack0) ->
  [begin
    default
   end | __Stack0].
 
 -compile({inline,yeccpars2_217_/1}).
--file("src/uarini_parse.yrl", 338).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 338).
 yeccpars2_217_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    __2
   end | __Stack].
 
--file("src/uarini_parse.erl", 9377).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9377).
 -compile({inline,yeccpars2_218_/1}).
--file("src/uarini_parse.yrl", 333).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 333).
 yeccpars2_218_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9384,7 +9384,7 @@ yeccpars2_218_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_220_/1}).
--file("src/uarini_parse.yrl", 341).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 341).
 yeccpars2_220_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9392,7 +9392,7 @@ yeccpars2_220_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_221_/1}).
--file("src/uarini_parse.yrl", 345).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 345).
 yeccpars2_221_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9400,7 +9400,7 @@ yeccpars2_221_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_222_/1}).
--file("src/uarini_parse.yrl", 347).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 347).
 yeccpars2_222_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9408,7 +9408,7 @@ yeccpars2_222_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_224_/1}).
--file("src/uarini_parse.yrl", 348).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 348).
 yeccpars2_224_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9416,25 +9416,25 @@ yeccpars2_224_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_226_/1}).
--file("src/uarini_parse.yrl", 344).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 344).
 yeccpars2_226_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9426).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9426).
 -compile({inline,yeccpars2_227_/1}).
--file("src/uarini_parse.yrl", 335).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 335).
 yeccpars2_227_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop1 ( __1 , __2 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9435).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9435).
 -compile({inline,yeccpars2_228_/1}).
--file("src/uarini_parse.yrl", 295).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 295).
 yeccpars2_228_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9442,16 +9442,16 @@ yeccpars2_228_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_230_/1}).
--file("src/uarini_parse.yrl", 308).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 308).
 yeccpars2_230_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    __2
   end | __Stack].
 
--file("src/uarini_parse.erl", 9452).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9452).
 -compile({inline,yeccpars2_232_/1}).
--file("src/uarini_parse.yrl", 379).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 379).
 yeccpars2_232_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9459,7 +9459,7 @@ yeccpars2_232_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_236_/1}).
--file("src/uarini_parse.yrl", 392).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 392).
 yeccpars2_236_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9467,25 +9467,25 @@ yeccpars2_236_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_239_/1}).
--file("src/uarini_parse.yrl", 389).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 389).
 yeccpars2_239_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    [ ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9477).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9477).
 -compile({inline,yeccpars2_241_/1}).
--file("src/uarini_parse.yrl", 395).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 395).
 yeccpars2_241_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { record_field , ? line ( __1 ) , __1 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9486).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9486).
 -compile({inline,yeccpars2_243_/1}).
--file("src/uarini_parse.yrl", 396).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 396).
 yeccpars2_243_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9493,7 +9493,7 @@ yeccpars2_243_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_245_/1}).
--file("src/uarini_parse.yrl", 393).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 393).
 yeccpars2_245_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9501,16 +9501,16 @@ yeccpars2_245_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_246_/1}).
--file("src/uarini_parse.yrl", 390).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 390).
 yeccpars2_246_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    __2
   end | __Stack].
 
--file("src/uarini_parse.erl", 9511).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9511).
 -compile({inline,yeccpars2_247_/1}).
--file("src/uarini_parse.yrl", 377).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 377).
 yeccpars2_247_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9518,160 +9518,160 @@ yeccpars2_247_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_249_/1}).
--file("src/uarini_parse.yrl", 484).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 484).
 yeccpars2_249_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9528).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9528).
 -compile({inline,yeccpars2_252_/1}).
--file("src/uarini_parse.yrl", 254).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 254).
 yeccpars2_252_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { match , ? line ( __2 ) , __1 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9537).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9537).
 -compile({inline,yeccpars2_253_/1}).
--file("src/uarini_parse.yrl", 255).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 255).
 yeccpars2_253_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop2 ( __1 , __2 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9546).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9546).
 -compile({inline,yeccpars2_255_/1}).
--file("src/uarini_parse.yrl", 258).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 258).
 yeccpars2_255_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop2 ( __1 , __2 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9555).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9555).
 -compile({inline,yeccpars2_257_/1}).
--file("src/uarini_parse.yrl", 261).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 261).
 yeccpars2_257_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop2 ( __1 , __2 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9564).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9564).
 -compile({inline,yeccpars2_267_/1}).
--file("src/uarini_parse.yrl", 265).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 265).
 yeccpars2_267_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop2 ( __1 , __2 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9573).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9573).
 -compile({inline,yeccpars2_280_/1}).
--file("src/uarini_parse.yrl", 273).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 273).
 yeccpars2_280_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop2 ( __1 , __2 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9582).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9582).
 -compile({inline,yeccpars2_288_/1}).
--file("src/uarini_parse.yrl", 277).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 277).
 yeccpars2_288_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop2 ( __1 , __2 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9591).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9591).
 -compile({inline,yeccpars2_289_/1}).
--file("src/uarini_parse.yrl", 269).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 269).
 yeccpars2_289_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop2 ( __1 , __2 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9600).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9600).
 -compile({inline,yeccpars2_290_/1}).
--file("src/uarini_parse.yrl", 401).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 401).
 yeccpars2_290_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { call , ? line ( __1 ) , __1 , element ( 1 , __2 ) }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9609).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9609).
 -compile({inline,yeccpars2_294_/1}).
--file("src/uarini_parse.yrl", 289).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 289).
 yeccpars2_294_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { oo_remote , ? line ( __2 ) , __1 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9618).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9618).
 -compile({inline,yeccpars2_295_/1}).
--file("src/uarini_parse.yrl", 291).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 291).
 yeccpars2_295_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { remote , ? line ( __2 ) , __1 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9627).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9627).
 -compile({inline,yeccpars2_296_/1}).
--file("src/uarini_parse.yrl", 297).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 297).
 yeccpars2_296_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { record_field , ? line ( __2 ) , __1 , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9636).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9636).
 -compile({inline,yeccpars2_299_/1}).
--file("src/uarini_parse.yrl", 383).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 383).
 yeccpars2_299_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { record , ? line ( __2 ) , __1 , element ( 3 , __3 ) , __4 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9645).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9645).
 -compile({inline,yeccpars2_301_/1}).
--file("src/uarini_parse.yrl", 381).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 381).
 yeccpars2_301_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { record_field , ? line ( __2 ) , __1 , element ( 3 , __3 ) , __5 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9654).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9654).
 -compile({inline,yeccpars2_302_/1}).
--file("src/uarini_parse.yrl", 281).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 281).
 yeccpars2_302_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    ? mkop1 ( __1 , __2 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9663).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9663).
 -compile({inline,yeccpars2_305_/1}).
--file("src/uarini_parse.yrl", 387).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 387).
 yeccpars2_305_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { record , ? line ( __2 ) , __1 , element ( 3 , __3 ) , __4 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9672).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9672).
 -compile({inline,yeccpars2_307_/1}).
--file("src/uarini_parse.yrl", 385).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 385).
 yeccpars2_307_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9679,7 +9679,7 @@ yeccpars2_307_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_308_/1}).
--file("src/uarini_parse.yrl", 98).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 98).
 yeccpars2_308_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9687,7 +9687,7 @@ yeccpars2_308_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_309_/1}).
--file("src/uarini_parse.yrl", 82).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 82).
 yeccpars2_309_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9695,7 +9695,7 @@ yeccpars2_309_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_310_/1}).
--file("src/uarini_parse.yrl", 80).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 80).
 yeccpars2_310_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9703,14 +9703,14 @@ yeccpars2_310_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_311_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_311_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_312_/1}).
--file("src/uarini_parse.yrl", 242).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 242).
 yeccpars2_312_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9718,16 +9718,16 @@ yeccpars2_312_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_313_/1}).
--file("src/uarini_parse.yrl", 103).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 103).
 yeccpars2_313_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { __1 , __2 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9728).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9728).
 -compile({inline,yeccpars2_315_/1}).
--file("src/uarini_parse.yrl", 105).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 105).
 yeccpars2_315_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9735,24 +9735,24 @@ yeccpars2_315_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_316_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_316_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
--file("src/uarini_parse.erl", 9744).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9744).
 -compile({inline,yeccpars2_317_/1}).
--file("src/uarini_parse.yrl", 538).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 538).
 yeccpars2_317_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { clause , ? line ( __1 ) , element ( 3 , __1 ) , __2 , __3 , __4 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9753).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9753).
 -compile({inline,yeccpars2_318_/1}).
--file("src/uarini_parse.yrl", 239).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 239).
 yeccpars2_318_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9760,7 +9760,7 @@ yeccpars2_318_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_320_/1}).
--file("src/uarini_parse.yrl", 540).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 540).
 yeccpars2_320_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9768,7 +9768,7 @@ yeccpars2_320_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_324_/1}).
--file("src/uarini_parse.yrl", 110).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 110).
 yeccpars2_324_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9776,7 +9776,7 @@ yeccpars2_324_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_330_/1}).
--file("src/uarini_parse.yrl", 117).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 117).
 yeccpars2_330_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9784,7 +9784,7 @@ yeccpars2_330_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_333_/1}).
--file("src/uarini_parse.yrl", 121).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 121).
 yeccpars2_333_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9792,7 +9792,7 @@ yeccpars2_333_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_335_/1}).
--file("src/uarini_parse.yrl", 120).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 120).
 yeccpars2_335_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9800,7 +9800,7 @@ yeccpars2_335_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_338_/1}).
--file("src/uarini_parse.yrl", 135).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 135).
 yeccpars2_338_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -9808,52 +9808,52 @@ yeccpars2_338_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_348_/1}).
--file("src/uarini_parse.yrl", 149).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 149).
 yeccpars2_348_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
    [ __1 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 9818).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9818).
 -compile({inline,yeccpars2_362_/1}).
--file("src/uarini_parse.yrl", 188).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 188).
 yeccpars2_362_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { type , ? line ( __1 ) , tuple , [ ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9827).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9827).
 -compile({inline,yeccpars2_363_/1}).
--file("src/uarini_parse.yrl", 189).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 189).
 yeccpars2_363_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { type , ? line ( __1 ) , tuple , __2 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9836).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9836).
 -compile({inline,yeccpars2_365_/1}).
--file("src/uarini_parse.yrl", 152).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 152).
 yeccpars2_365_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { ann_type , ? line ( __1 ) , [ __1 , __3 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9845).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9845).
 -compile({inline,yeccpars2_371_/1}).
--file("src/uarini_parse.yrl", 195).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 195).
 yeccpars2_371_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { type , ? line ( __1 ) , 'fun' , [ ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9854).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9854).
 -compile({inline,yeccpars2_375_/1}).
--file("src/uarini_parse.yrl", 199).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 199).
 yeccpars2_375_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9862,16 +9862,16 @@ yeccpars2_375_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_376_/1}).
--file("src/uarini_parse.yrl", 196).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 196).
 yeccpars2_376_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    __3
   end | __Stack].
 
--file("src/uarini_parse.erl", 9872).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9872).
 -compile({inline,yeccpars2_382_/1}).
--file("src/uarini_parse.yrl", 180).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 180).
 yeccpars2_382_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9879,9 +9879,9 @@ yeccpars2_382_(__Stack0) ->
     [ __1 , __3 , [ ] ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9882).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9882).
 -compile({inline,yeccpars2_383_/1}).
--file("src/uarini_parse.yrl", 182).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 182).
 yeccpars2_383_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9890,16 +9890,16 @@ yeccpars2_383_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_385_/1}).
--file("src/uarini_parse.yrl", 177).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 177).
 yeccpars2_385_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    build_gen_type ( __1 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9900).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9900).
 -compile({inline,yeccpars2_386_/1}).
--file("src/uarini_parse.yrl", 178).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 178).
 yeccpars2_386_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9907,27 +9907,27 @@ yeccpars2_386_(__Stack0) ->
     normalise ( __1 ) , __3 }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9910).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9910).
 -compile({inline,yeccpars2_388_/1}).
--file("src/uarini_parse.yrl", 184).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 184).
 yeccpars2_388_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
    { type , ? line ( __1 ) , nil , [ ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9919).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9919).
 -compile({inline,yeccpars2_390_/1}).
--file("src/uarini_parse.yrl", 185).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 185).
 yeccpars2_390_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { type , ? line ( __1 ) , list , [ __2 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9928).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9928).
 -compile({inline,yeccpars2_392_/1}).
--file("src/uarini_parse.yrl", 186).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 186).
 yeccpars2_392_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9935,9 +9935,9 @@ yeccpars2_392_(__Stack0) ->
     nonempty_list , [ __2 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9938).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9938).
 -compile({inline,yeccpars2_395_/1}).
--file("src/uarini_parse.yrl", 215).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 215).
 yeccpars2_395_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9947,7 +9947,7 @@ yeccpars2_395_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_398_/1}).
--file("src/uarini_parse.yrl", 225).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 225).
 yeccpars2_398_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9955,16 +9955,16 @@ yeccpars2_398_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_401_/1}).
--file("src/uarini_parse.yrl", 227).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 227).
 yeccpars2_401_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    build_bin_type ( [ __1 , __3 ] , __5 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 9965).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9965).
 -compile({inline,yeccpars2_403_/1}).
--file("src/uarini_parse.yrl", 218).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 218).
 yeccpars2_403_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9972,18 +9972,18 @@ yeccpars2_403_(__Stack0) ->
     [ __2 , abstract ( 0 , ? line ( __1 ) ) ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9975).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9975).
 -compile({inline,yeccpars2_408_/1}).
--file("src/uarini_parse.yrl", 223).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 223).
 yeccpars2_408_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { type , ? line ( __1 ) , binary , [ __2 , __4 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9984).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9984).
 -compile({inline,yeccpars2_409_/1}).
--file("src/uarini_parse.yrl", 220).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 220).
 yeccpars2_409_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -9991,9 +9991,9 @@ yeccpars2_409_(__Stack0) ->
     [ abstract ( 0 , ? line ( __1 ) ) , __2 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 9994).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 9994).
 -compile({inline,yeccpars2_411_/1}).
--file("src/uarini_parse.yrl", 203).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 203).
 yeccpars2_411_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10001,9 +10001,9 @@ yeccpars2_411_(__Stack0) ->
     [ { type , ? line ( __1 ) , product , [ ] } , __4 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 10004).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10004).
 -compile({inline,yeccpars2_413_/1}).
--file("src/uarini_parse.yrl", 174).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 174).
 yeccpars2_413_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10011,25 +10011,25 @@ yeccpars2_413_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_417_/1}).
--file("src/uarini_parse.yrl", 209).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 209).
 yeccpars2_417_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
    [ __1 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 10021).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10021).
 -compile({inline,yeccpars2_419_/1}).
--file("src/uarini_parse.yrl", 190).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 190).
 yeccpars2_419_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
    { type , ? line ( __1 ) , record , [ __2 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 10030).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10030).
 -compile({inline,yeccpars2_421_/1}).
--file("src/uarini_parse.yrl", 212).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 212).
 yeccpars2_421_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10038,16 +10038,16 @@ yeccpars2_421_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_423_/1}).
--file("src/uarini_parse.yrl", 210).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 210).
 yeccpars2_423_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 10048).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10048).
 -compile({inline,yeccpars2_424_/1}).
--file("src/uarini_parse.yrl", 191).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 191).
 yeccpars2_424_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10055,9 +10055,9 @@ yeccpars2_424_(__Stack0) ->
     record , [ __2 | __4 ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 10058).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10058).
 -compile({inline,yeccpars2_425_/1}).
--file("src/uarini_parse.yrl", 171).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 171).
 yeccpars2_425_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10065,16 +10065,16 @@ yeccpars2_425_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_427_/1}).
--file("src/uarini_parse.yrl", 150).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 150).
 yeccpars2_427_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 10075).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10075).
 -compile({inline,yeccpars2_430_/1}).
--file("src/uarini_parse.yrl", 206).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 206).
 yeccpars2_430_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10083,16 +10083,16 @@ yeccpars2_430_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_432_/1}).
--file("src/uarini_parse.yrl", 156).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 156).
 yeccpars2_432_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    lift_unions ( __1 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 10093).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10093).
 -compile({inline,yeccpars2_435_/1}).
--file("src/uarini_parse.yrl", 158).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 158).
 yeccpars2_435_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10101,9 +10101,9 @@ yeccpars2_435_(__Stack0) ->
     skip_paren ( __3 ) ] }
   end | __Stack].
 
--file("src/uarini_parse.erl", 10104).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10104).
 -compile({inline,yeccpars2_436_/1}).
--file("src/uarini_parse.yrl", 163).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 163).
 yeccpars2_436_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10111,9 +10111,9 @@ yeccpars2_436_(__Stack0) ->
     __2 , skip_paren ( __3 ) )
   end | __Stack].
 
--file("src/uarini_parse.erl", 10114).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10114).
 -compile({inline,yeccpars2_438_/1}).
--file("src/uarini_parse.yrl", 167).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 167).
 yeccpars2_438_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10121,9 +10121,9 @@ yeccpars2_438_(__Stack0) ->
     __2 , skip_paren ( __3 ) )
   end | __Stack].
 
--file("src/uarini_parse.erl", 10124).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10124).
 -compile({inline,yeccpars2_440_/1}).
--file("src/uarini_parse.yrl", 139).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 139).
 yeccpars2_440_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10132,7 +10132,7 @@ yeccpars2_440_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_441_/1}).
--file("src/uarini_parse.yrl", 142).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 142).
 yeccpars2_441_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -10140,16 +10140,16 @@ yeccpars2_441_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_445_/1}).
--file("src/uarini_parse.yrl", 147).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 147).
 yeccpars2_445_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    build_def ( __1 , __3 )
   end | __Stack].
 
--file("src/uarini_parse.erl", 10150).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10150).
 -compile({inline,yeccpars2_448_/1}).
--file("src/uarini_parse.yrl", 145).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 145).
 yeccpars2_448_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10158,7 +10158,7 @@ yeccpars2_448_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_450_/1}).
--file("src/uarini_parse.yrl", 143).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 143).
 yeccpars2_450_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10166,7 +10166,7 @@ yeccpars2_450_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_452_/1}).
--file("src/uarini_parse.yrl", 136).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 136).
 yeccpars2_452_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10174,7 +10174,7 @@ yeccpars2_452_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_453_/1}).
--file("src/uarini_parse.yrl", 114).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 114).
 yeccpars2_453_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10182,7 +10182,7 @@ yeccpars2_453_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_454_/1}).
--file("src/uarini_parse.yrl", 113).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 113).
 yeccpars2_454_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10190,7 +10190,7 @@ yeccpars2_454_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_455_/1}).
--file("src/uarini_parse.yrl", 111).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 111).
 yeccpars2_455_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10198,7 +10198,7 @@ yeccpars2_455_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_456_/1}).
--file("src/uarini_parse.yrl", 108).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 108).
 yeccpars2_456_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10206,7 +10206,7 @@ yeccpars2_456_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_457_/1}).
--file("src/uarini_parse.yrl", 229).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 229).
 yeccpars2_457_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -10214,7 +10214,7 @@ yeccpars2_457_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_458_/1}).
--file("src/uarini_parse.yrl", 107).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 107).
 yeccpars2_458_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10222,7 +10222,7 @@ yeccpars2_458_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_464_/1}).
--file("src/uarini_parse.yrl", 124).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 124).
 yeccpars2_464_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10230,7 +10230,7 @@ yeccpars2_464_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_465_/1}).
--file("src/uarini_parse.yrl", 123).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 123).
 yeccpars2_465_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10238,7 +10238,7 @@ yeccpars2_465_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_469_/1}).
--file("src/uarini_parse.yrl", 128).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 128).
 yeccpars2_469_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -10246,7 +10246,7 @@ yeccpars2_469_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_470_/1}).
--file("src/uarini_parse.yrl", 483).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 483).
 yeccpars2_470_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -10254,7 +10254,7 @@ yeccpars2_470_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_473_/1}).
--file("src/uarini_parse.yrl", 133).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 133).
 yeccpars2_473_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10262,7 +10262,7 @@ yeccpars2_473_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_474_/1}).
--file("src/uarini_parse.yrl", 130).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 130).
 yeccpars2_474_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10270,7 +10270,7 @@ yeccpars2_474_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_476_/1}).
--file("src/uarini_parse.yrl", 129).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 129).
 yeccpars2_476_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10278,16 +10278,16 @@ yeccpars2_476_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_477_/1}).
--file("src/uarini_parse.yrl", 131).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 131).
 yeccpars2_477_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
    [ __1 | __3 ]
   end | __Stack].
 
--file("src/uarini_parse.erl", 10288).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.erl", 10288).
 -compile({inline,yeccpars2_478_/1}).
--file("src/uarini_parse.yrl", 126).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 126).
 yeccpars2_478_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10295,7 +10295,7 @@ yeccpars2_478_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_479_/1}).
--file("src/uarini_parse.yrl", 231).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 231).
 yeccpars2_479_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10303,7 +10303,7 @@ yeccpars2_479_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_480_/1}).
--file("src/uarini_parse.yrl", 109).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 109).
 yeccpars2_480_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10311,7 +10311,7 @@ yeccpars2_480_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_482_/1}).
--file("src/uarini_parse.yrl", 230).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 230).
 yeccpars2_482_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10319,7 +10319,7 @@ yeccpars2_482_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_483_/1}).
--file("src/uarini_parse.yrl", 77).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 77).
 yeccpars2_483_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10327,7 +10327,7 @@ yeccpars2_483_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_484_/1}).
--file("src/uarini_parse.yrl", 78).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 78).
 yeccpars2_484_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10335,7 +10335,7 @@ yeccpars2_484_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_486_/1}).
--file("src/uarini_parse.yrl", 236).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 236).
 yeccpars2_486_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10343,21 +10343,21 @@ yeccpars2_486_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_488_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_488_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_489_/1}).
--file("src/uarini_parse.yrl", 248).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 248).
 yeccpars2_489_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_491_/1}).
--file("src/uarini_parse.yrl", 85).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 85).
 yeccpars2_491_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10365,7 +10365,7 @@ yeccpars2_491_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_493_/1}).
--file("src/uarini_parse.yrl", 81).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 81).
 yeccpars2_493_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10373,7 +10373,7 @@ yeccpars2_493_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_494_/1}).
--file("src/uarini_parse.yrl", 88).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 88).
 yeccpars2_494_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10381,7 +10381,7 @@ yeccpars2_494_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_495_/1}).
--file("src/uarini_parse.yrl", 92).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 92).
 yeccpars2_495_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10389,7 +10389,7 @@ yeccpars2_495_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_496_/1}).
--file("src/uarini_parse.yrl", 79).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 79).
 yeccpars2_496_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10397,7 +10397,7 @@ yeccpars2_496_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_498_/1}).
--file("src/uarini_parse.yrl", 535).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 535).
 yeccpars2_498_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -10405,11 +10405,11 @@ yeccpars2_498_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_500_/1}).
--file("src/uarini_parse.yrl", 245).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 245).
 yeccpars2_500_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 
--file("src/uarini_parse.yrl", 1154).
+-file("/Users/jr/Dropbox/DSc/Src/workspace/uarini/src/uarini_parse.yrl", 1154).

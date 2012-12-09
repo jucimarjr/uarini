@@ -2,7 +2,7 @@
 -export([compile/1]).
 
 %%-----------------------------------------------------------------------------
-%% Interface com o usuario final. Compila vários arquivos cerl dependentes
+%% Interface com o usuario final. Compila varios arquivos cerl dependentes
 compile({beam, CerlFileName}) ->
 	
 	StartTime = time_microseconds(),
@@ -78,7 +78,6 @@ create_erl_file(ErlangCode, ErlangFileName) ->
 	
 %%-----------------------------------------------------------------------------
 %% funcao para calcular os microssegundos
-
 time_microseconds() ->
     {MS, S, US} = now(),
     (MS * 1.0e+12) + (S * 1.0e+6) + US.

@@ -1,9 +1,0 @@
--class(area_quadrado).
--extends(area).
--constructor(new/1).
--export([area/1]).
-
-class methods.
-
-area(Dados)->
-	self::R * Dados * Dados.
