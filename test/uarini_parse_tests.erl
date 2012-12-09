@@ -21,7 +21,7 @@ uarini_tag_test() ->
     Exp3 = {attribute, 1, interface, name},
     Exp4 = {attribute, 1, implements, [c1, c2, c3]},
     Exp5 = {attribute, 1, constructor, [{new,0},{new,1}]},
-    
+
     Form1 = uarini_parse:parse(get_tokens("-class(name).")),
     Form2 = uarini_parse:parse(get_tokens("-extends(name).")),
     Form3 = uarini_parse:parse(get_tokens("-interface(name).")),
@@ -37,7 +37,7 @@ uarini_tag_test() ->
 uarini_markup_test() ->
     Exp1 = {class_attributes, 1},
     Exp2 = {class_methods, 1},
-    
+
     Form1 = uarini_parse:parse(get_tokens("class_attributes.")),
     Form2 = uarini_parse:parse(get_tokens("class_methods.")),
 
@@ -45,21 +45,18 @@ uarini_markup_test() ->
      ?assertEqual(?OK(Exp2), Form2)].
 
 uarini_var_test() ->
-    Exp1 = [{[],
-             {{atom,1,'NoType'}, {var,1,'MyVar'}
-           }}],
-    Exp2 = [{[],
-             {{atom,1, car}, {var,1,'Fusca'}
-           }}],
-    Exp3 = [{
-        [{public,1}],
-    {{atom,1,'NoType'}, {var,1,'MyVar'}}}],
-    Exp4 = [{
-        [{private,1}],
-    {{atom,1, car},{var,1,'Fusca'}}}],
-    Exp5 = [{
-        [{protected,1},{static,1},{final,1}],
-    {{atom,1, car}, {var,1,'Ferrari'} }}],
+    Exp1 = {oo_attributes, 1, [{oo_attribute, 1, [],{oo_var, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}}]},
+    Exp2 = {oo_attributes, 1, [{oo_attribute, 1, [],{oo_var, 1, {atom,1,     car}, {var,1,'Fusca'}}}]},
+
+    Exp3 = {oo_attributes, 1,
+               [{oo_attribute, 1, [{public, 1}], {oo_var, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}}]},
+    Exp4 = {oo_attributes, 1,
+               [{oo_attribute, 1, [{private,1}], {oo_var, 1, {atom, 1,car}, {var,1,'Fusca'}}}]},
+
+    Exp5 = {oo_attributes, 1,
+               [{oo_attribute, 1,
+                    [{protected,1},{static,1},{final,1}],
+                     {oo_var, 1, {atom,1, car}, {var,1,'Ferrari'}}}]},
 
     Form1 = uarini_parse:parse(get_tokens("MyVar.")),
     Form2 = uarini_parse:parse(get_tokens("car Fusca.")),
