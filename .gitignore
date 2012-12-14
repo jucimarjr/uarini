@@ -6,12 +6,10 @@ priv
 *.plt
 *.swp
 .DS_store
-uarini_lexer.erl
-uarini_parser.erl
+uarini_scan.erl
+uarini_parse.erl
 .metadata/
 *.log
 *.dump
-*.*~
-Makefile~
-jk~
+*~
 *.bak

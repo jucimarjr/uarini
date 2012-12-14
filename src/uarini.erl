@@ -1,75 +1,84 @@
+%% LUDUS - Laboratorio de Projetos Especiais em Engenharia da Computacao
+%% Aluno  : Daniel Henrique ( dhbaquino@gmail.com )
+%%			Emiliano Firmino ( elmiliox@gmail.com )
+%%			Rodrigo Bernardino ( rbbernardino@gmail.com )
+%% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
+%% Objetivo : Módulo API para compilar arquivos uarini
+
 -module(uarini).
--export([compile/1]).
+-export([compile/1, get_version/0]).
+
+-include("../include/uarini_define.hrl").
 
 %%-----------------------------------------------------------------------------
-%% Interface com o usuario final. Compila vários arquivos cerl dependentes
-compile({beam, CerlFileName}) ->
-	
-	{_, _, StartTime} = now(),
+%% Interface com o usuario final. Compila 1 arquivo uarini, gera o .beam
+compile({beam, JavaFileName}) ->
+	[ErlangFile] = get_erl_file_list([{JavaFileName, JavaFileName}]),
 
-	ErlangFile = get_erl_file(CerlFileName),
 	erl_tidy:file(ErlangFile,[{backups,false}]),
-	compile:file(ErlangFile),
-
-	{_, _, EndTime} = now(),
-	ElapsedTime = EndTime - StartTime,
-	
-	io:format(
-		"~p -> ~p [ Compile time: ~p us (~p s) ]~n",
-		[
-			filename:basename(CerlFileName),
-			ErlangFile,
-			ElapsedTime,
-			ElapsedTime/1000000
-		]
-	);
+	compile:file(ErlangFile);
 
 %%-----------------------------------------------------------------------------
-%% Interface com o usuario final. Compila vários arquivos cerl dependentes
-compile(CerlFileName) ->
-	
-	{_, _, StartTime} = now(),
-	
-	ErlangFile = get_erl_file(CerlFileName),
-	
-	{_, _, EndTime} = now(),
-	ElapsedTime = EndTime - StartTime,
-	
-	io:format(
-		"~p -> ~p [ Compile time: ~p us (~p s) ]~n", [CerlFileName,
-			ErlangFile,
-			ElapsedTime, ElapsedTime/1000000]
-	).
+%% Interface com o usuario final. Compila vários arquivos uarini dependentes
+compile(FileNameList) ->
+	ErlangFileList = get_erl_file_list(FileNameList),
+
+	[ begin
+		erl_tidy:file(ErlangFile, [{backups,false}, {quiet, true}]),
+		compile:file(ErlangFile, [{outdir, filename:dirname(ErlangFile)}])
+	  end
+	  || ErlangFile <- ErlangFileList ],
+	ok.
 
 %%-----------------------------------------------------------------------------
-%% gera um arquivo .erl de um .cerl
-%% FUNÇÃO OBSOLETA, falta atualizar dependências
-get_erl_file(CerlFileName) ->
-	CerlAST = ast:get_cerl_ast(CerlFileName),
+%% gera varios .erl a partir de varios .cerl
+%% antes da traducao, as informacoes de todas as classes sao obtidas
+get_erl_file_list(FileNameList) ->
+	ASTList = lists:map(fun ast:get_urn_forms/1, FileNameList),
+	%% TODO: ClassesInfo = lists:map(fun ast:get_class_info/1, ASTList),
+	ClassesInfo = nil,
 
-	ErlangModuleName= get_erl_modulename(CerlAST),
+	get_erl_file_list(ASTList, ClassesInfo, []).
 
-	ErlangFileName= get_erl_filename(ErlangModuleName),
-	ErlangCode =
-		core:transform_uast_to_east(CerlAST, ErlangModuleName),
-	create_erl_file(ErlangCode, ErlangFileName),
-	ErlangFileName.
+get_erl_file_list([], _, ErlangFileList) ->
+	lists:reverse(ErlangFileList, []);
+get_erl_file_list([AST | Rest], ClassesInfo, ErlangFileList) ->
+	ErlangModuleName = get_erl_modulename(AST),
+	ErlangFileName = get_erl_filename(ErlangModuleName),
+
+	{ok, ErlangAST} =
+		core:transform_uast_to_east(AST, ErlangModuleName, ClassesInfo),
+
+	create_erl_file(ErlangAST, ErlangFileName),
+
+	get_erl_file_list(Rest, ClassesInfo, [ErlangFileName | ErlangFileList]).
 
 %%-----------------------------------------------------------------------------
-%% Extrai o nome do arquivo .erl a partir do cerl ast
+%% Mostra a versao, autores e ano do Jaraki.
+get_version() ->
+	io:format("Uarini - A OOP extension for Erlang Compiler ~n"),
+	io:format("Version: ~p~n", [?VSN]),
+	io:format("Team: ~p~n", [?TEAM]),
+	io:format("Year: ~p~n", [?YEAR]).
+
+%%-----------------------------------------------------------------------------
+%% Determina o nome do arquivo .erl
 get_erl_filename(ErlangModuleName) ->
-	atom_to_list(ErlangModuleName) ++ ".erl".
+	"./" ++ atom_to_list(ErlangModuleName) ++ ".erl".
 
 %%-----------------------------------------------------------------------------
-%% Extrai o nome do modulo erlang partir do cerl ast
-%% o nome do modulo eh o nome da classe
-get_erl_modulename(CerlAST) ->
-	[{class,CerlClassName}|_] = CerlAST,
-	list_to_atom(string:to_lower(atom_to_list(CerlClassName))).
+%% Extrai o nome do modulo erlang partir dos forms do uarini
+%% o nome do modulo Erlang gerado eh o nome da classe
+get_erl_modulename(AST) ->
+	case AST of
+		[{attribute, _Line, class, ClassName} | _ ] ->
+			ClassName
+	end.
 
 %%-----------------------------------------------------------------------------
 %% Cria o arquivo .erl no sistema de arquivos
-create_erl_file(ErlangCode, ErlangFileName) ->
+create_erl_file(ErlangAST, ErlangFileName) ->
+	ErlangCode = erl_prettypr:format(erl_syntax:form_list(ErlangAST)),
 	{ok, WriteDescriptor} = file:open(ErlangFileName, [raw, write]),
 	file:write(WriteDescriptor, ErlangCode),
 	file:close(WriteDescriptor).

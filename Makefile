@@ -1,4 +1,4 @@
-SRC_DIR=src
+B1;3201;0cSRC_DIR=src
 EBIN_DIR=ebin
 INCLUDE_DIR=include
 TEST_EBIN_DIR=test/ebin
