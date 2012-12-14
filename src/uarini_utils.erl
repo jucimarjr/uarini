@@ -1,19 +1,26 @@
+%% LUDUS - Laboratorio de Projetos Especiais em Engenharia da Computacao
+%% Aluno  : Daniel Henrique ( dhbaquino@gmail.com )
+%%			Emiliano Firmino ( elmiliox@gmail.com )
+%%			Rodrigo Bernardino ( rbbernardino@gmail.com )
+%% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
+%% Objetivo : Utilitários para o compilador
+
 -module(uarini_utils).
 -compile(export_all).
 
 -include("../include/uarini_define.hrl").
 
 %%-----------------------------------------------------------------------------
-%% Compila vários códigos em Uarini dependentes e gera .erl's correspondentes
-compile(CerlFileNameList) ->
-	case catch(uarini:compile(CerlFileNameList)) of
+%% Compila vários códigos em OOE dependentes e gera .beam's correspondentes
+compile(FileNameList) ->
+	case catch(uarini:compile(FileNameList)) of
 		{'EXIT', Reason} ->
 			io:format("*******ERROR!~n"),
 			io:format("***Reason:~n~p", [Reason]);
 		{error, Errors} ->
 			io:format("*******ERROR!~n"),
 			io:format("***Reasons:\n"),
-			uarini_exception:print_errors(Errors);
+			jaraki_exception:print_errors(Errors);
 		ok ->
 			ok;
 		X ->
@@ -22,50 +29,52 @@ compile(CerlFileNameList) ->
 	end.
 
 %%-----------------------------------------------------------------------------
-%% Extrai a Erlang Abstract Syntax Tree de um arquivo .cerl
-get_erl_ast(CerlFileName) ->
-	CerlAST = ast:get_cerl_ast(CerlFileName),
-	[{_Line, {class, ClassName}, _ClassBody}] = CerlAST,
-	ModuleName = list_to_atom(string:to_lower(atom_to_list(ClassName))),
-	core:transform_uast_to_east(CerlAST, ModuleName, []).
+%% Extrai a Erlang Abstract Syntax Tree do código-fonte
+get_ast(FileName) ->
+	AST = ast:get_ast(FileName),
+	[{class, {_Line, {name, ClassName}, _ClassBody}}] = AST,
+	ModuleName = helpers:lower_atom(ClassName),
+	core:transform_oo_expr(AST, ModuleName, []).
 
 %%-----------------------------------------------------------------------------
-%% Imprime a árvore do cerl gerada análise sintática do compilador
-print_ast(CerlFileName) ->
+%% Imprime a árvore gerada pela análise sintática do compilador
+print_urn_ast(FileName) ->
 	io:format("Generating Syntax Analysis... "),
 
-	case catch(ast:get_cerl_ast(CerlFileName)) of
+	Dir = filename:dirname(FileName),
+	%FileName = filename:basename(FileName),
+	case catch(ast:get_ast(FileName)) of
 		{'EXIT', Reason} ->
 			io:format("*******ERROR!~n"),
 			io:format("***Reason:~n~p", [Reason]);
-		CerlAST ->
+		{Dir, AST} ->
 			io:format("done!~n"),
 
-			io:format("Uarini Syntax Tree from ~p:~n", [CerlFileName]),
-			io:format("~p~n", [CerlAST])
+			io:format("Jaraki Syntax Tree from ~p:~n", [FileName]),
+			io:format("~p~n", [AST])
 	end.
 
 %%-----------------------------------------------------------------------------
-%% Imprime os tokens do cerl gerados pela análise léxica do compilador
-print_tokens(CerlFileName) ->
+%% Imprime os tokens gerados pela análise léxica do compilador
+print_tokens(FileName) ->
 	io:format("Generating Lexical Analysis... "),
 
-	Tokens = ast:get_cerl_tokens(CerlFileName),
+	Tokens = ast:get_tokens(FileName),
 	io:format("done!~n"),
 
-	io:format("Uarini Tokens from ~p:~n", [CerlFileName]),
+	io:format("Uarini Tokens from ~p:~n", [FileName]),
 	io:format("~p~n", [Tokens]).
 
 %%-----------------------------------------------------------------------------
-%% Transforma o código erlang em Abstract Syntax Tree
-print_erl_ast(CerlFileName) ->
+%% Imprime a árvore sintática do código gerado
+print_erl_ast(FileName) ->
 	io:format("Generating Erlang Abstract Syntax Tree... "),
 
-	case catch(get_erl_ast(CerlFileName)) of
+	case catch(get_erl_ast(FileName)) of
 		{ok, ErlangAST} ->
 			io:format("done!~n"),
 
-			io:format("Erlang Abstract Syntax Tree from ~p:~n", [CerlFileName]),
+			io:format("Erlang Abstract Syntax Tree from ~p:~n", [FileName]),
 			io:format("~p~n", [ErlangAST]);
 
 		{'EXIT', Reason} ->
@@ -74,19 +83,12 @@ print_erl_ast(CerlFileName) ->
 	end.
 
 %%-----------------------------------------------------------------------------
-%% Transforma o código erlang em Abstract Syntax Tree
-print_erl_ast_from_erlang(ErlangFileName) ->
-	io:format("Generating Erlang Abstract Syntax Tree from Erlang... "),
-
-	ErlangAst =
-		case epp:parse_file(ErlangFileName, [], []) of
-			{ok, Tree} -> Tree;
-			Error -> io:format("~p", [Error])
-		end,
-	io:format("done!~n"),
-
-	io:format("Erlang Abstract Syntax Tree from ~p:~n", [ErlangFileName]),
-	io:format("~p~n", [ErlangAst]).
+%% traduz expressões em uarini e gera árvore sintática do erlang resultante
+get_erl_ast(FileName) ->
+	AST = ast:get_urn_ast(FileName),
+	[{class, {_Line, {name, ClassName}, _ClassBody}}] = AST,
+	ModuleName = helpers:lower_atom(ClassName),
+	core:transform_uast_to_east(AST, ModuleName, []).
 
 %%-----------------------------------------------------------------------------
 %% calcula o tempo de execução de uma funcao em microssegundos

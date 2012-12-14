@@ -14,15 +14,14 @@ UTILS_MODULE=uarini_utils
 
 function usage
 {
-	echo "Usage: `basename $0` [options] [.java file]
+	echo "Usage: `basename $0` [options] [.cerl file]
 
 	[-h   | --help]  Prints this help
 	[-tk  | --tokens]  Prints the tokens list of the given .cerl file
 	[-uast | --uarini_ast]  Prints the Uarini Abstract Sintax Tree (AST) of the given .cerl file
 	[-east | --erlang_ast]  Prints the Converted Erlang AST of the given .cerl file
-	[-d   | --debug ]  Compile uarini code debugging the \"java_compile\" module
-
-	NOTE: If any option other than -d is passed, no erlang code file is generated!"
+    "
+#	NOTE: If any option other than -d is passed, no erlang code file is generated!"
 #[-abf | --erlang_abs] Prints the Abstract Format Tree of the given .erl file
 }
 
@@ -57,9 +56,9 @@ function print_tokens
 	echo ""
 }
 
-function print_jtree
+function print_utree
 {
-	erl -pa $UARINI_PATH/ebin -noshell -eval "uarini_utils:print_ast(\"$UARINI_PATH/$filename\")." -s erlang halt
+	erl -pa $UARINI_PATH/ebin -noshell -eval "uarini_utils:print_urn_ast(\"$UARINI_PATH/$filename\")." -s erlang halt
 	echo ""
 }
 
@@ -72,18 +71,6 @@ function print_etree
 	fi
 	compileParams=$compileParams"\""$UARINI_PATH"/"${filename[0]}"\""
 	erl -pa $UARINI_PATH/ebin -noshell -eval "uarini_utils:print_erl_ast("$compileParams")." -s erlang halt
-	echo ""
-}
-
-function print_erl_tree
-{
-	erl -pa $UARINI_PATH/ebin -noshell -eval "uarini_utils:print_erl_ast(\"$UARINI_PATH/$filename\")." -s erlang halt
-	echo ""
-}
-
-function debug_compile
-{
-	echo "A ser implementado..."
 	echo ""
 }
 
@@ -100,7 +87,7 @@ fi
 tokens=
 
 # var para armazenar se foi passada opção -tr
-jtree=
+utree=
 etree=
 #abf=
 fileIndex=0
@@ -114,7 +101,7 @@ while [ "$1" != "" ]; do
         -tk | --tokens )        tokens=1
 								generate_erl=0
                                 ;;
-        -uast | --java_ast )	jtree=1
+        -uast | --java_ast )	utree=1
 								generate_erl=0
                                 ;;
         -east | --erlang_ast )	etree=1
@@ -126,8 +113,8 @@ while [ "$1" != "" ]; do
         -h | --help )           usage
                                 exit
                                 ;;
-		-d | --debug )			debug=1
-								;;
+#		-d | --debug )			debug=1
+#								;;
         *.cerl )                filename[$fileIndex]=$1
 								fileIndex=`expr $fileIndex + 1`
 								;;
@@ -150,8 +137,8 @@ if [ "$tokens" == "1" ]; then
 	print_tokens
 fi
 
-if [ "$jtree" == "1" ]; then
-	print_jtree
+if [ "$utree" == "1" ]; then
+	print_utree
 fi
 
 if [ "$etree" == "1" ]; then
