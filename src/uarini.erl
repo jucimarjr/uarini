@@ -12,8 +12,8 @@
 
 %%-----------------------------------------------------------------------------
 %% Interface com o usuario final. Compila 1 arquivo uarini, gera o .beam
-compile({beam, JavaFileName}) ->
-	[ErlangFile] = get_erl_file_list([{JavaFileName, JavaFileName}]),
+compile({beam, UariniFileName}) ->
+	[ErlangFile] = get_erl_file_list([{UariniFileName, UariniFileName}]),
 
 	erl_tidy:file(ErlangFile,[{backups,false}]),
 	compile:file(ErlangFile);
@@ -42,6 +42,7 @@ get_erl_file_list(FileNameList) ->
 
 get_erl_file_list([], _, ErlangFileList) ->
 	lists:reverse(ErlangFileList, []);
+
 get_erl_file_list([AST | Rest], ClassesInfo, ErlangFileList) ->
 	ErlangModuleName = get_erl_modulename(AST),
 	ErlangFileName = get_erl_filename(ErlangModuleName),
@@ -54,7 +55,7 @@ get_erl_file_list([AST | Rest], ClassesInfo, ErlangFileList) ->
 	get_erl_file_list(Rest, ClassesInfo, [ErlangFileName | ErlangFileList]).
 
 %%-----------------------------------------------------------------------------
-%% Mostra a versao, autores e ano do Jaraki.
+%% Mostra a versao, autores e ano do ooErlang ( uarini ).
 get_version() ->
 	io:format("Uarini - A OOP extension for Erlang Compiler ~n"),
 	io:format("Version: ~p~n", [?VSN]),

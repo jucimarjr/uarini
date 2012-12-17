@@ -49,7 +49,7 @@ function_args_list2(Line, [ArgType | Rest], ArgAstList, N) ->
 	function_args_list2(Line, Rest, [ArgAst |ArgAstList], N+1).
 
 %%---------------------------------------------------------------------------%%
-%% Declaração dos parâmetros da função na st
+%% Declaracao dos parâmetros da funcao na st
 init_args(Line, ParametersList) ->
 	init_args(Line, ParametersList, []).
 

@@ -1,3 +1,10 @@
+%% LUDUS - Laboratorio de Projetos Especiais em Engenharia da Computacao
+%% Aluno  : Daniel Henrique ( dhbaquino@gmail.com )
+%%			Emiliano Firmino ( elmiliox@gmail.com )
+%%			Rodrigo Bernardino ( rbbernardino@gmail.com )
+%% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
+%% Objetivo : Criacao e manipulacao das variaveis
+
 -module(st).
 -export(
 	[

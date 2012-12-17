@@ -26,7 +26,7 @@ transform_uast_to_east(AST, ErlangModuleName, _ClassesInfo) ->
 	%% mescla infos dos membros das classes com os das suas superclasses
 	%st:insert_parent_members(ClassesInfo),
 
-	%% AST na realidade é uma lista de forms
+	%% AST na realidade eh uma lista de forms
 	{ExportList, FunctionList, OtherForms} = get_erl_forms(AST),
 
 	%FunctionList2 = [OOFunctions | FunctionList],
@@ -46,8 +46,8 @@ transform_uast_to_east(AST, ErlangModuleName, _ClassesInfo) ->
 
 %%-----------------------------------------------------------------------------
 %% Filtra os forms, deixando apenas os especificos do erlang
-%%    os forms do uarini são tratados ao guardar as info das classes na ST
-%%    eles reppresentam os atributos e os metodos
+%%    os forms do uarini sao tratados ao guardar as info das classes na ST
+%%    eles representam os atributos e os metodos
 get_erl_forms(UariniForms) ->
 	match_erl_form(UariniForms, [], [], []).
 
