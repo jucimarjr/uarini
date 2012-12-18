@@ -14,13 +14,28 @@ build() ->
 %% Extrai a Java Abstract Syntax Tree de um arquivo .java
 get_ast(ErlangClassFileName) ->
 	Tokens = get_tokens(ErlangClassFileName),
-	{ok, AST} = uarini_parse:parse(Tokens),
-	AST.
+    TokenFormList = split_forms(Tokens),
+    ParseResultList = [uarini_parse:parse(T) || T <- TokenFormList],
+    [F|| {ok, F} <- ParseResultList].
 
-%%-------------------------------------------	----------------------------------
+%%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo .java
 get_tokens(ErlangClassFileName) ->
 	{ok, FileContent} = file:read_file(ErlangClassFileName),
 	Program = binary_to_list(FileContent),
 	{ok, Tokens, _EndLine} = uarini_scan:string(Program),
 	Tokens.
+
+%%-----------------------------------------------------------------------------
+%%
+split_forms(Ts) ->
+    split_forms(Ts, [], []).
+
+split_forms([], [], Fs) ->
+    lists:reverse(Fs);
+split_forms([], F, Fs) ->
+    lists:reverse([lists:reverse(F)|Fs]);
+split_forms([T={dot,_}|Ts], F, Fs) ->
+    split_forms(Ts, [], [lists:reverse([T|F])|Fs]);
+split_forms([T|Ts], F, Fs) ->
+    split_forms(Ts, [T|F], Fs).
