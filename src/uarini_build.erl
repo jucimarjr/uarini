@@ -11,14 +11,14 @@ build() ->
 
 
 %%-----------------------------------------------------------------------------
-%% Extrai a Java Abstract Syntax Tree de um arquivo .java
+%% Extrai a Abstract Syntax Tree de um arquivo .cerl
 get_ast(ErlangClassFileName) ->
 	Tokens = get_tokens(ErlangClassFileName),
 	{ok, AST} = uarini_parse:parse(Tokens),
 	AST.
 
-%%-------------------------------------------	----------------------------------
-%% Extrai a lista de Tokens de um arquivo .java
+%%-----------------------------------------------------------------------------
+%% Extrai a lista de Tokens de um arquivo
 get_tokens(ErlangClassFileName) ->
 	{ok, FileContent} = file:read_file(ErlangClassFileName),
 	Program = binary_to_list(FileContent),
