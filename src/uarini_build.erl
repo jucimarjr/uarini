@@ -27,15 +27,26 @@ get_tokens(ErlangClassFileName) ->
 	Tokens.
 
 %%-----------------------------------------------------------------------------
-%%
-split_forms(Ts) ->
-    split_forms(Ts, [], []).
+%% Particiona o fluxo de token em subfluxos terminados pelo token dot
+split_forms(Tokens) ->
+    split_forms(Tokens, [], []).
 
-split_forms([], [], Fs) ->
-    lists:reverse(Fs);
-split_forms([], F, Fs) ->
-    lists:reverse([lists:reverse(F)|Fs]);
-split_forms([T={dot,_}|Ts], F, Fs) ->
-    split_forms(Ts, [], [lists:reverse([T|F])|Fs]);
-split_forms([T|Ts], F, Fs) ->
-    split_forms(Ts, [T|F], Fs).
+split_forms([], [], ReverseForms) ->
+    FormList = lists:reverse(ReverseForms),
+    FormList;
+split_forms([], ReverseFormTokens, ReverseForms) ->
+    Form = lists:reverse(ReverseFormTokens),
+    FormList = lists:reverse([Form|ReverseForms]),
+    FormList;
+split_forms(
+        [DotToken={dot,_}|Tokens],
+        ReverseFormTokens,
+        ReverseForms) ->
+    Form = lists:reverse([DotToken|ReverseFormTokens]),
+    split_forms(Tokens, [], [Form|ReverseForms]);
+split_forms(
+        [Token|Tokens],
+        ReverseFormTokens,
+        ReverseForms) ->
+    split_forms(Tokens, [Token|ReverseFormTokens], ReverseForms).
+
