@@ -1,4 +1,4 @@
-﻿-class(exemplo).
+-class(exemplo).
 -export([main/0]).
 
 class_methods.

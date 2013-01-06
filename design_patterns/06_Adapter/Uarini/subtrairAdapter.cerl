@@ -1,6 +1,6 @@
 -class(subtrairAdapter).
 -implements([operar]).
--constructor([constructor/1])
+-constructor([constructor/1]).
 -export([operar/2]).
 
 class_attributes.

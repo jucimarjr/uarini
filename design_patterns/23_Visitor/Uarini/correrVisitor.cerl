@@ -1,4 +1,4 @@
-﻿-class(correrVisitor).
+-class(correrVisitor).
 -implements([visitor/1]).
 -export([visit/1]).
 

@@ -1,4 +1,4 @@
-﻿-class(relatorioUmidade).
+-class(relatorioUmidade).
 -extends(relatorio).
 -export([montarRelatorio/0, montarCabecalho/0, montarCorpo/0, montarRodape/0]).
 

@@ -1,4 +1,4 @@
--class(Template).
+-class(template).
 -export([main/0]).
 
 class_methods.

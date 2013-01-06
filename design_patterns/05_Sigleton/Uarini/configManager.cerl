@@ -1,5 +1,6 @@
 -class(configManager).
 -export([getInstance/0, getServerName/0, setServerName/1]).
+-static([getInstance/0]).
 
 class_attributes.
 
@@ -11,14 +12,13 @@ class_methods.
 constructor() ->
 	nop.
 
-static getInstance()->
+getInstance() ->
 	case (Instance == null) of
 		true ->
 			Instance = configManager::constructor();
 		false ->
-			nop
-	end,
-	Instance.
+			Instance
+	end.
 
 getServerName() ->
 	ServerName.

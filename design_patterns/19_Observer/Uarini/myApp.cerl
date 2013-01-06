@@ -4,13 +4,12 @@
 class_methods.
 
 main() ->
-	
-	io:format(¨Enter Text >¨),
+	io:format("Enter Text >"),
 	
 	EventSource = eventSource::constructor(),
 	ResponseHandler = responseHandler::constructor(),
 
 	EventSource::addObserver(ResponseHandler),
-	
+
 	Thread =  thread::constructor(ResponseHandler),
-    Thread::start().
+	Thread::start().
