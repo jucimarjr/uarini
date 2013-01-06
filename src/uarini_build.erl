@@ -16,8 +16,15 @@ get_ast(ErlangClassFileName) ->
 	Tokens = get_tokens(ErlangClassFileName),
     TokenFormList = split_forms(Tokens),
     ParseResultList = [uarini_parse:parse(T) || T <- TokenFormList],
-    [F|| {ok, F} <- ParseResultList].
-
+    filter_result(ParseResultList, []).
+%%-----------------------------------------------------------------------------
+%% Retorna a AST caso nao exista nenhum error no parse
+filter_result([], ReverseForms) ->
+	lists:reverse(ReverseForms);
+filter_result([{ok, F}|Result], RFs) ->
+	filter_result(Result, [F|RFs]);
+filter_result([{error,Msg}|_], _) ->
+	erlang:error(Msg).
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo
 get_tokens(ErlangClassFileName) ->
