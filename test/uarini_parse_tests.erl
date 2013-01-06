@@ -21,18 +21,21 @@ uarini_tag_test() ->
     Exp3 = {attribute, 1, interface, name},
     Exp4 = {attribute, 1, implements, [c1, c2, c3]},
     Exp5 = {attribute, 1, constructor, [{new,0},{new,1}]},
+    Exp6 = {attribute, 1, static,      [{getInstance,0}]},
 
     Form1 = uarini_parse:parse(get_tokens("-class(name).")),
     Form2 = uarini_parse:parse(get_tokens("-extends(name).")),
     Form3 = uarini_parse:parse(get_tokens("-interface(name).")),
     Form4 = uarini_parse:parse(get_tokens("-implements([c1,c2,c3]).")),
     Form5 = uarini_parse:parse(get_tokens("-constructor([new/0, new/1]).")),
+    Form6 = uarini_parse:parse(get_tokens("-static([getInstance/0]).")),
 
     [?assertEqual(?OK(Exp1), Form1),
      ?assertEqual(?OK(Exp2), Form2),
      ?assertEqual(?OK(Exp3), Form3),
      ?assertEqual(?OK(Exp4), Form4),
-     ?assertEqual(?OK(Exp5), Form5)].
+     ?assertEqual(?OK(Exp5), Form5),
+     ?assertEqual(?OK(Exp6), Form6)].
 
 uarini_markup_test() ->
     Exp1 = {class_attributes, 1},
