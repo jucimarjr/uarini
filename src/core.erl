@@ -13,11 +13,11 @@
 %% Converte o uast em east.
 %%   uast -> arvore sintatica do uarini.
 %%   east -> arvore sintatica do erlang.
-transform_uast_to_east(AST, ErlangModuleName, _ClassesInfo) ->
+transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	io:format("core: compilando \"~p\"...\n", [ErlangModuleName]),
 
 	st:new(),
-	%st:insert_classes_info(ClassesInfo),
+	st:insert_classes_info(ClassesInfo),
 
 	%DefaultConstructor = create_default_constructor(ErlangModuleName),
 	%ParentMethods      = create_all_parent_methods(ErlangModuleName),
@@ -60,6 +60,9 @@ match_erl_form([Form | UariniForms], ExportList, FunctionList, OtherForms) ->
 			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
 
 		{attribute, _Line, constructor, _Functions} ->
+			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
+
+		{attribute, _Line, static, _Functions} ->
 			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
 
 		{attribute, _Line, export, _Functions} ->

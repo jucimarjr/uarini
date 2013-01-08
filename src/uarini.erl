@@ -35,8 +35,7 @@ compile(FileNameList) ->
 %% antes da traducao, as informacoes de todas as classes sao obtidas
 get_erl_file_list(FileNameList) ->
 	ASTList = lists:map(fun ast:get_urn_forms/1, FileNameList),
-	%% TODO: ClassesInfo = lists:map(fun ast:get_class_info/1, ASTList),
-	ClassesInfo = nil,
+	ClassesInfo = lists:map(fun ast:get_class_info/1, ASTList),
 
 	get_erl_file_list(ASTList, ClassesInfo, []).
 
