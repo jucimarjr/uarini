@@ -15,7 +15,8 @@ saveToMemento() ->
 	io:format("Originator: Saving to Memento."),
     memento::constructor(self::State).
  
-restoreFromMemento(memento Memento) ->
+restoreFromMemento(Memento)
+		when is_instance(Memento, memento) ->
 	self::State = Memento::getSavedState(),
 	io:format("Originator: State after restoring from Memento: ~w~n", [self::State]).
 

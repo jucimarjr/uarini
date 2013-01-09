@@ -3,5 +3,5 @@
 
 class_methods.
 
-visit(dog Animal);
-visit(cat Animal).
+visit(Animal) when is_instance(Animal, dog);
+visit(Animal) when is_instance(Animal, cat).

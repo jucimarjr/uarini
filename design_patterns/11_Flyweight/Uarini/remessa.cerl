@@ -7,5 +7,5 @@ estado Estado.
 
 class_methods.
 
-constructor(estado Estado) ->
+constructor(Estado) when is_instance(Estado, estado) ->
 	self::Estado = Estado.

@@ -1,6 +1,6 @@
 -class(pet).
 -extends(animal).
--constructor([constructor/2]).
+-constructor([constructor/1]).
 -export([falar/0, getNome/0, getIdade/0, setNome/1, SetIdade/1]).
 
 class_attributes.

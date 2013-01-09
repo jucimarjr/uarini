@@ -12,16 +12,16 @@ lblDisplay Show.
 
 class_methods.
  
-registerView(btnView V) ->
+registerView(V) when is_instance(V, btnView) ->
 	self::BtnView = V.
  
-registerSearch(btnSearch S) ->
+registerSearch(S) when is_instance(S, btnSearch) ->
 	self::BtnSearch = S.
 
-registerBook(btnBook B) ->
+registerBook(B) when is_instance(b, btnBook) ->
     self::BtnBook = B.
  
-registerDisplay(lblDisplay D) ->
+registerDisplay(D) when is_instance(D, lblDisplay) ->
 	self::Show = D.
 
 book() ->

@@ -9,7 +9,8 @@ subtrair Subtrair.
 
 class_methods.
 
-constructor(subtrair Subtrair) ->
+constructor(Subtrair) 
+		when is_instance(Subtrair, subtrair) ->
 	self::Subtrair = Subtrair.
 
 operar(A, B) ->

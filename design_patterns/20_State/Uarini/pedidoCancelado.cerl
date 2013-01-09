@@ -4,11 +4,11 @@
 
 class_methods.
 
-alterar(pedido Pedido) ->
+alterar(Pedido) when is_instance(Pedido, pedido) ->
 	io:format("Não é possível realizar alterações. Este pedido está cancelado.").
 
-cancelar(pedido Pedido) ->
+cancelar(Pedido) when is_instance(Pedido, pedido) ->
 	io:format("O pedido já foi cancelado.").
 
-enviar(pedido Pedido) ->
+enviar(Pedido) when is_instance(Pedido, pedido) ->
 	io:format("Não é possível realizar o envio do pedido. Este pedido está cancelado.").

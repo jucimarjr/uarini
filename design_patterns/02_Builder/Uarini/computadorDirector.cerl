@@ -1,4 +1,4 @@
--class(computadorDirector).
+class(computadorDirector).
 -constructor([constructor/1]).
 
 class_attributes.
@@ -7,7 +7,8 @@ computadorBuilder Builder.
 
 class_methods.
 
-constructor(computadorBuilder Builder) ->
+constructor(Builder)
+	when is_instance(Builder, computadorBuilder) ->
 	self::Builder = Builder.
 
 buildComputador() ->

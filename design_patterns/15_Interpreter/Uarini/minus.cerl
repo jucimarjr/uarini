@@ -10,7 +10,9 @@ expression RightOperand.
 
 class_methods.
 
-constructor(expression Left, expression Right) ->
+constructor(Left, Right) 
+	when is_instance(Left, expression) andalso
+		is_instance(Right, expression) ->
 	self::LeftOperand = Left,
 	self::RightOperand = Right.
 

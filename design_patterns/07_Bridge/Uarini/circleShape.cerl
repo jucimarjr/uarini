@@ -11,7 +11,8 @@ Radius.
 
 class_methods.
 
-constructor(X, Y, Radius, drawingAPI DrawingAPI) ->
+constructor(X, Y, Radius, DrawingAPI) 
+		when is_instance(DrawingAPI, drawingAPI)->
 	super::constructor(DrawingAPI),
 	self::X = X,
 	self::Y = Y,

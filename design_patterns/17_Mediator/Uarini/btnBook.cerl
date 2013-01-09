@@ -9,7 +9,7 @@ iMediator Med.
 
 class_methods.
 
-constructor(iMediator M) ->
+constructor(M) when is_instance(M, iMediator) ->
 	self::Med = M,
 	self::Med::registerBook(self).
 
@@ -17,7 +17,7 @@ execute() ->
 	self::Med::book().
 	
 setEnabled(B) ->
-	if(B =:= true)
+	case (B =:= true) of
 		true ->
 			io:format("BtnBook Enabled");
 		false ->

@@ -12,18 +12,18 @@ protected logger Next.
 
 class_methods.
 	
-setNext(logger Log) ->
+setNext(Log) when is_instance(Log, logger) ->
 	self::Next = Log,
 	Log.
 	
 message(Msg, Priority) ->
-	if (Priority <= self::Mask)
+	if (Priority =< self::Mask)
 		true ->
 			writeMessage(Msg);
 		false ->
 			nop
 	end,
-	if (self::Next =!= null)
+	if (self::Next =/= null)
 		true ->
 			self::Next::message(msg, priority);
 		false ->

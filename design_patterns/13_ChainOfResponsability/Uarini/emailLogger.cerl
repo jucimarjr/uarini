@@ -4,7 +4,7 @@
 
 class_methods.
 
-constrcutor(Mask) ->
+constructor(Mask) ->
 	self::Mask = Mask.
 
 protected writeMessage(Msg) ->

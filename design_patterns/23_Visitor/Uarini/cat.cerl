@@ -10,5 +10,5 @@ falar(Text) ->
 correr(Text) ->
 	io:format("~w~n", [Text]).
 
-accept(visitor Visitor) ->
+accept(Visitor) when is_instance(Visitor, visitor) ->
 	Visitor::visit(self).

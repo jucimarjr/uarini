@@ -9,7 +9,7 @@ iMediator Med.
 
 class_methods.
 
-constructor(iMediator M) ->
+constructor(M) when is_instance(M, iMediator) ->
 	self::Med = M,
 	self::Med::registerSearch(self).
 
@@ -17,7 +17,7 @@ execute() ->
 	self::Med::search().
 	
 setEnabled(B) ->
-	if(B =:= true)
+	case (B =:= true) of
 		true ->
 			io:format("BtnSearch Enabled");
 		false ->

@@ -4,7 +4,7 @@
 
 class_methods.
 
-visit(dog Animal) ->
+visit(Animal) when is_instance(Animal, dog) ->
 	Animal::correr("O cachorro está correndo");
-visit(cat Animal) ->
+visit(Animal) when is_instance(Animal, cat) ->
 	Animal::correr("O gato está correndo").

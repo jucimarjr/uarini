@@ -8,7 +8,7 @@ main() ->
     BtnBook = btnBook::constructor(Med),
     BtnSearch = btnSearch::constructor(Med),
     BtnView = btnView::constructor(Med),
-    Label = new LblDisplay(Med),
+    Label = LblDisplay:constructor(Med),
    	
     Med::book(),
     Med::search(),

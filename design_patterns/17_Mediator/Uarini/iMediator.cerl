@@ -7,7 +7,7 @@ class_methods.
 book().
 view().
 search().
-registerBook(btnBook B).    
-registerSearch(btnSearch S). 
-registerView(btnView V).
-registerDisplay(lblDisplay D).
+registerBook(B) when is_instance(B, btnBook).    
+registerSearch(S) when is_instance(S, btnSearch). 
+registerView(V) when is_instance(V, btnView).
+registerDisplay(D) when is_instance(D, lblDisplay).

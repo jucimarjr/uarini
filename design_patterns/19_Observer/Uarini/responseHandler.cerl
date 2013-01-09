@@ -8,11 +8,13 @@ Resp.
 
 class_methods.
 
-update(observable Obj, object Arg)
-	if (is_list(Arg))
+update(observable Obj, object Arg) 
+		when is_instance(Obj, observable) and
+			is_instance(Arg, object) ->
+	case (is_list(Arg)) of
 		true ->
 			self::Resp = Arg,
-			io:format(¨~nReceived Response: ~w¨, [self::Resp]);
+			io:format("~nReceived Response: ~w", [self::Resp]);
 		false ->
 			nop
 	end.

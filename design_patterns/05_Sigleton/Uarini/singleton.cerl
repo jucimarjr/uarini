@@ -3,7 +3,7 @@
 
 main() ->
 	configManager::getInstance()::setServerName("Nome do ConfigManager"),
-	
+
 	S = configManager::getInstance()::getServerName(),
 
 	ConfigManager = configManager::getInstance(),

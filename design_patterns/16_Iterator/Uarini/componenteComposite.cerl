@@ -12,5 +12,5 @@ class_methods.
 constructor() ->
 	ok.
 
-add(componente C) ->
+add(C) when is_instance(C, componente) ->
 	Componentes::add(c).

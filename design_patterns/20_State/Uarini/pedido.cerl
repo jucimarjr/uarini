@@ -16,7 +16,7 @@ cancelar() ->
 enviar() ->
 	Status::enviar(self).
 
-setStatus(statusPedido Status) ->
+setStatus(Status) when is_instance(Status, statusPedido) ->
 	self::Status = Status.
 
 getStatus() ->

@@ -27,12 +27,12 @@ main() ->
 
 	percorrerComputador(I, Clista).
 
-percorrer(computadorIterator I)
-	Clista == I::proximoComponente(),
-	if	Clista != null
+percorrer(I) when is_instance(I, computadorIterator) ->
+	Clista = I::proximoComponente(),
+	case Clista =/= null of
 		true ->
 			io:format("Componente: ~w~n.", [Clista::getClass()::getName()]),
 			io:format("Preço de custo: ~w~n.", [Clista::getPrecoCusto()]),
-			percorrer(computadorIterator I);
+			percorrer(I);
 		false ->
 			nop.

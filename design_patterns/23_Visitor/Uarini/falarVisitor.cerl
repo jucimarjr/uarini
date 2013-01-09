@@ -4,7 +4,7 @@
 
 class_methods.
 
-visit(dog Animal) ->
+visit(Animal) when is_instance(Animal, dog) ->
 	Animal::falar("O cachorro está latindo");
-visit(cat Animal) ->
+visit(Animal) when is_instance(Animal cat) ->
 	Animal::falar("O gato está miando").

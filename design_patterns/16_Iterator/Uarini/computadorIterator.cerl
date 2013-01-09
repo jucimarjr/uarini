@@ -4,21 +4,21 @@
 
 class_attributes.
 
-computador Computador.
-Current.
+computador Computador;
+Current;
 Steps.
 
 class_methods.
 
-constructor(Computador C) ->
-	self::Compuutador = C.
+constructor(computador C) when is_instance(C, computador) ->
+	self::Computador = C.
 
 proximoComponente() ->
 	Current = Current + 1,
 	Steps = 0,
 	R = getComponente(Computador),
 	
-	if R == null
+	case R == null of
 		true -> 
 			Current = Current - 1;
 		false ->
@@ -31,7 +31,7 @@ ComponenteAnterior() ->
 	Steps = 0,
 	R = getComponente(Computador),
 	
-	if R == null
+	case R == null of
 		true -> 
 			Current = Current + 1;
 		false ->
@@ -39,14 +39,19 @@ ComponenteAnterior() ->
 	end,
 	R.
 
-getComponente(componenteComposite Cl) ->
+getComponente(Cl)
+		when is_instance(Cl, componenteComposite) ->
 	Retorno = Componente::null,
 	percorrerComposite(Cl, Retorno),
 	Retorno.
 
-percorrerComposite(componenteComposite [H |  []], Componente Retorno) ->
-		Retorno;
-percorrerComposite(componenteComposite [H | R], Componente Retorno) ->
+percorrerComposite([H], Retorno)
+	when is_instance(H, componenteComposite) andalso 
+		is_instance(Retorno, componenteComposite) ->
+	Retorno;
+percorrerComposite([H|R], Retorno) 
+	when is_instance(H, componenteComposite) andalso 
+		is_instance(Retorno, componenteComposite) ->
 	Steps = Steps + 1,
 	Break = 0,
 	
