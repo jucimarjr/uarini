@@ -1,5 +1,6 @@
 -class(gerenciadorDePessoas).
 -export([main/0]).
+-static([main/0]).
 
 class_methods.
 

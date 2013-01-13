@@ -1,4 +1,5 @@
 -class(polimorfismo).
+-static([main/0]).
 
 class_methods.
 

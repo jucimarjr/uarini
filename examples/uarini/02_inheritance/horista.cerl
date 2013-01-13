@@ -1,6 +1,7 @@
 -class(horista).
 -extends(empregado).
 -export([getSalario/0, calcular/0, main/0]).
+-static([main/0]).
 
 class_methods.
 

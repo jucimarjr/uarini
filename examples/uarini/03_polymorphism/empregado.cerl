@@ -1,8 +1,8 @@
--abstract(empregado).
+-class(empregado).
 
 class_attributes.
 
-protected Salario.
+Salario.
 
 class_methods.
 
