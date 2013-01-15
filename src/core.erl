@@ -9,6 +9,8 @@
 -export([transform_uast_to_east/3]).
 -include("../include/uarini_define.hrl").
 
+-import(gen_ast, [match/3, var/2, rcall/4]).
+
 %%-----------------------------------------------------------------------------
 %% Converte o uast em east.
 %%   uast -> arvore sintatica do uarini.
@@ -27,13 +29,18 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	%st:insert_parent_members(ClassesInfo),
 
 	%% AST na realidade eh uma lista de forms
+	st:put_scope(class, ErlangModuleName),
 	{ExportList, FunctionList, OtherForms} = get_erl_forms(AST),
 
 	%FunctionList2 = [OOFunctions | FunctionList],
+
+	%% ExportList eh uma lista de funcoes assim: {Nome, Arity}
 	%ExportList2 = add_parent_methods(ExportList),
+	ConstrList = st:get_all_constr_info(ErlangModuleName),
+	ExportList2 = ExportList ++ ConstrList,
 
 	ErlangModule =
-		create_module(ErlangModuleName, FunctionList, ExportList, OtherForms),
+		create_module(ErlangModuleName, FunctionList, ExportList2, OtherForms),
 
 	case st:get_errors() of
 		[] ->
@@ -65,8 +72,8 @@ match_erl_form([Form | UariniForms], ExportList, FunctionList, OtherForms) ->
 		{attribute, _Line, static, _Functions} ->
 			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
 
-		{attribute, _Line, export, _Functions} ->
-			N_ExportList = [Form | ExportList],
+		{attribute, _Line, export, Functions} ->
+			N_ExportList = ExportList ++ Functions,
 			match_erl_form(UariniForms, N_ExportList, FunctionList, OtherForms);
 
 		{class_attributes, _Line} ->
@@ -78,6 +85,7 @@ match_erl_form([Form | UariniForms], ExportList, FunctionList, OtherForms) ->
 			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
 
 		{function, Line, Name, Arity, Clauses} ->
+			st:put_scope(function, {Name, Arity}),
 			Transformed_Method = get_erl_function(Line, Name, Arity, Clauses),
 			N_FunctionList = [Transformed_Method | FunctionList],
 			match_erl_form(UariniForms, ExportList, N_FunctionList, OtherForms)
@@ -103,7 +111,26 @@ get_erl_clause({clause, Line, ParamList, [], ExprList}) ->
 
 	Transformed_ExprList = lists:map(fun get_erl_expr/1, ExprList),
 
-	{clause, Line, Transformed_ParamList, [], Transformed_ExprList}.
+	Scope = st:get_scope(),
+	{ScopeClass, _ScopeFunction} = Scope,
+
+	AttrList = st:get_all_attr_info(ScopeClass),
+	NewArgs = [gen_ast:atom(Line, AttrName) || {AttrName, _Value} <- AttrList],
+	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line,  NewArgs)]),
+
+	NewObjectID_AST = match(Line, var(Line, "ObjectID"), NewAST),
+	ObjectID_AST = gen_ast:tuple(Line,
+						[gen_ast:atom(Line,ScopeClass), var(Line, "ObjectID")]),
+
+	case st:is_constructor(Scope) of
+		true ->
+			Transformed_ExprList2 =
+				[NewObjectID_AST | Transformed_ExprList] ++ [ObjectID_AST],
+			{clause, Line, Transformed_ParamList, [], Transformed_ExprList2};
+
+		false ->
+			{clause, Line, Transformed_ParamList, [], Transformed_ExprList}
+	end.
 
 get_erl_param(Parameter) -> gen_erl_code:match_param(Parameter).
 get_erl_expr(Expression) -> gen_erl_code:match_expr(Expression).
@@ -112,7 +139,8 @@ get_erl_expr(Expression) -> gen_erl_code:match_expr(Expression).
 %%-----------------------------------------------------------------------------
 %% Cria o modulo a partir do east.
 create_module(ErlangModuleName, FunctionList, ExportList, OtherForms) ->
-	[ { attribute, 1, module, ErlangModuleName } | ExportList ++ OtherForms ++
+	[ { attribute, 1, module, ErlangModuleName } |
+		[{attribute, 2, export, ExportList}] ++ OtherForms ++
 		FunctionList ++ [{eof, 1}]].
 
 %%-----------------------------------------------------------------------------

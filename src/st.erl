@@ -11,11 +11,12 @@
 		%% criar / zerar dicionário
 		new/0,		destroy/0,
 
-		put_scope/1,	get_scope/0,
+		put_scope/2,	get_scope/0,
 		put_error/2,	get_errors/0,
 
 		%% informações das classes
 		insert_classes_info/1,	insert_parent_members/1,  exist_class/1,
+		is_constructor/1,		get_all_constr_info/1,
 		is_superclass/2,		get_superclass/1,
 		exist_attr/2,			get_attr_info/2,		  get_all_attr_info/1
 	]).
@@ -29,11 +30,16 @@ new() ->
 destroy() ->
 	erase(), ok.
 
-put_scope(Scope) ->
-	put(scope, Scope).
+put_scope(class, Class) ->
+	put({scope, class}, Class);
 
-get_scope() ->
-	get(scope).
+put_scope(function, Function) ->
+	put({scope, function}, Function).
+
+get_scope()    ->
+	Class = get({scope, class}),
+	Function = get({scope, function}),
+	{Class, Function}.
 
 put_error(Line, Code) ->
 	NewErrors = [{Line, Code} | get(errors)],
@@ -52,35 +58,21 @@ get_errors() ->
 %%		NomeDaClasse => atom()
 %%
 %% Valor:
-%%		{NomePai, Campos, Metodos, Construtores}
-%% Onde:
-%%		Campos:  [Campo1, Campo2, ...]
-%%		Metodos: [Metodo1, Metodo2, ...]
-%%		Construtores: [Construtor1, Construtor2, ...]
+%%		{NomeSuper, Atributos, ListaConstrutores, ListaExport, ListaStatic}
+%% Campos:  [Campo1, Campo2, ...]
 %%
 %% CampoN:
 %%		{Nome, CampoValue}
 %%			   |
 %%			   |> {Tipo, Modificadores}
 %%
-%% MetodoN:
-%%		{ MethodKey, MethodValue}
-%%		  |			 |
-%%		  |			 |> {TipoRetorno, Modificadores}
-%%		  |
-%%		  |> {Nome, Parametros}
-%%
-%% ConstrutorN:
-%%		{ ConsrutorKey, ConstrutorValue }
-%%		  |             |
-%%		  |             |> Visibilidade
-%%		  |> Parametros
+%% ConstrutorN, ExportN, StaticN:
+%%		{ nome_funcao, QtdParametros }
 %%
 %% Outros:
 %%		Tipo			=> atom()
 %%		Nome			=> atom()
 %%		Modificadores	=> [ atom() ]
-%%		Parametros		=> [ Tipo ]
 
 %% inicializa "sub-dicionario" com informações das classes
 insert_classes_info(ClassesInfoList) ->
@@ -147,6 +139,18 @@ is_superclass(Class_A, Class_B) ->
 get_superclass(ClassName) ->
 	{ParentName, _, _, _, _} = get({oo_classes, ClassName}),
 	ParentName.
+
+%%----------------------------------------------------------------------------
+%%                              CONSTRUTORES
+%% verifica se determinado método é um construtor 
+is_constructor({ClassName, {FunctionName, Arity}}) ->
+	{_, _, ConstrList, _, _} = get({oo_classes, ClassName}),
+	helpers:has_element({FunctionName, Arity}, ConstrList).
+
+%% busca por todos os contrutores
+get_all_constr_info(ClassName) ->
+	{_, _, ConstrList, _, _} = get({oo_classes, ClassName}),
+	ConstrList.
 
 %%----------------------------------------------------------------------------
 %%                              CAMPOS

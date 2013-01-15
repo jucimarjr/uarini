@@ -3,7 +3,7 @@
 %%			Emiliano Firmino ( elmiliox@gmail.com )
 %%			Rodrigo Bernardino ( rbbernardino@gmail.com )
 %% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
-%% Objetivo : Criacao e manipulacao da AST
+%% Objetivo : Funcoes auxiliares para manipulacao de listas, entre outros
 
 -module(helpers).
 -export([has_element/2]).

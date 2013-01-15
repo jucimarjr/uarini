@@ -88,11 +88,13 @@ get_class_info(FormList) ->
 	{ok, ExportList} = orddict:find(export, NewODict),
 	{ok, StaticList} = orddict:find(static, NewODict),
 
+	ExportList2 = ExportList ++ ConstrList,
+
 	Errors = st:get_errors(),
 	st:destroy(),
 
 	ClassKey = ClassName,
-	ClassValue = {ParentName, AttrList, ConstrList, ExportList, StaticList},
+	ClassValue = {ParentName, AttrList, ConstrList, ExportList2, StaticList},
 	{{ClassKey, ClassValue}, Errors}.
 
 
@@ -132,7 +134,7 @@ get_forms_info([Form | FormList], ODict) ->
 
 %%-----------------------------------------------------------------------------
 %% faz o match do form para extrair a informação correspondente
-match_form({class_attributes, Line}, [AttrList | FormList]) ->
+match_form({class_attributes, _}, [AttrList | FormList]) ->
 	AttrInfoList = get_attr_info(AttrList),
 	{attributes, AttrInfoList, FormList};
 

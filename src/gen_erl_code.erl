@@ -10,7 +10,7 @@
 
 -import(gen_ast,
 	[
-		match/3
+		match/3, rcall/4
 	]).
 
 %%-----------------------------------------------------------------------------
@@ -49,6 +49,16 @@ transform_match(Line, LeftExpr, RightExpr) ->
 %% percorre uma expressao transformando cada subelemento
 %% falta definir todos os possíveis nós, no caso tuplas, listas e... oq mais?
 %% para botar um fim na recursao
+
+transform_inner_expr({call,Ln1,{oo_remote,_Ln2,ClassName,FuncName},FuncArgs}) ->
+	{atom, _, ClassName2} = ClassName,
+	{atom, _, FuncName2} = FuncName,
+	case st:is_constructor({ClassName2, {FuncName2, length(FuncArgs)}}) of
+		true ->
+			rcall(Ln1, ClassName2, FuncName2, FuncArgs)
+	end;
+%		false ->
+			
 
 transform_inner_expr(Expr) -> Expr.
 
