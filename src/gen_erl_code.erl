@@ -10,7 +10,7 @@
 
 -import(gen_ast,
 	[
-		match/3, rcall/4
+		match/3, rcall/4, integer/2, call/3
 	]).
 
 %%-----------------------------------------------------------------------------
@@ -28,21 +28,29 @@ match_param(Parameter) ->
 match_expr({match, Line, LeftExpr, RightExpr}) ->
 	transform_match(Line, LeftExpr, RightExpr);
 
+%% chamadas de funcao
+match_expr({call, _, _, _} = Expr) ->
+	create_call(Expr);
+
 %% clausula que ignora a transformacao (expressao ja esta em Erlang)
 match_expr(Expression) ->
 	Expression.
 
 %%-----------------------------------------------------------------------------
 %% atribuicao
-transform_match(Line, LeftExpr, RightExpr) ->
+transform_match(Ln1, LeftExpr, RightExpr) ->
 	case LeftExpr of
-		%% se for ooe, ignora...
-		{oo_remote, _Line2, _Self, _Attrb} ->
-			{nil, Line};
+		{oo_remote, Ln2, {atom, _, self}, {var, _, AttrName}} ->
+			ObjectID_AST = gen_ast:var(Ln2, "ObjectID"),
+			AttrNameAST = gen_ast:atom(Ln2, AttrName),
+			AttrValueAST = transform_inner_expr(RightExpr),
+			UpdateArgs = [ObjectID_AST, AttrNameAST, AttrValueAST],
+			rcall(Ln2, ooe, update_attr, UpdateArgs);
+
 		_ ->
 			Transformed_LeftExpr = transform_inner_expr(LeftExpr),
 			Transformed_RightExpr = transform_inner_expr(RightExpr),
-			match(Line, Transformed_LeftExpr, Transformed_RightExpr)
+			match(Ln1, Transformed_LeftExpr, Transformed_RightExpr)
 	end.
 
 %%-----------------------------------------------------------------------------
@@ -50,31 +58,53 @@ transform_match(Line, LeftExpr, RightExpr) ->
 %% falta definir todos os possíveis nós, no caso tuplas, listas e... oq mais?
 %% para botar um fim na recursao
 
-transform_inner_expr({call,Ln1,{oo_remote,_Ln2,ClassName,FuncName},FuncArgs}) ->
-	{atom, _, ClassName2} = ClassName,
-	{atom, _, FuncName2} = FuncName,
-	case st:is_constructor({ClassName2, {FuncName2, length(FuncArgs)}}) of
-		true ->
-			rcall(Ln1, ClassName2, FuncName2, FuncArgs)
-	end;
-%		false ->
-			
+transform_inner_expr({oo_remote, Ln1, ObjectVar, ObjectAttr}) ->
+	ObjectVar2 = call(Ln1, element, [integer(Ln1, 2), ObjectVar]),
+	{_, _, AttrName} = ObjectAttr,
+	LookupArgs = [ObjectVar2, gen_ast:atom(Ln1, AttrName)],
+	rcall(Ln1, ooe, lookup_attr, LookupArgs);
+
+%% chamadas de funcao
+transform_inner_expr({call, _, _, _} = Expr) ->
+	create_call(Expr);
+
+%% operacoes como +, -, ++, etc.
+transform_inner_expr({op, Line, Op, LeftExp, RightExp}) ->
+	{op, Line, Op, transform_inner_expr(LeftExp), transform_inner_expr(RightExp)};
+
+%% operacao unaria, como +1, -2...
+transform_inner_expr({op, Line, Op, RightExp}) ->
+	{op, Line, Op, transform_inner_expr(RightExp)};
+
+%% formacao de lista, internamente toda lista eh assim: [El1 | [El2 |[El3]]]
+transform_inner_expr({cons, Line, Element, Tail}) ->
+	Transformed_Element = transform_inner_expr(Element),
+	Transformed_Tail = transform_inner_expr(Tail),
+	{cons, Line, Transformed_Element, Transformed_Tail};
 
 transform_inner_expr(Expr) -> Expr.
 
-%% operacoes como +, -, ++, etc.
-%transform_inner_expr({op, Line, Op, LeftExp, RightExp}) ->
-%	{op, Line, Op, match_attr_expr(LeftExp), match_attr_expr(RightExp)};
+%%-----------------------------------------------------------------------------
+%% funcao para transformar chamada de funcoes
+create_call({call, Ln1, FuncLocation, ArgList}) ->
+	TransfFuncLocation = create_func_loc(FuncLocation, ArgList),
+	TransfArgList = [transform_inner_expr(Arg) || Arg <- ArgList],
+	{call, Ln1, TransfFuncLocation, TransfArgList}.
 
-%% exemplo de nó para dar fim a recursao:
-% transform_inner_expr({var ... }) -> {var ... };
+%% chamadas classe::funcao(Args)
+create_func_loc({oo_remote, Ln2, ClassName, FuncName}, ArgList) ->
+	{_, _, ClassName2} = ClassName,
+	{_, _, FuncName2} = FuncName,
+	case st:is_constructor({ClassName2, {FuncName2, length(ArgList)}}) of
+		true ->
+			{remote, Ln2, ClassName, FuncName}
+	end;
+	%		false ->
 
-%% operacao unaria, como +1, -2...
-%% transform_inner_expr({op, Line, Op, RightExp}) ->
-%% 	{op, Line, Op, match_attr_expr(RightExp)};
+%% chamadas de funcao modulo:funcao(Args)
+create_func_loc({remote, Ln2, Module, Function}, _ArgList) ->
+	{remote, Ln2, Module, Function};
 
-%% formacao de lista, internamente toda lista eh assim: [El1 | [El2 |[El3]]]
-%% transform_inner_expr({cons, Line, Element, Tail}) ->
-%%  Transformed_Element = transform_inner_expr(Element),
-%%  Transformed_Tail = transform_inner_expr(Tail),
-%%  {cons, Line, Transformed_Element, Transformed_Tail}.
+%% chamadas de funcao funcao(Args)
+create_func_loc(FunctionName, _ArgList) ->
+	FunctionName.

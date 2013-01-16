@@ -3,31 +3,34 @@
 
 %% criação de objetos
 new(AttrList) ->
-	AttrList2 = [{AttrName, []} || AttrName <- AttrList],
-	spawn(ooe, obj_loop, [AttrList2]).
+	AttrKeyValueList = [{AttrName, []} || AttrName <- AttrList],
+	ODict = orddict:from_list(AttrKeyValueList),
+	spawn(ooe, obj_loop, [ODict]).
 
 %% função que os processos de objeto rodam para guardar os valores dos attr
 %% o nome da classe fica na propria variavel
-obj_loop(AttrList) ->
+obj_loop(ODict) ->
 	receive
 		{Sender, attr_lookup, AttrName} ->
-			case orddict:find(AttrName, AttrList) of
+			case orddict:find(AttrName, ODict) of
 				{ok, AttrValue} ->
 					Sender ! {self(), attr_lookup, {value, AttrValue}};
 				error ->
-					Sender ! {self(), attr_lookup, {error, attr_not_found}}
+					Msg = {error, attr_not_found, AttrName},
+					Sender ! {self(), attr_lookup, Msg}
 			end,
-			obj_loop(AttrList);
+			obj_loop(ODict);
 
 		{Sender, attr_update, AttrName, AttrValue} ->
-			case orddict:find(AttrName, AttrList) of
+			case orddict:find(AttrName, ODict) of
 				{ok, _} ->
 					Sender ! {self(), attr_update, ok},
-					obj_loop(orddict:store(AttrName, AttrValue, AttrList));
+					obj_loop(orddict:store(AttrName, AttrValue, ODict));
 
 				error ->
-					Sender ! {self(), attr_update, {error, attr_not_found}},
-					obj_loop(AttrList)
+					Msg = {error, attr_not_found, AttrName},
+					Sender ! {self(), attr_update, Msg},
+					obj_loop(ODict)
 			end;
 
 		{Sender, destroy} ->
@@ -36,15 +39,15 @@ obj_loop(AttrList) ->
 	end.
 
 %% API para consulta e alteração de campos
-lookup_attr(ObjectID, attr_lookup, AttrName) ->
+lookup_attr(ObjectID, AttrName) ->
 	Self = self(),
 	ObjectID ! {Self, attr_lookup, AttrName},
 	receive
 		{ObjectID, attr_lookup, {value, AttrValue}} ->
 			AttrValue;
 
-		{ObjectID, attr_lookup, {error, attr_not_found}} ->
-			throw({attr_lookup, {error, attr_not_found}})
+		{ObjectID, attr_lookup, {error, attr_not_found, Attr}} ->
+			throw({attr_lookup, {error, attr_not_found, Attr}})
 	end.
 
 update_attr(ObjectID, AttrName, NewValue) ->
@@ -54,6 +57,6 @@ update_attr(ObjectID, AttrName, NewValue) ->
 		{ObjectID, attr_update, ok} ->
 			ok;
 
-		{ObjectID, attr_update, {error, attr_not_found}} ->
-			throw({attr_update, {error, attr_not_found}})
+		{ObjectID, attr_update, {error, attr_not_found, AttrName}} ->
+			throw({attr_update, {error, attr_not_found, AttrName}})
 	end.
