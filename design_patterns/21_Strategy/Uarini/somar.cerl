@@ -1,6 +1,6 @@
 -class(somar).
 -implements([operacao]).
--export(calcular/2).
+-export([calcular/2]).
 
 class_methods.
 
