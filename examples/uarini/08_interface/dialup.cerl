@@ -1,0 +1,8 @@
+-class(dialup).
+-implements(conexao).
+-export([conectar/0]).
+
+class_methods.
+
+conectar() ->
+	"Modem discando...".

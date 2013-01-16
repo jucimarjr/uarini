@@ -1,0 +1,6 @@
+-interface(conexao).
+-export([conectar/0]).
+
+class_methods.
+
+conectar().
