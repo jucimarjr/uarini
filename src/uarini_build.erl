@@ -20,11 +20,12 @@ get_ast(ErlangClassFileName) ->
 %%-----------------------------------------------------------------------------
 %% Retorna a AST caso nao exista nenhum error no parse
 filter_result([], ReverseForms) ->
-	lists:reverse(ReverseForms);
+	{ok, lists:reverse(ReverseForms)};
 filter_result([{ok, F}|Result], RFs) ->
 	filter_result(Result, [F|RFs]);
 filter_result([{error,Msg}|_], _) ->
-	erlang:error(Msg).
+	%erlang:error(Msg).
+	{error, Msg}.
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo
 get_tokens(ErlangClassFileName) ->
