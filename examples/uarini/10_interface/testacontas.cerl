@@ -1,0 +1,18 @@
+-class(testacontas).
+-static([main/0]).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	CC = contacorrente::constructor(),
+	CC::depositar(1200.20),
+	cc::sacar(300),
+	
+	CP = contapoupanca::constructor(),
+	CP::depositar(500.50),
+	CP::sacar(25),
+	
+	Gerador = geradorextratos::constructor(),
+	Gerador::geradorConta(CC),
+	Gerador::geradorConta(CP).
