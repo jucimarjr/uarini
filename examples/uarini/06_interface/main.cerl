@@ -1,0 +1,16 @@
+-class(main).
+-export([main/0]).
+-static([main/0]).
+
+class_methods.
+
+main() ->
+	F1 = quadrado::constructor(4),
+	F2 = circulo::constructor(2),
+	
+	F1 = Quadrado,
+	F2 = Circulo,
+	
+	io:format("Area da Figura 1 eh: ~p~n", [F1::calcularArea()]),
+	io:format("Area da Figura 2 eh: ~p~n", [F2::calcularArea()]).
+	

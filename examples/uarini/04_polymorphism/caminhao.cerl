@@ -1,0 +1,20 @@
+-class(caminhao).
+-extends(ipva).
+-constructor([constructor/2]).
+
+class_attributes.
+
+Ano;
+Placa;
+VlrBase = 1.50;
+QtdEixos = 8;
+
+class_methods.
+
+constructor(Ano, Placa) ->
+	self::Ano = Ano,
+	self::Placa = Placa.
+	
+
+calcularIpva() ->
+	VlrBase * QtdCavalos * QtdEixos.

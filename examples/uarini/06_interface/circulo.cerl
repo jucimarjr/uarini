@@ -1,0 +1,17 @@
+-class(circulo)
+-implements(figura).
+-export([calcularArea/0]).
+-constructor([constructor/1]).
+
+class_attributes.
+
+Raio.
+
+class_methods.
+
+constructor(Raio) ->
+	self::Raio = Raio.
+	
+calcularArea() ->
+	Area = 3.14 * Raio * Raio,
+	Area.

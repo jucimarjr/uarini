@@ -1,0 +1,18 @@
+-class(ipvacarro).
+-extends(ipva).
+-constructor([construtor/2]).
+
+class_attributes.
+
+Ano;
+Placa;
+VlrBase = 1.20.
+
+class_methods.
+
+constructor(Ano, Placa) ->
+	self::Ano = Ano,
+	self::Placa = Placa.
+
+calcularIpva() ->
+	VlrBase * QtdCavalos.

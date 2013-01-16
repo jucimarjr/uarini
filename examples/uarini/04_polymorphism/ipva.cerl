@@ -1,0 +1,11 @@
+-class(ipva).
+-export([calcularIpva/0]).
+
+class_attributes.
+
+QtdCavalos = 150;
+QtdEixos.
+
+class_methods.
+
+calcularIpva() -> 0.

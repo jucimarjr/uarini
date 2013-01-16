@@ -1,0 +1,14 @@
+-class(polimorfismo).
+-export([main/0]).
+-static([main/0]).
+
+class_methods.
+
+main() ->
+	Caminhao = caminhao::constructor(1995, "JXT - 1234"),
+	Carro = carro::constructor(2008, "MNO - 4321").
+	
+	Ipva = Caminhao,
+	io:format("Ipva do caminhao: ~p~n", [Ipva::calcularIpva()]),
+	Ipva = Carro,
+	io:format("Ipva do carro: ~p~n", [Ipva::calcularIpva()]).

@@ -1,0 +1,19 @@
+-class(quadrado).
+-implements(figura).
+-export([calcularArea/0]).
+-constructor([constructor/1]).
+
+class_attributes.
+
+Lado.
+
+class_methods.
+
+constructor(Lado) ->
+	self::Lado = Lado.
+	
+calcularArea() ->
+	Area = Lado * Lado,
+	Area.
+	
+

@@ -1,0 +1,8 @@
+-class(onibus).
+-extends(transporte).
+-export([exibeDados/0]).
+
+class_methods.
+
+exibeDados() ->
+	io:format("Onibus: Indo no engarrafamento... ~n").
