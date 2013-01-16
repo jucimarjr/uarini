@@ -1,0 +1,8 @@
+-class(relatorioprodutos).
+-implements(irelatorio).
+-export([getSql/0]).
+
+class_methods.
+
+getSql() ->
+	"select * from produtos".

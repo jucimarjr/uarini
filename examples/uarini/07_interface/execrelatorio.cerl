@@ -1,0 +1,15 @@
+-class(execrelatorio).
+-static([main/0]).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	RelatorioCli = relatorioclientes::constructor(),
+	RelatorioPro = relatorioprodutos::constructor(),
+	
+	Relatorios = RelatorioCli,
+	Relatorios::getSql(),
+	
+	Relatorios = RelatorioPro,
+	Relatorios::getSql().

@@ -1,0 +1,8 @@
+-class(relatorioclientes).
+-implements(irelatorio).
+-export([getSql/0]).
+
+class_methods.
+
+getSql() ->
+	"select * from clientes".
