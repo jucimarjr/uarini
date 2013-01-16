@@ -1,0 +1,8 @@
+-class(subtracao).
+-extends(operacaomatematica).
+-export([calcular/2]).
+
+class_methods.
+
+calcular(X,Y) ->
+	X-Y.
