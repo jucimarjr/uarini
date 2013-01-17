@@ -1,14 +1,16 @@
 -class(pingping).
 -export([run/2, run/3]).
--static([run/2, run/3]).
--include("conf.hrl").
+-static([run/2, run/3, printResult/5,bandwidth_calc/2, error_report/2, time_microseg/0]).
+%%-include("conf.hrl").
+
+class_methods.
 
 run(DataSize, R) ->
    OutFileLocation = "out_cerl_pingping.txt",
 
    case file:open(OutFileLocation, [append]) of
 	{error, Why} ->
-	    ?ERR_REPORT("Falha ao criar arquivo!", Why);
+	    error_report("Falha ao criar arquivo!", Why);
    
 	{ok, OutFile} ->
 	    run(DataSize, R, OutFile)
@@ -76,7 +78,16 @@ generate_data(Size, Bytes) ->
 %%-----------------------------------------------------------------------------
 %% time_microseg()
 %% captura o tempo atual em microsegundos
-
 time_microseg() ->
     {MS, S, US} = now(),
     (MS * 1.0e+12) + (S * 1.0e+6) + US.
+
+%%-----------------------------------------------------------------------------
+%% error_report(Msg, Reason)
+%% formata a msg de erro
+error_report(Msg, Reason) ->
+	io:format("%%%%%%%%%%%%%% ERRO %%%%%%%%%%%%%%\n" ++
+				     "Msg: ~w\n" ++
+				     "Reason: ~w\n\n", [Msg, Reason]).
+
+

@@ -7,7 +7,7 @@ compile_all_beam_test_() ->
 		[compile_beam(CerlFile) ||
 			CerlFile <-  
 				filelib:wildcard("examples/uarini/*/*.cerl") ++
-				filelib:wildcard("design_patterns/*/Uarini/*.cerl")
+				filelib:wildcard("examples/mpi/*/*.cerl")
 		]
 	
 		%%[compile_beam(CerlFile) ||
