@@ -1,0 +1,23 @@
+-class(proc).
+-export([new/3,destroy/0]).
+-constructor([new/3]).
+
+new(_,Parent, 0) ->
+    Parent ! {finish, self()};
+
+new(Data, Parent, R) ->
+    receive
+	{init, Parent, Peer} ->
+	    Peer ! {self(), Data},
+	    pingping(Data, Parent, R-1);
+
+	{Peer, Data} ->
+	    Peer ! {self(), Data},
+	    pingping(Data, Parent, R-1)
+    end.
+
+destroy() ->
+    receive
+	{finish, self()} ->
+	    ok
+    end.
