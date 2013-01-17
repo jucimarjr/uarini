@@ -1,4 +1,4 @@
--class(circulo)
+-class(circulo).
 -implements(figura).
 -export([calcularArea/0]).
 -constructor([constructor/1]).
