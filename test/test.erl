@@ -18,10 +18,17 @@ compile_all_beam_test_() ->
 	{
 		"Uarini compiling .CERL and generating .BEAM...",
 		[compile_beam(CerlFile) ||
-			CerlFile <- filelib:wildcard("src_cerl/*.cerl") ++ 
+			CerlFile <-  
 				filelib:wildcard("examples/uarini/*/*.cerl") ++
 				filelib:wildcard("design_patterns/*/Uarini/*.cerl")
 		]
+	
+		%%[compile_beam(CerlFile) ||
+		%%	CerlFile <-  
+		%%		filelib:wildcard("examples/uarini/*/*.cerl") ++
+		%%		filelib:wildcard("design_patterns/*/Uarini/*.cerl")
+		%%]
+	
 	}.
 
 compile_beam(CerlFile) ->

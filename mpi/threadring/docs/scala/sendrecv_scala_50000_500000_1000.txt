@@ -1,2 +1,0 @@
-DataSize	Repetition	NProc	Time[us]
-50000		500000		1000		13552839221
