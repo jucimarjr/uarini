@@ -9,7 +9,6 @@ build() ->
 	compile:file(uarini_parse),
 	ok.
 
-
 %%-----------------------------------------------------------------------------
 %% Extrai a Abstract Syntax Tree de um arquivo .cerl
 get_ast(ErlangClassFileName) ->
@@ -17,6 +16,8 @@ get_ast(ErlangClassFileName) ->
     TokenFormList = split_forms(Tokens),
     ParseResultList = [uarini_parse:parse(T) || T <- TokenFormList],
     filter_result(ParseResultList, []).
+
+
 %%-----------------------------------------------------------------------------
 %% Retorna a AST caso nao exista nenhum error no parse
 filter_result([], ReverseForms) ->
@@ -26,6 +27,7 @@ filter_result([{ok, F}|Result], RFs) ->
 filter_result([{error,Msg}|_], _) ->
 	%erlang:error(Msg).
 	{error, Msg}.
+
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo
 get_tokens(ErlangClassFileName) ->
