@@ -1,11 +1,7 @@
 -abstract(componente).
-
 -export([getPrecoCusto/0, getPrecoLucroMinimo/0, getPrecoLucroMaximo/0]).
 
-
-
 class_methods.
-
 
 
 getPrecoCusto(). 

@@ -13,7 +13,7 @@ constructor(Name) ->
 	self::Name = Name.
 
 interpreter(map<string, expression> Variables) ->
-	case Variables::get(self::Name) == null off
+	case Variables::get(self::Name) == null of
 		true ->
 			0;
 		false ->

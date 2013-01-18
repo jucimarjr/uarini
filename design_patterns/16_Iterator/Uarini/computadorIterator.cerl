@@ -1,6 +1,6 @@
 -class(computadorIterator).
 -constructor([constructor/1]).
--export([proximoComponente/0, ComponenteAnterior/0]).
+-export([proximoComponente/0, componenteAnterior/0]).
 
 class_attributes.
 
@@ -26,7 +26,7 @@ proximoComponente() ->
 	end,
 	R.
 
-ComponenteAnterior() ->
+componenteAnterior() ->
 	Current = Current - 1,
 	Steps = 0,
 	R = getComponente(Computador),

@@ -8,8 +8,8 @@ protected drawingAPI DrawingAPI.
 
 class_methods.
 
-protected constructor(DrawingAPI) ->
-		when is_instance(DrawingAPI, drawingAPI)
+protected constructor(DrawingAPI)
+		when is_instance(DrawingAPI, drawingAPI) ->
 	self::DrawingAPI = DrawingAPI.
 
 draw().

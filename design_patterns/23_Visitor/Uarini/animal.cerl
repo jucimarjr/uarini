@@ -7,4 +7,4 @@ falar(Text).
 
 correr(Text).
 
- accept(Visitor) when is_instance(Visitor, visitor).
+accept(Visitor) when is_instance(Visitor, visitor).

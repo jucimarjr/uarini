@@ -1,6 +1,6 @@
 -class(emailLogger).
 -extends(logger).
--constrcutor([constructor/1]).
+-constructor([constructor/1]).
 
 class_methods.
 

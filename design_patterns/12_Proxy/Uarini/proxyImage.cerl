@@ -1,6 +1,6 @@
 -interface(proxyImage).
 -implements([image]).
--constrcutor([constrcutor/1]).
+-constructor([constructor/1]).
 -export([displayImage/0]).
 
 class_attributes.
