@@ -26,6 +26,7 @@ debug: compile
 ebin/uarini.beam: $(INCLUDE_DIR)/*.hrl src/*.erl
 	@ echo Compiling Parser ...
 	@ $(ERL) -eval 'yecc:file("src/uarini_parse.yrl", [{verbose, true}]), halt().'
+	@ $(ERL) -eval 'yecc:file("src/aleppo_parser.yrl", [{verbose, true}]), halt().'
 	@ mkdir -p $(EBIN_DIR)
 	@ echo Compiling Erlang source...
 	@ $(ERLC) -o $(EBIN_DIR) src/*.erl
@@ -42,6 +43,13 @@ $(TEST_EBIN_DIR)/test.beam : test/*.erl
 src/uarini_parse.erl: 
 	@ echo Compiling Parser ...
 	@ $(ERL) -eval 'yecc:file("src/uarini_parse.yrl", [{verbose, true}]), halt().'
+	@ mkdir -p $(EBIN_DIR)
+	@ $(ERLC) -o $(EBIN_DIR) $@
+	@ echo
+
+src/aleppo_parser.erl:
+	@ echo Compiling Aleppo Parser ...
+	@ $(ERL) -eval 'yecc:file("src/aleppo_parser.yrl", [{verbose, true}]), halt().'
 	@ mkdir -p $(EBIN_DIR)
 	@ $(ERLC) -o $(EBIN_DIR) $@
 	@ echo
