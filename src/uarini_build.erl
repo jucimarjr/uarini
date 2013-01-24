@@ -1,5 +1,5 @@
 -module(uarini_build).
--export([build/0,get_tokens/1,get_ast/1]).
+-export([build/0,get_tokens/1,get_ast/1,get_raw_tokens/1]).
 
 %%-----------------------------------------------------------------------------
 %%Gera os analisadores lexico e sintatico e compila o compilador
@@ -30,13 +30,23 @@ filter_result([{error,Msg}|_], _) ->
 
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo
-get_tokens(ErlangClassFileName) ->
+get_raw_tokens(ErlangClassFileName) ->
 	%%{ok, Tokens} = aleppo:scan_file(ErlangClassFileName),
     %% Remove EOF token
     %%lists:sublist(Tokens, length(Tokens)-1).
     {ok, Source} = file:read_file(ErlangClassFileName),
     {ok, Tokens, _Lines} = uarini_scan:string( binary_to_list(Source) ),
     Tokens.
+
+%%-----------------------------------------------------------------------------
+%% Extrai a lista de Tokens Preprocessados de um arquivo
+get_tokens(ErlangClassFileName) ->
+    {ok, Tokens} = aleppo:scan_file(ErlangClassFileName),
+    [remove_column(T) || T <- Tokens, element(1, T) =/= eof].
+
+remove_column(TupleToken) ->
+    [Lexema|[{L,_C}|Etc]] = tuple_to_list(TupleToken),
+    list_to_tuple([Lexema|[L|Etc]]).
 
 %%-----------------------------------------------------------------------------
 %% Particiona o fluxo de token em subfluxos terminados pelo token dot

@@ -15,8 +15,22 @@ compile_all_beam_test_() ->
 		%%		filelib:wildcard("examples/uarini/*/*.cerl") ++
 		%%		filelib:wildcard("design_patterns/*/Uarini/*.cerl")
 		%%]
-	
 	}.
+
+compile_tokenize_test_() ->
+    {"Uarini comparing preprocessor and scanner",
+    [compare_raw_preprocessed_tokens(CerlFile) ||
+		CerlFile <-
+			filelib:wildcard("examples/uarini/*/*.cerl") ++
+			filelib:wildcard("examples/mpi/*/*.cerl")
+        ]}
+.
+
+compare_raw_preprocessed_tokens(CerlFile) ->
+    {CerlFile, ?_assertEqual(
+        uarini_build:get_raw_tokens(CerlFile),
+        uarini_build:get_tokens(CerlFile)
+    )}.
 
 compile_beam(CerlFile) ->
 	{
