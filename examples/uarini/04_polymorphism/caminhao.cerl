@@ -6,8 +6,8 @@ class_attributes.
 
 Ano;
 Placa;
-VlrBase = 1.50;
-QtdEixos = 8.
+VlrBase;
+QtdEixos.
 
 class_methods.
 

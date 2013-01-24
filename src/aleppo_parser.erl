@@ -1,7 +1,7 @@
 -module(aleppo_parser).
 -export([parse/1, parse_and_scan/1, format_error/1]).
 
--file("c:/PROGRA~2/erl5.9/lib/parsetools-2.0.7/include/yeccpre.hrl", 0).
+-file("/usr/local/lib/erlang/lib/parsetools-2.0.7/include/yeccpre.hrl", 0).
 %%
 %% %CopyrightBegin%
 %%
