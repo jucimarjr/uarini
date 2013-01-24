@@ -31,9 +31,12 @@ filter_result([{error,Msg}|_], _) ->
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo
 get_tokens(ErlangClassFileName) ->
-	{ok, Tokens} = aleppo:scan_file(ErlangClassFileName),
+	%%{ok, Tokens} = aleppo:scan_file(ErlangClassFileName),
     %% Remove EOF token
-    lists:sublist(Tokens, length(Tokens)-1).
+    %%lists:sublist(Tokens, length(Tokens)-1).
+    {ok, Source} = file:read_file(ErlangClassFileName),
+    {ok, Tokens, _Lines} = uarini_scan:string( binary_to_list(Source) ),
+    Tokens.
 
 %%-----------------------------------------------------------------------------
 %% Particiona o fluxo de token em subfluxos terminados pelo token dot
