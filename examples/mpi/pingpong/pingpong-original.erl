@@ -1,12 +1,14 @@
--module(pingping).
+-module(pingpong).
 -export([run/2, run/3]).
+%%-compile(export_all).
+-include("conf.hrl").
 
 run(DataSize, R) ->
-   OutFileLocation = "out_cerl_pingping.txt",
+   OutFileLocation = "../../docs/erlang/out_erl_pingpong.txt",
 
    case file:open(OutFileLocation, [append]) of
 	{error, Why} ->
-	    error_report("Falha ao criar arquivo!", Why);
+	    ?ERR_REPORT("Falha ao criar arquivo!", Why);
    
 	{ok, OutFile} ->
 	    run(DataSize, R, OutFile)
@@ -16,31 +18,37 @@ run(DataSize, R, OutFile) ->
     Data = generate_data(DataSize),
     Self = self(),
     SpawnStart = time_microseg(),
-    P1 = proc:new(Data, Self, R), % cria P1 = {proc, <0.35.0>}
-	P2 = proc:new(Data, Self, R), % cria P2 = {proc, <0.36.0>}
+    P1 = spawn(fun() -> pingpong(Data, Self, R) end),
+    P2 = spawn(fun() -> pingpong(Data, Self, R) end),
     SpawnEnd = time_microseg(),
     TimeStart = time_microseg(),
-	(erlang:element(1, P1)):send(element(2, P1), {init, self(), ooe:lookup_attr(element(2, P2), 'Pid')}), % proc:send(<0.35.0>, ...)
-	(erlang:element(1, P2)):send(element(2, P2), {init, self(), ooe:lookup_attr(element(2, P1), 'Pid')}), % proc:send(<0.36.0>, ...)
-	finalize(ooe:lookup_attr(element(2, P1), 'Pid')),
-	finalize(ooe:lookup_attr(element(2, P2), 'Pid')),
+    P1 ! {init, self(), P2},    
+    finalize(P1),
+    finalize(P2),
     TimeEnd = time_microseg(),
-	ooe:destroy(element(2, P1)),
-	ooe:destroy(element(2, P2)),
     TotalTime = TimeEnd - TimeStart,
     SpawnTime = SpawnEnd - SpawnStart,
     printResult(Data, R, TotalTime, SpawnTime, OutFile).
 
-%%-----------------------------------------------------------------------------
-%% finalize( Pid )
-%% espera termino da execucao do processo
-%%
-%% Pid		= o pid do processo
-finalize(Pid) ->
-	receive
-		{finish, Pid} ->
-			ok
-	end.
+pingpong(_,Parent, 0) ->
+    Parent ! {finish, self()};
+
+pingpong(Data, Parent, R) ->
+    receive
+	{init, Parent, Peer} ->
+	    Peer ! {self(), Data},
+	    pingpong(Data, Parent, R-1);
+
+	{Peer, Data} ->
+	    Peer ! {self(), Data},
+	    pingpong(Data, Parent, R-1)
+    end.
+
+finalize(P1) ->
+    receive
+	{finish, P1} ->
+	    ok
+    end.
 
 %%-----------------------------------------------------------------------------
 %% printResult( Data, R, Time, OutFile )
@@ -87,16 +95,7 @@ generate_data(Size, Bytes) ->
 %%-----------------------------------------------------------------------------
 %% time_microseg()
 %% captura o tempo atual em microsegundos
+
 time_microseg() ->
     {MS, S, US} = now(),
     (MS * 1.0e+12) + (S * 1.0e+6) + US.
-
-%%-----------------------------------------------------------------------------
-%% error_report(Msg, Reason)
-%% formata a msg de erro
-error_report(Msg, Reason) ->
-	io:format("%%%%%%%%%%%%%% ERRO %%%%%%%%%%%%%%\n" ++
-				     "Msg: ~w\n" ++
-				     "Reason: ~w\n\n", [Msg, Reason]).
-
-

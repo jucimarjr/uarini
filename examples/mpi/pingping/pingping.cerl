@@ -22,16 +22,27 @@ run(DataSize, R, OutFile) ->
     SpawnStart = time_microseg(),
     P1 = proc::new(Data, Self, R),
 	P2 = proc::new(Data, Self, R),
-	P1::start(),
-	P2::start(),
     SpawnEnd = time_microseg(),
     TimeStart = time_microseg(),
-    P1 ! {init, self(), P2},
-    P2 ! {init, self(), P1},
+    P1::send({init, self(), P2::Pid}),
+    P2::send({init, self(), P1::Pid}),
+	finalize(P1::Pid),
+	finalize(P2::Pid),
     TimeEnd = time_microseg(),
     TotalTime = TimeEnd - TimeStart,
     SpawnTime = SpawnEnd - SpawnStart,
     printResult(Data, R, TotalTime, SpawnTime, OutFile).
+
+%%-----------------------------------------------------------------------------
+%% finalize( Pid )
+%% espera termino da execucao do processo
+%%
+%% Pid		= o pid do processo
+finalize(Pid) ->
+	receive
+		{finish, Pid} ->
+			ok
+	end.
 
 %%-----------------------------------------------------------------------------
 %% printResult( Data, R, Time, OutFile )
