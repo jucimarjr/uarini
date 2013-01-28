@@ -60,3 +60,9 @@ update_attr(ObjectID, AttrName, NewValue) ->
 		{ObjectID, attr_update, {error, attr_not_found, AttrName}} ->
 			throw({attr_update, {error, attr_not_found, AttrName}})
 	end.
+
+destroy(ObjectID) ->
+	ObjectID ! {self(), destroy},
+	receive
+		{ObjectID, destroy, ok} -> ok
+	end.

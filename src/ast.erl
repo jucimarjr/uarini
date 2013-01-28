@@ -22,10 +22,12 @@ get_urn_forms(FileName) ->
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo .cerl
 get_urn_tokens(FileName) ->
-	{ok, FileContent} = file:read_file(FileName),
-	Program = binary_to_list(FileContent),
-	{ok, Tokens, _EndLine} = uarini_scan:string(Program),
-	Tokens.
+    {ok, Tokens} = aleppo:scan_file(FileName),
+    [remove_column(T) || T <- Tokens, element(1, T) =/= eof].
+
+remove_column(TupleToken) ->
+    [Lexema|[{L,_C}|Etc]] = tuple_to_list(TupleToken),
+    list_to_tuple([Lexema|[L|Etc]]).
 
 %%-----------------------------------------------------------------------------
 %% Quebra os forms de um fluxo de Tokens identificados por 'dot'
@@ -134,6 +136,11 @@ get_forms_info([Form | FormList], ODict) ->
 
 %%-----------------------------------------------------------------------------
 %% faz o match do form para extrair a informação correspondente
+
+%% caso nao tenha atributos
+match_form({class_attributes, _}, [{class_methods, _} | _FormList]) ->
+	nop;
+
 match_form({class_attributes, _}, [AttrList | FormList]) ->
 	AttrInfoList = get_attr_info(AttrList),
 	{attributes, AttrInfoList, FormList};

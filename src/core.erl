@@ -37,10 +37,11 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	%% ExportList eh uma lista de funcoes assim: {Nome, Arity}
 	%ExportList2 = add_parent_methods(ExportList),
 	ConstrList = st:get_all_constr_info(ErlangModuleName),
-	ExportList2 = ExportList ++ ConstrList,
+	ExportList2 = filter_object_mthd(ExportList),
+	ExportList3 = ExportList2 ++ ConstrList,
 
 	ErlangModule =
-		create_module(ErlangModuleName, FunctionList, ExportList2, OtherForms),
+		create_module(ErlangModuleName, FunctionList, ExportList3, OtherForms),
 
 	case st:get_errors() of
 		[] ->
@@ -52,6 +53,30 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	end.
 
 %%-----------------------------------------------------------------------------
+%% filtra os metodos de objetos para acrescer a Arity, pois eles possuem
+%% o ObjectID como parametro extra
+filter_object_mthd(ExportList) ->
+	filter_object_mthd(ExportList, []).
+
+filter_object_mthd([], NewExportList) ->
+	lists:reverse(NewExportList);
+
+filter_object_mthd([FunctionInfo | ExportList], NewExportList ) ->
+	{FunctionName, Arity} = FunctionInfo,
+	ClassName = st:get_scope(class),
+	MethodKey = {ClassName, {FunctionName, Arity}},
+
+	case (st:is_static(MethodKey) or st:is_constructor(MethodKey)) of
+		true ->
+			filter_object_mthd(ExportList, [FunctionInfo | NewExportList]);
+
+		false ->
+			NewFunctionInfo = {FunctionName, Arity + 1},
+			filter_object_mthd(ExportList, [NewFunctionInfo | NewExportList])
+	end.
+			
+
+%%-----------------------------------------------------------------------------
 %% Filtra os forms, deixando apenas os especificos do erlang
 %%    os forms do uarini sao tratados ao guardar as info das classes na ST
 %%    eles representam os atributos e os metodos
@@ -59,7 +84,7 @@ get_erl_forms(UariniForms) ->
 	match_erl_form(UariniForms, [], [], []).
 
 match_erl_form([], ExportList, FunctionList, OtherForms) ->
-	{ExportList, FunctionList, OtherForms};
+	{ExportList, lists:reverse(FunctionList), lists:reverse(OtherForms)};
 
 match_erl_form([Form | UariniForms], ExportList, FunctionList, OtherForms) ->
 	case Form of
@@ -88,12 +113,11 @@ match_erl_form([Form | UariniForms], ExportList, FunctionList, OtherForms) ->
 			st:put_scope(function, {Name, Arity}),
 			Transformed_Method = get_erl_function(Line, Name, Arity, Clauses),
 			N_FunctionList = [Transformed_Method | FunctionList],
-			match_erl_form(UariniForms, ExportList, N_FunctionList, OtherForms)
+			match_erl_form(UariniForms, ExportList, N_FunctionList, OtherForms);
 
-		%% {constructor, ConstructorData} ->
-		%% 	ConstructorAst = create_constructor(ClassName, ConstructorData),
-		%% 	NewErlangModuleBody = [ConstructorAst | ErlangModuleBody],
-		%% 	match_erl_member(ClassName, Rest, NewErlangModuleBody)
+		_AnyOtherForm ->
+			N_OtherForms = [Form | OtherForms],
+			match_erl_form(UariniForms, ExportList, FunctionList, N_OtherForms)
 	end.
 
 %%-----------------------------------------------------------------------------
@@ -101,15 +125,37 @@ match_erl_form([Form | UariniForms], ExportList, FunctionList, OtherForms) ->
 %% para Erlang
 get_erl_function(Line, Name, Arity, Clauses) ->
 	Transformed_Clauses = lists:map(fun get_erl_clause/1, Clauses),
-	{function, Line, Name, Arity, Transformed_Clauses}.
+
+	Scope = st:get_scope(),
+
+	IsStaticOrConstructor = (st:is_static(Scope) or st:is_constructor(Scope)),
+	case IsStaticOrConstructor of
+		true ->
+			{function, Line, Name, Arity, Transformed_Clauses};
+
+		false ->
+			{function, Line, Name, Arity + 1, Transformed_Clauses}
+	end.
 
 %%-----------------------------------------------------------------------------
 %% Transforma uma clausula de uma funcao, convertendo as expressoes de Uarini
 %% para Erlang
 get_erl_clause({clause, Line, ParamList, [], ExprList}) ->
-	Transformed_ParamList = lists:map(fun get_erl_param/1, ParamList),
+	TransfParamListTemp = lists:map(fun get_erl_param/1, ParamList),
 
-	Transformed_ExprList = lists:map(fun get_erl_expr/1, ExprList),
+	Scope = st:get_scope(),
+
+	IsStaticOrConstructor = (st:is_static(Scope) or st:is_constructor(Scope)),
+	case IsStaticOrConstructor of
+		false ->
+			TransfObjectID = gen_ast:var(Line, 'ObjectID'),
+			TransfParamList = [TransfObjectID | TransfParamListTemp];
+
+		true ->
+			TransfParamList = TransfParamListTemp
+	end,
+
+	TransfExprList = lists:map(fun get_erl_expr/1, ExprList),
 
 	Scope = st:get_scope(),
 	{ScopeClass, _ScopeFunction} = Scope,
@@ -124,12 +170,12 @@ get_erl_clause({clause, Line, ParamList, [], ExprList}) ->
 
 	case st:is_constructor(Scope) of
 		true ->
-			Transformed_ExprList2 =
-				[NewObjectID_AST | Transformed_ExprList] ++ [ObjectID_AST],
-			{clause, Line, Transformed_ParamList, [], Transformed_ExprList2};
+			TransfExprList2 =
+				[NewObjectID_AST | TransfExprList] ++ [ObjectID_AST],
+			{clause, Line, TransfParamList, [], TransfExprList2};
 
 		false ->
-			{clause, Line, Transformed_ParamList, [], Transformed_ExprList}
+			{clause, Line, TransfParamList, [], TransfExprList}
 	end.
 
 get_erl_param(Parameter) -> gen_erl_code:match_param(Parameter).

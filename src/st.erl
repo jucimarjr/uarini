@@ -11,12 +11,13 @@
 		%% criar / zerar dicionário
 		new/0,		destroy/0,
 
-		put_scope/2,	get_scope/0,
+		put_scope/2,	get_scope/0, get_scope/1,
 		put_error/2,	get_errors/0,
 
 		%% informações das classes
 		insert_classes_info/1,	insert_parent_members/1,  exist_class/1,
 		is_constructor/1,		get_all_constr_info/1,
+		is_static/1,			is_public/1,
 		is_superclass/2,		get_superclass/1,
 		exist_attr/2,			get_attr_info/2,		  get_all_attr_info/1
 	]).
@@ -33,6 +34,7 @@ destroy() ->
 put_scope(class, Class) ->
 	put({scope, class}, Class);
 
+%% Function = {NomeFuncao, Arity}
 put_scope(function, Function) ->
 	put({scope, function}, Function).
 
@@ -40,6 +42,9 @@ get_scope()    ->
 	Class = get({scope, class}),
 	Function = get({scope, function}),
 	{Class, Function}.
+
+get_scope(class) ->
+	get({scope, class}).
 
 put_error(Line, Code) ->
 	NewErrors = [{Line, Code} | get(errors)],
@@ -151,6 +156,17 @@ is_constructor({ClassName, {FunctionName, Arity}}) ->
 get_all_constr_info(ClassName) ->
 	{_, _, ConstrList, _, _} = get({oo_classes, ClassName}),
 	ConstrList.
+
+%%----------------------------------------------------------------------------
+%%                              METODOS
+%% verificoes de metodos 
+is_static({ClassName, {FunctionName, Arity}}) ->
+	{_, _, _, _, StaticList} = get({oo_classes, ClassName}),
+	helpers:has_element({FunctionName, Arity}, StaticList).
+
+is_public({ClassName, {FunctionName, Arity}}) ->
+	{_, _, _, ExportList, _} = get({oo_classes, ClassName}),
+	helpers:has_element({FunctionName, Arity}, ExportList).
 
 %%----------------------------------------------------------------------------
 %%                              CAMPOS

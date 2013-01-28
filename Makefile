@@ -1,4 +1,4 @@
-B1;3201;0cSRC_DIR=src
+SRC_DIR=src
 EBIN_DIR=ebin
 INCLUDE_DIR=include
 TEST_EBIN_DIR=test/ebin
@@ -30,7 +30,6 @@ ebin/uarini.beam: $(INCLUDE_DIR)/*.hrl src/*.erl
 	@ mkdir -p $(EBIN_DIR)
 	@ echo Compiling Erlang source...
 	@ $(ERLC) -o $(EBIN_DIR) src/*.erl
-	
 	@ echo
 
 $(TEST_EBIN_DIR)/test.beam : test/*.erl

@@ -11,6 +11,13 @@
 function(Line, Name, ParametersLength, ErlangFunctionBody) ->
 	{function, Line, Name, ParametersLength, ErlangFunctionBody}.
 
+%%-----------------------------------------------------------------------------
+%%                     UARINI
+%% Expr jah deve ser uma tupla ou uma variavel que contem uma tupla
+element(Ln, Number, Expr) ->
+	rcall(Ln, erlang, element, [integer(Ln, Number), Expr]).
+
+%%-----------------------------------------------------------------------------
 %% lista de parâmetros da definição de uma função
 function_args_list(Line, ParametersList) ->
 	function_args_list(Line, ParametersList, []).
