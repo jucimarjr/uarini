@@ -12,7 +12,8 @@ class_methods.
 
 constructor(Nome, Nasc) ->  
     self::Nome = Nome,
-    self::Nascimento = Nasc.
+    self::Nascimento = Nasc,
+	self::DinheiroNaCarteira = 0.
     
 gastar(Valor) -> 
     self::DinheiroNaCarteira = self::DinheiroNaCarteira - Valor.
