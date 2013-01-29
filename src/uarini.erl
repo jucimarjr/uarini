@@ -25,7 +25,7 @@ compile(FileNameList) ->
 
 	[ begin
 		erl_tidy:file(ErlangFile, [{backups,false}, {quiet, true}]),
-		compile:file(ErlangFile, [{outdir, filename:dirname(ErlangFile)}])
+		compile:file(ErlangFile, [{outdir, filename:dirname(ErlangFile)},verbose,report_errors,report_warnings])
 	  end
 	  || ErlangFile <- ErlangFileList ],
 	ok.

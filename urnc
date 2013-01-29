@@ -27,7 +27,7 @@ function usage
 
 function generate_erl
 {
-	echo "Generating Erlang source code from Uarini..."
+	echo "Generating Erlang source code from ooErlang..."
 	compileParams=""
 	for (( i = 0; i < fileIndex; i++ ))
 	do

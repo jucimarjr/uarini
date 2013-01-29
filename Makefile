@@ -57,6 +57,7 @@ clean:
 	@ echo Cleaning...
 	rm -f erl_crash.dump
 	rm -f *.erl
+	rm -f *.beam
 	rm -f $(SRC_DIR)/uarini_parse.erl
 	rm -rf $(EBIN_DIR)/
 	rm -rf $(TEST_EBIN_DIR)/

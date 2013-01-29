@@ -17,8 +17,11 @@ compile_tokenize_test_() ->
 		CerlFile <-
 			filelib:wildcard("examples/uarini/*/*.cerl") ++
 			filelib:wildcard("examples/mpi/*/*.cerl")
-        ]}
-.
+        ]}.
+
+compile_pingping_test_() ->
+	?_assertEqual({ok},{uarini:compile(filelib:wildcard("../examples/mpi/pingping/*.cerl"))}).
+
 
 compare_raw_preprocessed_tokens(CerlFile) ->
     {CerlFile, ?_assertEqual(
@@ -33,3 +36,5 @@ get_ast(CerlFile) ->
 		{CerlFile, element(1,
 			uarini_build:get_ast(CerlFile))})
 	}.
+
+

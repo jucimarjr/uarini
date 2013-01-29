@@ -1,5 +1,5 @@
 -class(proc).
--export([new/3,send/1]).
+-export([new/3]).
 -constructor([new/3]).
 -static([loop/3]).
 
