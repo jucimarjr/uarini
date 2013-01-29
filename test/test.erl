@@ -1,24 +1,18 @@
 -module(test).
 -include_lib("eunit/include/eunit.hrl").
 
-compile_all_beam_test_() ->
+get_ast_all_test_() ->
 	{
-		"Uarini compiling .CERL and generating .BEAM...",
-		[compile_beam(CerlFile) ||
+		"ooErlang getting .CERL and generating AST...",
+		[get_ast(CerlFile) ||
 			CerlFile <-  
 				filelib:wildcard("examples/uarini/*/*.cerl") ++
 				filelib:wildcard("examples/mpi/*/*.cerl")
 		]
-	
-		%%[compile_beam(CerlFile) ||
-		%%	CerlFile <-  
-		%%		filelib:wildcard("examples/uarini/*/*.cerl") ++
-		%%		filelib:wildcard("design_patterns/*/Uarini/*.cerl")
-		%%]
 	}.
 
 compile_tokenize_test_() ->
-    {"Uarini comparing preprocessor and scanner",
+    {"ooErlang comparing preprocessor and scanner",
     [compare_raw_preprocessed_tokens(CerlFile) ||
 		CerlFile <-
 			filelib:wildcard("examples/uarini/*/*.cerl") ++
@@ -32,7 +26,7 @@ compare_raw_preprocessed_tokens(CerlFile) ->
         uarini_build:get_tokens(CerlFile)
     )}.
 
-compile_beam(CerlFile) ->
+get_ast(CerlFile) ->
 	{
 	CerlFile,
 	?_assertEqual({CerlFile, ok},
