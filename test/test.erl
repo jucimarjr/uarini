@@ -19,11 +19,34 @@ compile_tokenize_test_() ->
 			filelib:wildcard("examples/mpi/*/*.cerl")
         ]}.
 
-compile_01_objects_test_() ->
-	?_assertEqual({[{ok,gerenciadorDePessoas},{ok,pessoa}]},{uarini:compile(filelib:wildcard("examples/uarini/01_objects/*.cerl"))}).
+compile_ooe_all_test_() ->
+	{
+		"ooErlang compiling .CERL and generating .ERL and .BEAM...",
+		[compile_ooe(Dir) || Dir <- examples_list()]
+	}.
 
-compile_pingping_test_() ->
-	?_assertEqual({[{ok,pingping},{ok,proc}]},{uarini:compile(filelib:wildcard("examples/mpi/pingping/*.cerl"))}).
+compile_ooe(Dir) ->
+{
+	Dir,
+	?_assertEqual({gen_ok_module(Dir)},{uarini:compile(filelib:wildcard(Dir))})
+}.
+
+%compile_pingping_test_() ->
+%	Dir = "examples/mpi/pingping/*.cerl",
+%	?_assertEqual({gen_ok_module(Dir)},{uarini:compile(filelib:wildcard(Dir))}).
+
+%compile_pingpong_test_() ->
+%	Dir = "examples/mpi/pingpong/*.cerl",
+%	?_assertEqual({gen_ok_module(Dir)},{uarini:compile(filelib:wildcard(Dir))}).
+
+
+examples_list() ->
+	[
+	 "examples/uarini/01_objects/*.cerl",
+	 "examples/mpi/pingping/*.cerl",
+	 "examples/mpi/pingpong/*.cerl",
+	 "examples/mpi/threadring/*.cerl"
+	 ].
 
 compare_raw_preprocessed_tokens(CerlFile) ->
     {CerlFile, ?_assertEqual(
@@ -38,5 +61,12 @@ get_ast(CerlFile) ->
 		{CerlFile, element(1,
 			uarini_build:get_ast(CerlFile))})
 	}.
+
+
+gen_ok_module( Dir ) ->
+	lists:map( 
+	  fun(Arg) -> {ok,list_to_atom(filename:basename(Arg,".cerl"))} end,
+	  filelib:wildcard(Dir)
+	).
 
 
