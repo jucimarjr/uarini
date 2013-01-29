@@ -16,7 +16,7 @@
 %%   uast -> arvore sintatica do uarini.
 %%   east -> arvore sintatica do erlang.
 transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
-	io:format("core: compilando \"~p\"...\n", [ErlangModuleName]),
+	%io:format("core: compilando \"~p\"...\n", [ErlangModuleName]),
 
 	st:new(),
 	st:insert_classes_info(ClassesInfo),

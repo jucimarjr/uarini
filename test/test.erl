@@ -19,9 +19,11 @@ compile_tokenize_test_() ->
 			filelib:wildcard("examples/mpi/*/*.cerl")
         ]}.
 
-compile_pingping_test_() ->
-	?_assertEqual({ok},{uarini:compile(filelib:wildcard("../examples/mpi/pingping/*.cerl"))}).
+compile_01_objects_test_() ->
+	?_assertEqual({[{ok,gerenciadorDePessoas},{ok,pessoa}]},{uarini:compile(filelib:wildcard("examples/uarini/01_objects/*.cerl"))}).
 
+compile_pingping_test_() ->
+	?_assertEqual({[{ok,pingping},{ok,proc}]},{uarini:compile(filelib:wildcard("examples/mpi/pingping/*.cerl"))}).
 
 compare_raw_preprocessed_tokens(CerlFile) ->
     {CerlFile, ?_assertEqual(

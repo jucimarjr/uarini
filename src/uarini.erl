@@ -23,12 +23,13 @@ compile({beam, UariniFileName}) ->
 compile(FileNameList) ->
 	ErlangFileList = get_erl_file_list(FileNameList),
 
-	[ begin
+	A = [ begin
+		io:format("compiling ~p~n", [ErlangFile]),	  
 		erl_tidy:file(ErlangFile, [{backups,false}, {quiet, true}]),
 		compile:file(ErlangFile, [{outdir, filename:dirname(ErlangFile)},verbose,report_errors,report_warnings])
 	  end
 	  || ErlangFile <- ErlangFileList ],
-	ok.
+	A.
 
 %%-----------------------------------------------------------------------------
 %% gera varios .erl a partir de varios .cerl
