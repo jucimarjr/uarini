@@ -4,11 +4,11 @@
 
 class_methods.
 
+imprimir_imposto(IPVA) ->
+	io:format("Ipva do caminhao: ~p~n", [IPVA::calcularIpva()]),
+
 main() ->
 	Caminhao = caminhao::constructor(1995, "JXT - 1234"),
 	Carro = carro::constructor(2008, "MNO - 4321").
-	
-	Ipva = Caminhao,
-	io:format("Ipva do caminhao: ~p~n", [Ipva::calcularIpva()]),
-	Ipva = Carro,
-	io:format("Ipva do carro: ~p~n", [Ipva::calcularIpva()]).
+	imprimir_imposto(Caminhao),
+	imprimir_imposto(Carro).

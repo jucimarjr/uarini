@@ -10,7 +10,5 @@ main() ->
     H::setSalario( 2240.00 ),
     M::setSalario( 2240.00 ),
 
-    E = H,
-    io:format( "Salario em horas: ~p", [E::getSalario()]),
-    E = M,
-    io:format( "Salario em horas: ~p", [E::getSalario()]).
+    io:format( "Salario em horas: ~p", [H::getSalario()]),
+    io:format( "Salario em horas: ~p", [M::getSalario()]).
