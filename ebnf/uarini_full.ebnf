@@ -114,7 +114,7 @@ expr_600 ::= (prefix_op | ) expr_700
 
 expr_700 ::= function_call | record_expr | expr_800
 
-expr_800 ::= expr_900 (':' expr_max | )
+expr_800 ::= expr_900 ((':'|'::') expr_max |)
 
 expr_900 ::= ( | expr_900) '.' atom | expr_max
 
@@ -132,7 +132,7 @@ expr_max ::= var
                | fun_expr
                | try_expr
                | query_expr
-             
+
 list ::= '[' (']' | expr tail)
 
 tail ::= ( | '|' expr) ']' | ',' expr tail

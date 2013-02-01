@@ -17,3 +17,5 @@ function ::= function_clauses
 function_clauses ::= function_clause ( | function_clauses )
 
 function_clause ::= atom clause_args clause_guard (clause_body|)
+
+expr_800 ::= expr_900 ((':'|'::') expr_max |)
