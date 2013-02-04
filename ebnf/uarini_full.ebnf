@@ -2,17 +2,11 @@ form ::= (atribute | function | rule | 'class_attributes' | oo_attributes | 'cla
 
 oo_attributes ::= oo_attribute (';' oo_attributes | )
 
-oo_attribute ::= (oo_modifier | ) oo_var
-
-oo_modifier ::= oo_visibility oo_access | oo_visibility | oo_access
-
-oo_visibility ::= 'public' | 'protected' | 'private'
-
-oo_access ::= 'static' | 'final' | 'static' 'final'
+oo_attribute ::= oo_var
 
 oo_var ::= (atom | ) var ('=' exprs |)
 
-attribute ::=
+atribute ::=
     '-'(atom
          ( attr_val
          | typed_attr_val
