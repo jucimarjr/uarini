@@ -57,7 +57,7 @@ transform_match(Ln1, LeftExpr, RightExpr) ->
 			IsObjMethod = (not st:is_static(Scope)) or st:is_constructor(Scope),
 			case IsObjMethod of
 				true ->
-					ObjectID_AST = gen_ast:var(Ln2, "ObjectID"),
+					ObjectID_AST = gen_ast:objectID(Ln2),
 					AttrNameAST = gen_ast:atom(Ln2, AttrName),
 					AttrValueAST = transform_inner_expr(RightExpr),
 					UpdateArgs = [ObjectID_AST, AttrNameAST, AttrValueAST],
@@ -85,7 +85,7 @@ transform_inner_expr({oo_remote, Ln1, {atom, _, self}, ObjectAttr}) ->
 	IsObjMethod = (not st:is_static(Scope)) or st:is_constructor(Scope),
 	case IsObjMethod of
 		true ->
-			ObjectID_AST = gen_ast:var(Ln1, "ObjectID"),
+			ObjectID_AST = gen_ast:objectID(Ln1),
 			LookupArgs = [ObjectID_AST, gen_ast:atom(Ln1, AttrName)],
 			rcall(Ln1, ooe, lookup_attr, LookupArgs);
 
@@ -139,6 +139,12 @@ create_call({call, Ln1, FuncLocation, ArgList}) ->
 		{object, ObjectVarName, FuncName} ->
 			create_object_call(Ln1, ObjectVarName, FuncName, ArgList);
 
+		{object_direct, FuncName} ->
+			create_object_direct_call(Ln1, FuncName, ArgList);
+
+		{object_super, SuperClassName, FuncName} ->
+			create_super_call(Ln1, SuperClassName, FuncName, ArgList);
+
 		{error, Error} ->
 			{call, Ln1, gen_ast:atom(Ln1, throw), gen_ast:tuple(Error)}
 	end.
@@ -155,6 +161,28 @@ create_object_call(Ln, ObjectVarName, FuncName, ArgList) ->
 
 	{call, Ln, TransfFuncLocation, TransfArgList}.
 
+%% chamadas de funcao self::funcao(Args)
+%% ObjectID ja esta na propria funcao
+create_object_direct_call(Ln, FuncName, ArgList) ->
+	TransfObjectID  = gen_ast:objectID(Ln),
+
+	TransfArgListTemp = [transform_inner_expr(Arg) || Arg <- ArgList],
+	TransfArgList = [TransfObjectID | TransfArgListTemp],
+
+	{call, Ln, FuncName, TransfArgList}.
+
+%% chamadas de funcao super::funcao(Args)
+%% ObjectID ja esta na propria funcao
+create_super_call(Ln, SuperClassName, FuncName, ArgList) ->
+	TransfObjectID  = gen_ast:objectID(Ln),
+
+	TransfArgListTemp = [transform_inner_expr(Arg) || Arg <- ArgList],
+	TransfArgList = [TransfObjectID | TransfArgListTemp],
+	TransfFuncLocation = {remote, Ln, SuperClassName, FuncName},
+
+	{call, Ln, TransfFuncLocation, TransfArgList}.
+
+
 %%-----------------------------------------------------------------------------
 %% busca a localizacao da funcao e verifica se eh static, public, etc
 %% retorna:
@@ -164,6 +192,57 @@ create_object_call(Ln, ObjectVarName, FuncName, ArgList) ->
 %% chamadas Objeto::funcao(Args)
 get_func_loc({oo_remote, _Ln, {var, _, ObjectVarName}, FuncName}, _ArgList) ->
 	{object, ObjectVarName, FuncName};
+
+%% chamadas super::funcao(Args)
+get_func_loc({oo_remote, Ln1, {atom, _, super}, FuncName}, ArgList) ->
+	{_, _, FuncName2} = FuncName,
+	Scope = st:get_scope(),
+
+	{ScopeClassName, _ScopeMethod} = Scope,
+	SuperClassName = st:get_superclass(ScopeClassName),
+
+	case SuperClassName of
+		null ->
+			{error, {super_call_on_class_without_parent, {ln, Ln1}}};
+
+		_ ->
+			case st:is_static(Scope) of
+				true ->
+					{error, {super_object_call_on_static_context, {ln, Ln1}}};
+
+				false ->
+					MethodKey = {SuperClassName, {FuncName2, length(ArgList)}},
+					case st:is_static(MethodKey) of
+						true ->
+							{error, {call_static_method_from_super, {ln,Ln1}}};
+
+						false ->
+							SuperClassName2 = atom(Ln1, SuperClassName),
+							{object_super, SuperClassName2, FuncName}
+					end
+			end
+	end;
+
+%% chamadas self::funcao(Args)
+get_func_loc({oo_remote, Ln1, {atom, _, self}, FuncName}, ArgList) ->
+	{_, _, FuncName2} = FuncName,
+	Scope = st:get_scope(),
+
+	{ClassName, _ScopeMethod} = Scope,
+
+	case st:is_static(Scope) of
+		true ->
+			{error, {object_call_on_static_context, {ln, Ln1}}};
+
+		false ->
+			case st:is_static({ClassName, {FuncName2, length(ArgList)}}) of
+				true ->
+					{normal, FuncName};
+
+				false ->
+					{object_direct, FuncName}
+			end
+	end;
 
 %% chamadas classe::funcao(Args)
 get_func_loc({oo_remote, Ln2, {atom, _, ClassName}, FuncName}, ArgList) ->
