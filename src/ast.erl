@@ -148,7 +148,7 @@ match_form({class_attributes, _}, [AttrList | FormList]) ->
 match_form({attribute, _, class, ClassName}, FormList) ->
 	{class_name, ClassName, FormList};
 
-match_form({attribute, _, parent, ParentName}, FormList) ->
+match_form({attribute, _, extends, ParentName}, FormList) ->
 	{parent, ParentName, FormList};
 
 match_form({attribute, _, constructor, ConstrList}, FormList) ->
@@ -176,8 +176,17 @@ get_attr_info([Attr | Rest], AttrInfoList) ->
 	{oo_attribute,_, ModifierList, {oo_var, _,  TypeTemp, NameTemp}} = Attr,
 	{{atom, _, Type}, {var, _, Name}} = {TypeTemp, NameTemp},
 	ModifierList2 = [Modifier || {Modifier, _} <- ModifierList],
+
+	ModifierList3 =
+		case helpers:has_element(public, ModifierList2) of
+			true ->
+				ModifierList2;
+			false ->
+				[private | ModifierList2]
+		end,
+
 	VarKey = Name,
-	VarValue = {Type, ModifierList2},
+	VarValue = {Type, ModifierList3},
 	NewAttrInfo = {VarKey, VarValue},
 	get_attr_info(Rest, [ NewAttrInfo | AttrInfoList ]).
 

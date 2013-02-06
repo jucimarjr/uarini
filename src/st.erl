@@ -16,10 +16,13 @@
 
 		%% informações das classes
 		insert_classes_info/1,	insert_parent_members/1,  exist_class/1,
+		insert_default_constructor/1,
 		is_constructor/1,		get_all_constr_info/1,
 		is_static/1,			is_public/1,
 		is_superclass/2,		get_superclass/1,
-		exist_attr/2,			get_attr_info/2,		  get_all_attr_info/1
+		exist_attr/2,			get_attr_info/2,		  get_all_attr_info/1,
+		get_visible_methods/1,	get_export_list/1,
+		get_methods_with_parent/1
 	]).
 
 -import(helpers, [has_element/2]).
@@ -81,46 +84,148 @@ get_errors() ->
 
 %% inicializa "sub-dicionario" com informações das classes
 insert_classes_info(ClassesInfoList) ->
-	lists:map(fun put_class_info/1, ClassesInfoList),
-	insert_parent_members(ClassesInfoList).
+	lists:map(fun put_class_info/1, ClassesInfoList).%,
+	% insert_parent_members(ClassesInfoList).
 
 %% insere informação de uma classe
 put_class_info({{ClassName, ClassInfo}, Errors}) ->
 	{ParentName, AttrList, ConstrList, ExportList, StaticList} = ClassInfo,
 	put(errors, Errors),
 	ClassKey = {oo_classes, ClassName},
+
 	ClassValue = {ParentName, AttrList, ConstrList, ExportList, StaticList},
 	put(ClassKey, ClassValue).
+
+insert_default_constructor(ClassName) ->
+	ClassInfo = get({oo_classes, ClassName}),
+	{ParentName, AttrList, _ConstrList, ExportList, StaticList} = ClassInfo,
+	ConstrList2 = [{constructor, 0}],
+	ExportList2 = [{constructor, 0} | ExportList],	
+
+	ClassKey = {oo_classes, ClassName},
+	ClassValue = {ParentName, AttrList, ConstrList2, ExportList2, StaticList},
+	put(ClassKey, ClassValue).
+	
 
 %% atualiza dicionário inserindo informações dos
 %% métodos e atributos visíveis na superclasse
 insert_parent_members([]) -> ok;
-insert_parent_members([{{_, null, _, _, _}, _} | Rest]) ->
+insert_parent_members([{{_, {null, _, _, _, _}, _}} | Rest]) ->
 	insert_parent_members(Rest);
-insert_parent_members([ {{ClassName, ClassInfo}, _Errors} | Rest ]) ->
-	{ParentName, AttrList, ConstrList, ExportList, StaticList} = ClassInfo,
-	%ParentMethods = get_methods_with_parent(ClassName),
-	ParentAttrList  = get_visible_attr(ParentName),
+insert_parent_members([{{ClassName, ClassInfo}, _Errors} | Rest ]) ->
+	{ParentName, AttrList, ConstrList, _ExportList, _StaticList} = ClassInfo,
 
-	%NewMethods = merge_parent_methods(ParentMethods),
+	MethodsWithParent = get_methods_with_parent(ClassName),
+	NewStaticList = get_static_with_parent(ClassName),
+
+	NewExportList = merge_method_lists(MethodsWithParent),
+
+	ParentAttrList  = get_visible_attr(ParentName, []),
 
 	NewAttrList     = AttrList ++ ParentAttrList,
 
 	ClassKey = {oo_classes, ClassName},
-	ClassValue = {ParentName, NewAttrList, ConstrList, ExportList, StaticList},
+	ClassValue = {ParentName, NewAttrList, ConstrList, NewExportList, NewStaticList},
 	put(ClassKey, ClassValue),
-
 	insert_parent_members(Rest).
 
-%% busca a informação de todos os campos visíveis às casses filhas
-get_visible_attr(null)      -> [];
-get_visible_attr(ClassName) ->
-	{ParentName, AttrList, _, _, _} = get({oo_classes, ClassName}),
-	VisibleAttr = lists:filter(fun is_visible_attr/1, AttrList),
-	VisibleAttr ++ get_visible_attr(ParentName).
+%% mescla os metodos de uma lista [{Classe1 Metodos1}, {Classe2, Metodos2} ...]
+merge_method_lists(MethodsWithParent) ->
+	MixedMethodList = [MethodList || {_, MethodList} <- MethodsWithParent],
+	lists:flatten(MixedMethodList).
 
-is_visible_attr({_, {_, Modifiers}}) ->
-	helpers:has_element(public, Modifiers).
+%% busca a informação de todos os campos visíveis às casses filhas
+get_visible_attr(null, ODict)      -> ODict;
+get_visible_attr(ClassName, ODict) ->
+	{ParentName, AttrList, _, _, _} = get({oo_classes, ClassName}),
+%%	VisibleAttr = lists:filter(fun is_visible_attr/1, AttrList),
+%%	VisibleAttr ++
+	NewODict = helpers:orddict_store_all(AttrList, ODict),
+	get_visible_attr(ParentName, NewODict).
+
+%%is_visible_attr({_, {_, Modifiers}}) ->
+%%	helpers:has_element(public, Modifiers).
+
+%% busca as infos de todos os métodos visíveis de determinada classe,
+%% acrescentando os métodos herdados e aplicando a sobrescrita (filtra métodos
+%% sobrescritos da classe filha)
+%%
+%% retorna no formato [ {Classe, Metodos}, {SuperClasse, MetodosSuper} ]
+%% métodos sobrescritos são RETIRADOS das classes de origem
+%%
+%% se D --extende--|> C --extende--|> B --extende--|> A, entao os metodos
+%% A lista de B contem os metodos public de C e D
+get_methods_with_parent(ClassName) ->
+	AllMethods = get_visible_methods(ClassName),
+	filter_over_methods(AllMethods).
+	%% case filter_over_methods(AllMethods) of
+	%% 	[ClassMethods_A | []] ->
+	%% 		[ClassMethods_A, {null, []}];
+
+	%% 	[ClassMethods_A, ClassMethods_B | _Rest] ->
+	%% 		[ClassMethods_A, ClassMethods_B]
+	%% end.
+
+%% muito semelhante ao método acima, porem para buscar a lista de metodos static
+%% que sao exportados!
+%% alem disso, eh retornado apenas a lista de static, sem as classes
+get_static_with_parent(ClassName) ->
+	AllMethods = get_visible_methods(ClassName),
+	filter_over_static(AllMethods).
+
+%% busca todos os metodos public e static e retorna uma lista com eles
+%% input (metodos public):   [{Classe1, Metodos1}, {Classe2, Metodos2} ... ]
+%% output (public e static): [StaticMethod1, StaticMethods2, ...]
+filter_over_static(MethodsList) ->
+	lists:foldl(fun filter_over_static/2, [], MethodsList).
+
+filter_over_static({Class, PublicList}, StaticList) ->
+	StaticMethods = lists:filter(fun(X) -> is_static({Class, X}) end, PublicList),
+	helpers:insert_replace_all(StaticMethods, StaticList).
+
+%% busca a informação de todos os métodos visíveis às classes filhas
+%% recursivamente indo de baixo para cima
+%% recebe     - Classe1
+%% retorna    - [{Classe1, Metodos1}, {Classe2, Metodos2}, ... ]
+%% retorna no sentido crescente:
+%% C --extende--|> B --extd--|> A    ->    {C, B, A}
+%%
+%% Esse formato eh necessario para gerar as funcoes proxy no modulo "core"
+get_visible_methods(null)      -> [];
+get_visible_methods(ClassName) ->
+	{ParentName, _, _, ExportList, _} = get({oo_classes, ClassName}),
+	[{ClassName, ExportList} | get_visible_methods(ParentName)].
+
+%% dada as classes A <|-- B <|-- C (C extende B que extende A)
+%% remove de A os métodos sobrescritos por B
+%% recebe e retorna a lista CRESCENTE [C, B, A, ...]
+%% o formato da lista recebida eh: [ {Classe1, Metodos1}, ... ]
+filter_over_methods(MethodsList) ->
+	ReverseMethodsList = lists:reverse(MethodsList, []),
+	filter_over_methods(ReverseMethodsList, []).
+
+filter_over_methods([], NewMethodsList) ->
+	NewMethodsList;
+filter_over_methods([LastMethods], NewMethodsList) ->
+	[LastMethods | NewMethodsList];
+filter_over_methods([MethodsA, MethodsB | Rest], NewMethodsList) ->
+	{ClassA, MethodsListA} = MethodsA,
+	{_ClassB, MethodsListB} = MethodsB,
+
+	NewMethodsListA = remove_same_methods(MethodsListA, MethodsListB),
+
+	NewMethodsA = {ClassA, NewMethodsListA},
+	filter_over_methods([MethodsB | Rest], [NewMethodsA | NewMethodsList]).
+
+%% considere B --extende--|> A
+%% remove todos os métodos da lista A que estão em B e são iguais
+%% usado fazer a sobrescrita, retorna a lista de métodos que B consegue ver
+%% de A (sua classe pai)
+remove_same_methods(MethodsListA, MethodsListB) ->
+	lists:foldl(fun remove_method/2, MethodsListA, MethodsListB).
+
+remove_method(MethodFrom_B, MethodsList_A) ->
+	lists:filter(fun(MethodFrom_A) -> MethodFrom_A =/= MethodFrom_B end, MethodsList_A).
 
 %%---------------------------------------------
 
@@ -167,6 +272,10 @@ is_static({ClassName, {FunctionName, Arity}}) ->
 is_public({ClassName, {FunctionName, Arity}}) ->
 	{_, _, _, ExportList, _} = get({oo_classes, ClassName}),
 	helpers:has_element({FunctionName, Arity}, ExportList).
+
+get_export_list(ClassName) ->
+	{_, _, _, ExportList, _} = get({oo_classes, ClassName}),
+	ExportList.
 
 %%----------------------------------------------------------------------------
 %%                              CAMPOS

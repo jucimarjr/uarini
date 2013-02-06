@@ -16,32 +16,30 @@
 %%   uast -> arvore sintatica do uarini.
 %%   east -> arvore sintatica do erlang.
 transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
-	%io:format("core: compilando \"~p\"...\n", [ErlangModuleName]),
+	%% io:format("core: compilando \"~p\"...\n", [ErlangModuleName]),
+	%% F = fun(Class, ClassInfo) ->
+	%% 			io:format("\n-------~p--------\n~p\n------------\n", [Class, ClassInfo]) end,
+	%% F2 = fun() -> G = get(), lists:map(fun({{oo_classes, Class}, Info}) -> F(Class, Info); (_) -> ok end,G) end,
 
 	st:new(),
-	st:insert_classes_info(ClassesInfo),
-
-	%DefaultConstructor = create_default_constructor(ErlangModuleName),
-	%ParentMethods      = create_all_parent_methods(ErlangModuleName),
-	%OOFunctions = [DefaultConstructor] ++ ParentMethods,
-
-	%% mescla infos dos membros das classes com os das suas superclasses
-	%st:insert_parent_members(ClassesInfo),
-
-	%% AST na realidade eh uma lista de forms
 	st:put_scope(class, ErlangModuleName),
-	{ExportList, FunctionList, OtherForms} = get_erl_forms(AST),
+	st:insert_classes_info(ClassesInfo),
+	ParentMethods = create_all_parent_methods(ErlangModuleName),
+	st:insert_parent_members(ClassesInfo),
 
-	%FunctionList2 = [OOFunctions | FunctionList],
-
-	%% ExportList eh uma lista de funcoes assim: {Nome, Arity}
-	%ExportList2 = add_parent_methods(ExportList),
 	ConstrList = st:get_all_constr_info(ErlangModuleName),
+	DefaultConstructor = create_default_constructor(ErlangModuleName, ConstrList),
+	OOFunctions = DefaultConstructor ++ ParentMethods,
+
+	{FunctionList, OtherForms} = get_erl_forms(AST),
+
+	FunctionList2 = OOFunctions ++ FunctionList,
+
+	ExportList = st:get_export_list(ErlangModuleName),
 	ExportList2 = filter_object_mthd(ExportList),
-	ExportList3 = ExportList2 ++ ConstrList,
 
 	ErlangModule =
-		create_module(ErlangModuleName, FunctionList, ExportList3, OtherForms),
+		create_module(ErlangModuleName, FunctionList2, ExportList2, OtherForms),
 
 	case st:get_errors() of
 		[] ->
@@ -80,44 +78,46 @@ filter_object_mthd([FunctionInfo | ExportList], NewExportList ) ->
 %% Filtra os forms, deixando apenas os especificos do erlang
 %%    os forms do uarini sao tratados ao guardar as info das classes na ST
 %%    eles representam os atributos e os metodos
+%%    ExportList vem da info das classes, por isso eh ignorado
 get_erl_forms(UariniForms) ->
-	match_erl_form(UariniForms, [], [], []).
+	match_erl_form(UariniForms, [], []).
 
-match_erl_form([], ExportList, FunctionList, OtherForms) ->
-	{ExportList, lists:reverse(FunctionList), lists:reverse(OtherForms)};
+match_erl_form([], FunctionList, OtherForms) ->
+	{lists:reverse(FunctionList), lists:reverse(OtherForms)};
 
-match_erl_form([Form | UariniForms], ExportList, FunctionList, OtherForms) ->
+match_erl_form([Form | UariniForms], FunctionList, OtherForms) ->
 	case Form of
 		{attribute, _Line, class, _ClassName} ->
-			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
+			match_erl_form(UariniForms, FunctionList, OtherForms);
 
 		{attribute, _Line, constructor, _Functions} ->
-			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
+			match_erl_form(UariniForms, FunctionList, OtherForms);
+
+		{attribute, _Line, extends, _Functions} ->
+			match_erl_form(UariniForms, FunctionList, OtherForms);
+
+		{attribute, _Line, export, _Functions} ->
+			match_erl_form(UariniForms, FunctionList, OtherForms);
 
 		{attribute, _Line, static, _Functions} ->
-			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
-
-		{attribute, _Line, export, Functions} ->
-			N_ExportList = ExportList ++ Functions,
-			match_erl_form(UariniForms, N_ExportList, FunctionList, OtherForms);
+			match_erl_form(UariniForms, FunctionList, OtherForms);
 
 		{class_attributes, _Line} ->
 			[_Attributes | UariniForms_rest] = UariniForms,
-			match_erl_form(UariniForms_rest,
-							ExportList, FunctionList, OtherForms);
+			match_erl_form(UariniForms_rest, FunctionList, OtherForms);
 
 		{class_methods, _Line} ->
-			match_erl_form(UariniForms, ExportList, FunctionList, OtherForms);
+			match_erl_form(UariniForms, FunctionList, OtherForms);
 
 		{function, Line, Name, Arity, Clauses} ->
 			st:put_scope(function, {Name, Arity}),
 			Transformed_Method = get_erl_function(Line, Name, Arity, Clauses),
 			N_FunctionList = [Transformed_Method | FunctionList],
-			match_erl_form(UariniForms, ExportList, N_FunctionList, OtherForms);
+			match_erl_form(UariniForms, N_FunctionList, OtherForms);
 
 		_AnyOtherForm ->
 			N_OtherForms = [Form | OtherForms],
-			match_erl_form(UariniForms, ExportList, FunctionList, N_OtherForms)
+			match_erl_form(UariniForms, FunctionList, N_OtherForms)
 	end.
 
 %%-----------------------------------------------------------------------------
@@ -157,9 +157,7 @@ get_erl_clause({clause, Line, ParamList, [], ExprList}) ->
 
 	TransfExprList = lists:map(fun get_erl_expr/1, ExprList),
 
-	Scope = st:get_scope(),
 	{ScopeClass, _ScopeFunction} = Scope,
-
 	AttrList = st:get_all_attr_info(ScopeClass),
 	NewArgs = [gen_ast:atom(Line, AttrName) || {AttrName, _Value} <- AttrList],
 	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line,  NewArgs)]),
@@ -190,16 +188,61 @@ create_module(ErlangModuleName, FunctionList, ExportList, OtherForms) ->
 		FunctionList ++ [{eof, 1}]].
 
 %%-----------------------------------------------------------------------------
+%% declara o construtor padrao quando nao for definido nenhum pelo usuario
+create_default_constructor(ClassName, []) ->
+	st:insert_default_constructor(ClassName),
+
+	Line = 0,
+
+	AttrList = st:get_all_attr_info(ClassName),
+	NewArgs = [gen_ast:atom(Line, AttrName) || {AttrName, _Value} <- AttrList],
+	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line,  NewArgs)]),
+
+	NewObjectID_AST = match(Line, var(Line, "ObjectID"), NewAST),
+	ObjectID_AST = gen_ast:tuple(Line,
+						[gen_ast:atom(Line, ClassName), var(Line, "ObjectID")]),
+
+	TransfExprList = [NewObjectID_AST, ObjectID_AST],
+	Clause = {clause, Line, [], [], TransfExprList},
+
+	[{function, Line, constructor, 0, [Clause]}];
+
+%% caso jah tenha construtor def pelo user nao cria default_constructor
+create_default_constructor(_ClassName, _ListaDeConstrutores) ->
+	[].
+
+%%-----------------------------------------------------------------------------
 %% declara os métodos das super classes
-%% create_all_parent_methods(ClassName) ->
-%% 	AllMethodsList = st:get_methods_with_parent(ClassName),
-%% 	[_ClassMethods | InheritedMethods] = AllMethodsList,
-%% 	create_parent_method_list(InheritedMethods, []).
+%% isso soh funciona antes da funcao insert_parent_members ser chamada!
+create_all_parent_methods(ClassName) ->
+	[_ClassMethods | ParentClasses] = st:get_methods_with_parent(ClassName),
+	create_parent_method_list(ParentClasses, []).
 
-%% create_parent_method_list([], AllMethodsList) -> AllMethodsList;
-%% create_parent_method_list([{ClassName, MethodsList} | Rest], Result) ->
-%% 	TempL = [create_parent_method(Method, ClassName) || Method <- MethodsList],
-%% 	create_parent_method_list(Rest, TempL ++ Result).
+create_parent_method_list([], NewMethodList) -> NewMethodList;
+create_parent_method_list([{ClassName, MethodList} | Rest], NewMethodList) ->
+	MethodListTemp =
+		[create_parent_method(Method, ClassName) || Method <- MethodList],
+	create_parent_method_list(Rest, MethodListTemp ++ NewMethodList).
 
-%% create_parent_method(MethodInfo, ClassName) ->
+create_parent_method({MethodName, Arity}, ClassName) ->
+	Ln = 0,
+	Arity2 =
+		case st:is_static({ClassName, {MethodName, Arity}}) of
+			false ->
+				 Arity + 1;
+			true ->
+				Arity
+		end,
 
+	ParamList = create_generic_params(0, Arity2),
+
+	ScopeClass = st:get_scope(class),
+	ParentScopeClass = st:get_superclass(ScopeClass),
+
+	ExprList = [gen_ast:rcall(Ln, ParentScopeClass, MethodName, ParamList)],
+	Clause = {clause, Ln, ParamList, [], ExprList},
+	{function, Ln, MethodName, Arity2, [Clause]}.
+
+create_generic_params(Ln, Arity) ->
+	Seq = lists:seq(1, Arity),
+	[gen_ast:var(Ln, "Param_" ++ integer_to_list(Num)) || Num <- Seq].
