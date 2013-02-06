@@ -1,12 +1,10 @@
-form ::= (atribute | function | rule | 'class_attributes' | oo_attributes | 'class_methods') '.'
+form ::= (attribute | function | rule | 'class_attributes' | oo_attributes | 'class_methods') '.'
 
 oo_attributes ::= oo_attribute (';' oo_attributes | )
 
-oo_attribute ::= oo_var
+oo_attribute ::= (atom | ) var ('=' exprs |)
 
-oo_var ::= (atom | ) var ('=' exprs |)
-
-atribute ::=
+attribute ::=
     '-'(atom
          ( attr_val
          | typed_attr_val
