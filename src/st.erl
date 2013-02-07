@@ -16,7 +16,7 @@
 
 		%% informações das classes
 		insert_classes_info/1,	insert_parent_members/1,  exist_class/1,
-		insert_default_constructor/1,
+		insert_default_constructor/2,
 		is_constructor/1,		get_all_constr_info/1,
 		is_static/1,			is_public/1,
 		is_superclass/2,		get_superclass/1,
@@ -96,11 +96,11 @@ put_class_info({{ClassName, ClassInfo}, Errors}) ->
 	ClassValue = {ParentName, AttrList, ConstrList, ExportList, StaticList},
 	put(ClassKey, ClassValue).
 
-insert_default_constructor(ClassName) ->
+insert_default_constructor(ClassName, ConstrName) ->
 	ClassInfo = get({oo_classes, ClassName}),
 	{ParentName, AttrList, _ConstrList, ExportList, StaticList} = ClassInfo,
-	ConstrList2 = [{constructor, 0}],
-	ExportList2 = [{constructor, 0} | ExportList],	
+	ConstrList2 = [{ConstrName, 0}],
+	ExportList2 = [{ConstrName, 0} | ExportList],	
 
 	ClassKey = {oo_classes, ClassName},
 	ClassValue = {ParentName, AttrList, ConstrList2, ExportList2, StaticList},

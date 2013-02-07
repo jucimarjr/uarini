@@ -284,8 +284,26 @@ get_func_loc({remote, Ln2, Module, Function}, _ArgList) ->
 	{normal, {remote, Ln2, Module, Function}};
 
 %% chamadas de funcao funcao(Args)
-get_func_loc(FunctionName, _ArgList) ->
-	{normal, FunctionName}.
+get_func_loc({atom, Ln, FunctionName}, ArgList) ->
+	Scope = st:get_scope(),
+
+	{ScopeClass, _ScopeMethod} = Scope,
+
+	MethodKey = {ScopeClass, {FunctionName, length(ArgList)}},
+
+	case st:is_static(MethodKey) of
+		true ->
+			{normal, {atom, Ln, FunctionName}};
+
+		false ->
+			case st:is_static(Scope) of
+				true ->
+					{error, {object_call_on_static_context, {ln, Ln}}};
+
+				false ->
+					{object_direct, {atom, Ln, FunctionName}}
+			end
+	end.
 
 %%-----------------------------------------------------------------------------
 %% transforma expressoes fun() -> ... ; () -> ... end

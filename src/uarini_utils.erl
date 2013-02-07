@@ -21,11 +21,14 @@ compile(FileNameList) ->
 			io:format("*******ERROR!~n"),
 			io:format("***Reasons:\n"),
 			jaraki_exception:print_errors(Errors);
-		ok ->
-			ok;
-		X ->
-			io:format("*******UNEXPECTED ERROR!~n"),
-			io:format("***Reason:~n~p", [X])
+
+		Result ->
+			io:format("~nCompilation Result:~n"
+						"~p", [Result])
+
+		%% X ->
+		%% 	io:format("*******UNEXPECTED ERROR!~n"),
+		%% 	io:format("***Reason:~n~p", [X])
 	end.
 
 %%-----------------------------------------------------------------------------

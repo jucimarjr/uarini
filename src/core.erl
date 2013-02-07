@@ -190,9 +190,10 @@ create_module(ErlangModuleName, FunctionList, ExportList, OtherForms) ->
 %%-----------------------------------------------------------------------------
 %% declara o construtor padrao quando nao for definido nenhum pelo usuario
 create_default_constructor(ClassName, []) ->
-	st:insert_default_constructor(ClassName),
-
+	ConstrName = new_,
 	Line = 0,
+
+	st:insert_default_constructor(ClassName, ConstrName),
 
 	AttrList = st:get_all_attr_info(ClassName),
 	NewArgs = [gen_ast:atom(Line, AttrName) || {AttrName, _Value} <- AttrList],
@@ -205,7 +206,7 @@ create_default_constructor(ClassName, []) ->
 	TransfExprList = [NewObjectID_AST, ObjectID_AST],
 	Clause = {clause, Line, [], [], TransfExprList},
 
-	[{function, Line, constructor, 0, [Clause]}];
+	[{function, Line, ConstrName, 0, [Clause]}];
 
 %% caso jah tenha construtor def pelo user nao cria default_constructor
 create_default_constructor(_ClassName, _ListaDeConstrutores) ->

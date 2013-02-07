@@ -39,7 +39,7 @@ $(TEST_EBIN_DIR)/test.beam : test/*.erl
 	@ $(ERLC) -o $(TEST_EBIN_DIR) test/test.erl
 	@ echo  
 
-src/uarini_parse.erl: 
+src/uarini_parse.erl: src/uarini_parse.yrl
 	@ echo Compiling Parser ...
 	@ $(ERL) -eval 'yecc:file("src/uarini_parse.yrl", [{verbose, true}]), halt().'
 	@ mkdir -p $(EBIN_DIR)
