@@ -19,4 +19,4 @@ gastar(Valor) ->
     self::DinheiroNaCarteira = self::DinheiroNaCarteira - Valor.
     
 receber(Valor) ->  
-    self::DinheiroNaCarteira = self::dinheiroNaCarteira + Valor.
+    self::DinheiroNaCarteira = self::DinheiroNaCarteira + Valor.
