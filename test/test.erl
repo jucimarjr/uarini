@@ -1,23 +1,23 @@
 -module(test).
 -include_lib("eunit/include/eunit.hrl").
 
-get_ast_all_test_() ->
-	{
-		"ooErlang getting .CERL and generating AST...",
-		[get_ast(CerlFile) ||
-			CerlFile <-  
-				filelib:wildcard("examples/uarini/*/*.cerl") ++
-				filelib:wildcard("examples/mpi/*/*.cerl")
-		]
-	}.
-
-compile_tokenize_test_() ->
-    {"ooErlang comparing preprocessor and scanner",
-    [compare_raw_preprocessed_tokens(CerlFile) ||
-		CerlFile <-
-			filelib:wildcard("examples/uarini/*/*.cerl") ++
-			filelib:wildcard("examples/mpi/*/*.cerl")
-        ]}.
+%% get_ast_all_test_() ->
+%% 	{
+%% 		"ooErlang getting .CERL and generating AST...",
+%% 		[get_ast(CerlFile) ||
+%% 			CerlFile <-  
+%% 				filelib:wildcard("examples/uarini/*/*.cerl") ++
+%% 				filelib:wildcard("examples/mpi/*/*.cerl")
+%% 		]
+%% 	}.
+%% 
+%% compile_tokenize_test_() ->
+%%     {"ooErlang comparing preprocessor and scanner",
+%%     [compare_raw_preprocessed_tokens(CerlFile) ||
+%% 		CerlFile <-
+%% 			filelib:wildcard("examples/uarini/*/*.cerl") ++
+%% 			filelib:wildcard("examples/mpi/*/*.cerl")
+%%         ]}.
 
 compile_ooe_all_test_() ->
 	{
@@ -31,31 +31,32 @@ compile_ooe(Dir) ->
 	?_assertEqual({gen_ok_module(Dir)},{uarini:compile(filelib:wildcard(Dir))})
 }.
 
-%compile_pingping_test_() ->
-%	Dir = "examples/mpi/pingping/*.cerl",
-%	?_assertEqual({gen_ok_module(Dir)},{uarini:compile(filelib:wildcard(Dir))}).
 
-%compile_pingpong_test_() ->
-%	Dir = "examples/mpi/pingpong/*.cerl",
-%	?_assertEqual({gen_ok_module(Dir)},{uarini:compile(filelib:wildcard(Dir))}).
-
+%% examples_list() ->
+%% 	[
+%% 	 "examples/uarini/01_objects/*.cerl",
+%% 	 "examples/uarini/02_inheritance/*.cerl",
+%% 	 "examples/uarini/03_polymorphism/*.cerl",
+%% 	 "examples/uarini/04_polymorphism/*.cerl",
+%% 	 "examples/uarini/05_polymorphism/*.cerl",
+%% 	 "examples/uarini/06_interface/*.cerl",
+%% 	 "examples/uarini/07_interface/*.cerl",
+%% 	 "examples/uarini/08_interface/*.cerl",
+%% 	 "examples/uarini/09_polymorphism/*.cerl",
+%% 	 "examples/uarini/10_interface/*.cerl",
+%% 	 "examples/mpi/pingping/*.cerl",
+%% 	 "examples/mpi/pingpong/*.cerl",
+%% 	 "examples/mpi/threadring/*.cerl"
+%% 	 ].
 
 examples_list() ->
 	[
 	 "examples/uarini/01_objects/*.cerl",
-	 "examples/uarini/02_inheritance/*.cerl",
-	 "examples/uarini/03_polymorphism/*.cerl",
-	 "examples/uarini/04_polymorphism/*.cerl",
-	 "examples/uarini/05_polymorphism/*.cerl",
-	 "examples/uarini/06_interface/*.cerl",
-	 "examples/uarini/07_interface/*.cerl",
-	 "examples/uarini/08_interface/*.cerl",
-	 "examples/uarini/09_polymorphism/*.cerl",
-	 "examples/uarini/10_interface/*.cerl",
-	 "examples/mpi/pingping/*.cerl",
-	 "examples/mpi/pingpong/*.cerl",
-	 "examples/mpi/threadring/*.cerl"
+	 "examples/uarini/02_inheritance/*.cerl"
 	 ].
+
+
+
 
 compare_raw_preprocessed_tokens(CerlFile) ->
     {CerlFile, ?_assertEqual(
