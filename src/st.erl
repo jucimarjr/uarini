@@ -113,10 +113,10 @@ insert_parent_members([]) -> ok;
 insert_parent_members([{{_, {null, _, _, _, _}, _}} | Rest]) ->
 	insert_parent_members(Rest);
 insert_parent_members([{{ClassName, ClassInfo}, _Errors} | Rest ]) ->
-	{ParentName, AttrList, ConstrList, _ExportList, _StaticList} = ClassInfo,
+	{ParentName, AttrList, ConstrList, _ExportList, StaticList} = ClassInfo,
 
 	MethodsWithParent = get_methods_with_parent(ClassName),
-	NewStaticList = get_static_with_parent(ClassName),
+	NewStaticList = get_static_with_parent(StaticList, ClassName),
 
 	NewExportList = merge_method_lists(MethodsWithParent),
 
@@ -169,9 +169,10 @@ get_methods_with_parent(ClassName) ->
 %% muito semelhante ao método acima, porem para buscar a lista de metodos static
 %% que sao exportados!
 %% alem disso, eh retornado apenas a lista de static, sem as classes
-get_static_with_parent(ClassName) ->
-	AllMethods = get_visible_methods(ClassName),
-	filter_over_static(AllMethods).
+get_static_with_parent(StaticList, ClassName) ->
+	SuperClassName = get_superclass(ClassName),
+	ParentMethods = get_visible_methods(SuperClassName),
+	filter_over_static([ {ClassName, StaticList} | ParentMethods ]).
 
 %% busca todos os metodos public e static e retorna uma lista com eles
 %% input (metodos public):   [{Classe1, Metodos1}, {Classe2, Metodos2} ... ]
