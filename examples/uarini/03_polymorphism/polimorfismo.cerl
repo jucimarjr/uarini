@@ -4,11 +4,11 @@
 class_methods.
 
 main() ->
-    H = horista::constructor(),
-    M = mensalista::constructor(),
+    H = horista::new(),
+    M = mensalista::new(),
 
-    H::setSalario( 2240.00 ),
-    M::setSalario( 2240.00 ),
+    H::set_salario( 2240.00 ),
+    M::set_salario( 2240.00 ),
 
-    io:format( "Salario em horas: ~p", [H::getSalario()]),
-    io:format( "Salario em horas: ~p", [M::getSalario()]).
+    io:format( "Salario em horas: ~p", [H::get_salario()]),
+    io:format( "Salario em horas: ~p", [M::get_salario()]).
