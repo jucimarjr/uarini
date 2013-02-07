@@ -52,7 +52,10 @@ compile_ooe(Dir) ->
 examples_list() ->
 	[
 	 "examples/uarini/01_objects/*.cerl",
-	 "examples/uarini/02_inheritance/*.cerl"
+	 "examples/uarini/02_inheritance/*.cerl",
+	 "examples/mpi/pingping/*.cerl",
+ 	 "examples/mpi/pingpong/*.cerl",
+ 	 "examples/mpi/threadring/*.cerl"
 	 ].
 
 
