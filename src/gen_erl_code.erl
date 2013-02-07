@@ -44,6 +44,10 @@ match_expr({oo_remote, _, _, _} = Expr) ->
 match_expr({op, Ln, '!', LeftExpr, RightExpr}) ->
 	{op, Ln, '!', transform_inner_expr(LeftExpr), transform_inner_expr(RightExpr)};
 
+%% operacoes aritimeticas, como +, -, ++, etc.
+match_expr({op, _, _, _, _} = Expr) ->
+	transform_inner_expr(Expr);
+
 %% clausula que ignora a transformacao (expressao ja esta em Erlang)
 match_expr(Expression) ->
 	Expression.
@@ -131,23 +135,42 @@ transform_inner_expr(Expr) -> Expr.
 %%-----------------------------------------------------------------------------
 %% funcao para transformar chamada de funcoes
 create_call({call, Ln1, FuncLocation, ArgList}) ->
-	case get_func_loc(FuncLocation, ArgList) of
-		{normal, TransfFuncLocation} ->
+	case is_bif(FuncLocation, ArgList) of
+		true ->
 			TransfArgList = [transform_inner_expr(Arg) || Arg <- ArgList],
-			{call, Ln1, TransfFuncLocation, TransfArgList};
+			{call, Ln1, FuncLocation, TransfArgList};
 
-		{object, ObjectVarName, FuncName} ->
-			create_object_call(Ln1, ObjectVarName, FuncName, ArgList);
+		false ->
+			case get_func_loc(FuncLocation, ArgList) of
+				{normal, TransfFuncLocation} ->
+					TransfArgList = [transform_inner_expr(Arg) || Arg <- ArgList],
+					{call, Ln1, TransfFuncLocation, TransfArgList};
 
-		{object_direct, FuncName} ->
-			create_object_direct_call(Ln1, FuncName, ArgList);
+				{object, ObjectVarName, FuncName} ->
+					create_object_call(Ln1, ObjectVarName, FuncName, ArgList);
 
-		{object_super, SuperClassName, FuncName} ->
-			create_super_call(Ln1, SuperClassName, FuncName, ArgList);
+				{object_direct, FuncName} ->
+					create_object_direct_call(Ln1, FuncName, ArgList);
 
-		{error, Error} ->
-			{call, Ln1, gen_ast:atom(Ln1, throw), gen_ast:tuple(Error)}
+				{object_super, SuperClassName, FuncName} ->
+					create_super_call(Ln1, SuperClassName, FuncName, ArgList);
+
+				{error, Error} ->
+					{call, Ln1, gen_ast:atom(Ln1, throw), gen_ast:tuple(Error)}
+			end
 	end.
+
+%% verifica se funcao é uma bif
+is_bif({atom, _, self}, ArgList) when length(ArgList) == 0 -> true;
+is_bif({atom, _, size}, ArgList) when length(ArgList) == 1 -> true;
+is_bif({atom, _, now}, ArgList) when length(ArgList) == 0 -> true;
+is_bif({atom, _, list_to_binary}, ArgList) when length(ArgList) == 1 -> true;
+is_bif({atom, _, list_to_integer}, ArgList) when length(ArgList) == 1 -> true;
+is_bif({atom, _, list_to_float}, ArgList) when length(ArgList) == 1 -> true;
+is_bif({atom, _, list_to_tuple}, ArgList) when length(ArgList) == 1 -> true;
+is_bif({atom, _, atom_to_list}, ArgList) when length(ArgList) == 1 -> true;
+is_bif({atom, _, tuple_to_list}, ArgList) when length(ArgList) == 1 -> true;
+is_bif(_,_) -> false.
 
 %% chamadas de funcao Objecto::funcao(Args)
 %% para metodo de objeto
