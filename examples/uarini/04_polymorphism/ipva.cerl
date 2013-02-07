@@ -1,11 +1,16 @@
 -class(ipva).
 -export([calcularIpva/0]).
+-constructor([new_/0]).
 
 class_attributes.
 
-QtdCavalos = 150;
+%QtdCavalos = 150;
+QtdCavalos;
 QtdEixos.
 
 class_methods.
+
+new_() ->
+	self::QtdCavalos = 150.
 
 calcularIpva() -> 0.

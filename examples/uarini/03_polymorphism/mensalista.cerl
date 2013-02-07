@@ -1,6 +1,6 @@
 -class(mensalista).
 -extends(empregado).
--exports([new/0, get_salario/0]).
+-export([new/0, get_salario/0]).
 -constructor([new/0]).
 
 class_methods.  

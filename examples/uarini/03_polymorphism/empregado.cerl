@@ -1,5 +1,5 @@
 -class(empregado).
--exports([get_salario/0, set_salario/1]).
+-export([get_salario/0, set_salario/1]).
 
 class_attributes.
 
