@@ -24,10 +24,13 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	st:new(),
 	st:put_scope(class, ErlangModuleName),
 	st:insert_classes_info(ClassesInfo),
-	ParentMethods = create_all_parent_methods(ErlangModuleName),
-	st:insert_parent_members(ClassesInfo),
 
+	ParentMethods = create_all_parent_methods(ErlangModuleName),
 	ConstrList = st:get_all_constr_info(ErlangModuleName),
+
+	st:insert_parent_members(ClassesInfo),
+	st:insert_default_constructors(ClassesInfo),
+
 	DefaultConstructor = create_default_constructor(ErlangModuleName, ConstrList),
 	OOFunctions = DefaultConstructor ++ ParentMethods,
 
@@ -190,10 +193,7 @@ create_module(ErlangModuleName, FunctionList, ExportList, OtherForms) ->
 %%-----------------------------------------------------------------------------
 %% declara o construtor padrao quando nao for definido nenhum pelo usuario
 create_default_constructor(ClassName, []) ->
-	ConstrName = new_,
 	Line = 0,
-
-	st:insert_default_constructor(ClassName, ConstrName),
 
 	AttrList = st:get_all_attr_info(ClassName),
 	NewArgs = [gen_ast:atom(Line, AttrName) || {AttrName, _Value} <- AttrList],
@@ -206,7 +206,7 @@ create_default_constructor(ClassName, []) ->
 	TransfExprList = [NewObjectID_AST, ObjectID_AST],
 	Clause = {clause, Line, [], [], TransfExprList},
 
-	[{function, Line, ConstrName, 0, [Clause]}];
+	[{function, Line, ?CONSTR_NAME, 0, [Clause]}];
 
 %% caso jah tenha construtor def pelo user nao cria default_constructor
 create_default_constructor(_ClassName, _ListaDeConstrutores) ->

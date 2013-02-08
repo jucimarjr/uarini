@@ -6,6 +6,7 @@
 %% Objetivo : Criacao e manipulacao das variaveis
 
 -module(st).
+-include("../include/uarini_define.hrl").
 -export(
 	[
 		%% criar / zerar dicionário
@@ -16,7 +17,7 @@
 
 		%% informações das classes
 		insert_classes_info/1,	insert_parent_members/1,  exist_class/1,
-		insert_default_constructor/2,
+		insert_default_constructors/1,
 		is_constructor/1,		get_all_constr_info/1,
 		is_static/1,			is_public/1,
 		is_superclass/2,		get_superclass/1,
@@ -91,20 +92,31 @@ insert_classes_info(ClassesInfoList) ->
 put_class_info({{ClassName, ClassInfo}, Errors}) ->
 	{ParentName, AttrList, ConstrList, ExportList, StaticList} = ClassInfo,
 	put(errors, Errors),
-	ClassKey = {oo_classes, ClassName},
 
+	ClassKey = {oo_classes, ClassName},
 	ClassValue = {ParentName, AttrList, ConstrList, ExportList, StaticList},
 	put(ClassKey, ClassValue).
 
-insert_default_constructor(ClassName, ConstrName) ->
+
+insert_default_constructors([]) -> ok;
+insert_default_constructors([{{ClassName, _ClassInfo}, _Errors} | Rest]) ->
 	ClassInfo = get({oo_classes, ClassName}),
-	{ParentName, AttrList, _ConstrList, ExportList, StaticList} = ClassInfo,
-	ConstrList2 = [{ConstrName, 0}],
-	ExportList2 = [{ConstrName, 0} | ExportList],	
+	{ParentName, AttrList, ConstrList, ExportList, StaticList} = ClassInfo,
+
+	case ConstrList of
+		[] ->
+			ExportList2 = [{?CONSTR_NAME, 0} | ExportList],
+			ConstrList2 = [{?CONSTR_NAME, 0}];
+
+		_ ->
+			ExportList2 = ExportList,
+			ConstrList2 = ConstrList
+	end,
 
 	ClassKey = {oo_classes, ClassName},
 	ClassValue = {ParentName, AttrList, ConstrList2, ExportList2, StaticList},
-	put(ClassKey, ClassValue).
+	put(ClassKey, ClassValue),
+	insert_default_constructors(Rest).
 	
 
 %% atualiza dicionário inserindo informações dos

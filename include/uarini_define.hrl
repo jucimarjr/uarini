@@ -6,4 +6,4 @@
 		'Daniel Henrique',
 		'Rodrigo Bernardino']).
 -define(YEAR, 2012).
-
+-define(CONSTR_NAME, new_).
