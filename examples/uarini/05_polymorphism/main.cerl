@@ -12,6 +12,6 @@ main() ->
 	io:format("Polimorfismo (Sobreposicao) ~n"),
 	
 	Transp::exibeDados(),
-	Aviao::exibeDados(),
 	Navio::exibeDados(),
-	Oniubs::exibeDados().
+	Onibus::exibeDados(),
+	Aviao::exibeDados().
