@@ -18,6 +18,8 @@ test:   compile
 	@ $(ERLC) -o $(TEST_EBIN_DIR) test/*.erl
 	@ $(ERL) -pa $(EBIN_DIR) -pa $(TEST_EBIN_DIR) \
 		-eval 'eunit:test([test, uarini_scan_tests,uarini_parse_tests], [verbose]), halt().'
+	@ mv *.beam $(EBIN_DIR)/
+	@ mv *.erl $(EBIN_DIR)/
 
 # This is the task when you intend to debug
 debug: ERLC += +debug_info
