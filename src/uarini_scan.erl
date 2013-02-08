@@ -1364,10 +1364,4 @@ reserved_word('xor') -> true;
 reserved_word('class_attributes') -> true;
 reserved_word('class_methods') -> true;
 
-reserved_word('public')    -> true;
-reserved_word('protected') -> true;
-reserved_word('private')   -> true;
-reserved_word('static')    -> true;
-reserved_word('final')     -> true;
-
 reserved_word(_) -> false.

@@ -24,7 +24,6 @@ Nonterminals
 form
 
 oo_attributes oo_attribute % ooe
-oo_modifier oo_visibility oo_access oo_var %ooe
 
 attribute attr_val
 function function_clauses function_clause
@@ -68,8 +67,6 @@ char integer float atom string var
 '!' '=' '::' '..' '...'
 
 'class_attributes' 'class_methods' % oo_markup
-'public' 'protected' 'private' % oo_visibility
-'final' 'static' % oo_access
 
 'spec' 'callback' % helper
 dot.
@@ -91,29 +88,12 @@ form -> oo_attributes dot :
 oo_attributes -> oo_attribute : ['$1'].
 oo_attributes -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
 
-oo_attribute -> oo_var             : build_oo_attribute('$1').
-oo_attribute -> oo_modifier oo_var : build_oo_attribute('$1', '$2').
-
-oo_modifier -> oo_access               : '$1'.
-oo_modifier -> oo_visibility           : ['$1'].
-oo_modifier -> oo_visibility oo_access : ['$1'] ++ '$2'.
-
-oo_visibility -> 'public' : '$1'.
-oo_visibility -> 'private' : '$1'.
-oo_visibility -> 'protected' : '$1'.
-
-oo_access -> 'static' 'final' : ['$1','$2'].
-oo_access -> 'static'         : ['$1'].
-oo_access -> 'final'          : ['$1'].
-
-oo_var -> var                : build_oo_var('$1').
-oo_var -> atom var           : build_oo_var('$1', '$2').
-oo_var -> var '=' exprs      : build_oo_var({match,?line('$2'),'$1','$3'}).
-oo_var -> atom var '=' exprs : build_oo_var('$1', {match,?line('$3'),'$2','$4'}).
+oo_attribute -> var                : build_oo_attribute('$1').
+oo_attribute -> atom var           : build_oo_attribute('$1', '$2').
+oo_attribute -> var '=' exprs      : build_oo_attribute({match,?line('$2'),'$1','$3'}).
+oo_attribute -> atom var '=' exprs : build_oo_attribute('$1', {match,?line('$3'),'$2','$4'}).
 
 attribute -> '-' atom     attr_val : build_attribute('$2', '$3').
-attribute -> '-' 'static' attr_val : Static = {atom, ?line('$2'), static},
-                                        build_attribute(Static,'$3').
 
 attribute -> '-' atom typed_attr_val         : build_typed_attribute('$2','$3').
 attribute -> '-' atom '(' typed_attr_val ')' : build_typed_attribute('$2','$4').
@@ -1158,15 +1138,9 @@ abstract_method({clause,Line,Name,Args,Guards,[]}) ->
 abstract_method(FunNode) ->
     FunNode.
 
-build_oo_attribute(TypedVar) ->
-    {oo_attribute, ?line(TypedVar),  [], TypedVar}.
-build_oo_attribute(Modifier, TypedVar) ->
-    [Head|_Tail] = Modifier,
-    Line = ?line(Head),
-    {oo_attribute, Line, Modifier, TypedVar}.
+build_oo_attribute(Var) ->
+   NoType = {atom, ?line(Var), 'NoType'},
+   build_oo_attribute(NoType, Var).
 
-build_oo_var(Var) ->
-   build_oo_var({atom, ?line(Var), 'NoType'}, Var).
-
-build_oo_var(Type, Var) ->
-   {oo_var, ?line(Type), Type, Var}.
+build_oo_attribute(Type, Var) ->
+   {oo_attribute, ?line(Type), Type, Var}.
