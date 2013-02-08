@@ -10,18 +10,26 @@
 
 -define(SCAN, uarini_scan).
 -define(RW_TOKEN(ReservedWord), {ok, [{ReservedWord, 1}], 1}).
+-define(ATOM_TOKEN(Atom),       {ok, [{atom, 1,   Atom}], 1}).
+
 
 reserved_word_test() ->
     ReservedWords = [
         class_attributes,
-        class_methods,
+        class_methods],
+    NotReservedWords = [
         public,
         protected,
         private,
         static,
         final],
 
-    AssertEquals = fun (W)->
+    AssertReserved = fun (W)->
         ?assertEqual(?RW_TOKEN(W), ?SCAN:string(atom_to_list(W)))
     end,
-    lists:map(AssertEquals, ReservedWords).
+    AssertAtom = fun (W)->
+        ?assertEqual(?ATOM_TOKEN(W), ?SCAN:string(atom_to_list(W)))
+    end,
+
+    lists:map(AssertReserved, ReservedWords) ++
+    lists:map(AssertAtom,  NotReservedWords).

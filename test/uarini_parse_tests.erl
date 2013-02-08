@@ -48,24 +48,24 @@ uarini_markup_test() ->
      ?assertEqual(?OK(Exp2), Form2)].
 
 uarini_var_test() ->
-    Exp1 = {oo_attributes, 1, [{oo_attribute, 1, [],{oo_var, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}}]},
-    Exp2 = {oo_attributes, 1, [{oo_attribute, 1, [],{oo_var, 1, {atom,1,     car}, {var,1,'Fusca'}}}]},
-
+    Exp1 = {oo_attributes, 1,
+        [{oo_attribute, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}]},
+    Exp2 = {oo_attributes, 1,
+        [{oo_attribute, 1, {atom,1, car}, {var,1,'Fusca'}}]},
     Exp3 = {oo_attributes, 1,
-               [{oo_attribute, 1, [{public, 1}], {oo_var, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}}]},
+        [{oo_attribute, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}]},
     Exp4 = {oo_attributes, 1,
-               [{oo_attribute, 1, [{private,1}], {oo_var, 1, {atom, 1,car}, {var,1,'Fusca'}}}]},
+        [{oo_attribute, 1, {atom, 1,car}, {var,1,'Fusca'}}]},
 
     Exp5 = {oo_attributes, 1,
                [{oo_attribute, 1,
-                    [{protected,1},{static,1},{final,1}],
-                     {oo_var, 1, {atom,1, car}, {var,1,'Ferrari'}}}]},
+                    {atom,1, car}, {var,1,'Ferrari'}}]},
 
     Form1 = uarini_parse:parse(get_tokens("MyVar.")),
     Form2 = uarini_parse:parse(get_tokens("car Fusca.")),
-    Form3 = uarini_parse:parse(get_tokens("public MyVar.")),
-    Form4 = uarini_parse:parse(get_tokens("private car Fusca.")),
-    Form5 = uarini_parse:parse(get_tokens("protected static final car Ferrari.")),
+    Form3 = uarini_parse:parse(get_tokens("MyVar.")),
+    Form4 = uarini_parse:parse(get_tokens("car Fusca.")),
+    Form5 = uarini_parse:parse(get_tokens("car Ferrari.")),
 
     [?assertEqual(?OK(Exp1), Form1),
      ?assertEqual(?OK(Exp2), Form2),
