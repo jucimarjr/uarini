@@ -167,26 +167,17 @@ match_form(_,_) -> nop.
 
 %%-----------------------------------------------------------------------------
 %% info de campos
-get_attr_info({oo_attributes,_, AttrList}) ->
+get_attr_info({oo_attributes, _, AttrList}) ->
 	get_attr_info(AttrList, []).
 
 get_attr_info([], AttrInfoList) ->
 	lists:reverse(AttrInfoList, []);
 get_attr_info([Attr | Rest], AttrInfoList) ->
-	{oo_attribute,_, ModifierList, {oo_var, _,  TypeTemp, NameTemp}} = Attr,
+	{oo_attribute, _, TypeTemp, NameTemp} = Attr,
 	{{atom, _, Type}, {var, _, Name}} = {TypeTemp, NameTemp},
-	ModifierList2 = [Modifier || {Modifier, _} <- ModifierList],
-
-	ModifierList3 =
-		case helpers:has_element(public, ModifierList2) of
-			true ->
-				ModifierList2;
-			false ->
-				[private | ModifierList2]
-		end,
 
 	VarKey = Name,
-	VarValue = {Type, ModifierList3},
+    VarValue = {Type, [public]},
 	NewAttrInfo = {VarKey, VarValue},
 	get_attr_info(Rest, [ NewAttrInfo | AttrInfoList ]).
 
