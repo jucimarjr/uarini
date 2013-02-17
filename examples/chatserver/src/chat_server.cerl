@@ -1,0 +1,53 @@
+-class(chat_server).
+-author('elmiliox@gmail.com').
+-static([
+    start/0, stop/0,
+    send_chat_message/2, route_messages/1,
+    register_client/2, unregister_client/1]).
+-compile(export_all).
+
+class_methods.
+start() ->
+    server_util:start(chat_server, {chat_server, route_messages, [dict:new()]}).
+
+stop() ->
+    server_util:stop(chat_server).
+
+send_chat_message(Addressee, MessageBody) ->
+    global:send(chat_server, {send_chat_msg, Addressee, MessageBody}).
+
+register_client(ClientName, ClientPid) ->
+    global:send(chat_server, {register_nick, ClientName, ClientPid}).
+
+unregister_client(ClientName) ->
+    global:send(chat_server, {unregister_nick, ClientName}).
+
+route_messages(Clients) ->
+    receive
+        {send_chat_msg, ClientName, MessageBody} ->
+            case dict:find(ClientName, Clients) of
+                {ok, ClientPid} ->
+                    ClientPid ! {printmsg, MessageBody};
+                error ->
+                    io:format(
+                        "Lost message ~p for ~p~n",
+                        [MessageBody, ClientName])
+            end,
+            route_messages(Clients);
+        {register_nick, ClientName, ClientPid} ->
+            route_messages(dict:store(ClientName, ClientPid, Clients));
+        {unregister_nick, ClientName} ->
+            case dict:find(ClientName, Clients) of
+                {ok, ClientPid} ->
+                    ClientPid ! stop,
+                    route_messages(dict:erase(ClientName, Clients));
+                error ->
+                    io:format("Error! Unknown client: ~p~n", [ClientName]),
+                    route_messages(Clients)
+            end;
+        shutdown ->
+            io:format("Shutting down ~n");
+        Oops ->
+            io:format("Warning! Received: ~p~n", [Oops]),
+            route_messages(Clients)
+    end.
