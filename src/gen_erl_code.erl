@@ -170,6 +170,7 @@ is_bif({atom, _, list_to_float}, ArgList) when length(ArgList) == 1 -> true;
 is_bif({atom, _, list_to_tuple}, ArgList) when length(ArgList) == 1 -> true;
 is_bif({atom, _, atom_to_list}, ArgList) when length(ArgList) == 1 -> true;
 is_bif({atom, _, tuple_to_list}, ArgList) when length(ArgList) == 1 -> true;
+is_bif({atom, _, spawn}, ArgList) when length(ArgList) == 3 -> true;
 is_bif(_,_) -> false.
 
 %% chamadas de funcao Objecto::funcao(Args)
