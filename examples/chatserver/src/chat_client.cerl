@@ -1,0 +1,36 @@
+-class(chat_client).
+-author('elmiliox@gmail.com').
+-constructor([register/1]).
+-compile(export_all).
+-static([handle_messages/1]).
+
+class_attributes.
+Nick.
+
+class_methods.
+
+register(Nickname) ->
+    self::Nick = Nickname,
+    Pid = spawn(chat_client, handle_messages, [Nickname]),
+    case chat_server:register_client(Nickname, Pid) of
+        true ->
+            ok;
+        false ->
+            erlang:error(register_failed)
+    end.
+
+unregister() ->
+    chat_server:unregister_client(self::Nick).
+
+send(Message) ->
+    chat_server:send_chat_message(self::Nick, Message).
+
+
+handle_messages(Nickname) ->
+    receive
+        {printmsg, MessageBody} ->
+            io:format("~p received: ~p~n", [Nickname, MessageBody]),
+            handle_messages(Nickname);
+        stop ->
+            ok
+    end.
