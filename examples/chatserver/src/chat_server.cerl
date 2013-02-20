@@ -1,53 +1,56 @@
 -class(chat_server).
 -author('elmiliox@gmail.com').
--static([
-    start/0, stop/0,
-    send_chat_message/2, route_messages/1,
-    register_client/2, unregister_client/1]).
+-static([start/0, stop/0, join/2, unjoin/2, send/2, message_router/1]).
 -compile(export_all).
 
 class_methods.
 start() ->
-    server_util:start(chat_server, {chat_server, route_messages, [dict:new()]}).
+    server_util:start(chat_server, {chat_server, message_router, [dict:new()]}).
 
 stop() ->
     server_util:stop(chat_server).
 
-send_chat_message(Addressee, MessageBody) ->
-    global:send(chat_server, {send_chat_msg, Addressee, MessageBody}).
+join(ClientName, ClientPid) ->
+    global:send(chat_server, {join, ClientName, ClientPid}).
 
-register_client(ClientName, ClientPid) ->
-    global:send(chat_server, {register_nick, ClientName, ClientPid}).
+unjoin(ClientName) ->
+    global:send(chat_server, {unjoin, ClientName}).
 
-unregister_client(ClientName) ->
-    global:send(chat_server, {unregister_nick, ClientName}).
+send(Message) ->
+    global:send(chat_server, {public_message, Message}).
 
-route_messages(Clients) ->
+send_to(Addressee, Message) ->
+    global:send(chat_server, {private_message, Message, Addressee}).
+
+message_router(Clients) ->
     receive
-        {send_chat_msg, ClientName, MessageBody} ->
-            case dict:find(ClientName, Clients) of
-                {ok, ClientPid} ->
-                    ClientPid ! {printmsg, MessageBody};
+        {private_message, Addressee, Message} ->
+            case dict:find(Addressee, Clients) of
+                {ok, Client} -> Client ! {printmsg, Message};
                 error ->
                     io:format(
-                        "Lost message ~p for ~p~n",
-                        [MessageBody, ClientName])
+                        "Lost message ~p for ~p~n", [Message, Addressee])
             end,
-            route_messages(Clients);
-        {register_nick, ClientName, ClientPid} ->
-            route_messages(dict:store(ClientName, ClientPid, Clients));
-        {unregister_nick, ClientName} ->
-            case dict:find(ClientName, Clients) of
-                {ok, ClientPid} ->
-                    ClientPid ! stop,
-                    route_messages(dict:erase(ClientName, Clients));
+            message_router(Clients);
+        {public_message, Message} ->
+            lists:map(
+                fun (Client) -> Client ! {printmsg, Message} end,
+                dict:to_list(Clients)),
+            message_router(Clients);
+        {join,   Nick, Pid} ->
+            message_router(dict:store(Nick, Pid, Clients));
+        {unjoin, Nick} ->
+            case dict:find(Nick, Clients) of
+                {ok, Client} -> Client ! stop,
+                    io:format("~p leaved.", [Nick]),
+                    message_router(dict:erase(Nick, Clients));
                 error ->
-                    io:format("Error! Unknown client: ~p~n", [ClientName]),
-                    route_messages(Clients)
+                    io:format("Error! Unknown client: ~p~n", [Nick]),
+                    message_router(Clients)
             end;
         shutdown ->
             io:format("Shutting down ~n");
         Oops ->
             io:format("Warning! Received: ~p~n", [Oops]),
-            route_messages(Clients)
+            message_router(Clients)
     end.

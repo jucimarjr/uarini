@@ -11,19 +11,17 @@ class_methods.
 
 register(Nickname) ->
     self::Nick = Nickname,
-    Pid = spawn(chat_client, handle_messages, [Nickname]),
-    case chat_server:register_client(Nickname, Pid) of
-        true ->
-            ok;
-        false ->
-            erlang:error(register_failed)
-    end.
+    spawn(chat_client, handle_messages, [Nickname]),
+    ok.
 
 unregister() ->
     chat_server:unregister_client(self::Nick).
 
 send(Message) ->
-    chat_server:send_chat_message(self::Nick, Message).
+    chat_server:send(Message).
+
+send_to(Addressee, Message) ->
+    chat_server:send_to(Addressee, Message).
 
 
 handle_messages(Nickname) ->
