@@ -7,6 +7,7 @@
 
 -module(ast).
 -export([get_urn_tokens/1, get_urn_forms/1, get_class_info/1]).
+-include("../include/uarini_define.hrl").
 
 %%-----------------------------------------------------------------------------
 %% Extrai a Uarini Abstract Syntax Tree de um arquivo .cerl
@@ -71,67 +72,58 @@ split_dots([T|Ts], F, Fs) ->
 get_class_info(FormList) ->
 	st:new(),
 
-	D1 = orddict:new(),
-	D2 = orddict:store(parent_name, null, D1),
-	D3 = orddict:store(attributes, [], D2),
-%	D4 = orddict:store(methods, [], D3),
-	D5 = orddict:store(constructors, [], D3),
-	D6 = orddict:store(export, [], D5),
-	D7 = orddict:store(class_name, "", D6),
-	D8 = orddict:store(static, [], D7),
+	ClassInfo = get_forms_info(FormList, #class{}),
 
-	NewODict = get_forms_info(FormList, D8),
+	ExportList = ClassInfo#class.export,
+	StaticList = ClassInfo#class.static,
+	MethodsInfo = ClassInfo#class.methods,
+	MethodsInfo2 =
+		[update_method(Mthd, ExportList, StaticList) || Mthd <- MethodsInfo],
+	MethodsInfo3 = orddict:from_list(MethodsInfo2),
 
-	{ok, ClassName} = orddict:find(class_name, NewODict),
-	{ok, ParentName} = orddict:find(parent_name, NewODict),
-	{ok, AttrList} = orddict:find(attributes, NewODict),
-%	D4 = orddict:find(methods, [], D3),
-	{ok, ConstrList} = orddict:find(constructors, NewODict),
-	{ok, ExportList} = orddict:find(export, NewODict),
-	{ok, StaticList} = orddict:find(static, NewODict),
+	ExportList2 = ClassInfo#class.export ++ ClassInfo#class.constr,
 
-	ExportList2 = ExportList ++ ConstrList,
+	AttrList = orddict:from_list(ClassInfo#class.attrs),
 
 	Errors = st:get_errors(),
 	st:destroy(),
 
-	ClassKey = ClassName,
-	ClassValue = {ParentName, AttrList, ConstrList, ExportList2, StaticList},
+	ClassKey = ClassInfo#class.name,
+	ClassValue = ClassInfo#class{export = ExportList2, methods = MethodsInfo3,
+								attrs = AttrList},
+
 	{{ClassKey, ClassValue}, Errors}.
 
 
 %%-----------------------------------------------------------------------------
 %% percorre a lista de forms
-get_forms_info([], ODict) ->
-	ODict;
-get_forms_info([Form | FormList], ODict) ->
+get_forms_info([], ClassInfo) ->
+	ClassInfo;
+get_forms_info([Form | FormList], ClassInfo) ->
 	case match_form(Form, FormList) of
 		{class_name, ClassName, FormList2} ->
-			NewODict = orddict:store(class_name, ClassName, ODict),
-			get_forms_info(FormList2, NewODict);
+			get_forms_info(FormList2, ClassInfo#class{name = ClassName});
 
 		{parent, ParentName, FormList2} ->
-			NewODict = orddict:store(parent_name, ParentName, ODict),
-			get_forms_info(FormList2, NewODict);
+			get_forms_info(FormList2, ClassInfo#class{parent=ParentName});
 
 		{attributes, AttrList, FormList2} ->
-			NewODict = orddict:store(attributes, AttrList, ODict),
-			get_forms_info(FormList2, NewODict);
+			get_forms_info(FormList2, ClassInfo#class{attrs = AttrList});
 
-		{constructors, ConstrInfo, FormList2} ->
-			NewODict = orddict:store(constructors, ConstrInfo, ODict),
-			get_forms_info(FormList2, NewODict);
+		{methods, MethodList, FormList2} ->
+			get_forms_info(FormList2, ClassInfo#class{methods = MethodList});
 
-		{export, ExportInfo, FormList2} ->
-			NewODict = orddict:store(export, ExportInfo, ODict),
-			get_forms_info(FormList2, NewODict);
+		{constructors, ConstrList, FormList2} ->
+			get_forms_info(FormList2, ClassInfo#class{constr=ConstrList});
 
-		{static, StaticInfo, FormList2} ->
-			NewODict = orddict:store(static, StaticInfo, ODict),
-			get_forms_info(FormList2, NewODict);
+		{export, ExportList, FormList2} ->
+			get_forms_info(FormList2, ClassInfo#class{export = ExportList});
+
+		{static, StaticList, FormList2} ->
+			get_forms_info(FormList2, ClassInfo#class{static = StaticList});
 
 		nop ->
-			get_forms_info(FormList, ODict)
+			get_forms_info(FormList, ClassInfo)
 	end.
 
 %%-----------------------------------------------------------------------------
@@ -160,9 +152,10 @@ match_form({attribute, _, export, ExportList}, FormList) ->
 match_form({attribute, _, static, StaticList}, FormList) ->
 	{static, StaticList, FormList};
 
-%% por enquanto, as info dos metodos necessarias estao nos atributos
-%% "static", "constructors" e "exports"
-match_form({class_methods, _}, _) -> nop;
+match_form({class_methods, _}, FormList) ->
+	{MethodList, RestForms} = get_all_method_info(FormList),
+	{methods, MethodList, RestForms};
+
 match_form(_,_) -> nop.
 
 %%-----------------------------------------------------------------------------
@@ -182,9 +175,35 @@ get_attr_info([Attr | Rest], AttrInfoList) ->
 	get_attr_info(Rest, [ NewAttrInfo | AttrInfoList ]).
 
 %%-----------------------------------------------------------------------------
+%% info dos metodos
+get_all_method_info(FunctionList) ->
+	get_method_info(FunctionList, []).
 
+get_method_info([{function, _Ln, Name, Arity, _Clauses} | Rest], MethodsInfo) ->
+	MthdKey = {Name, Arity},
+	MthdValue = [],
 
+	get_method_info(Rest, [{MthdKey, MthdValue} | MethodsInfo]);
 
+get_method_info([], MethodsInfo) ->
+	{lists:reverse(MethodsInfo), []};
+get_method_info([NotAFunction | Rest], MethodsInfo) ->
+	{lists:reverse(MethodsInfo), [NotAFunction | Rest]}.
+
+%% atualiza informação dos métodos com seus respectivos modificadores
+update_method({MethodKey, _MethodValue}, ExportList, StaticList) ->
+	IsPublic = helpers:has_element(MethodKey, ExportList),
+	IsStatic = helpers:has_element(MethodKey, StaticList),
+
+	Modifiers =
+		case {IsPublic, IsStatic} of
+			{true, true} -> [public, static];
+			{true, false} -> [public];
+			{false, true} -> [static];
+			{false, false} -> []
+		end,
+
+	{MethodKey, Modifiers}.
 
 
 

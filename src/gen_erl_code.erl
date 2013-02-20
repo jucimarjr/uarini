@@ -7,6 +7,7 @@
 
 -module(gen_erl_code).
 -export([match_param/1, match_expr/1]).
+-include("../include/uarini_define.hrl").
 
 -import(gen_ast,
 	[
@@ -135,43 +136,23 @@ transform_inner_expr(Expr) -> Expr.
 %%-----------------------------------------------------------------------------
 %% funcao para transformar chamada de funcoes
 create_call({call, Ln1, FuncLocation, ArgList}) ->
-	case is_bif(FuncLocation, ArgList) of
-		true ->
+	case get_func_loc(FuncLocation, ArgList) of
+		{normal, TransfFuncLocation} ->
 			TransfArgList = [transform_inner_expr(Arg) || Arg <- ArgList],
-			{call, Ln1, FuncLocation, TransfArgList};
+			{call, Ln1, TransfFuncLocation, TransfArgList};
 
-		false ->
-			case get_func_loc(FuncLocation, ArgList) of
-				{normal, TransfFuncLocation} ->
-					TransfArgList = [transform_inner_expr(Arg) || Arg <- ArgList],
-					{call, Ln1, TransfFuncLocation, TransfArgList};
+		{object, ObjectVarName, FuncName} ->
+			create_object_call(Ln1, ObjectVarName, FuncName, ArgList);
 
-				{object, ObjectVarName, FuncName} ->
-					create_object_call(Ln1, ObjectVarName, FuncName, ArgList);
+		{object_direct, FuncName} ->
+			create_object_direct_call(Ln1, FuncName, ArgList);
 
-				{object_direct, FuncName} ->
-					create_object_direct_call(Ln1, FuncName, ArgList);
+		{object_super, SuperClassName, FuncName} ->
+			create_super_call(Ln1, SuperClassName, FuncName, ArgList);
 
-				{object_super, SuperClassName, FuncName} ->
-					create_super_call(Ln1, SuperClassName, FuncName, ArgList);
-
-				{error, Error} ->
-					{call, Ln1, gen_ast:atom(Ln1, throw), gen_ast:tuple(Error)}
-			end
+		{error, Error} ->
+			{call, Ln1, gen_ast:atom(Ln1, throw), gen_ast:tuple(Error)}
 	end.
-
-%% verifica se funcao é uma bif
-is_bif({atom, _, self}, ArgList) when length(ArgList) == 0 -> true;
-is_bif({atom, _, size}, ArgList) when length(ArgList) == 1 -> true;
-is_bif({atom, _, now}, ArgList) when length(ArgList) == 0 -> true;
-is_bif({atom, _, list_to_binary}, ArgList) when length(ArgList) == 1 -> true;
-is_bif({atom, _, list_to_integer}, ArgList) when length(ArgList) == 1 -> true;
-is_bif({atom, _, list_to_float}, ArgList) when length(ArgList) == 1 -> true;
-is_bif({atom, _, list_to_tuple}, ArgList) when length(ArgList) == 1 -> true;
-is_bif({atom, _, atom_to_list}, ArgList) when length(ArgList) == 1 -> true;
-is_bif({atom, _, tuple_to_list}, ArgList) when length(ArgList) == 1 -> true;
-is_bif({atom, _, spawn}, ArgList) when length(ArgList) == 3 -> true;
-is_bif(_,_) -> false.
 
 %% chamadas de funcao Objecto::funcao(Args)
 %% para metodo de objeto
@@ -315,17 +296,22 @@ get_func_loc({atom, Ln, FunctionName}, ArgList) ->
 
 	MethodKey = {ScopeClass, {FunctionName, length(ArgList)}},
 
-	case st:is_static(MethodKey) of
-		true ->
-			{normal, {atom, Ln, FunctionName}};
-
+	case st:exist_method(MethodKey) of
 		false ->
-			case st:is_static(Scope) of
+			{normal, {atom, Ln, FunctionName}};
+		true ->
+			case st:is_static(MethodKey) of
 				true ->
-					{error, {object_call_on_static_context, {ln, Ln}}};
+					{normal, {atom, Ln, FunctionName}};
 
 				false ->
-					{object_direct, {atom, Ln, FunctionName}}
+					case st:is_static(Scope) of
+						true ->
+							{error, {object_call_on_static_context, {ln, Ln}}};
+
+						false ->
+							{object_direct, {atom, Ln, FunctionName}}
+					end
 			end
 	end.
 

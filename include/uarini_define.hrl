@@ -7,3 +7,12 @@
 		'Rodrigo Bernardino']).
 -define(YEAR, 2012).
 -define(CONSTR_NAME, new_).
+
+-record(class, {
+			name    = "",	 % ClassName
+			parent  = null, % ParentName
+			attrs	= [],	 % AttrList
+			methods	= [],	 % MethodList
+			constr 	= [],	 % ConstrList
+			export	= [],	 % ExportList
+			static	= []}). % StaticList

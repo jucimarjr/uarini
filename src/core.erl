@@ -67,13 +67,19 @@ filter_object_mthd([FunctionInfo | ExportList], NewExportList ) ->
 	ClassName = st:get_scope(class),
 	MethodKey = {ClassName, {FunctionName, Arity}},
 
-	case (st:is_static(MethodKey) or st:is_constructor(MethodKey)) of
+	case st:is_constructor(MethodKey) of
 		true ->
 			filter_object_mthd(ExportList, [FunctionInfo | NewExportList]);
 
 		false ->
-			NewFunctionInfo = {FunctionName, Arity + 1},
-			filter_object_mthd(ExportList, [NewFunctionInfo | NewExportList])
+			case st:is_static(MethodKey) of
+				true ->
+				 filter_object_mthd(ExportList, [FunctionInfo | NewExportList]);
+
+				false ->
+				  NewFunctionInfo = {FunctionName, Arity + 1},
+				  filter_object_mthd(ExportList, [NewFunctionInfo | NewExportList])
+		end
 	end.
 			
 
@@ -225,7 +231,7 @@ create_parent_method_list([{ClassName, MethodList} | Rest], NewMethodList) ->
 		[create_parent_method(Method, ClassName) || Method <- MethodList],
 	create_parent_method_list(Rest, MethodListTemp ++ NewMethodList).
 
-create_parent_method({MethodName, Arity}, ClassName) ->
+create_parent_method({{MethodName, Arity}, _Modifiers}, ClassName) ->
 	Ln = 0,
 	Arity2 =
 		case st:is_static({ClassName, {MethodName, Arity}}) of
