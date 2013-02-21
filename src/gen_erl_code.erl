@@ -14,6 +14,8 @@
 		match/3, rcall/4, integer/2, call/3, var/2, atom/2
 	]).
 
+-import(uarini_errors, [handle_error/3]).
+
 %%-----------------------------------------------------------------------------
 %% Faz o match de uma expressao nos parametros de uma clausula de uma funcao
 %% de Uarini para Erlang
@@ -95,8 +97,7 @@ transform_inner_expr({oo_remote, Ln1, {atom, _, self}, ObjectAttr}) ->
 			rcall(Ln1, ooe, lookup_attr, LookupArgs);
 
 		false ->
-			Error = gen_ast:atom(Ln1, {self_on_static_method}),
-			{call, Ln1, gen_ast:atom(Ln1, throw), Error}
+			handle_error(Ln1, 1, [])
 	end;
 
 transform_inner_expr({oo_remote, Ln1, ObjectVar, ObjectAttr}) ->
@@ -150,8 +151,8 @@ create_call({call, Ln1, FuncLocation, ArgList}) ->
 		{object_super, SuperClassName, FuncName} ->
 			create_super_call(Ln1, SuperClassName, FuncName, ArgList);
 
-		{error, Error} ->
-			{call, Ln1, gen_ast:atom(Ln1, throw), gen_ast:tuple(Error)}
+		error ->
+			error
 	end.
 
 %% chamadas de funcao Objecto::funcao(Args)
@@ -208,18 +209,18 @@ get_func_loc({oo_remote, Ln1, {atom, _, super}, FuncName}, ArgList) ->
 
 	case SuperClassName of
 		null ->
-			{error, {super_call_on_class_without_parent, {ln, Ln1}}};
+			handle_error(Ln1, 2, []);
 
 		_ ->
 			case st:is_static(Scope) of
 				true ->
-					{error, {super_object_call_on_static_context, {ln, Ln1}}};
+					handle_error(Ln1, 3, []);
 
 				false ->
 					MethodKey = {SuperClassName, {FuncName2, length(ArgList)}},
 					case st:is_static(MethodKey) of
 						true ->
-							{error, {call_static_method_from_super, {ln,Ln1}}};
+							handle_error(Ln1, 4, []);
 
 						false ->
 							SuperClassName2 = atom(Ln1, SuperClassName),
@@ -237,7 +238,7 @@ get_func_loc({oo_remote, Ln1, {atom, _, self}, FuncName}, ArgList) ->
 
 	case st:is_static(Scope) of
 		true ->
-			{error, {object_call_on_static_context, {ln, Ln1}}};
+			handle_error(Ln1, 5, []);
 
 		false ->
 			case st:is_static({ClassName, {FuncName2, length(ArgList)}}) of
@@ -250,21 +251,21 @@ get_func_loc({oo_remote, Ln1, {atom, _, self}, FuncName}, ArgList) ->
 	end;
 
 %% chamadas classe::funcao(Args)
-get_func_loc({oo_remote, Ln2, {atom, _, ClassName}, FuncName}, ArgList) ->
+get_func_loc({oo_remote, Ln1, {atom, _, ClassName}, FuncName}, ArgList) ->
 	{_, _, FuncName2} = FuncName,
 
 	MethodKey = {ClassName, {FuncName2, length(ArgList)}},
 
-	TransfClassName = atom(Ln2, ClassName),
+	TransfClassName = atom(Ln1, ClassName),
 
 	case st:exist_class(ClassName) of
 		false ->
-			{error, {class_not_found, ClassName}};
+			handle_error(Ln1, 6, [ClassName]);
 
 		true ->
 			case st:is_constructor(MethodKey) of
 				true ->
-					{normal, {remote, Ln2, TransfClassName, FuncName}};
+					{normal, {remote, Ln1, TransfClassName, FuncName}};
 
 				false ->
 					case st:is_public(MethodKey) of
@@ -272,14 +273,17 @@ get_func_loc({oo_remote, Ln2, {atom, _, ClassName}, FuncName}, ArgList) ->
 							case st:is_static(MethodKey) of
 								true ->
 									{normal,
-									  {remote, Ln2, TransfClassName, FuncName}};
+									  {remote, Ln1, TransfClassName, FuncName}};
 
 								false ->
-									{error, {not_static, ClassName, FuncName}}
+									ErrorArgs =
+										[ClassName, FuncName, length(ArgList)],
+									handle_error(Ln1, 7, ErrorArgs)
 							end;
 
 						false ->
-							{error, {not_public, ClassName, FuncName}}
+							ErrorArgs = [ClassName, FuncName, length(ArgList)],
+							handle_error(Ln1, 8, ErrorArgs)
 					end
 			end
 	end;
@@ -307,7 +311,7 @@ get_func_loc({atom, Ln, FunctionName}, ArgList) ->
 				false ->
 					case st:is_static(Scope) of
 						true ->
-							{error, {object_call_on_static_context, {ln, Ln}}};
+							handle_error(5, Ln, []);
 
 						false ->
 							{object_direct, {atom, Ln, FunctionName}}

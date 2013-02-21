@@ -40,8 +40,6 @@ function generate_erl
 	#echo "$compileParams"
 	erl -pa $UARINI_PATH/ebin -noshell -eval "uarini_utils:compile( ["$compileParams"] )." -s erlang halt
 	echo ""
-	echo "done!"
-	echo ""
 }
 
 function print_tokens

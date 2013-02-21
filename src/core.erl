@@ -48,9 +48,10 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 		[] ->
 			st:destroy(),
 			{ok, ErlangModule};
+
 		Errors ->
 			st:destroy(),
-			throw({error, Errors})
+			{error, Errors}
 	end.
 
 %%-----------------------------------------------------------------------------

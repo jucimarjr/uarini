@@ -23,12 +23,23 @@ compile({beam, UariniFileName}) ->
 compile(FileNameList) ->
 	ErlangFileList = get_erl_file_list(FileNameList),
 
+	io:format("\n"),
+	Result =
 	[ begin
-		io:format("~ncompiling ~p~n", [ErlangFile]),	  
-		erl_tidy:file(ErlangFile, [{backups,false}, {quiet, true}]),
-		compile:file(ErlangFile, [{outdir, filename:dirname(ErlangFile)},verbose,report_errors,report_warnings])
+		%% io:format("~ncompiling ~p~n", [ErlangFile]),
+		case ErlangFile of
+			{error, ClassName, Errors} ->
+				uarini_errors:print_errors(ClassName, Errors),
+				{error, ClassName};
+
+			_ ->
+				erl_tidy:file(ErlangFile, [{backups,false}, {quiet, true}]),
+				compile:file(ErlangFile, [{outdir, filename:dirname(ErlangFile)},
+										  verbose,report_errors,report_warnings])
+		end
 	  end
-	  || ErlangFile <- ErlangFileList ].
+	  || ErlangFile <- ErlangFileList ],
+	Result.
 
 %%-----------------------------------------------------------------------------
 %% gera varios .erl a partir de varios .cerl
@@ -46,12 +57,16 @@ get_erl_file_list([AST | Rest], ClassesInfo, ErlangFileList) ->
 	ErlangModuleName = get_erl_modulename(AST),
 	ErlangFileName = get_erl_filename(ErlangModuleName),
 
-	{ok, ErlangAST} =
-		core:transform_uast_to_east(AST, ErlangModuleName, ClassesInfo),
+	%%io:format("~ncompiling ~p~n", [ErlangModuleName]),
+	case core:transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) of
+		{ok, ErlangAST} ->
+			create_erl_file(ErlangAST, ErlangFileName),
+			get_erl_file_list(Rest, ClassesInfo, [ErlangFileName | ErlangFileList]);
 
-	create_erl_file(ErlangAST, ErlangFileName),
-
-	get_erl_file_list(Rest, ClassesInfo, [ErlangFileName | ErlangFileList]).
+		{error, Errors} ->
+			Element = {error, ErlangModuleName, Errors},
+			get_erl_file_list(Rest, ClassesInfo, [Element | ErlangFileList])
+	end.
 
 %%-----------------------------------------------------------------------------
 %% Mostra a versao, autores e ano do ooErlang ( uarini ).

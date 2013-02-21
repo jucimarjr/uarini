@@ -13,7 +13,7 @@
 		new/0,		destroy/0,
 
 		put_scope/2,	get_scope/0, get_scope/1,
-		put_error/2,	get_errors/0,
+		put_error/3,	get_errors/0,
 
 		%% informações das classes
 		insert_classes_info/1,	insert_parent_members/1,  exist_class/1,
@@ -50,8 +50,8 @@ get_scope()    ->
 get_scope(class) ->
 	get({scope, class}).
 
-put_error(Line, Code) ->
-	NewErrors = [{Line, Code} | get(errors)],
+put_error(Line, Code, Args) ->
+	NewErrors = [{Line, Code, Args} | get(errors)],
 	put(errors, NewErrors).
 
 get_errors() ->

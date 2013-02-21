@@ -17,10 +17,9 @@ compile(FileNameList) ->
 		{'EXIT', Reason} ->
 			io:format("*******ERROR!~n"),
 			io:format("***Reason:~n~p", [Reason]);
-		{error, Errors} ->
-			io:format("*******ERROR!~n"),
-			io:format("***Reasons:\n"),
-			jaraki_exception:print_errors(Errors);
+
+		error ->
+			error;
 
 		Result ->
 			io:format("~nCompilation Result:~n"
