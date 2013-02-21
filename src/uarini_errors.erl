@@ -23,12 +23,13 @@ get_error_text(4, []) -> "Using super variable to call static method, should"
 get_error_text(5, []) -> "Calling object method on static context";
 get_error_text(6, [ClassName]) -> "Class '"++ClassName++"' not found";
 get_error_text(7, [ClassName, FuncName, Arity]) ->
-	"Method "++FuncName++"/"++Arity++" in class "++ClassName++" is not static";
+	{"Method ~p/~p in class ~p is not static", [FuncName, Arity, ClassName]};
 get_error_text(8, [ClassName, FuncName, Arity]) ->
-	"Method "++FuncName++"/"++Arity++" in class "++ClassName++" is not public".
+	{"Method ~p/~p in class ~p is not public", [FuncName, Arity, ClassName]}.
 
 print_errors(_, []) ->
 	ok;
 print_errors(ClassName, [ {Line, Code, Args} | Rest ]) ->
-	io:format("class ~p:#~p - ~s\n", [ClassName, Line, get_error_text(Code, Args)]),
+	{Format, PArgs} = get_error_text(Code, Args),
+	io:format("class ~p:#~p - " ++ Format ++ "\n", [ClassName, Line] ++ PArgs),
 	print_errors(ClassName, Rest).

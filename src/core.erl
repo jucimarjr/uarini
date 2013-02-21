@@ -9,7 +9,7 @@
 -export([transform_uast_to_east/3]).
 -include("../include/uarini_define.hrl").
 
--import(gen_ast, [match/3, var/2, rcall/4]).
+-import(gen_ast, [match/3, var/2, rcall/4, atom/2, tuple/2]).
 
 %%-----------------------------------------------------------------------------
 %% Converte o uast em east.
@@ -167,28 +167,30 @@ get_erl_clause({clause, Line, ParamList, [], ExprList}) ->
 
 	TransfExprList = lists:map(fun get_erl_expr/1, ExprList),
 
-	{ScopeClass, _ScopeFunction} = Scope,
-	AttrList = st:get_all_attr_info(ScopeClass),
-	NewArgs = [gen_ast:atom(Line, AttrName) || {AttrName, _Value} <- AttrList],
-	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line,  NewArgs)]),
-
-	NewObjectID_AST = match(Line, var(Line, "ObjectID"), NewAST),
-	ObjectID_AST = gen_ast:tuple(Line,
-						[gen_ast:atom(Line,ScopeClass), var(Line, "ObjectID")]),
-
 	case st:is_constructor(Scope) of
-		true ->
-			TransfExprList2 =
-				[NewObjectID_AST | TransfExprList] ++ [ObjectID_AST],
-			{clause, Line, TransfParamList, [], TransfExprList2};
-
 		false ->
-			{clause, Line, TransfParamList, [], TransfExprList}
+			{clause, Line, TransfParamList, [], TransfExprList};
+
+		true ->
+			TransfExprList2=create_user_constr_body(Line, Scope, TransfExprList),
+			{clause, Line, TransfParamList, [], TransfExprList2}
 	end.
 
 get_erl_param(Parameter) -> gen_erl_code:match_param(Parameter).
 get_erl_expr(Expression) -> gen_erl_code:match_expr(Expression).
 
+create_user_constr_body(Line, Scope, TransfExprList) ->
+	{ScopeClass, _ScopeFunction} = Scope,
+	AttrList = st:get_all_attr_info(ScopeClass),
+	NewArgs = [
+				tuple(Line, [atom(Line, AttrName), InitialExpr]) ||
+				{AttrName, {_Type, InitialExpr}} <- AttrList],
+	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line, NewArgs)]),
+
+	NewObjectID_AST = match(Line, var(Line, "ObjectID"), NewAST),
+	ObjectID_AST = tuple(Line, [atom(Line,ScopeClass), var(Line, "ObjectID")]),
+
+	[NewObjectID_AST] ++ TransfExprList ++ [ObjectID_AST].
 
 %%-----------------------------------------------------------------------------
 %% Cria o modulo a partir do east.
@@ -203,7 +205,9 @@ create_default_constructor(ClassName, []) ->
 	Line = 0,
 
 	AttrList = st:get_all_attr_info(ClassName),
-	NewArgs = [gen_ast:atom(Line, AttrName) || {AttrName, _Value} <- AttrList],
+	NewArgs = [
+				tuple(Line, [atom(Line, AttrName), InitialExpr]) ||
+				{AttrName, {_Type, InitialExpr}} <- AttrList],
 	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line,  NewArgs)]),
 
 	NewObjectID_AST = match(Line, var(Line, "ObjectID"), NewAST),

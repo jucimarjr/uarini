@@ -90,8 +90,8 @@ oo_attributes -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
 
 oo_attribute -> var                : build_oo_attribute('$1').
 oo_attribute -> atom var           : build_oo_attribute('$1', '$2').
-oo_attribute -> var '=' exprs      : build_oo_attribute({match,?line('$2'),'$1','$3'}).
-oo_attribute -> atom var '=' exprs : build_oo_attribute('$1', {match,?line('$3'),'$2','$4'}).
+oo_attribute -> var '=' expr      : build_oo_attribute({'$1', {initial_value, '$3'}}).
+oo_attribute -> atom var '=' expr : build_oo_attribute('$1', {match,?line('$3'),'$2','$4'}).
 
 attribute -> '-' atom     attr_val : build_attribute('$2', '$3').
 

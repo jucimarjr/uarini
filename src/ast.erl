@@ -167,10 +167,18 @@ get_attr_info([], AttrInfoList) ->
 	lists:reverse(AttrInfoList, []);
 get_attr_info([Attr | Rest], AttrInfoList) ->
 	{oo_attribute, _, TypeTemp, NameTemp} = Attr,
-	{{atom, _, Type}, {var, _, Name}} = {TypeTemp, NameTemp},
+	{atom, _, Type} = TypeTemp,
 
-	VarKey = Name,
-    VarValue = {Type, [public]},
+	{VarName, VarValue} =
+		case NameTemp of
+			{var, _, Name} ->
+				{Name, {Type, {nil, 0}}};
+
+			{{var,_, Name}, {initial_value, InitialExpr}} ->
+				{Name, {Type, InitialExpr}}
+		end,
+
+	VarKey = VarName,
 	NewAttrInfo = {VarKey, VarValue},
 	get_attr_info(Rest, [ NewAttrInfo | AttrInfoList ]).
 

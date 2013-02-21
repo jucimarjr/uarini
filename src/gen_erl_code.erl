@@ -86,6 +86,7 @@ transform_match(Ln1, LeftExpr, RightExpr) ->
 %% falta definir todos os possíveis nós, no caso tuplas, listas e... oq mais?
 %% para botar um fim na recursao
 
+%% self::Atributo
 transform_inner_expr({oo_remote, Ln1, {atom, _, self}, ObjectAttr}) ->
 	Scope = st:get_scope(),
 	{_, _, AttrName} = ObjectAttr,
@@ -100,6 +101,7 @@ transform_inner_expr({oo_remote, Ln1, {atom, _, self}, ObjectAttr}) ->
 			handle_error(Ln1, 1, [])
 	end;
 
+%% Objeto::Atributo
 transform_inner_expr({oo_remote, Ln1, ObjectVar, ObjectAttr}) ->
 	ObjectVar2 = call(Ln1, element, [integer(Ln1, 2), ObjectVar]),
 	{_, _, AttrName} = ObjectAttr,
@@ -276,13 +278,15 @@ get_func_loc({oo_remote, Ln1, {atom, _, ClassName}, FuncName}, ArgList) ->
 									  {remote, Ln1, TransfClassName, FuncName}};
 
 								false ->
+									{_,_, FuncName2} = FuncName,
 									ErrorArgs =
-										[ClassName, FuncName, length(ArgList)],
+										[ClassName, FuncName2, length(ArgList)],
 									handle_error(Ln1, 7, ErrorArgs)
 							end;
 
 						false ->
-							ErrorArgs = [ClassName, FuncName, length(ArgList)],
+							{_,_, FuncName2} = FuncName,
+							ErrorArgs = [ClassName, FuncName2, length(ArgList)],
 							handle_error(Ln1, 8, ErrorArgs)
 					end
 			end

@@ -3,8 +3,7 @@
 
 %% criação de objetos
 new(AttrList) ->
-	AttrKeyValueList = [{AttrName, []} || AttrName <- AttrList],
-	ODict = orddict:from_list(AttrKeyValueList),
+	ODict = orddict:from_list(AttrList),
 	spawn(ooe, obj_loop, [ODict]).
 
 %% função que os processos de objeto rodam para guardar os valores dos attr
