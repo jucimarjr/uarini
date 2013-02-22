@@ -1,7 +1,7 @@
 -module(aleppo_parser).
 -export([parse/1, parse_and_scan/1, format_error/1]).
 
--file("/usr/local/lib/erlang/lib/parsetools-2.0.7/include/yeccpre.hrl", 0).
+-file("/usr/lib/erlang/lib/parsetools-2.0.7/include/yeccpre.hrl", 0).
 %%
 %% %CopyrightBegin%
 %%
@@ -185,7 +185,7 @@ yecctoken2string(Other) ->
 
 
 
--file("src/aleppo_parser.erl", 188).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.erl", 188).
 
 yeccpars2(0=S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_0(S, Cat, Ss, Stack, T, Ts, Tzr);
@@ -3259,14 +3259,14 @@ yeccpars2_181(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_3(_S, Cat, Ss, Stack, T, Ts, Tzr).
 
 -compile({inline,yeccpars2_0_/1}).
--file("src/aleppo_parser.yrl", 56).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 56).
 yeccpars2_0_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_2_/1}).
--file("src/aleppo_parser.yrl", 54).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 54).
 yeccpars2_2_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -3274,7 +3274,7 @@ yeccpars2_2_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_3_/1}).
--file("src/aleppo_parser.yrl", 59).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 59).
 yeccpars2_3_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3282,7 +3282,7 @@ yeccpars2_3_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_4_/1}).
--file("src/aleppo_parser.yrl", 64).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 64).
 yeccpars2_4_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3290,7 +3290,7 @@ yeccpars2_4_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_5_/1}).
--file("src/aleppo_parser.yrl", 60).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 60).
 yeccpars2_5_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3298,7 +3298,7 @@ yeccpars2_5_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_6_/1}).
--file("src/aleppo_parser.yrl", 63).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 63).
 yeccpars2_6_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3306,7 +3306,7 @@ yeccpars2_6_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_7_/1}).
--file("src/aleppo_parser.yrl", 62).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 62).
 yeccpars2_7_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3314,14 +3314,14 @@ yeccpars2_7_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_8_/1}).
--file("src/aleppo_parser.yrl", 56).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 56).
 yeccpars2_8_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_9_/1}).
--file("src/aleppo_parser.yrl", 58).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 58).
 yeccpars2_9_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3329,14 +3329,14 @@ yeccpars2_9_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_10_/1}).
--file("src/aleppo_parser.yrl", 56).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 56).
 yeccpars2_10_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_11_/1}).
--file("src/aleppo_parser.yrl", 57).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 57).
 yeccpars2_11_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3344,7 +3344,7 @@ yeccpars2_11_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_13_/1}).
--file("src/aleppo_parser.yrl", 61).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 61).
 yeccpars2_13_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3352,7 +3352,7 @@ yeccpars2_13_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_63_/1}).
--file("src/aleppo_parser.yrl", 65).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 65).
 yeccpars2_63_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3360,7 +3360,7 @@ yeccpars2_63_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_65_/1}).
--file("src/aleppo_parser.yrl", 53).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 53).
 yeccpars2_65_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3368,7 +3368,7 @@ yeccpars2_65_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_87_/1}).
--file("src/aleppo_parser.yrl", 92).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 92).
 yeccpars2_87_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3376,483 +3376,483 @@ yeccpars2_87_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,'yeccpars2_90_!'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_!'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_#'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_#'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_('/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_('(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_*'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_*'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_+'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_+'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_++'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_++'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_--'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_--'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_->'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_->'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_.'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_.'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_..'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_..'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_/'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_/'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_:'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_:'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_:-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_:-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_::'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_::'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_;'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_;'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_<-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_<-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_<<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_<<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_<='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_<='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_=/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_=/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_=:='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_=:='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_=<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_=<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_=='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_=='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_>='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_>='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_>>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_>>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_?'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_?'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_['/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_['(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_after/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_after(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_and/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_and(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_andalso/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_andalso(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_atom/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_atom(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_band/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_band(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_begin/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_begin(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_bnot/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_bnot(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_bor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_bor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_bsl/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_bsl(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_bsr/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_bsr(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_bxor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_bxor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_case/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_case(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_catch/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_catch(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_char/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_char(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_div/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_div(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_end/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_end(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_float/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_float(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_fun/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_fun(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_if/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_if(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_integer/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_integer(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_not/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_not(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_of/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_of(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_or/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_or(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_orelse/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_orelse(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_query/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_query(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_receive/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_receive(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_rem/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_rem(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_spec/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_spec(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_string/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_string(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_try/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_try(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_var/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_var(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_when/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_when(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_xor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_90_xor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_{'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_{'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_|'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_|'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_90_||'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_90_||'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_90_/1}).
--file("src/aleppo_parser.yrl", 106).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 106).
 yeccpars2_90_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_91_/1}).
--file("src/aleppo_parser.yrl", 109).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 109).
 yeccpars2_91_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -3860,7 +3860,7 @@ yeccpars2_91_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_95_/1}).
--file("src/aleppo_parser.yrl", 93).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 93).
 yeccpars2_95_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3868,7 +3868,7 @@ yeccpars2_95_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_96_/1}).
--file("src/aleppo_parser.yrl", 114).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 114).
 yeccpars2_96_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3876,7 +3876,7 @@ yeccpars2_96_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_97_/1}).
--file("src/aleppo_parser.yrl", 113).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 113).
 yeccpars2_97_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3884,7 +3884,7 @@ yeccpars2_97_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_98_/1}).
--file("src/aleppo_parser.yrl", 112).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 112).
 yeccpars2_98_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -3892,1435 +3892,1435 @@ yeccpars2_98_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,'yeccpars2_99_!'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_!'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_#'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_#'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_('/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_('(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_*'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_*'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_+'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_+'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_++'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_++'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_--'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_--'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_->'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_->'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_.'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_.'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_..'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_..'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_/'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_/'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_:'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_:'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_:-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_:-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_::'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_::'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_;'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_;'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_<-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_<-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_<<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_<<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_<='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_<='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_=/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_=/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_=:='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_=:='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_=<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_=<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_=='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_=='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_>='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_>='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_>>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_>>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_?'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_?'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_['/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_['(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_after/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_after(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_and/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_and(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_andalso/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_andalso(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_atom/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_atom(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_band/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_band(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_begin/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_begin(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_bnot/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_bnot(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_bor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_bor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_bsl/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_bsl(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_bsr/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_bsr(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_bxor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_bxor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_case/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_case(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_catch/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_catch(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_char/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_char(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_div/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_div(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_end/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_end(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_float/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_float(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_fun/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_fun(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_if/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_if(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_integer/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_integer(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_not/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_not(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_of/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_of(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_or/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_or(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_orelse/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_orelse(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_query/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_query(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_receive/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_receive(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_rem/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_rem(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_spec/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_spec(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_string/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_string(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_try/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_try(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_var/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_var(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_when/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_when(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_xor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_99_xor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_{'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_{'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_|'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_|'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_99_||'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_99_||'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_99_/1}).
--file("src/aleppo_parser.yrl", 122).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 122).
 yeccpars2_99_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_!'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_!'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_#'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_#'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_('/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_('(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_*'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_*'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_+'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_+'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_++'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_++'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_--'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_--'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_->'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_->'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_.'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_.'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_..'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_..'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_/'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_/'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_:'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_:'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_:-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_:-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_::'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_::'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_;'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_;'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_<-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_<-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_<<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_<<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_<='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_<='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_=/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_=/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_=:='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_=:='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_=<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_=<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_=='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_=='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_>='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_>='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_>>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_>>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_?'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_?'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_['/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_['(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_after/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_after(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_and/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_and(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_andalso/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_andalso(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_atom/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_atom(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_band/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_band(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_begin/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_begin(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_bnot/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_bnot(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_bor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_bor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_bsl/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_bsl(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_bsr/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_bsr(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_bxor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_bxor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_case/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_case(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_catch/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_catch(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_char/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_char(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_div/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_div(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_end/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_end(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_float/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_float(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_fun/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_fun(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_if/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_if(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_integer/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_integer(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_not/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_not(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_of/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_of(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_or/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_or(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_orelse/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_orelse(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_query/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_query(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_receive/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_receive(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_rem/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_rem(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_spec/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_spec(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_string/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_string(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_try/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_try(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_var/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_var(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_when/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_when(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_xor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_102_xor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_{'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_{'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_|'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_|'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_102_||'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_102_||'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_102_/1}).
--file("src/aleppo_parser.yrl", 122).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 122).
 yeccpars2_102_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_!'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_!'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_#'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_#'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_('/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_('(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_*'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_*'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_+'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_+'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_++'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_++'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_--'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_--'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_->'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_->'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_.'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_.'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_..'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_..'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_/'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_/'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_:'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_:'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_:-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_:-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_::'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_::'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_;'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_;'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_<-'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_<-'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_<<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_<<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_<='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_<='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_=/='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_=/='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_=:='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_=:='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_=<'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_=<'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_=='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_=='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_>='/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_>='(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_>>'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_>>'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_?'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_?'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_['/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_['(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_after/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_after(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_and/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_and(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_andalso/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_andalso(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_atom/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_atom(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_band/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_band(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_begin/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_begin(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_bnot/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_bnot(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_bor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_bor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_bsl/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_bsl(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_bsr/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_bsr(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_bxor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_bxor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_case/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_case(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_catch/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_catch(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_char/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_char(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_div/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_div(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_end/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_end(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_float/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_float(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_fun/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_fun(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_if/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_if(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_integer/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_integer(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_not/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_not(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_of/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_of(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_or/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_or(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_orelse/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_orelse(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_query/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_query(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_receive/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_receive(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_rem/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_rem(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_spec/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_spec(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_string/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_string(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_try/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_try(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_var/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_var(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_when/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_when(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_xor/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_103_xor(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_{'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_{'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_|'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_|'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,'yeccpars2_103_||'/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 'yeccpars2_103_||'(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_103_/1}).
--file("src/aleppo_parser.yrl", 122).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 122).
 yeccpars2_103_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_107_/1}).
--file("src/aleppo_parser.yrl", 116).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 116).
 yeccpars2_107_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5328,14 +5328,14 @@ yeccpars2_107_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_108_/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_108_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_109_/1}).
--file("src/aleppo_parser.yrl", 125).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 125).
 yeccpars2_109_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5343,7 +5343,7 @@ yeccpars2_109_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_111_/1}).
--file("src/aleppo_parser.yrl", 117).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 117).
 yeccpars2_111_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5351,7 +5351,7 @@ yeccpars2_111_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_113_/1}).
--file("src/aleppo_parser.yrl", 95).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 95).
 yeccpars2_113_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5359,7 +5359,7 @@ yeccpars2_113_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_115_/1}).
--file("src/aleppo_parser.yrl", 115).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 115).
 yeccpars2_115_(__Stack0) ->
  [__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5367,14 +5367,14 @@ yeccpars2_115_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_116_/1}).
--file("src/aleppo_parser.yrl", 119).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 119).
 yeccpars2_116_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_117_/1}).
--file("src/aleppo_parser.yrl", 110).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 110).
 yeccpars2_117_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5382,7 +5382,7 @@ yeccpars2_117_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_127_/1}).
--file("src/aleppo_parser.yrl", 90).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 90).
 yeccpars2_127_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5390,7 +5390,7 @@ yeccpars2_127_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_131_/1}).
--file("src/aleppo_parser.yrl", 77).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 77).
 yeccpars2_131_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5398,7 +5398,7 @@ yeccpars2_131_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_135_/1}).
--file("src/aleppo_parser.yrl", 76).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 76).
 yeccpars2_135_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5406,7 +5406,7 @@ yeccpars2_135_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_139_/1}).
--file("src/aleppo_parser.yrl", 86).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 86).
 yeccpars2_139_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5414,7 +5414,7 @@ yeccpars2_139_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_143_/1}).
--file("src/aleppo_parser.yrl", 85).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 85).
 yeccpars2_143_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5422,21 +5422,21 @@ yeccpars2_143_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_146_/1}).
--file("src/aleppo_parser.yrl", 100).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 100).
 yeccpars2_146_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_148_/1}).
--file("src/aleppo_parser.yrl", 67).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 67).
 yeccpars2_148_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_150_/1}).
--file("src/aleppo_parser.yrl", 68).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 68).
 yeccpars2_150_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5444,7 +5444,7 @@ yeccpars2_150_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_151_/1}).
--file("src/aleppo_parser.yrl", 70).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 70).
 yeccpars2_151_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5452,7 +5452,7 @@ yeccpars2_151_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_152_/1}).
--file("src/aleppo_parser.yrl", 69).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 69).
 yeccpars2_152_(__Stack0) ->
  [__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5460,7 +5460,7 @@ yeccpars2_152_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_154_/1}).
--file("src/aleppo_parser.yrl", 73).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 73).
 yeccpars2_154_(__Stack0) ->
  [__8,__7,__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5468,7 +5468,7 @@ yeccpars2_154_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_155_/1}).
--file("src/aleppo_parser.yrl", 72).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 72).
 yeccpars2_155_(__Stack0) ->
  [__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5476,7 +5476,7 @@ yeccpars2_155_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_158_/1}).
--file("src/aleppo_parser.yrl", 104).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 104).
 yeccpars2_158_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
@@ -5484,14 +5484,14 @@ yeccpars2_158_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_160_/1}).
--file("src/aleppo_parser.yrl", 67).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 67).
 yeccpars2_160_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_163_/1}).
--file("src/aleppo_parser.yrl", 74).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 74).
 yeccpars2_163_(__Stack0) ->
  [__11,__10,__9,__8,__7,__6,__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5499,7 +5499,7 @@ yeccpars2_163_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_165_/1}).
--file("src/aleppo_parser.yrl", 103).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 103).
 yeccpars2_165_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5507,7 +5507,7 @@ yeccpars2_165_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_167_/1}).
--file("src/aleppo_parser.yrl", 80).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 80).
 yeccpars2_167_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5515,14 +5515,14 @@ yeccpars2_167_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_168_/1}).
--file("src/aleppo_parser.yrl", 56).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 56).
 yeccpars2_168_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_172_/1}).
--file("src/aleppo_parser.yrl", 0).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 0).
 yeccpars2_172_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5530,7 +5530,7 @@ yeccpars2_172_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_173_/1}).
--file("src/aleppo_parser.yrl", 0).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 0).
 yeccpars2_173_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5538,7 +5538,7 @@ yeccpars2_173_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_175_/1}).
--file("src/aleppo_parser.yrl", 79).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 79).
 yeccpars2_175_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5546,7 +5546,7 @@ yeccpars2_175_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_178_/1}).
--file("src/aleppo_parser.yrl", 83).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 83).
 yeccpars2_178_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
@@ -5554,14 +5554,14 @@ yeccpars2_178_(__Stack0) ->
   end | __Stack].
 
 -compile({inline,yeccpars2_179_/1}).
--file("src/aleppo_parser.yrl", 56).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 56).
 yeccpars2_179_(__Stack0) ->
  [begin
    [ ]
   end | __Stack0].
 
 -compile({inline,yeccpars2_181_/1}).
--file("src/aleppo_parser.yrl", 82).
+-file("/home/pec/workspace/uarini/src/aleppo_parser.yrl", 82).
 yeccpars2_181_(__Stack0) ->
  [__5,__4,__3,__2,__1 | __Stack] = __Stack0,
  [begin

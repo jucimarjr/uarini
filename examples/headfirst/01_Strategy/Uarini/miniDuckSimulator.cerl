@@ -1,0 +1,30 @@
+-class(miniDuckSimulator).
+-export([main/0]).
+-static([main/0]).
+
+class_methods.
+
+main() ->
+	Mallard = mallardDuck::new_(),
+	Mallard::display(),
+	Mallard::performQuack(),
+	Mallard::performFly(),
+	Mallard::swim(),
+	
+	Redhead = redheadDuck::new_(),
+	Redhead::display(),
+	Redhead::performQuack(),
+	Redhead::performFly(),
+	Redhead::swim(),
+
+	Rubber = rubberDuck::new_(),
+	Rubber::display(),
+	Rubber::performQuack(),
+	Rubber::performFly(),
+	Rubber::swim(),
+	
+	Decoy = decoyDuck::new_(),
+	Decoy::display(),
+	Decoy::performQuack(),
+	Decoy::performFly(),
+	Decoy::swim().

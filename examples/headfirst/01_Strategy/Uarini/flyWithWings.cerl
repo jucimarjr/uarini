@@ -1,0 +1,8 @@
+-class(flyWithWings).
+-implements(flyBehaviour).
+-export([fly/0]).
+
+class_methods.
+
+fly() ->
+	io:format("I'm flying!!~n").

@@ -1,0 +1,13 @@
+-class(decoyDuck).
+-extends(Duck).
+-export([new/0, display/0]).
+-constructor([new/0]).
+
+class_methods.
+
+new() ->
+	QuackBehaviour = muteQuack::new_();
+	FlyBehaviour = flyNoWay::new_().
+
+display() ->
+	io:format("I'm only a wood carved Decoy Duck...~n").	

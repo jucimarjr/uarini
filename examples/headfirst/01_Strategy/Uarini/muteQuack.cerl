@@ -1,0 +1,8 @@
+-class(muteQuack).
+-implements(quackBehaviour).
+-export([quack/0]).
+
+class_methods.
+
+quack() ->
+	io:format("<< Silence >>~n").

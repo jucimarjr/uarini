@@ -1,0 +1,13 @@
+-class(redheadDuck).
+-extends(Duck).
+-export([new/0, display/0]).
+-constructor([new/0]).
+
+class_methods.
+
+new() ->
+	QuackBehaviour = quack::new_();
+	FlyBehaviour = flyWithWings::new_().
+
+display() ->
+	io:format("I'm a real Red-Head Duck!~n").	
