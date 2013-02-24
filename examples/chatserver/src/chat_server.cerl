@@ -1,6 +1,8 @@
 -class(chat_server).
 -author('elmiliox@gmail.com').
--static([start/0, stop/0, join/2, unjoin/2, send/2, message_router/1]).
+-static(
+    [start/0, stop/0, join/2, unjoin/1, send/2, message_router/1,
+     send/1,  send_to/2]).
 -compile(export_all).
 
 class_methods.
@@ -26,22 +28,27 @@ message_router(Clients) ->
     receive
         {private_message, Addressee, Message} ->
             case dict:find(Addressee, Clients) of
-                {ok, Client} -> Client ! {printmsg, Message};
+                {ok, Client} ->
+		    io:format("Forward messa ~p to ~p~n", [Message, Addressee]),
+		    Client ! {printmsg, Message};
                 error ->
-                    io:format(
-                        "Lost message ~p for ~p~n", [Message, Addressee])
+                    io:format("Lost message ~p for ~p~n", [Message, Addressee])
             end,
             message_router(Clients);
         {public_message, Message} ->
+            io:format("Broadcast ~p~n", [Message]),
+	    Pids = [Pid ||{_, Pid} <- dict:to_list(Clients)],
             lists:map(
                 fun (Client) -> Client ! {printmsg, Message} end,
-                dict:to_list(Clients)),
+                Pids),
             message_router(Clients);
         {join,   Nick, Pid} ->
+            io:format("Registered ~p~n", [Nick]),
             message_router(dict:store(Nick, Pid, Clients));
         {unjoin, Nick} ->
             case dict:find(Nick, Clients) of
-                {ok, Client} -> Client ! stop,
+                {ok, Client} ->
+		    Client ! stop,
                     io:format("~p leaved.", [Nick]),
                     message_router(dict:erase(Nick, Clients));
                 error ->

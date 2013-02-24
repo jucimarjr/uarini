@@ -11,11 +11,14 @@ class_methods.
 
 register(Nickname) ->
     self::Nick = Nickname,
-    spawn(chat_client, handle_messages, [Nickname]),
+    chat_server:join(
+        Nickname,
+        spawn(chat_client, handle_messages, [Nickname])
+    ),
     ok.
 
 unregister() ->
-    chat_server:unregister_client(self::Nick).
+    chat_server:unjoin(self::Nick).
 
 send(Message) ->
     chat_server:send(Message).
