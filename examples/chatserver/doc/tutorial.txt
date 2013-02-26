@@ -1,0 +1,32 @@
+1) Build Chat Server
+$ make
+
+2) Conversation using Multiplos Nodes
+2.1 - Crie dois terminais com a expressao abaixo,
+o node-name deve ser diferente e o cookie igual.
+$ erl -pa ebin -sname <node-name> -setcookie <cookie> -pa <UARIN_LIB>
+
+2.2 - Verifique se os nos se conectaram
+> net_adm:ping(<other-node-name>@<machine-name>).
+>> pong. # Conectou com sucesso
+>> pang. # Falhou, verifique se estao na mesma rede
+
+2.3 - Inicie o servidor de chat
+> chat_server:start().
+>> yes. # Iniciou com sucesso.
+
+2.4 - Crie um cliente em cada node
+> {chat_client, Client} = chat_client:register(<nome>).
+>> {chat_client, <X.YY.Z>}
+
+2.5 - Envie uma mensagem para todos
+> chat_client:send(Client, "Ola").
+
+2.6 - Envie uma mensagem para alguem em especifico
+> chat_client:send_to(Client, "Name", "Message").
+
+2.7 - Encerrar o Client
+> chat_client:unregister(Client).
+
+2.8 - Encerrar o Servidor
+> chat_server:stop().

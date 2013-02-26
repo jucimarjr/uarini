@@ -7,7 +7,7 @@ ERL=erl -noshell -pa $(UARINI_LIB) -s init stop
 # This is the default task
 compile:
 	@ mkdir --parents $(EBIN_DIR)
-	@ erlc -o ebin include/ooe.erl include/server_util.erl
+	@ erlc -o ebin include/server_util.erl
 	@ cd $(EBIN_DIR);	\
 		$(ERL) -eval 'uarini:compile(["../src/chat_client.cerl","../src/chat_server.cerl"]).'
 
