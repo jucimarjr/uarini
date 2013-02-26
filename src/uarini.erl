@@ -48,7 +48,9 @@ get_erl_file_list(FileNameList) ->
 	ASTList = lists:map(fun ast:get_urn_forms/1, FileNameList),
 	ClassesInfo = lists:map(fun ast:get_class_info/1, ASTList),
 
-	get_erl_file_list(ASTList, ClassesInfo, []).
+	ASTList2 = remove_interfaces(ASTList),
+
+	get_erl_file_list(ASTList2, ClassesInfo, []).
 
 get_erl_file_list([], _, ErlangFileList) ->
 	lists:reverse(ErlangFileList, []);
@@ -66,6 +68,19 @@ get_erl_file_list([AST | Rest], ClassesInfo, ErlangFileList) ->
 		{error, Errors} ->
 			Element = {error, ErlangModuleName, Errors},
 			get_erl_file_list(Rest, ClassesInfo, [Element | ErlangFileList])
+	end.
+
+%% remove da lista de AST a ser compilada as interfaces,
+%% pois elas nao geram codigo, sao usadas apenas nas info das classes
+remove_interfaces(ASTList) -> remove_interfaces(ASTList, []).
+
+remove_interfaces([], NewASTList) -> lists:reverse(NewASTList);
+remove_interfaces([AST | ASTList], NewASTList) ->
+	case AST of
+		[{attribute, _Line, interface, _InterName} | _ ] ->
+			remove_interfaces(ASTList, NewASTList);
+		_ ->
+			remove_interfaces(ASTList, [AST | NewASTList])
 	end.
 
 %%-----------------------------------------------------------------------------

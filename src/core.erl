@@ -28,7 +28,8 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	ParentMethods = create_all_parent_methods(ErlangModuleName),
 	ConstrList = st:get_all_constr_info(ErlangModuleName),
 
-	st:insert_parent_members(ClassesInfo),
+	st:merge_parent_members(ClassesInfo),
+	uarini_errors:check_interface(ErlangModuleName),
 	st:insert_default_constructors(ClassesInfo),
 
 	DefaultConstructor = create_default_constructor(ErlangModuleName, ConstrList),
@@ -225,7 +226,7 @@ create_default_constructor(_ClassName, _ListaDeConstrutores) ->
 
 %%-----------------------------------------------------------------------------
 %% declara os métodos das super classes
-%% isso soh funciona antes da funcao insert_parent_members ser chamada!
+%% isso soh funciona antes da funcao merge_parent_members ser chamada!
 create_all_parent_methods(ClassName) ->
 	[_ClassMethods | ParentClasses] = st:get_methods_with_parent(ClassName),
 	create_parent_method_list(ParentClasses, []).

@@ -9,10 +9,12 @@
 -define(CONSTR_NAME, new_).
 
 -record(class, {
-			name    = "",	 % ClassName
-			parent  = null, % ParentName
-			attrs	= [],	 % AttrList
-			methods	= [],	 % MethodList
-			constr 	= [],	 % ConstrList
-			export	= [],	 % ExportList
-			static	= []}). % StaticList
+			name    = "",	 % ClassName ou InterfaceName (caso is_interface)
+			parent  = null,			% ParentName
+			attrs	= [],			% AttrList
+			methods	= [],			% MethodList
+			constr 	= [],			% ConstrList
+			export	= [],			% ExportList
+			static	= [],			% StaticList
+			impl	= null, 		% Implements
+			is_interface = false}). % Define se é interface

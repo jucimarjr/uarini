@@ -16,14 +16,15 @@
 		put_error/3,	get_errors/0,
 
 		%% informações das classes
-		insert_classes_info/1,	insert_parent_members/1,  exist_class/1,
+		insert_classes_info/1,	merge_parent_members/1,  exist_class/1,
 		insert_default_constructors/1,
 		is_constructor/1,		get_all_constr_info/1,
 		is_static/1,			is_public/1,
 		is_superclass/2,		get_superclass/1,
 		exist_attr/2,			get_attr_info/2,		get_all_attr_info/1,
 		get_all_methods/1,		get_export_list/1,		exist_method/1,
-		get_methods_with_parent/1
+		get_methods_with_parent/1,		get_methods_with_parent_2/1,
+		get_interface/1
 	]).
 
 -import(helpers, [has_element/2]).
@@ -85,8 +86,7 @@ get_errors() ->
 
 %% inicializa "sub-dicionario" com informações das classes
 insert_classes_info(ClassesInfoList) ->
-	lists:map(fun put_class_info/1, ClassesInfoList).%,
-	% insert_parent_members(ClassesInfoList).
+	lists:map(fun put_class_info/1, ClassesInfoList).
 
 %% insere informação de uma classe
 put_class_info({{ClassName, ClassInfo}, Errors}) ->
@@ -117,10 +117,10 @@ insert_default_constructors([{{ClassName, _ClassInfo}, _Errors} | Rest]) ->
 
 %% atualiza dicionário inserindo informações dos
 %% métodos e atributos visíveis na superclasse
-insert_parent_members([]) -> ok;
-insert_parent_members([{{_, #class{parent = null}}, _} | Rest]) ->
-	insert_parent_members(Rest);
-insert_parent_members([{{ClassName, ClassInfo}, _Errors} | Rest ]) ->
+merge_parent_members([]) -> ok;
+merge_parent_members([{{_, #class{parent = null}}, _} | Rest]) ->
+	merge_parent_members(Rest);
+merge_parent_members([{{ClassName, ClassInfo}, _Errors} | Rest ]) ->
 	#class{parent = ParentName, attrs = AttrList} = ClassInfo,
 
 	MethodsWithParent = get_methods_with_parent(ClassName),
@@ -135,7 +135,7 @@ insert_parent_members([{{ClassName, ClassInfo}, _Errors} | Rest ]) ->
 	ClassKey = {oo_classes, ClassName},
 	ClassValue = ClassInfo#class{attrs = NewAttrList, methods = NewMethods},
 	put(ClassKey, ClassValue),
-	insert_parent_members(Rest).
+	merge_parent_members(Rest).
 
 %% mescla os metodos de uma lista [{Classe1 Metodos1}, {Classe2, Metodos2} ...]
 merge_method_lists(MethodsWithParent) ->
@@ -164,13 +164,12 @@ get_all_attr(ClassName, ODict) ->
 get_methods_with_parent(ClassName) ->
 	AllMethods = get_all_methods(ClassName),
 	filter_over_methods(AllMethods).
-	%% case filter_over_methods(AllMethods) of
-	%% 	[ClassMethods_A | []] ->
-	%% 		[ClassMethods_A, {null, []}];
 
-	%% 	[ClassMethods_A, ClassMethods_B | _Rest] ->
-	%% 		[ClassMethods_A, ClassMethods_B]
-	%% end.
+%% mesmo que o de cima acrescentando a mesclagem para retornar os métodos no
+%% formato [metodo1, metodo2, ...]
+get_methods_with_parent_2(ClassName) ->
+	MethodsWithParent = get_methods_with_parent(ClassName),
+	merge_method_lists(MethodsWithParent).
 
 %% busca a informação de todos os métodos visíveis às classes filhas
 %% recursivamente indo de baixo para cima
@@ -304,6 +303,15 @@ get_attr_info(ClassName, AttrName) ->
 		false ->
 			false
 	end.
+
+%%----------------------------------------------------------------------------
+%%                              INTERFACE
+
+%% verifica se a classe implementa alguma interface, se sim, retorna o nome
+get_interface(ClassName) ->
+	ClassInfo = get({oo_classes, ClassName}),
+	#class{impl = InterfaceName} = ClassInfo,
+	InterfaceName.
 
 %%                     FINAL INFO DAS CLASSES
 %%----------------------------------------------------------------------------

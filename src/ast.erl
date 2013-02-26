@@ -104,8 +104,16 @@ get_forms_info([Form | FormList], ClassInfo) ->
 		{class_name, ClassName, FormList2} ->
 			get_forms_info(FormList2, ClassInfo#class{name = ClassName});
 
+		{interface, InterfaceName, FormList2} ->
+			ClassInfo2 = ClassInfo#class{
+							name = InterfaceName, is_interface = true},
+			get_forms_info(FormList2, ClassInfo2);
+
 		{parent, ParentName, FormList2} ->
 			get_forms_info(FormList2, ClassInfo#class{parent=ParentName});
+
+		{implements, InterfaceName, FormList2} ->
+			get_forms_info(FormList2, ClassInfo#class{impl=InterfaceName});
 
 		{attributes, AttrList, FormList2} ->
 			get_forms_info(FormList2, ClassInfo#class{attrs = AttrList});
@@ -140,8 +148,14 @@ match_form({class_attributes, _}, [AttrList | FormList]) ->
 match_form({attribute, _, class, ClassName}, FormList) ->
 	{class_name, ClassName, FormList};
 
+match_form({attribute, _, interface, InterfaceName}, FormList) ->
+	{interface, InterfaceName, FormList};
+
 match_form({attribute, _, extends, ParentName}, FormList) ->
 	{parent, ParentName, FormList};
+
+match_form({attribute, _, implements, InterfaceName}, FormList) ->
+	{implements, InterfaceName, FormList};
 
 match_form({attribute, _, constructor, ConstrList}, FormList) ->
 	{constructors, ConstrList, FormList};
@@ -207,8 +221,8 @@ update_method({MethodKey, _MethodValue}, ExportList, StaticList) ->
 		case {IsPublic, IsStatic} of
 			{true, true} -> [public, static];
 			{true, false} -> [public];
-			{false, true} -> [static];
-			{false, false} -> []
+			{false, true} -> [private, static];
+			{false, false} -> [private]
 		end,
 
 	{MethodKey, Modifiers}.
