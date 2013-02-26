@@ -1,0 +1,15 @@
+-class(mainconexao).
+-static([main/0, connect/1]).
+-export([main/0]).
+
+class_methods.
+
+connect(Con) ->
+	io:format("~p~n", [Con::conectar()]).
+
+main() ->
+	Con1 = dialup::new_(),
+	Con2 = adsl::new_(),
+	
+	connect(Con1),
+	connect(Con2).
