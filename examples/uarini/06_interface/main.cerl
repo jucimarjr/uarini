@@ -5,11 +5,8 @@
 class_methods.
 
 main() ->
-	F1 = quadrado::constructor(4),
-	F2 = circulo::constructor(2),
-	
-	F1 = Quadrado,
-	F2 = Circulo,
+	F1 = quadrado::new(4),
+	F2 = circulo::new(2),
 	
 	io:format("Area da Figura 1 eh: ~p~n", [F1::calcularArea()]),
 	io:format("Area da Figura 2 eh: ~p~n", [F2::calcularArea()]).
