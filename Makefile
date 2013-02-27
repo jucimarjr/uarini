@@ -20,6 +20,7 @@ test:   compile
 		-eval 'eunit:test([test, uarini_scan_tests,uarini_parse_tests], [verbose]), halt().'
 	@ mv *.beam $(TEST_EBIN_DIR)/
 	@ mv *.erl $(TEST_EBIN_DIR)/
+	@ cp $(EBIN_DIR)/ooe.beam $(TEST_EBIN_DIR)/
 
 # This is the task when you intend to debug
 debug: ERLC += +debug_info

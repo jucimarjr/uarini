@@ -1,0 +1,20 @@
+-class(bicicleta).
+-extends(ipva).
+-constructor([constructor/3]).
+
+class_attributes.
+
+Ano;
+Placa;
+VlrBase;
+QtdEixos.
+
+class_methods.
+
+constructor(Ano, Placa, QtdEixos) ->
+	self::Ano = Ano,
+	self::Placa = Placa,
+	self::QtdEixos = QtdEixos,
+	self::VlrBase = 1.20,
+	self::QtdCavalos = 150.
+
