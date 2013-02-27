@@ -56,6 +56,11 @@ examples_list() ->
  	 "examples/uarini/03_polymorphism/*.cerl",
  	 "examples/uarini/04_polymorphism/*.cerl",
 	 "examples/uarini/05_polymorphism/*.cerl",
+	 "examples/uarini/06_interface/*.cerl",
+	 "examples/uarini/07_interface/*.cerl",
+	 "examples/uarini/08_interface/*.cerl",
+	 "examples/uarini/09_polymorphism/*.cerl",
+	 "examples/uarini/10_interface/*.cerl",
 	 "examples/mpi/pingping/*.cerl",
  	 "examples/mpi/pingpong/*.cerl",
  	 "examples/mpi/threadring/*.cerl"

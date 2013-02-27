@@ -1,7 +1,7 @@
 -class(quadrado).
 -implements(figura).
--export([calcularArea/0]).
--constructor([constructor/1]).
+-export([calcularArea/0, new/1]).
+-constructor([new/1]).
 
 class_attributes.
 
@@ -9,11 +9,10 @@ Lado.
 
 class_methods.
 
-constructor(Lado) ->
+new(Lado) ->
 	self::Lado = Lado.
 	
 calcularArea() ->
-	Area = Lado * Lado,
-	Area.
+	self::Lado * self::Lado.
 	
 

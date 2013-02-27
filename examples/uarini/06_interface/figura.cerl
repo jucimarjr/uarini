@@ -3,4 +3,4 @@
 
 class_methods.
 
-calcularArea().
+calcularArea() -> null.

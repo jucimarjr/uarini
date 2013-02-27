@@ -3,4 +3,4 @@
 
 class_methods.
 
-calcular(X,Y).
+calcular(X,Y) -> null.

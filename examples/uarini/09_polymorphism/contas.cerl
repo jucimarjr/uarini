@@ -8,6 +8,6 @@ mostrarCalculo(OperacaoMatematica, X, Y) ->
 	io:format("O resultado eh: ~p~n", [OperacaoMatematica::calcular(X,Y)]).
 	
 main() ->
-	contas::mostrarCalculo(OperacaoMatematica = soma::constructor(), 5, 2),
-	contas::mostrarCalculo(OperacaoMatematica = subtracao::constructor(), 5, 2).
+	mostrarCalculo(soma::new_(), 5, 2),
+	mostrarCalculo(subtracao::new_(), 5, 2).
 	
