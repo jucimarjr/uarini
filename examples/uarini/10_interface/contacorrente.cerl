@@ -1,19 +1,23 @@
 -class(contacorrente).
 -implements(conta).
--export([depositar/1, getSaldo/0, sacar/1]).
+-constructor([new/1]).
+-export([depositar/1, sacar/1, getSaldo/0]).
 
 class_attributes.
 
-Saldo;
-TaxaOperacao = 0.45.
+Saldo.
+%TaxaOperacao = 0.45.
 
 class_methods.
 
+new(ValorInicial) ->
+	self::Saldo = ValorInicial.
+
 depositar(Valor) ->
-	self::Saldo = Saldo + Valor - TaxaOperacao.
+	self::Saldo = self::Saldo + Valor - 0.45.
 	
 getSaldo() ->
 	self::Saldo.
 	
 sacar(Valor) ->
-	self::Saldo = Saldo - Valor - TaxaOperacao.
+	self::Saldo = self::Saldo - Valor - 0.45.

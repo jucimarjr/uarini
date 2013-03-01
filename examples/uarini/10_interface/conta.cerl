@@ -3,6 +3,6 @@
 
 class_methods.
 
-depositar().
-sacar().
-getSaldo().
+depositar(Valor) -> null.
+sacar(Valor) -> null.
+getSaldo() -> null.

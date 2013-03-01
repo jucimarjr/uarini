@@ -5,14 +5,14 @@
 class_methods.
 
 main() ->
-	CC = contacorrente::constructor(),
-	CC::depositar(1200.20),
-	cc::sacar(300),
+	CC = contacorrente::new(0),
+	CC::depositar(1200),
+	CC::sacar(300),
 	
-	CP = contapoupanca::constructor(),
-	CP::depositar(500.50),
+	CP = contapoupanca::new(0),
+	CP::depositar(500),
 	CP::sacar(25),
-	
-	Gerador = geradorextratos::constructor(),
+
+	Gerador = geradorextratos::new_(),
 	Gerador::geradorConta(CC),
 	Gerador::geradorConta(CP).

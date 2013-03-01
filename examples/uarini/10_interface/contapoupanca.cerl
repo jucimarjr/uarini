@@ -1,6 +1,7 @@
 -class(contapoupanca).
 -implements(conta).
--export([depositar/1, getSaldo/0, sacar/1]).
+-constructor([new/1]).
+-export([depositar/1, sacar/1, getSaldo/0]).
 
 class_attributes.
 
@@ -8,11 +9,14 @@ Saldo.
 
 class_methods.
 
+new(ValorInicial) ->
+	self::Saldo = ValorInicial.
+
 depositar(Valor) ->
-	self::Saldo = Saldo + Valor.
+	self::Saldo = self::Saldo + Valor.
 	
 getSaldo() ->
 	self::Saldo.
 	
 sacar(Valor) ->
-	self::Saldo = Saldo - Valor.
+	self::Saldo = self::Saldo - Valor.
