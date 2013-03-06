@@ -15,20 +15,25 @@ handle_error(Line, Code, Args) ->
 	st:put_error(Line, Code, Args),
 	error.
 
-get_error_text(1, []) -> "Using self variable on static context";
-get_error_text(2, []) -> "Using super on class that has no superclass";
-get_error_text(3, []) -> "Using super variable on static context";
-get_error_text(4, []) -> "Using super variable to call static method, should"
-							 "use class name instead";
-get_error_text(5, []) -> "Calling object method on static context";
-get_error_text(6, [ClassName]) -> "Class '"++ClassName++"' not found";
+get_error_text(1, []) -> {"Using self variable on static context", []};
+get_error_text(2, []) -> {"Using super on class that has no superclass", []};
+get_error_text(3, []) -> {"Using super variable on static context", []};
+get_error_text(4, []) -> {"Using super variable to call static method, should"
+							 "use class name instead", []};
+get_error_text(5, []) -> {"Calling object method on static context", []};
+get_error_text(6, [ClassName]) -> {"Class '~p' not found", [ClassName]};
 get_error_text(7, [ClassName, FuncName, Arity]) ->
 	{"Method ~p/~p in class ~p is not static", [FuncName, Arity, ClassName]};
 get_error_text(8, [ClassName, FuncName, Arity]) ->
 	{"Method ~p/~p in class ~p is not public", [FuncName, Arity, ClassName]};
 get_error_text(9, [Name, Arity, Modifiers, ClassName]) ->
 	{"Method ~p/~p (~p) not found in class ~p, but required by its implemented "
-		"interface", [Name, Arity, Modifiers, ClassName]}.
+		"interface", [Name, Arity, Modifiers, ClassName]};
+get_error_text(10, [Name]) ->
+	{"'~p' should be a variable", [Name]};
+
+get_error_text(11, [Name, Class]) ->
+	{"Method '~p' does not exist in class '~p'", [Name, Class]}.
 
 print_errors(_, []) ->
 	ok;

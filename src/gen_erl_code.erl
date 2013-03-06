@@ -102,11 +102,15 @@ transform_inner_expr({oo_remote, Ln1, {atom, _, self}, ObjectAttr}) ->
 	end;
 
 %% Objeto::Atributo
-transform_inner_expr({oo_remote, Ln1, ObjectVar, ObjectAttr}) ->
+transform_inner_expr({oo_remote, Ln1, {var, _,_} = ObjectVar, ObjectAttr}) ->
 	ObjectVar2 = call(Ln1, element, [integer(Ln1, 2), ObjectVar]),
 	{_, _, AttrName} = ObjectAttr,
 	LookupArgs = [ObjectVar2, gen_ast:atom(Ln1, AttrName)],
 	rcall(Ln1, ooe, lookup_attr, LookupArgs);
+
+%% classe::Atributo  # ERRO
+transform_inner_expr({oo_remote, Ln1, {atom, _, Name} = _WrongObjectVar, _}) ->
+	uarini_errors:handle_error(Ln1, 10, [Name]);
 
 %% chamadas de funcao
 transform_inner_expr({call, _, _, _} = Expr) ->
@@ -209,26 +213,40 @@ get_func_loc({oo_remote, Ln1, {atom, _, super}, FuncName}, ArgList) ->
 	{ScopeClassName, _ScopeMethod} = Scope,
 	SuperClassName = st:get_superclass(ScopeClassName),
 
-	case SuperClassName of
-		null ->
-			handle_error(Ln1, 2, []);
+	Check =
+		case SuperClassName of
+			null ->
+				handle_error(Ln1, 2, []);
 
-		_ ->
-			case st:is_static(Scope) of
-				true ->
-					handle_error(Ln1, 3, []);
+			_ ->
+				MethodKey = {SuperClassName, {FuncName2, length(ArgList)}},
+				case st:exist_method(MethodKey) of
+					false ->
+						handle_error(Ln1, 11, [FuncName2, SuperClassName]);
 
-				false ->
-					MethodKey = {SuperClassName, {FuncName2, length(ArgList)}},
-					case st:is_static(MethodKey) of
-						true ->
-							handle_error(Ln1, 4, []);
+					true ->
+						case st:is_static(MethodKey) of
+							true ->
+								handle_error(Ln1, 3, []);
 
-						false ->
-							SuperClassName2 = atom(Ln1, SuperClassName),
-							{object_super, SuperClassName2, FuncName}
-					end
-			end
+							false ->
+								case st:is_static(MethodKey) of
+									true ->
+										handle_error(Ln1, 4, []);
+
+									false ->
+										ok
+								end
+						end
+				end
+		end,
+
+	case Check of
+		ok ->
+			SuperClassName2 = atom(Ln1, SuperClassName),
+			{object_super, SuperClassName2, FuncName};
+		error ->
+			error
 	end;
 
 %% chamadas self::funcao(Args)
