@@ -16,7 +16,9 @@
 reserved_word_test() ->
     ReservedWords = [
         class_attributes,
-        class_methods],
+        class_methods,
+        attributes,
+        methods],
     NotReservedWords = [
         public,
         protected,
