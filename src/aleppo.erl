@@ -1,6 +1,7 @@
-% Aleppo: ALternative Erlang Pre-ProcessOr 
+% Aleppo: ALternative Erlang Pre-ProcessOr
 -module(aleppo).
--export([process_file/1, process_tokens/1, process_tokens/2, scan_file/1]).
+-export([process_file/1, process_tokens/1, process_tokens/2, scan_file/1,
+        scan_tokens/1]).
 
 -record(ale_context, {
         include_trail = [],
