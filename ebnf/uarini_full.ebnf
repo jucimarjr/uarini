@@ -1,15 +1,14 @@
 form ::=
     (attribute | rule) '.' |
-    (('class_attributes' | 'attributes') '.'  oo_attributes) |
-    (('class_methods'    | 'methods') '.' oo_methods)
+    (('class_attributes' | 'attributes') '.'  oo_attributes_1) |
+    (('class_methods' | 'methods') '.' oo_methods)
 
-oo_attributes ::= oo_attribute (';' oo_attributes | )
+oo_attributes_1 ::= (oo_attribute ( '.' |';' oo_attributes) | )
+oo_attributes ::= oo_attribute (';' oo_attributes | '.')
 
-oo_attribute ::= (atom | ) var ('=' exprs |)
+oo_attribute ::= var ( |'=' exprs)
 
-oo_methods ::= ('class_methods' | 'methods') methods '.'
-
-methods ::= function '.' ( | methods )
+oo_methods ::= (function '.' methods | )
 
 attribute ::=
     '-'(atom

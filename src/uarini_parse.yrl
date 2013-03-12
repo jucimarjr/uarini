@@ -23,7 +23,7 @@
 Nonterminals
 form
 
-oo_attributes oo_attribute oo_methods % ooe
+oo_attributes_1 oo_attributes oo_attribute oo_methods % ooe
 
 attribute attr_val
 function function_clauses function_clause
@@ -76,13 +76,13 @@ Expect 2.
 Rootsymbol form.
 
 form -> attribute dot : '$1'.
-form -> rule      dot : '$1'.
+form -> rule dot : '$1'.
 
 form ->
-    'class_attributes' dot oo_attributes :
+    'class_attributes' dot oo_attributes_1 :
         {class_attributes, ?line('$1'), '$3'}.
 form ->
-    'attributes' dot oo_attributes :
+    'attributes' dot oo_attributes_1 :
         {instance_attributes, ?line('$1'), '$3'}.
 form ->
     'class_methods' dot oo_methods :
@@ -91,9 +91,12 @@ form ->
     'methods' dot oo_methods :
         {instance_methods, ?line('$1'),'$3'}.
 
+oo_attributes_1 -> '$empty' : [].
+oo_attributes_1 -> oo_attribute dot : ['$1'].
+oo_attributes_1 -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
+
 oo_attributes -> oo_attribute dot : ['$1'].
 oo_attributes -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
-oo_attributes -> '$empty' : [].
 
 oo_attribute -> var               : build_oo_attribute('$1').
 oo_attribute -> atom var          : build_oo_attribute('$1', '$2').
