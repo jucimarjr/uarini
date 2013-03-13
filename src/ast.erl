@@ -18,31 +18,55 @@ get_urn_forms(FileName) ->
 			{ok, Form} = uarini_parse:parse(Ts),
 			Form
 		end,
-		split_dots(Tokens)).
+		split_forms(Tokens)).
 
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo .cerl
 get_urn_tokens(FileName) ->
     {ok, Tokens} = aleppo:scan_file(FileName),
-    [remove_column(T) || T <- Tokens, element(1, T) =/= eof].
-
-remove_column(TupleToken) ->
-    [Lexema|[{L,_C}|Etc]] = tuple_to_list(TupleToken),
-    list_to_tuple([Lexema|[L|Etc]]).
+    [begin
+        {L, _C} = element(2, T),
+        setelement(2, T, L)
+     end|| T <- Tokens, element(1, T) =/= eof].
 
 %%-----------------------------------------------------------------------------
 %% Quebra os forms de um fluxo de Tokens identificados por 'dot'
-split_dots(Ts) ->
-	split_dots(Ts, [], []).
+split_forms(Ts) ->
+	split_forms(Ts, [], []).
 
-split_dots([], [], Fs) ->
+split_forms([], [], Fs) ->
     lists:reverse(Fs);
-split_dots([], F, Fs) ->
+split_forms([], F, Fs) ->
     lists:reverse([lists:reverse(F)|Fs]);
-split_dots([T={dot,_}|Ts], F, Fs) ->
-    split_dots(Ts, [], [lists:reverse([T|F])|Fs]);
-split_dots([T|Ts], F, Fs) ->
-    split_dots(Ts, [T|F], Fs).
+split_forms([T={dot,_}|Ts], F, Fs) ->
+    NextForm = lists:reverse([T|F]),
+    NextFs = next_form_sequence(NextForm, Fs),
+    split_forms(Ts, [], NextFs);
+split_forms([T|Ts], F, Fs) ->
+    split_forms(Ts, [T|F], Fs).
+
+next_form_sequence(NextForm, []) ->
+    [NextForm];
+next_form_sequence(NextForm, Fs=[PrevForm|FsTail]) ->
+    case must_merge_form(
+            form_first_token_id(PrevForm),
+            form_first_token_id(NextForm)) of
+        true ->
+            [PrevForm++NextForm|FsTail];
+        false ->
+            [NextForm|Fs]
+    end.
+
+must_merge_form(class_attributes, var) -> true;
+must_merge_form(class_methods, atom) -> true;
+must_merge_form(attributes, var) -> true;
+must_merge_form(methods, atom) -> true;
+must_merge_form(
+    _FirstPrevFormTokenId,
+    _FirstNextFormTokenId) -> false.
+
+form_first_token_id([]) -> 'IgnoreToken';
+form_first_token_id([Token|_]) -> element(1, Token).
 
 %%-----------------------------------------------------------------------------
 %% Extrai informações da classe e seus  membros (campos e métodos)
