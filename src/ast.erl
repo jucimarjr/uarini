@@ -31,30 +31,36 @@ get_urn_tokens(FileName) ->
 
 %%-----------------------------------------------------------------------------
 %% Quebra os forms de um fluxo de Tokens identificados por 'dot'
-split_forms(Ts) ->
-	split_forms(Ts, [], []).
+split_forms(TokenStream) ->
+	split_forms(TokenStream, [], []).
 
-split_forms([], [], Fs) ->
-    lists:reverse(Fs);
-split_forms([], F, Fs) ->
-    lists:reverse([lists:reverse(F)|Fs]);
-split_forms([T={dot,_}|Ts], F, Fs) ->
-    NextForm = lists:reverse([T|F]),
-    NextFs = next_form_sequence(NextForm, Fs),
-    split_forms(Ts, [], NextFs);
-split_forms([T|Ts], F, Fs) ->
-    split_forms(Ts, [T|F], Fs).
 
-next_form_sequence(NextForm, []) ->
-    [NextForm];
-next_form_sequence(NextForm, Fs=[PrevForm|FsTail]) ->
+split_forms([], [], FormStack) ->
+    lists:reverse(FormStack);
+
+split_forms([], TokenStack, FormStack) ->
+    Form = lists:reverse(TokenStack),
+    lists:reverse(
+        update_form_stack(Form, FormStack));
+
+split_forms([DotToken={dot,_}|TokenStream], TokenStack, FormStack) ->
+    Form = lists:reverse([DotToken|TokenStack]),
+    split_forms(TokenStream, [],
+        update_form_stack(Form, FormStack));
+
+split_forms([Token|TokenStream], TokenStack, FormStack) ->
+    split_forms(TokenStream, [Token|TokenStack], FormStack).
+
+
+update_form_stack(Form, []) -> [Form];
+update_form_stack(Form, FormStack=[FormStackHead|FormStackTail]) ->
     case must_merge_form(
-            form_first_token_id(PrevForm),
-            form_first_token_id(NextForm)) of
+            get_form_first_token_id(FormStackHead),
+            get_form_first_token_id(Form)) of
         true ->
-            [PrevForm++NextForm|FsTail];
+            [FormStackHead++Form|FormStackTail];
         false ->
-            [NextForm|Fs]
+            [Form|FormStack]
     end.
 
 must_merge_form(class_attributes, var) -> true;
@@ -65,8 +71,7 @@ must_merge_form(
     _FirstPrevFormTokenId,
     _FirstNextFormTokenId) -> false.
 
-form_first_token_id([]) -> 'IgnoreToken';
-form_first_token_id([Token|_]) -> element(1, Token).
+get_form_first_token_id([Token|_]) -> element(1, Token).
 
 %%-----------------------------------------------------------------------------
 %% Extrai informações da classe e seus  membros (campos e métodos)
