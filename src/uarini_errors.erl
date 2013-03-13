@@ -27,13 +27,14 @@ get_error_text(7, [ClassName, FuncName, Arity]) ->
 get_error_text(8, [ClassName, FuncName, Arity]) ->
 	{"Method ~p/~p in class ~p is not public", [FuncName, Arity, ClassName]};
 get_error_text(9, [Name, Arity, Modifiers, ClassName]) ->
-	{"Method ~p/~p (~p) not found in class ~p, but required by its implemented "
-		"interface", [Name, Arity, Modifiers, ClassName]};
+	{"Method ~p/~p (~p) not found in class ~p, but required by one of its "
+		"implemented interfaces", [Name, Arity, Modifiers, ClassName]};
 get_error_text(10, [Name]) ->
 	{"'~p' should be a variable", [Name]};
-
 get_error_text(11, [Name, Class]) ->
-	{"Method '~p' does not exist in class '~p'", [Name, Class]}.
+	{"Method '~p' does not exist in class '~p'", [Name, Class]};
+get_error_text(12, []) ->
+	{"bad interface", []}.
 
 print_errors(_, []) ->
 	ok;
@@ -52,14 +53,15 @@ print_errors(ClassName, [ {Line, Code, Args} | Rest ]) ->
 %% Checa se a classe implementa alguma interface e atende a todos os
 %% requisitos definidos na interface, gerando erros caso contrário
 check_interface(ClassName) ->
-	case st:get_interface(ClassName) of
+	case st:get_interface_list(ClassName) of
 		null ->
 			ok;
 
-		InterfaceName ->
-			InterAllMethods = st:get_methods_with_parent_2(InterfaceName),
+		InterfaceNameList ->
+			InterAllMethodsTemp =
+				[st:get_methods_with_parent_2(Name) || Name <- InterfaceNameList],
+			InterAllMethods = helpers:flatten_norep(InterAllMethodsTemp),
 			ClassAllMethods = st:get_methods_with_parent_2(ClassName),
-
 			check_interface(ClassName, InterAllMethods, ClassAllMethods)
 	end.
 

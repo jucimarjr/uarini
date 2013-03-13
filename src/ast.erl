@@ -112,8 +112,11 @@ get_forms_info([Form | FormList], ClassInfo) ->
 		{parent, ParentName, FormList2} ->
 			get_forms_info(FormList2, ClassInfo#class{parent=ParentName});
 
-		{implements, InterfaceName, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{impl=InterfaceName});
+		{implements, InterfaceList, FormList2} when is_list(InterfaceList) ->
+			get_forms_info(FormList2, ClassInfo#class{impl=InterfaceList});
+
+		{implements, InterfaceName, FormList2} when is_atom(InterfaceName) ->
+			get_forms_info(FormList2, ClassInfo#class{impl=[InterfaceName]});
 
 		{attributes, AttrList, FormList2} ->
 			get_forms_info(FormList2, ClassInfo#class{attrs = AttrList});
