@@ -7,7 +7,7 @@
 
 -module(helpers).
 -export([has_element/2, orddict_store_all/2, insert_replace/2,
-		insert_replace_all/2]).
+		insert_replace_all/2, flatten_norep/1]).
 
 %%-----------------------------------------------------------------------------
 %% verifica se determinado elemento existe na lista
@@ -39,3 +39,10 @@ insert_replace_all([], List) -> List;
 insert_replace_all([Element | Rest], List) ->
 	NewList = insert_replace(Element, List),
 	insert_replace_all(Rest, NewList).
+
+%%-----------------------------------------------------------------------------
+%% Recebe uma lista de listas, mescla os elementos de todas em uma única lista
+%% sem repetir nenhum elemento
+flatten_norep(List) ->
+	FlattenedList = lists:flatten(List),
+	insert_replace_all(FlattenedList, []).
