@@ -84,9 +84,7 @@ get_form_first_token_id([Token|_]) -> element(1, Token).
 %% Campos:  [Campo1, Campo2, ...]
 %%
 %% CampoN:
-%%		{Nome, CampoValue}
-%%			   |
-%%			   |> {Tipo, Modificadores}
+%%		{Nome, ValorInicial}
 %%
 %% ConstrutorN, ExportN, StaticN:
 %%		{ nome_funcao, QtdParametros }
@@ -104,10 +102,9 @@ get_class_info(FormList) ->
 	ClassInfo = get_forms_info(FormList, #class{}),
 
 	ExportList = ClassInfo#class.export,
-	StaticList = ClassInfo#class.static,
 	MethodsInfo = ClassInfo#class.methods,
 	MethodsInfo2 =
-		[update_method(Mthd, ExportList, StaticList) || Mthd <- MethodsInfo],
+		[update_method(Mthd, ExportList) || Mthd <- MethodsInfo],
 	MethodsInfo3 = orddict:from_list(MethodsInfo2),
 
 	ExportList2 = ClassInfo#class.export ++ ClassInfo#class.constr,
@@ -129,35 +126,37 @@ get_class_info(FormList) ->
 get_forms_info([], ClassInfo) ->
 	ClassInfo;
 get_forms_info([Form | FormList], ClassInfo) ->
-	case match_form(Form, FormList) of
-		{class_name, ClassName, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{name = ClassName});
+	case match_form(Form) of
+		{class_name, ClassName} ->
+			get_forms_info(FormList, ClassInfo#class{name = ClassName});
 
-		{interface, InterfaceName, FormList2} ->
+		{interface, InterfaceName} ->
 			ClassInfo2 = ClassInfo#class{
 							name = InterfaceName, is_interface = true},
-			get_forms_info(FormList2, ClassInfo2);
+			get_forms_info(FormList, ClassInfo2);
 
-		{parent, ParentName, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{parent=ParentName});
+		{parent, ParentName} ->
+			get_forms_info(FormList, ClassInfo#class{parent=ParentName});
 
-		{implements, InterfaceName, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{impl=InterfaceName});
+		{implements, InterfaceList} when is_list(InterfaceList) ->
+			get_forms_info(FormList, ClassInfo#class{impl=InterfaceList});
 
-		{attributes, AttrList, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{attrs = AttrList});
+		{implements, InterfaceName} when is_atom(InterfaceName) ->
+			get_forms_info(FormList, ClassInfo#class{impl=[InterfaceName]});
 
-		{methods, MethodList, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{methods = MethodList});
+		{attributes, AttrList} ->
+			get_forms_info(FormList, ClassInfo#class{attrs = AttrList});
 
-		{constructors, ConstrList, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{constr=ConstrList});
+		{methods, MethodList} ->
+			OriginalMethodList = ClassInfo#class.methods,
+			NewMethodList = OriginalMethodList ++ MethodList,
+			get_forms_info(FormList, ClassInfo#class{methods = NewMethodList});
 
-		{export, ExportList, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{export = ExportList});
+		{constructors, ConstrList} ->
+			get_forms_info(FormList, ClassInfo#class{constr=ConstrList});
 
-		{static, StaticList, FormList2} ->
-			get_forms_info(FormList2, ClassInfo#class{static = StaticList});
+		{export, ExportList} ->
+			get_forms_info(FormList, ClassInfo#class{export = ExportList});
 
 		nop ->
 			get_forms_info(FormList, ClassInfo)
@@ -166,59 +165,59 @@ get_forms_info([Form | FormList], ClassInfo) ->
 %%-----------------------------------------------------------------------------
 %% faz o match do form para extrair a informação correspondente
 
-%% caso nao tenha atributos
-match_form({class_attributes, _}, [{class_methods, _} | _FormList]) ->
-	nop;
+%% caso nao tenha atributos - DESATUALIZADO, MUDAR!!
+%% match_form({instance_attributes, _}, [{class_methods, _} | _FormList]) ->
+%% 	nop;
 
-match_form({class_attributes, _}, [AttrList | FormList]) ->
+match_form({attribute, _, class, ClassName}) ->
+	{class_name, ClassName};
+
+match_form({attribute, _, interface, InterfaceName}) ->
+	{interface, InterfaceName};
+
+match_form({attribute, _, extends, ParentName}) ->
+	{parent, ParentName};
+
+match_form({attribute, _, implements, InterfaceName}) ->
+	{implements, InterfaceName};
+
+match_form({attribute, _, constructor, ConstrList}) ->
+	{constructors, ConstrList};
+
+match_form({attribute, _, export, ExportList}) ->
+	{export, ExportList};
+
+match_form({class_attributes, _Ln, AttrList}) ->
 	AttrInfoList = get_attr_info(AttrList),
-	{attributes, AttrInfoList, FormList};
+	{attributes, AttrInfoList};
 
-match_form({attribute, _, class, ClassName}, FormList) ->
-	{class_name, ClassName, FormList};
+match_form({class_methods, _Ln, MethodList}) ->
+	ClassMethods = get_all_methods_info(static, MethodList),
+	{methods, ClassMethods};
 
-match_form({attribute, _, interface, InterfaceName}, FormList) ->
-	{interface, InterfaceName, FormList};
+match_form({methods, _Ln, MethodList}) ->
+	InstanceMethods = get_all_methods_info(object, MethodList),
+	{methods, InstanceMethods};
 
-match_form({attribute, _, extends, ParentName}, FormList) ->
-	{parent, ParentName, FormList};
-
-match_form({attribute, _, implements, InterfaceName}, FormList) ->
-	{implements, InterfaceName, FormList};
-
-match_form({attribute, _, constructor, ConstrList}, FormList) ->
-	{constructors, ConstrList, FormList};
-
-match_form({attribute, _, export, ExportList}, FormList) ->
-	{export, ExportList, FormList};
-
-match_form({attribute, _, static, StaticList}, FormList) ->
-	{static, StaticList, FormList};
-
-match_form({class_methods, _}, FormList) ->
-	{MethodList, RestForms} = get_all_method_info(FormList),
-	{methods, MethodList, RestForms};
-
-match_form(_,_) -> nop.
+match_form(_) -> nop.
 
 %%-----------------------------------------------------------------------------
 %% info de campos
-get_attr_info({oo_attributes, _, AttrList}) ->
+get_attr_info(AttrList) ->
 	get_attr_info(AttrList, []).
 
 get_attr_info([], AttrInfoList) ->
 	lists:reverse(AttrInfoList, []);
 get_attr_info([Attr | Rest], AttrInfoList) ->
-	{oo_attribute, _, TypeTemp, NameTemp} = Attr,
-	{atom, _, Type} = TypeTemp,
+	{oo_attribute, _Ln, NameTemp} = Attr,
 
 	{VarName, VarValue} =
 		case NameTemp of
 			{var, _, Name} ->
-				{Name, {Type, {nil, 0}}};
+				{Name, {nil, 0}};
 
 			{{var,_, Name}, {initial_value, InitialExpr}} ->
-				{Name, {Type, InitialExpr}}
+				{Name, InitialExpr}
 		end,
 
 	VarKey = VarName,
@@ -227,31 +226,31 @@ get_attr_info([Attr | Rest], AttrInfoList) ->
 
 %%-----------------------------------------------------------------------------
 %% info dos metodos
-get_all_method_info(FunctionList) ->
-	get_method_info(FunctionList, []).
+%% Scope pode ser static ou object
+get_all_methods_info(Scope, FunctionList) ->
+	get_methods_info2(Scope, FunctionList, []).
 
-get_method_info([{function, _Ln, Name, Arity, _Clauses} | Rest], MethodsInfo) ->
+get_methods_info2(_, [], MethodsInfo) ->
+	lists:reverse(MethodsInfo);
+
+get_methods_info2(Scope, [{function, _, Name, Arity, _} | Rest], MethodsInfo) ->
 	MthdKey = {Name, Arity},
-	MthdValue = [],
 
-	get_method_info(Rest, [{MthdKey, MthdValue} | MethodsInfo]);
+	MthdValue =
+		case Scope of
+			static -> [static];
+			object -> []
+		end,
+	get_methods_info2(Scope, Rest, [{MthdKey, MthdValue} | MethodsInfo]).
 
-get_method_info([], MethodsInfo) ->
-	{lists:reverse(MethodsInfo), []};
-get_method_info([NotAFunction | Rest], MethodsInfo) ->
-	{lists:reverse(MethodsInfo), [NotAFunction | Rest]}.
-
-%% atualiza informação dos métodos com seus respectivos modificadores
-update_method({MethodKey, _MethodValue}, ExportList, StaticList) ->
+%% atualiza informação dos métodos com modificador se for public ou nao 
+update_method({MethodKey, MethodValue}, ExportList) ->
 	IsPublic = helpers:has_element(MethodKey, ExportList),
-	IsStatic = helpers:has_element(MethodKey, StaticList),
 
 	Modifiers =
-		case {IsPublic, IsStatic} of
-			{true, true} -> [public, static];
-			{true, false} -> [public];
-			{false, true} -> [private, static];
-			{false, false} -> [private]
+		case IsPublic of
+			true -> [public | MethodValue];
+			false -> MethodValue
 		end,
 
 	{MethodKey, Modifiers}.

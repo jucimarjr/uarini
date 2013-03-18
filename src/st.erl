@@ -24,7 +24,7 @@
 		exist_attr/2,			get_attr_info/2,		get_all_attr_info/1,
 		get_all_methods/1,		get_export_list/1,		exist_method/1,
 		get_methods_with_parent/1,		get_methods_with_parent_2/1,
-		get_interface/1
+		get_interface_list/1
 	]).
 
 -import(helpers, [has_element/2]).
@@ -72,11 +72,9 @@ get_errors() ->
 %% Campos:  [Campo1, Campo2, ...]
 %%
 %% CampoN:
-%%		{Nome, CampoValue}
-%%			   |
-%%			   |> {Tipo, Modificadores}
+%%		{Nome, ValorInicial}
 %%
-%% ConstrutorN, ExportN, StaticN:
+%% ConstrutorN, ExportN:
 %%		{ nome_funcao, QtdParametros }
 %%
 %% Outros:
@@ -308,10 +306,10 @@ get_attr_info(ClassName, AttrName) ->
 %%                              INTERFACE
 
 %% verifica se a classe implementa alguma interface, se sim, retorna o nome
-get_interface(ClassName) ->
+get_interface_list(ClassName) ->
 	ClassInfo = get({oo_classes, ClassName}),
-	#class{impl = InterfaceName} = ClassInfo,
-	InterfaceName.
+	#class{impl = InterfaceNameList} = ClassInfo,
+	InterfaceNameList.
 
 %%                     FINAL INFO DAS CLASSES
 %%----------------------------------------------------------------------------

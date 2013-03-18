@@ -27,9 +27,6 @@ debug: ERLC += +debug_info
 debug: compile
 
 ebin/uarini.beam: $(INCLUDE_DIR)/*.hrl src/*.erl
-	@ echo Compiling Parser ...
-	@ $(ERL) -eval 'yecc:file("src/uarini_parse.yrl", [{verbose, true}]), halt().'
-	@ $(ERL) -eval 'yecc:file("src/aleppo_parser.yrl", [{verbose, true}]), halt().'
 	@ mkdir -p $(EBIN_DIR)
 	@ echo Compiling Erlang source...
 	@ $(ERLC) -o $(EBIN_DIR) src/*.erl
