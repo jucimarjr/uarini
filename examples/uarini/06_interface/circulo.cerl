@@ -7,7 +7,7 @@ class_attributes.
 
 Raio.
 
-class_methods.
+methods.
 
 new(Raio) ->
 	self::Raio = Raio.

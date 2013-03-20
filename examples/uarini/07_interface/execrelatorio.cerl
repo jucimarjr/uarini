@@ -1,5 +1,4 @@
 -class(execrelatorio).
--static([main/0, funcao_aux/1]).
 -export([main/0]).
 
 class_methods.

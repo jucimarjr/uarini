@@ -7,7 +7,7 @@ class_attributes.
 
 Lado.
 
-class_methods.
+methods.
 
 new(Lado) ->
 	self::Lado = Lado.

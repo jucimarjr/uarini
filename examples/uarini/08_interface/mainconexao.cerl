@@ -1,5 +1,4 @@
 -class(mainconexao).
--static([main/0, connect/1]).
 -export([main/0]).
 
 class_methods.

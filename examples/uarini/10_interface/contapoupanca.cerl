@@ -7,7 +7,7 @@ class_attributes.
 
 Saldo.
 
-class_methods.
+methods.
 
 new(ValorInicial) ->
 	self::Saldo = ValorInicial.

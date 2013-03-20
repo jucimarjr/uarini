@@ -1,5 +1,4 @@
 -class(testacontas).
--static([main/0]).
 -export([main/0]).
 
 class_methods.

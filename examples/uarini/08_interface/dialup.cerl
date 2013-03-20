@@ -2,7 +2,7 @@
 -implements(conexao).
 -export([conectar/0]).
 
-class_methods.
+methods.
 
 conectar() ->
 	"Modem discando...".

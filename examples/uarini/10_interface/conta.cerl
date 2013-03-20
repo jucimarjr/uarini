@@ -1,7 +1,7 @@
 -interface(conta).
 -export([depositar/1, sacar/1, getSaldo/0]).
 
-class_methods.
+methods.
 
 depositar(Valor) -> null.
 sacar(Valor) -> null.

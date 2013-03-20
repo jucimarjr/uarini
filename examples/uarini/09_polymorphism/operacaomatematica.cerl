@@ -1,6 +1,6 @@
 -class(operacaomatematica).
 -export([calcular/2]).
 
-class_methods.
+methods.
 
 calcular(X,Y) -> null.

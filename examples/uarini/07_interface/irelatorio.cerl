@@ -1,6 +1,6 @@
 -interface(irelatorio).
 -export([getSql/0]).
 
-class_methods.
+methods.
 
 getSql() -> null.

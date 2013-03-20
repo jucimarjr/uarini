@@ -10,7 +10,7 @@ Placa;
 VlrBase.
 %VlrBase = 1.20.
 
-class_methods.
+methods.
 
 constructor(Ano, Placa) ->
 	self::Ano = Ano,

@@ -2,7 +2,7 @@
 -extends(transporte).
 -export([exibeDados/0]).
 
-class_methods.
+methods.
 
 exibeDados() ->
 	io:format("Aviao: Voando... ~n").

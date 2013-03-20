@@ -9,7 +9,7 @@ Placa;
 VlrBase;
 QtdEixos.
 
-class_methods.
+methods.
 
 constructor(Ano, Placa, QtdEixos) ->
 	self::Ano = Ano,

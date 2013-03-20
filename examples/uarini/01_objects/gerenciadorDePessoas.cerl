@@ -1,15 +1,14 @@
 -class(gerenciadorDePessoas).
 -export([main/0]).
--static([main/0]).
 
 class_methods.
 
 main() ->      
-    PVitor = pessoa::constructor("Vitor Fernando Pamplona","07/11/1983"),   
+    PVitor = pessoa::new("Vitor Fernando Pamplona","07/11/1983"),   
       
     PVitor::receber(1000.00),   
       
-    PJoao = pessoa::constructor("João da Silva", "18/02/1970"),   
+    PJoao = pessoa::new("João da Silva", "18/02/1970"),   
       
     PJoao::receber(500.00),  
     PJoao::gastar(100.00).

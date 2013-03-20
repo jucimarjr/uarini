@@ -2,9 +2,8 @@
 -extends(empregado).
 -export([get_salario/0, main/0,calcular/0]).
 -constructor([new/0]).
--static([main/0]).
 
-class_methods.
+methods.
 
 new() -> ok.
 
@@ -14,6 +13,8 @@ get_salario() ->
 calcular() ->
 	super::calcular(),
     io:format("Salario da classe:~p ~n", [ self::get_salario() ] ).
+
+class_methods.
 
 main() ->
     H = horista::new(),

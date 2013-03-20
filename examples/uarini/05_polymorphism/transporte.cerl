@@ -1,7 +1,7 @@
 -class(transporte).
 -export([exibeDados/0]).
 
-class_methods.
+methods.
 
 exibeDados() ->
 	io:format("Transporte: Metodo para exibicao dos dados: ~n").

@@ -2,7 +2,7 @@
 -extends(operacaomatematica).
 -export([calcular/2]).
 
-class_methods.
+methods.
 
 calcular(X,Y) ->
 	X+Y.

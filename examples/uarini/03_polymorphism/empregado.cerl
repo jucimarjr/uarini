@@ -5,7 +5,7 @@ class_attributes.
 
 Salario.
 
-class_methods.
+methods.
 
 get_salario() ->
 	self::Salario.

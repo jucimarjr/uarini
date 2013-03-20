@@ -1,5 +1,4 @@
 -class(contas).
--static([mostrarCalculo/3, main/0]).
 -export([mostrarCalculo/3, main/0]).
 
 class_methods.
