@@ -187,7 +187,11 @@ match_form({attribute, _, constructor, ConstrList}) ->
 match_form({attribute, _, export, ExportList}) ->
 	{export, ExportList};
 
-match_form({class_attributes, _Ln, AttrList}) ->
+match_form({class_attributes, Ln, _AttrList}) ->
+	uarini_errors:handle_error(Ln, 13, []),
+	nop;
+
+match_form({attributes, _Ln, AttrList}) ->
 	AttrInfoList = get_attr_info(AttrList),
 	{attributes, AttrInfoList};
 
