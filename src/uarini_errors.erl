@@ -34,7 +34,9 @@ get_error_text(10, [Name]) ->
 get_error_text(11, [Name, Class]) ->
 	{"Method '~p' does not exist in class '~p'", [Name, Class]};
 get_error_text(12, []) ->
-	{"bad interface", []}.
+	{"bad interface", []};
+get_error_text(13, []) ->
+	{"class attributes not implemented yet", []}.
 
 print_errors(_, []) ->
 	ok;

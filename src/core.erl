@@ -116,6 +116,9 @@ match_erl_form([Form | UariniForms], FunctionList, OtherForms) ->
 		{class_attributes, _Line, _AttrList} ->
 			match_erl_form(UariniForms, FunctionList, OtherForms);
 
+		{attributes, _Line, _AttrList} ->
+			match_erl_form(UariniForms, FunctionList, OtherForms);
+
 		{class_methods, _Line, MthdsList} ->
 			FunctionListTemp = lists:map(fun get_erl_function/1, MthdsList),
 			N_FunctionList = FunctionList ++ FunctionListTemp,

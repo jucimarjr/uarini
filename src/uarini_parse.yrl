@@ -83,7 +83,7 @@ form ->
         {class_attributes, ?line('$1'), '$3'}.
 form ->
     'attributes' dot oo_attributes_1 :
-        {instance_attributes, ?line('$1'), '$3'}.
+        {attributes, ?line('$1'), '$3'}.
 form ->
     'class_methods' dot oo_methods :
         {class_methods, ?line('$1'), '$3'}.
