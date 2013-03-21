@@ -1,13 +1,13 @@
 -class(rubberDuck).
--extends(Duck).
+-extends(duck).
 -export([new/0, display/0]).
 -constructor([new/0]).
 
-class_methods.
+methods.
 
 new() ->
-	QuackBehaviour = squeak::new_();
-	FlyBehaviour = flyNoWay::new_().
+	self::QuackBehaviour = squeak::new_(),
+	self::FlyBehaviour = flyNoWay::new_().
 
 display() ->
 	io:format("I'm just a small Rubber Duck!~n").	

@@ -1,13 +1,13 @@
 -class(redheadDuck).
--extends(Duck).
+-extends(duck).
 -export([new/0, display/0]).
 -constructor([new/0]).
 
-class_methods.
+methods.
 
 new() ->
-	QuackBehaviour = quack::new_();
-	FlyBehaviour = flyWithWings::new_().
+	self::QuackBehaviour = quack::new_(),
+	self::FlyBehaviour = flyWithWings::new_().
 
 display() ->
 	io:format("I'm a real Red-Head Duck!~n").	

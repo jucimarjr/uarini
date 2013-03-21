@@ -2,7 +2,7 @@
 -implements(quackBehaviour).
 -export([quack/0]).
 
-class_methods.
+methods.
 
 quack() ->
 	io:format("Quack!~n").
