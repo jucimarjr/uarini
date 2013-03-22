@@ -3,7 +3,7 @@
 -export([calcularArea/0, new/1]).
 -constructor([new/1]).
 
-class_attributes.
+attributes.
 
 Lado.
 

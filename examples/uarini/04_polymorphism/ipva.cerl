@@ -2,7 +2,7 @@
 -export([calcularIpva/0]).
 -constructor([new_/0]).
 
-class_attributes.
+attributes.
 
 %QtdCavalos = 150;
 QtdCavalos;
