@@ -1,7 +1,7 @@
 -class(duck).
 -export([display/0, performFly/0, performQuack/0, swim/0]).
 
-class_attributes.
+attributes.
 
 FlyBehaviour;
 QuackBehaviour.
