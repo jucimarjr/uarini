@@ -40,8 +40,8 @@ uarini_tag_test_() ->
 uarini_markup_test_() ->
     Exp1 = {class_attributes, 1, []},
     Exp2 = {class_methods, 1, []},
-    Exp3 = {instance_attributes, 1, []},
-    Exp4 = {instance_methods, 1, []},
+    Exp3 = {attributes, 1, []},
+    Exp4 = {methods, 1, []},
 
     Form1 = uarini_parse:parse(get_tokens("class_attributes.")),
     Form2 = uarini_parse:parse(get_tokens("class_methods.")),
