@@ -1,16 +1,17 @@
 -class(procpong).
 -export([new/3, send/1]).
 -constructor([new/3]).
--static([loop/3]).
 
-class_attributes.
+attributes.
 
 Pid.
 
-class_methods.
+methods.
 
 new(Data, Parent, R) ->
 	self::Pid = spawn( fun() -> loop(R, Data, Parent) end ).
+
+get_pid() -> Pid.
 
 loop(0, _, Parent) ->
     Parent ! {finish, self()};
