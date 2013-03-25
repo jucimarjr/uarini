@@ -2,7 +2,6 @@
 -export([new/3, send/1]).
 -constructor([new/3]).
 
-
 attributes.
 
 Pid.
@@ -12,7 +11,13 @@ methods.
 new(Data, Parent, R) ->
 	self::Pid = spawn( fun() -> loop(R, Data, Parent) end ).
 
-get_pid() -> self::Pid.
+send(Msg) ->
+	self::Pid ! Msg.
+	
+get_pid() ->
+	self::Pid.
+
+class_methods.
 
 loop(0, _, Parent) ->
     Parent ! {finish, self()};
@@ -27,6 +32,3 @@ loop(R, Data, Parent) ->
 	    	Peer ! {self(), Data},
 	    	loop(R-1, Data, Parent)
    end.
-
-send(Msg) ->
-	self::Pid ! Msg.
