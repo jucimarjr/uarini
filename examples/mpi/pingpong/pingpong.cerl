@@ -1,7 +1,5 @@
 -class(pingpong).
 -export([run/2, run/3]).
--static([run/2, run/3, printResult/5,bandwidth_calc/2, error_report/2,
-time_microseg/0, generate_data/1, generate_data/2, finalize/1]).
 %%-include("conf.hrl").
 
 class_methods.

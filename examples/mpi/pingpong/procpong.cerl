@@ -11,7 +11,13 @@ methods.
 new(Data, Parent, R) ->
 	self::Pid = spawn( fun() -> loop(R, Data, Parent) end ).
 
-get_pid() -> Pid.
+send(Msg) ->
+	self::Pid ! Msg.
+
+get_pid() ->
+	self::Pid.
+
+class_methods.
 
 loop(0, _, Parent) ->
     Parent ! {finish, self()};
@@ -27,5 +33,3 @@ loop(R, Data, Parent) ->
 	    	loop(R-1, Data, Parent)
    end.
 
-send(Msg) ->
-	self::Pid ! Msg.
