@@ -54,7 +54,7 @@ uarini_markup_test_() ->
      ?_assertEqual(?OK(Exp4), Form4)].
 
 uarini_attribute_test_() ->
-    Exp1 = {instance_attributes, 1,
+    Exp1 = {attributes, 1,
                [{oo_attribute, 1,
                    {var, 1, 'MyVar'}}]},
 
