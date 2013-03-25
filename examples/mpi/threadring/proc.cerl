@@ -11,7 +11,12 @@ methods.
 new(RightProc) ->
 	self::Pid = spawn( fun() -> loop(RightProc) end ).
 
-get_pid() -> Pid.
+get_pid() -> self::Pid.
+
+send(Msg) ->
+	self::Pid ! Msg.
+
+class_methods.
 
 loop(RightProc) ->
 	receive
@@ -19,6 +24,3 @@ loop(RightProc) ->
 	    RightProc ! Data,
 	    loop(RightProc)
     end.
-
-send(Msg) ->
-	self::Pid ! Msg.
