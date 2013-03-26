@@ -1,0 +1,39 @@
+-class(dependentPizzaStore).
+-export([create_pizza/2]).
+
+methods.
+
+create_pizza(Style,Type) ->
+	if
+		(Style == "NY") ->
+			if
+				(Type == "cheese") ->
+					Pizza = nyStyleCheesePizza::new();
+				(Type == "veggie") ->
+					Pizza = nyStyleVeggiePizza::new();
+				(Type == "clam") ->
+					Pizza = nyStyleClamPizza::new();
+				(Type == "pepperoni") ->
+					Pizza = nyStyleClamPizza::new()
+			end;
+		(Style == "Chicago") ->
+			if
+				(Type == "cheese") ->
+					Pizza = chicagoStyleCheesePizza::new();
+				(Type == "veggie") ->
+					Pizza = chicagoStyleVeggiePizza::new();
+				(Type == "clam") ->
+					Pizza = chicagoStyleClamPizza::new();
+				(Type == "pepperoni") ->
+					Pizza = chicagoStyleClamPizza::new()
+			end;
+		_ ->
+			io:format("Error: invalid type of pizza ~n"),
+			null
+	end,
+	Pizza::prepare(),
+	Pizza::bake(),
+	Pizza::cut(),
+	Pizza::box(),
+	Pizza.
+		

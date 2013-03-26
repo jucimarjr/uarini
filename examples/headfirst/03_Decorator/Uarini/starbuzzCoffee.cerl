@@ -1,0 +1,21 @@
+-class(starbuzzCoffee).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Beverage = expresso::new(),
+	io:format("~p $ ~p~n", [Beverage::get_description(), Beverage::cost()]),
+	
+	Beverage2 = darkRoast::new(),
+	Beverage2 = mocha::new(Beverage2),
+	Beverage2 = mocha::new(Beverage2),
+	Beverage2 = whip::new(Beverage2),
+	io:format("~p $ ~p~n", [Beverage2::get_description(), Beverage2::cost()]),
+	
+	Beverage3 = houseBlend::new(),
+	Beverage3 = soy::new(Beverage3),
+	Beverage3 = mocha::new(Beverage3),
+	Beverage3 = whip::new(Beverage3),
+
+	io:format("~p $ ~p~n", [Beverage3::get_description(), Beverage3::cost()]).

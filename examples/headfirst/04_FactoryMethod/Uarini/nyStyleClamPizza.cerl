@@ -1,0 +1,14 @@
+-class(nyStyleClamPizza).
+-extends(pizza).
+-export([new/0]).
+-constructor([new/0]).
+
+methods.
+
+new() ->
+	self::Name = "NY Style Clam Pizza",
+	self::Dough = "Thin Crust Dough",
+	self::Sauce = "Marinara Sauce",
+	
+	self::Toppings = ["Grated Reggiano Cheese"|self::Toppings],
+	self::Toppings = ["Fresh Clams form Long Island Sound"|self::Toppings].

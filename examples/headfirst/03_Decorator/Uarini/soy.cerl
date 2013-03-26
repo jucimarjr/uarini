@@ -1,0 +1,21 @@
+-class(soy).
+-extends(condimentDecorator).
+-export([new/1, get_description/0, add_cost/0]).
+-constructor([new/1]).
+
+attributes.
+
+Beverage.
+
+methods.
+
+new(Beverage) ->
+	self::Beverage = Beverage.
+	
+get_description() ->
+	Temp = self::Beverage,
+	Temp::get_description() ++ ", Soy".
+	
+add_cost() ->
+	Temp = self::Beverage,
+	0.15 + Temp::cost().

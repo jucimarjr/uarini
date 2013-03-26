@@ -1,0 +1,11 @@
+-class(expresso).
+-extends(beverage).
+-export([new/0, cost/0]).
+-constructor([new/0]).
+
+methods.
+
+new() ->
+	self::Description = "Expresso".
+	
+cost() -> 1.99.

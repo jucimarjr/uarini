@@ -1,0 +1,18 @@
+-class(chicagoStyleClamPizza).
+-extends(pizza).
+-export([new/0, cut/0]).
+-constructor([new/0]).
+
+methods.
+
+new() ->
+	self::Name = "Chicago Style Clam Pizza",
+	self::Dough = "Extra Thick Crust Dough",
+	self::Sauce = "Plum Tomato Sauce",
+	
+	self::Toppings = ["Shredded Mozzarella Cheese"|self::Toppings],
+	self::Toppings = ["Frozen Clams from Chesapeake Bay"|self::Toppings].
+	
+cut() ->
+	io:format("Cutting the pizza into square slices ~n").
+		

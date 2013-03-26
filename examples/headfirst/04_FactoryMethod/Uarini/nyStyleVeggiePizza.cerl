@@ -1,0 +1,17 @@
+-class(nyStyleVeggiePizza).
+-extends(pizza).
+-export([new/0]).
+-constructor([new/0]).
+
+methods.
+
+new() ->
+	self::Name = "NY Style Veggie Pizza",
+	self::Dough = "Thin Crust Dough",
+	self::Sauce = "Marinara Sauce",
+	
+	self::Toppings = ["Grated Reggiano Cheese"|self::Toppings],
+	self::Toppings = ["Garlic"|self::Toppings],
+	self::Toppings = ["Onion"|self::Toppings],
+	self::Toppings = ["Mushrooms"|self::Toppings],
+	self::Toppings = ["Red Pepper"|self::Toppings].
