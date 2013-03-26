@@ -1,0 +1,7 @@
+-class(freshClams).
+-implements(clams).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Fresh Clams from Long Island Sound".

@@ -1,0 +1,7 @@
+-class(parmesanCheese).
+-implements(cheese).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Shredded Parmesan".

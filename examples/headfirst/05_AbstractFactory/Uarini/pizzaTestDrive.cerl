@@ -5,7 +5,7 @@ class_methods.
 
 main() ->
 	NyStore = nyPizzaStore::new_(),
-	ChicagoStore = chicagoPizzaStore::new_(),
+	chicagoStore = chicagoPizzaStore::new_(),
 	
 	Pizza1 = NyStore::order_pizza("cheese"),
 	io:format("Ethan ordered a ~p ~n", [Pizza1::get_name()]),
@@ -30,4 +30,3 @@ main() ->
 	
 	Pizza8 = ChicagoStore::order_pizza("veggie"),
 	io:format("Joel ordered a ~p ~n", [Pizza8::get_name()]).
-	

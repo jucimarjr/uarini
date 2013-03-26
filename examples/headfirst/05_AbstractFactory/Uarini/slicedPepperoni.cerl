@@ -1,0 +1,7 @@
+-class(slicedPepperoni).
+-implements(pepperoni).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Sliced Pepperoni".
