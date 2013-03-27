@@ -1,0 +1,7 @@
+-interface(turkey).
+-export([gobble/0, fly/0]).
+
+methods.
+
+gobble().
+fly().

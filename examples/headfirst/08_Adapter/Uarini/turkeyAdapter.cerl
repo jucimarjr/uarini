@@ -1,0 +1,25 @@
+-class(turkeyAdapter).
+-implements(duck).
+-export([new/1, quack/0, fly/0]).
+-constructor([new/1]).
+
+attributes.
+
+Turkey.
+
+methods.
+
+new(Turkey) ->
+	self::Turkey = Turkey.
+	
+quack() ->
+	Temp = self::Turkey,
+	Temp::gobble().
+	
+fly() ->
+	Temp = self::Turkey,
+	Temp::fly(),
+	Temp::fly(),
+	Temp::fly(),
+	Temp::fly(),
+	Temp::fly().

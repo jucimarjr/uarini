@@ -1,0 +1,11 @@
+-class(mallardDuck).
+-implements(duck).
+-export([quack/0, fly/0]).
+
+methods.
+
+quack() ->
+	io:format("Quack ~n").
+	
+fly() ->
+	io:format("I'm flying ~n").

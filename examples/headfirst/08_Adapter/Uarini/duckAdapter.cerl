@@ -1,0 +1,27 @@
+-class(duckAdapter).
+-implements(turkey).
+-export([new/1, gobble/0, fly/0]).
+-constructor([new/1]).
+
+attributes.
+
+Duck.
+
+methods.
+
+new(Duck) ->
+	self::Duck = Duck.
+	
+gobble() ->
+	Temp = self::Duck,
+	Temp::quack().
+	
+fly() ->
+	Random = random:uniform(5),
+	if 
+		(Random == 0) ->
+			Temp = self::Duck,
+			Temp::fly();
+		true ->
+			io:format("")
+	end.

@@ -1,0 +1,39 @@
+-class(turkeyTestDrive).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Duck = mallardDuck::new_(),
+	DuckAdapter = duckAdapter::new(Duck),
+	
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly(),
+	io:format("The DuckAdapter says..."),
+	DuckAdapter::gobble(),
+	DuckAdapter::fly().
