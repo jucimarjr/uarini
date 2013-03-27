@@ -1,0 +1,31 @@
+-class(pizza).
+-export([prepare/0, bake/0, cut/0, box/0, set_name/1]).
+-export([get_name/0]).
+
+attributes.
+
+Name;
+Sauce;
+Veggies;
+Cheese;
+Pepperoni;
+Clam.
+
+methods.
+
+prepare() -> null.
+
+bake() ->
+	io:format("Bake for 25 minutes at 350 ~n").
+	
+cut() ->
+	io:format("Cutting the pizza into diagonal slices ~n").
+	
+box() ->
+	io:format("Place pizza in official PizzaStore box ~n").
+	
+set_name(Name) ->
+	self::Name = Name.
+	
+get_name() -> 
+	self::Name.

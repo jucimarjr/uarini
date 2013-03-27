@@ -1,0 +1,7 @@
+-class(garlic).
+-implements(veggies).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Garlic".

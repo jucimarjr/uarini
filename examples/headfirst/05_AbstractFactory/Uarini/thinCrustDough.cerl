@@ -1,0 +1,7 @@
+-class(thinCrustDough).
+-implements(dough).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Thin crust Dough".

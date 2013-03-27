@@ -15,8 +15,16 @@ get_urn_forms(FileName) ->
 	Tokens = get_urn_tokens(FileName),
 	lists:map(
 		fun(Ts) ->
-			{ok, Form} = uarini_parse:parse(Ts),
-			Form
+			case uarini_parse:parse(Ts) of
+				{ok, Form} ->
+					Form;
+				{error, {Ln, uarini_parse, ErrorList}} ->
+					io:format("*****temporary syntax error print*****\n"
+								"'~p'#~p: ~p\n\n\n\n", [filename:basename(FileName), Ln, ErrorList]),
+					error
+					%% uarini_errors:handle_error(Ln, 15,
+					%% 	[FileName, lists:flatten(ErrorList)]),
+			end
 		end,
 		split_forms(Tokens)).
 
@@ -213,14 +221,12 @@ get_attr_info(AttrList) ->
 get_attr_info([], AttrInfoList) ->
 	lists:reverse(AttrInfoList, []);
 get_attr_info([Attr | Rest], AttrInfoList) ->
-	{oo_attribute, _Ln, NameTemp} = Attr,
-
 	{VarName, VarValue} =
-		case NameTemp of
-			{var, _, Name} ->
+		case Attr of
+			{oo_attribute, _Ln, {var, _, Name}} ->
 				{Name, {nil, 0}};
 
-			{{var,_, Name}, {initial_value, InitialExpr}} ->
+			{oo_attribute, _Ln, {var, _, Name}, InitialExpr} ->
 				{Name, InitialExpr}
 		end,
 

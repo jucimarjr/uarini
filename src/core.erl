@@ -182,7 +182,7 @@ get_erl_clause({clause, Line, ParamList, [], ExprList}) ->
 			{clause, Line, TransfParamList, [], TransfExprList2}
 	end.
 
-get_erl_param(Parameter) -> gen_erl_code:match_param(Parameter).
+get_erl_param(Parameter) -> gen_erl_code:match_pattern(Parameter).
 get_erl_expr(Expression) -> gen_erl_code:match_expr(Expression).
 
 create_user_constr_body(Line, Scope, TransfExprList) ->

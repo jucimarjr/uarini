@@ -1,0 +1,7 @@
+-class(marinaraSauce).
+-implements(sauce).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Marinara Sauce".
