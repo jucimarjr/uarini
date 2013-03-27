@@ -1,0 +1,10 @@
+-class(light).
+-export([on/0, off/0]).
+
+methods.
+
+on() ->
+	io:format("Light is on ~n").
+
+off() ->
+	io:format("Light is off ~n").

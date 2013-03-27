@@ -1,0 +1,17 @@
+-class(lightOffCommand).
+-implements(command).
+-export([new/1, execute/0]).
+-constructor([new/1]).
+
+attributes.
+
+Light.
+
+methods.
+
+new(Light) ->
+	self::Light = Light.
+	
+execute() ->
+	Temp = self::Light,
+	Temp::off().
