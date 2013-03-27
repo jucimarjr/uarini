@@ -7,15 +7,15 @@ main() ->
 	Beverage = expresso::new(),
 	io:format("~p $ ~p~n", [Beverage::get_description(), Beverage::cost()]),
 	
-	Beverage2 = darkRoast::new(),
-	Beverage2 = mocha::new(Beverage2),
-	Beverage2 = mocha::new(Beverage2),
-	Beverage2 = whip::new(Beverage2),
-	io:format("~p $ ~p~n", [Beverage2::get_description(), Beverage2::cost()]),
+	BevTemp1 = darkRoast::new(),
+	BevTemp2 = mocha::new(BevTemp1),
+	BevTemp3 = mocha::new(BevTemp2),
+	BevTemp4 = whip::new(BevTemp3),
+	io:format("~p $ ~p~n", [BevTemp4::get_description(), BevTemp4::cost()]),
 	
-	Beverage3 = houseBlend::new(),
-	Beverage3 = soy::new(Beverage3),
-	Beverage3 = mocha::new(Beverage3),
-	Beverage3 = whip::new(Beverage3),
+	BevTemp5 = houseBlend::new(),
+	BevTemp6 = soy::new(BevTemp5),
+	BevTemp7 = mocha::new(BevTemp6),
+	BevTemp8 = whip::new(BevTemp7),
 
-	io:format("~p $ ~p~n", [Beverage3::get_description(), Beverage3::cost()]).
+	io:format("~p $ ~p~n", [BevTemp8::get_description(), BevTemp8::cost()]).
