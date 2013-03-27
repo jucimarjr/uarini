@@ -3,4 +3,4 @@
 
 methods.
 
-getSql() -> null.
+getSql().

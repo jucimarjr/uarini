@@ -3,4 +3,4 @@
 
 methods.
 
-to_string() -> null.
+to_string().

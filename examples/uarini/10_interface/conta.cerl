@@ -3,6 +3,6 @@
 
 methods.
 
-depositar(Valor) -> null.
-sacar(Valor) -> null.
-getSaldo() -> null.
+depositar(Valor).
+sacar(Valor).
+getSaldo().
