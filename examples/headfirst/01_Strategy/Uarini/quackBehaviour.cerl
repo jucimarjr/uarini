@@ -3,4 +3,4 @@
 
 methods.
 
-quack() -> null.
+quack().

@@ -8,7 +8,7 @@ oo_attributes ::= oo_attribute (';' oo_attributes | '.')
 
 oo_attribute ::= var ( |'=' exprs)
 
-oo_methods ::= (function '.' methods | )
+oo_methods ::= (function '.' oo_methods | )
 
 attribute ::=
     '-'(atom
