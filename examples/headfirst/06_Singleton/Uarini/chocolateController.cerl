@@ -1,0 +1,14 @@
+-class(chocolateController).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Boiler = chocolateBoiler::new(),
+	Boiler::get_instance(),
+	Boiler::fill(),
+	Boiler::boil(),
+	Boiler::drain(),
+	
+	Boiler2 = chocolateBoiler::new(),
+	Boiler2::get_instance().
