@@ -1,0 +1,32 @@
+-class(homeTheaterFacade).
+-export([new/8, watch_movie/1, end_movie/0, listen_to_cd/1, end_cd/0]).
+-export([listen_to_radio/1, end_radio/0]).
+-constructor([new/8]).
+
+attributes.
+
+Amp;
+Tuner;
+Dvd;
+Cd;
+Projector;
+Lights;
+Screen;
+Popper.
+
+new(Amp,Tuner,Dvd,Cd,Projector,Screen,Lights,Popper) ->
+	self::Amp = Amp,
+	self::Tuner = Tuner,
+	self::Dvd = Dvd,
+	self::Cd = Cd,
+	self::Projector = Projector,
+	self::Screen = Screen,
+	self::Lights = Lights,
+	self::Popper = Popper.
+	
+watch_movie(Movie) ->
+	io:format("Get ready to watch a movie...~n"),
+	Temp1 = self::Popper,
+	Temp1::on(),
+	Temp1::pop(),
+	Temp2 = self::Lights

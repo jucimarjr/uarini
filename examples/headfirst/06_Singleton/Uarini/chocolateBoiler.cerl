@@ -6,10 +6,7 @@
 attributes.
 
 Empty;
-Boiled.
-
-class_attributes.
-
+Boiled;
 UniqueInstance.
 
 methods.
