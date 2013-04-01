@@ -22,7 +22,7 @@ off() ->
 	io:format("~p off~n", [self::Description]).
 	
 eject() ->
-	self::Title = null,
+	self::Title = "No title",
 	io:format("~p eject~n", [self::Description]).
 	
 play(Title) ->

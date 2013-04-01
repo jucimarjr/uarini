@@ -1,0 +1,19 @@
+-class(homeTheaterTestDrive).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Amp = amplifier::new("Top-O-Line Amplifier"),
+	Tuner = tuner::new("Top-O-Line AM/FM Tuner", Amp),
+	Dvd = dvdPlayer::new("Top-O-Line DVD Player", Amp),
+	Cd = cdPlayer::new("Top-O-Line CD Player", Amp),
+	Projector = projector::new("Top-O-Line Projector", Dvd),
+	Lights = theaterLights::new("Theater Ceiling Lights"),
+	Screen = screen::new("Theater Screen"),
+	Popper = popcornPopper::new("Popcorn Popper"),
+	
+	HomeTheater = homeTheaterFacade::new(Amp,Tuner,Dvd,Cd,Projector,Screen,Lights,Popper),
+	
+	HomeTheater::watch_movie("Raiders of the Lost Ark"),
+	HomeTheater::end_movie().
