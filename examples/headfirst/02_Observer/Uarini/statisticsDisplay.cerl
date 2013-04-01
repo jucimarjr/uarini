@@ -22,10 +22,13 @@ update(Temp, Humidity, Pressure) ->
 	self::TempSum = self::TempSum + Temp,
 	self::NumReadings = self::NumReadings + 1,
 	
+	Maximum = self::MaxTemp,
+	Minimum = self::MinTemp,
+	
 	if
-		(Temp > self::MaxTemp) ->
+		(Temp > Maximum) ->
 			self::MaxTemp = Temp;
-		(Temp < self::MinTemp) ->
+		(Temp < Minimum) ->
 			self::MinTemp = Temp
 	end,
 		

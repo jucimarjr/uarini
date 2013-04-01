@@ -23,11 +23,13 @@ update(Temp, Humidity, Pressure) ->
 	
 display() ->
 	io:format("Forecast: ~n"),
+	CrtPressure = self::CurrentPressure,
+	LstPressure = self::LastPressure,
 	if
-		(self::CurrentPressure > self::LastPressure) ->
+		(CrtPressure > LstPressure) ->
 			io:format("Improving weather on the way!~n");
-		(self::CurrentPressure == self::LastPressure) ->
+		(CrtPressure == LstPressure) ->
 			io:format("More of the same ~n");
-		(self::currentPressure < self::LastPressure) ->
+		(CrtPressure < LstPressure) ->
 			io:format("Watch out for cooler, rainy weather... ~n")
 	end.

@@ -4,9 +4,9 @@
 class_methods.
 
 main() ->
-	WeatherData = currentConditionsDisplay::new(),
+	WeatherData = weatherData::new(),
 	
-	CurrentDisplay = currentConditionsDisplay::new(WeatherData),
+	CurrentConditions = currentConditionsDisplay::new(WeatherData),
 	StatisticsDisplay = statisticsDisplay::new(WeatherData),
 	ForecastDisplay = forecastDisplay::new(WeatherData),
 	
