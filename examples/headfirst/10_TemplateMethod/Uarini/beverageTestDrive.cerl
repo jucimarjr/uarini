@@ -1,0 +1,23 @@
+-class(beverageTestDrive).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Tea = tea::new_(),
+	Coffee = coffee::new_(),
+	
+	io:format("~nMaking Tea...~n"),
+	Tea::prepare_recipe(),
+	
+	io:format("~nMaking Coffee...~n"),
+	Coffee::prepare_recipe(),
+	
+	TeaHook = teaWithHook::new_(),
+	CoffeeHook = coffeeWithHook::new_(),
+	
+	io:format("~nMaking Tea...~n"),
+	TeaHook::prepare_recipe(),
+	
+	io:format("~nMaking Coffee...~n"),
+	CoffeeHook::prepare_recipe().	
