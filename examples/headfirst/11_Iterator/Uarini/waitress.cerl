@@ -22,12 +22,6 @@ print_menu() ->
 	PancakeIterator = Pancake::create_iterator(),
 	DinerIterator = Diner::create_iterator(),
 	
-%	io:format("PancakeIterator: ~p~n", [PancakeIterator]),
-%	io:format("DinerIterator: ~p~n", [DinerIterator]),
-%	io:format("Pancake::MenuItems: ~p~n", [Pancake::MenuItems]),
-%	io:format("Diner::MenuItems: ~p~n", [Diner::MenuItems]),
-	
-		
 	io:format("MENU~n----~nBREAKFAST~n"),
 	print_the_menu(Pancake::MenuItems),
 	io:format("~nLUNCH~n"),
