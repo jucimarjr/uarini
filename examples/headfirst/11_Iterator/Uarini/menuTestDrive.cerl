@@ -1,0 +1,33 @@
+-class(menuTestDrive).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	PancakeHouseMenu = pancakeHouseMenu::new(),
+	DinerMenu = dinerMenu::new(),
+	
+	io:format("PancakeHouseMenu: ~p~n", [PancakeHouseMenu]),
+	io:format("DinerMenu: ~p~n", [DinerMenu]),
+	Waitress = waitress::new(PancakeHouseMenu, DinerMenu),
+	
+	Waitress::print_menu().
+%
+%print_menu() ->
+%	PancakeHouseMenu = pancakeHouseMenu::new_(),
+%	DinerMenu = dinerMenu::new_(),
+%	
+%	BreakfastItems = PancakeHouseMenu::get_menu_items(),
+%	
+%	print_items(BreakfastItems),
+%	
+%	LunchItems = dinerMenu::get_menu_items(),
+%	
+%	print_items(LunchItems).
+%	
+%print_items([]) -> io:format("");
+%print_items([Item|Items]) ->
+%	io:format("~p~n",[Item::get_name()]),
+%	io:format("      ~p~n",[Item::get_price()]),
+%	io:format("   ~p~n",[Item::get_description()]),
+%	print_items(Items).

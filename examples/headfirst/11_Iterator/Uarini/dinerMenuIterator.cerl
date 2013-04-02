@@ -1,0 +1,29 @@
+-class(dinerMenuIterator).
+-implements(iterator).
+-export([new/1, next/0, has_next/0]).
+-constructor([new/1]).
+
+attributes.
+
+Items;
+Position.
+
+methods.
+
+new(Items) ->
+	self::Items = Items.
+	
+next() ->
+	MenuItem = lists:nth(self::Position, self::Items),
+	self::Position = self::Position + 1,
+	MenuItem.
+	
+has_next() ->
+	Pos = self::Position,
+	Itm = self::Items,
+	if 
+		(Pos >= length(Itm)) ->
+			false;
+		true ->
+			true
+	end.

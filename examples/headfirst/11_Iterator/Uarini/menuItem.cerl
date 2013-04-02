@@ -1,0 +1,35 @@
+-class(menuItem).
+-export([new/4, get_name/0, get_description/0, get_price/0]).
+-export([is_vegetarian/0, to_string/0]).
+-constructor([new/4]).
+
+attributes.
+
+Name;
+Description;
+Vegetarian;
+Price.
+
+methods.
+
+new(Name,Description,Vegetarian,Price) ->
+	self::Name = Name,
+	self::Description = Description,
+	self::Vegetarian = Vegetarian,
+	self::Price = Price.
+	
+get_name() ->
+	self::Name.
+	
+get_description() ->
+	self::Description.
+	
+get_price() ->
+	self::Price.
+	
+is_vegetarian() ->
+	self::Vegetarian.
+	
+to_string() ->
+	Return = self::Name ++ ", $ " ++ self::Price ++ "~n   " ++ self::Description,
+	Return.
