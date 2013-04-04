@@ -1,0 +1,9 @@
+-interface(state).
+-export([insert_quarter/0, eject_quarter/0, turn_crank/0, dispense/0]).
+
+methods.
+
+insert_quarter().
+eject_quarter().
+turn_crank().
+dispense().

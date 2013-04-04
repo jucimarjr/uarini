@@ -1,0 +1,23 @@
+-class(gumballMachineTestDrive).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	GumballMachine = gumballMachine::new(5),
+	%io:format("~p~n", [GumballMachine::to_string()]),
+	GumballMachine::to_string(),
+	
+	GumballMachine::insert_quarter(),
+	GumballMachine::turn_crank(),
+	
+	%io:format("~p~n", [GumballMachine::to_string()]),
+	GumballMachine::to_string(),
+	
+	GumballMachine::insert_quarter(),
+	GumballMachine::turn_crank(),
+	GumballMachine::insert_quarter(),
+	GumballMachine::turn_crank(),
+	
+	%io:format("~p~n", [GumballMachine::to_string()]),
+	GumballMachine::to_string().

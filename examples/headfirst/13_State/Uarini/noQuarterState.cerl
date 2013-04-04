@@ -1,0 +1,31 @@
+-class(noQuarterState).
+-implements(state).
+-export([new/1]).
+-export([dispense/0, insert_quarter/0, eject_quarter/0, turn_crank/0, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+GumballMachine.
+
+methods.
+
+new(GumballMachine) ->
+	self::GumballMachine = GumballMachine.
+	
+insert_quarter() ->
+	io:format("You inserted a quarter~n"),
+	GBMachine = self::GumballMachine,
+	GBMachine::set_state(GBMachine::get_has_quarter_state()).
+	
+eject_quarter() ->
+	io:format("You haven't inserted a quarter~n").
+		
+turn_crank() ->
+	io:format("You turned but there's no quarter~n").
+		
+dispense() ->
+	io:format("You need to pay first~n").
+	
+to_string() ->
+	"Waiting for quarter".
