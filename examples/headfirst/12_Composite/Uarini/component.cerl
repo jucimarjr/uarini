@@ -1,0 +1,6 @@
+-interface(component).
+-export([transverse/0]).
+
+methods.
+
+transverse().

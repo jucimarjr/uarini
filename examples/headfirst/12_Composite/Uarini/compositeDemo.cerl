@@ -1,0 +1,23 @@
+-class(compositeDemo).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	First = row::new(1),
+	Second = column::new(2),
+	Third = column::new(3),
+	Fourth = row::new(4),
+	Fifth = row::new(5),
+	
+	First::add(Second),
+	First::add(Third),
+	Third::add(Fourth),
+	Third::add(Fifth),
+	First::add(primitive::new(6)),
+	Second::add(primitive::new(7)),
+	Third::add(primitive::new(8)),
+	Fourth::add(primitive::new(9)),
+	Fifth::add(primitive::new(10)),
+	
+	First::transverse().
