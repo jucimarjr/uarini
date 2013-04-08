@@ -8,32 +8,44 @@ create_pizza(Style,Type) ->
 		(Style == "NY") ->
 			if
 				(Type == "cheese") ->
-					Pizza = nyStyleCheesePizza::new();
+					Pizza = nyStyleCheesePizza::new(),
+					do_all_aux(Pizza);
 				(Type == "veggie") ->
-					Pizza = nyStyleVeggiePizza::new();
+					Pizza = nyStyleVeggiePizza::new(),
+					do_all_aux(Pizza);
 				(Type == "clam") ->
-					Pizza = nyStyleClamPizza::new();
+					Pizza = nyStyleClamPizza::new(),
+					do_all_aux(Pizza);
 				(Type == "pepperoni") ->
-					Pizza = nyStyleClamPizza::new()
+					Pizza = nyStyleClamPizza::new(),
+					do_all_aux(Pizza);
+				true ->
+					io:format("")
 			end;
 		(Style == "Chicago") ->
 			if
 				(Type == "cheese") ->
-					Pizza = chicagoStyleCheesePizza::new();
+					Pizza = chicagoStyleCheesePizza::new(),
+					do_all_aux(Pizza);
 				(Type == "veggie") ->
-					Pizza = chicagoStyleVeggiePizza::new();
+					Pizza = chicagoStyleVeggiePizza::new(),
+					do_all_aux(Pizza);
 				(Type == "clam") ->
-					Pizza = chicagoStyleClamPizza::new();
+					Pizza = chicagoStyleClamPizza::new(),
+					do_all_aux(Pizza);
 				(Type == "pepperoni") ->
-					Pizza = chicagoStyleClamPizza::new()
+					Pizza = chicagoStyleClamPizza::new(),
+					do_all_aux(Pizza);
+				true ->
+					io:format("")
 			end;
-		_ ->
-			io:format("Error: invalid type of pizza ~n"),
-			null
-	end,
+		true ->
+			io:format("Error: invalid type of pizza ~n")
+	end.
+	
+do_all_aux(Pizza) ->
 	Pizza::prepare(),
 	Pizza::bake(),
 	Pizza::cut(),
 	Pizza::box(),
 	Pizza.
-		

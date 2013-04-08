@@ -16,12 +16,12 @@ prepare() ->
 	io:format("Adding Sauce... ~n"),
 	io:format("Adding toppings: ~n"),
 	Tops = self::Toppings,
-	prepare(Tops).
+	prepare_aux(Tops).
 	
-prepare([]) -> null;	
-prepare([Top|Toppings]) ->
+prepare_aux([]) -> null;	
+prepare_aux([Top|Toppings]) ->
 	io:format("   ~p~n", [Top]),
-	prepare(Toppings).
+	prepare_aux(Toppings).
 	
 bake() ->
 	io:format("Bake for 25 minutes at 350 ~n").

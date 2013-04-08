@@ -7,13 +7,17 @@ methods.
 create_pizza(Item) ->
 	if
 		(Item == "cheese") ->
-			nyStyleCheesePizza::new();
+			Pizza = nyStyleCheesePizza::new(),
+			Pizza;
 		(Item == "veggie") ->
-			nyStyleVeggiePizza::new();
+			Pizza = nyStyleVeggiePizza::new(),
+			Pizza;
 		(Item == "clam") ->
-			nyStyleClamPizza::new();
+			Pizza = nyStyleClamPizza::new(),
+			Pizza;
 		(Item == "pepperoni") ->
-			nyStylePepperoniPizza::new();
-		_ ->
+			Pizza = nyStylePepperoniPizza::new(),
+			Pizza;
+		true ->
 			null
 	end.
