@@ -90,7 +90,8 @@ to_string() ->
 			io:format("")
 	end,
 	io:format("~n"),
-	io:format("Machine is ~p~n", [self::State]).
+	State = self::State,
+	io:format("Machine is ~p~n", [State::to_string()]).
 	
 %to_string() ->
 %	Result = "~nMighty Gumball, Inc.",
