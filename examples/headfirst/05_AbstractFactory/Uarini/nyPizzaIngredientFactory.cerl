@@ -1,7 +1,7 @@
 -class(nyPizzaIngredientFactory).
 -implements(pizzaIngredientFactory).
--export([create_dough/0, create_sauce/0, create_cheese/0, create_veggies/0]).
--export([create_pepperoni/0, create_clam/0]).
+-export([create_dough/0, create_sauce/0, create_cheese/0]).
+-export([create_veggies/0, create_pepperoni/0, create_clam/0]).
 
 methods.
 

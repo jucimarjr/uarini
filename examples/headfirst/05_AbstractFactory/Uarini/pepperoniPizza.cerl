@@ -14,8 +14,9 @@ new(IngredientFactory) ->
 	
 prepare() ->
 	io:format("Preparing ~p~n", [self::Name]),
-	self::Dough = IngredientFactory::create_dough(),
-	self::Sauce = IngredientFactory::create_sauce(),
-	self::Cheese = IngredientFactory::create_cheese(),
-	self::Veggies = IngredientFactory::create_veggies(),
-	self::Pepperoni = IngredientFactory::create_pepperoni().
+	Ingredient = self::IngredientFactory,
+	self::Dough = Ingredient::create_dough(),
+	self::Sauce = Ingredient::create_sauce(),
+	self::Cheese = Ingredient::create_cheese(),
+	self::Veggies = Ingredient::create_veggies(),
+	self::Pepperoni = Ingredient::create_pepperoni().
