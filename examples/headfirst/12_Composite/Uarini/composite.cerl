@@ -21,9 +21,9 @@ add(C) ->
 	
 transverse() ->
 	io:format("~p   ", [self::Value]),
-	transverse(self::Children).
+	transverse_aux(self::Children).
 	
-transverse([]) -> null;
-transverse([Child|Children]) ->
+transverse_aux([]) -> null;
+transverse_aux([Child|Children]) ->
 	Child::transverse(),
-	transverse(Children).
+	transverse_aux(Children).
