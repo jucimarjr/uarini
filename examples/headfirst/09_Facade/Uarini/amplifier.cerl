@@ -36,11 +36,11 @@ set_tuner(Tuner) ->
 	self::Tuner = Tuner.
 	
 set_dvd(Dvd) ->
-	io:format("~p setting DVD player to ~p~n", [self::Description, Dvd]),
+	io:format("~p setting DVD player to ~p~n", [self::Description, Dvd::to_string()]),
 	self::Dvd = Dvd.
 	
 set_cd(Cd) ->
-	io:format("~p setting CD player to ~p~n", [self::Description, Cd]),
+	io:format("~p setting CD player to ~p~n", [self::Description, Cd::to_string()]),
 	self::Cd = Cd.
 	
 to_string() ->
