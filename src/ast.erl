@@ -6,7 +6,7 @@
 %% Objetivo : Criacao e manipulacao da AST
 
 -module(ast).
--export([get_urn_tokens/1, get_urn_forms/1, get_class_info/1]).
+-export([get_urn_tokens/1, get_urn_forms/1, get_class_info/1, get_urn_forms_tokens/1]).
 -include("../include/uarini_define.hrl").
 
 %%-----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ get_urn_forms(FileName) ->
 					%% 	[FileName, lists:flatten(ErrorList)]),
 			end
 		end,
-		split_forms(Tokens)).
+		get_urn_forms_tokens(Tokens)).
 
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo .cerl
@@ -39,25 +39,25 @@ get_urn_tokens(FileName) ->
 
 %%-----------------------------------------------------------------------------
 %% Quebra os forms de um fluxo de Tokens identificados por 'dot'
-split_forms(TokenStream) ->
-	split_forms(TokenStream, [], []).
+get_urn_forms_tokens(TokenStream) ->
+	get_urn_forms_tokens(TokenStream, [], []).
 
 
-split_forms([], [], FormStack) ->
+get_urn_forms_tokens([], [], FormStack) ->
     lists:reverse(FormStack);
 
-split_forms([], TokenStack, FormStack) ->
+get_urn_forms_tokens([], TokenStack, FormStack) ->
     Form = lists:reverse(TokenStack),
     lists:reverse(
         update_form_stack(Form, FormStack));
 
-split_forms([DotToken={dot,_}|TokenStream], TokenStack, FormStack) ->
+get_urn_forms_tokens([DotToken={dot,_}|TokenStream], TokenStack, FormStack) ->
     Form = lists:reverse([DotToken|TokenStack]),
-    split_forms(TokenStream, [],
+    get_urn_forms_tokens(TokenStream, [],
         update_form_stack(Form, FormStack));
 
-split_forms([Token|TokenStream], TokenStack, FormStack) ->
-    split_forms(TokenStream, [Token|TokenStack], FormStack).
+get_urn_forms_tokens([Token|TokenStream], TokenStack, FormStack) ->
+    get_urn_forms_tokens(TokenStream, [Token|TokenStack], FormStack).
 
 
 update_form_stack(Form, []) -> [Form];
