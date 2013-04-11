@@ -14,9 +14,13 @@ WeatherData.
 methods.
 
 new(WeatherData) ->
+	self::MaxTemp = 0,
+	self::MinTemp = 200,
+	self::TempSum = 0,
+	self::NumReadings = 0,
 	self::WeatherData = WeatherData,
 	Temp = self::WeatherData,
-	Temp::register_observer(self()).
+	Temp::register_observer({statisticsDisplay, ObjectID}).
 	
 update(Temp, Humidity, Pressure) ->
 	self::TempSum = self::TempSum + Temp,
@@ -28,8 +32,14 @@ update(Temp, Humidity, Pressure) ->
 	if
 		(Temp > Maximum) ->
 			self::MaxTemp = Temp;
+		true ->
+			io:format("")
+	end,
+	if
 		(Temp < Minimum) ->
-			self::MinTemp = Temp
+			self::MinTemp = Temp;
+		true ->
+			io:format("")
 	end,
 		
 	display().

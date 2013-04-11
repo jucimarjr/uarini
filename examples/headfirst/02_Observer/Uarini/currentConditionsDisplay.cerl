@@ -14,7 +14,7 @@ methods.
 new(WeatherData) ->
 	self::WeatherData = WeatherData,
 	Temp = self::WeatherData,
-	Temp::register_observer(self()).
+	Temp::register_observer({currentConditionsDisplay, ObjectID}).
 	
 update(Temperature, Humidity, Pressure) ->
 	self::Temperature = Temperature,

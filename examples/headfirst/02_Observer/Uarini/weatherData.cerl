@@ -26,7 +26,7 @@ notify_observers() ->
 	Observers = self::Observers,
 	notify_aux(Observers).
 
-notify_aux([]) -> null;
+notify_aux([]) -> ok;
 notify_aux([Obs | Observers]) ->
 	Obs::update(self::Temperature, self::Humidity, self::Pressure),
 	notify_aux(Observers).

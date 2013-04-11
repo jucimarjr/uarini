@@ -6,9 +6,10 @@ class_methods.
 main() ->
 	WeatherData = weatherData::new(),
 	
-	CurrentConditions = currentConditionsDisplay::new(WeatherData),
-	StatisticsDisplay = statisticsDisplay::new(WeatherData),
+	HeatIndexDisplay = heatIndexDisplay::new(WeatherData),
 	ForecastDisplay = forecastDisplay::new(WeatherData),
+	StatisticsDisplay = statisticsDisplay::new(WeatherData),
+	CurrentConditions = currentConditionsDisplay::new(WeatherData),
 	
 	WeatherData::set_measurements(80, 65, 30.4),
 	WeatherData::set_measurements(82, 70, 29.2),

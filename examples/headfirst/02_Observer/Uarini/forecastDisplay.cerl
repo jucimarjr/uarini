@@ -12,9 +12,10 @@ WeatherData.
 methods.
 
 new(WeatherData) ->
+	self::CurrentPressure = 29.92,
 	self::WeatherData = WeatherData,
 	Temp = self::WeatherData,
-	Temp::register_observer(self()).
+	Temp::register_observer({forecastDisplay, ObjectID}).
 	
 update(Temp, Humidity, Pressure) ->
 	self::LastPressure = self::CurrentPressure,
@@ -22,7 +23,7 @@ update(Temp, Humidity, Pressure) ->
 	display().
 	
 display() ->
-	io:format("Forecast: ~n"),
+	io:format("Forecast: "),
 	CrtPressure = self::CurrentPressure,
 	LstPressure = self::LastPressure,
 	if

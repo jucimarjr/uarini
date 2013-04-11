@@ -11,9 +11,10 @@ WeatherData.
 methods.
 
 new(WeatherData) ->
+	self::HeatIndex = 0,
 	self::WeatherData = WeatherData,
 	Temp = self::WeatherData,
-	Temp::register_observer(self::WeatherData).
+	Temp::register_observer({heatIndexDisplay, ObjectID}).
 	
 update(T, Rh, Pressure) ->
 	self::HeatIndex = compute_heat_index(T, Rh),
@@ -31,4 +32,4 @@ compute_heat_index(T, Rh) ->
 	Index.
 	
 display() ->
-	io:format("Heat index is ~p~n", [self::heatIndex]).
+	io:format("Heat index is ~p~n", [self::HeatIndex]).
