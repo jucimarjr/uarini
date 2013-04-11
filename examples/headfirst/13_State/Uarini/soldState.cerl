@@ -25,7 +25,7 @@ turn_crank() ->
 dispense() ->
 	GBMachine = self::GumballMachine,
 	GBMachine::release_ball(),
-	Cnt = GBMachine::get_count,
+	Cnt = GBMachine::get_count(),
 	if
 		(Cnt > 0) ->
 			GBMachine::set_state(GBMachine::get_no_quarter_state());

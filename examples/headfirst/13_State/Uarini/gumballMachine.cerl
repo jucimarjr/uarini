@@ -17,11 +17,12 @@ Count.
 methods.
 
 new(NumberGumballs) ->
-	self::SoldOutState = soldOutState::new(self()),
-	self::NoQuarterState = noQuarterState::new(self()),
-	self::HasQuarterState = hasQuarterState::new(self()),
-	self::SoldState = soldState::new(self()),
+	self::SoldOutState = soldOutState::new({gumballMachine, ObjectID}),
+	self::NoQuarterState = noQuarterState::new({gumballMachine, ObjectID}),
+	self::HasQuarterState = hasQuarterState::new({gumballMachine, ObjectID}),
+	self::SoldState = soldState::new({gumballMachine, ObjectID}),
 	
+	self::State = self::SoldOutState,	
 	self::Count = NumberGumballs,
 	if
 		(NumberGumballs > 0) ->
@@ -41,7 +42,8 @@ eject_quarter() ->
 turn_crank() ->
 	Sta = self::State,
 	Sta::turn_crank(),
-	Sta::dispense().
+	Sta2 = self::State,
+	Sta2::dispense().
 	
 set_state(State) ->
 	self::State = State.
@@ -51,7 +53,7 @@ release_ball() ->
 	Cnt = self::Count,
 	if
 		(Cnt =/= 0) ->
-			self::Count = self::count - 1;
+			self::Count = self::Count - 1;
 		true ->
 			null
 	end.
