@@ -9,6 +9,7 @@ order_pizza(Type, String) ->
 	Object = {String, ObjectID},
 	Pizza = Object::create_pizza(Type),
 	
+	io:format("--- Making a ~p --- ~n", [Pizza::get_name()]),
 	Pizza::prepare(),
 	Pizza::bake(),
 	Pizza::cut(),
