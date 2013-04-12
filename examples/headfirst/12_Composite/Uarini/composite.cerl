@@ -12,6 +12,7 @@ Value.
 methods.
 
 new(Val) ->
+	self::Children = [],
 	self::Value = Val,
 	self::Total = 0.
 	
@@ -23,7 +24,7 @@ transverse() ->
 	io:format("~p   ", [self::Value]),
 	transverse_aux(self::Children).
 	
-transverse_aux([]) -> null;
+transverse_aux([]) -> ok;
 transverse_aux([Child|Children]) ->
 	Child::transverse(),
 	transverse_aux(Children).

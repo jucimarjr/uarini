@@ -30,7 +30,7 @@ cut() ->
 	io:format("Cutting the pizza into diagonal slices ~n").
 	
 box() ->
-	io:format("Place pizza in official PizzaStore box").
+	io:format("Place pizza in official PizzaStore box ~n").
 	
 get_name() ->
 	self::Name.	

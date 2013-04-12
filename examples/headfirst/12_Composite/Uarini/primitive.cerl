@@ -13,4 +13,4 @@ new(Val) ->
 	self::Value = Val.
 	
 transverse() ->
-	io:format("~p    ").
+	io:format("~p    ", [self::Value]).
