@@ -51,15 +51,16 @@ is_empty() ->
 is_boiled() ->
 	self::Boiled.
 
-class_methods.
-
 get_instance() ->
+	ListOfProcesses = erlang:registered(),
+	Return = lists:member(unique_instance, ListOfProcesses),
 	if
-		(UniqueInstance == []) ->
+		(Return == false) ->
 			io:format("Creating unique instance of Chocolate Boiler ~n"),
-			UniqueInstance = chocolateBoiler::new();
+			self::UniqueInstance = chocolateBoiler::new(),
+			erlang:register(unique_instance, ObjectID);
 		true ->
 			io:format("")
 	end,
 	io:format("Returning instance of Chocolate Boiler ~n"),
-	UniqueInstance.
+	self::UniqueInstance.
