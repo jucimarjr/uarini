@@ -6,7 +6,10 @@
 methods.
 
 new(Val) ->
-	super::new(Val).
+	%super::new(Val).
+	self::Children = [],
+	self::Value = Val,
+	self::Total = 0.
 	
 transverse() ->
 	io:format("Row"),
