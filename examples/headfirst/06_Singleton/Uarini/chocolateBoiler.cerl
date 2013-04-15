@@ -63,4 +63,5 @@ get_instance() ->
 			io:format("")
 	end,
 	io:format("Returning instance of Chocolate Boiler ~n"),
-	self::UniqueInstance.
+	Unique = {chocolateBoiler, whereis(unique_instance)},
+	Unique::UniqueInstance.
