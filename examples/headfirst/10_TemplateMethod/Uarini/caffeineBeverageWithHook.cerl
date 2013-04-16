@@ -1,5 +1,5 @@
 -class(caffeineBeverageWithHook).
--export([prepare_recipe/0, brew/0, add_condiments/0]).
+-export([prepare_recipe/1, brew/0, add_condiments/0]).
 -export([boil_water/0, pour_in_cup/0, customer_wants_condiments/0]).
 
 methods.
