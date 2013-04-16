@@ -20,5 +20,5 @@ customer_wants_condiments() ->
 	end.
 
 get_user_input() ->
-	Answer = io:read('Would you like lemon with your tea(y/n)?'),
+	{ok, Answer} = io:read('Would you like lemon with your tea(y/n)?'),
 	Answer.

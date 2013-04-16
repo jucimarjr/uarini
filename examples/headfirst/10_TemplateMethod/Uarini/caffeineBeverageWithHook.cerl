@@ -4,14 +4,15 @@
 
 methods.
 
-prepare_recipe() ->
-	boil_water(),
-	brew(),
-	pour_in_cup(),
-	Return = customer_wants_condiments(),
+prepare_recipe(Class) ->
+	Object = {Class, ObjectID},
+	Object::boil_water(),
+	Object::brew(),
+	Object::pour_in_cup(),
+	Return = Object::customer_wants_condiments(),
 	if 
 		(Return == true) ->
-			add_condiments();
+			Object::add_condiments();
 		true ->
 			io:format("")
 	end.

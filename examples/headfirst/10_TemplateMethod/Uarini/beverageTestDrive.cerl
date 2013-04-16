@@ -8,16 +8,16 @@ main() ->
 	Coffee = coffee::new_(),
 	
 	io:format("~nMaking Tea...~n"),
-	Tea::prepare_recipe(),
+	Tea::prepare_recipe(tea),
 	
 	io:format("~nMaking Coffee...~n"),
-	Coffee::prepare_recipe(),
+	Coffee::prepare_recipe(coffee),
 	
 	TeaHook = teaWithHook::new_(),
 	CoffeeHook = coffeeWithHook::new_(),
 	
 	io:format("~nMaking Tea...~n"),
-	TeaHook::prepare_recipe(),
+	TeaHook::prepare_recipe(teaWithHook),
 	
 	io:format("~nMaking Coffee...~n"),
-	CoffeeHook::prepare_recipe().	
+	CoffeeHook::prepare_recipe(coffeeWithHook).	

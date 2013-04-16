@@ -1,9 +1,8 @@
 FACTORY METHOD
 ==============
 
-Definição pela GOF(Gang of Four): "Definir uma interface para criar um objeto mas deixar que subclasses decidam que classe instan-
-                                   ciar. Factory Method permite que uma classe delegue a responsabilidade de instanciamento às 
-                                   subclasses."
+Definição pela GOF(Gang of Four): "Definir uma interface para criar um objeto mas deixar que subclasses decidam que classe instanciar.
+                                   Factory Method permite que uma classe delegue a responsabilidade de instanciamento às subclasses."
 
 No exemplo das Lojas de Pizza NYPizzaStore e ChicagoPizzaStore, cada uma delas possui os mesmos sabores de pizza, no caso, Cheese,
 Clam, Pepperoni e Veggie. Mas para cada loja, os sabores possuem diferentes características, diferentes ingredientes e precisam 

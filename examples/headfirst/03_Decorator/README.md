@@ -1,8 +1,8 @@
 DECORATOR
 =========
 
-Definição pela GOF(Gang of Four): "Anexar responsabilidades adicionais a um objeto dinamicamente. Decorators oferecem uma alter-
-                                   nativa flexível ao uso de herança para estender uma funcionalidade."
+Definição pela GOF(Gang of Four): "Anexar responsabilidades adicionais a um objeto dinamicamente. Decorators oferecem uma 
+                                   alternativa flexível ao uso de herança para estender uma funcionalidade."
 
 No exemplo da Loja de cafés StarBuzzCoffee, cada tipo de café possui uma descrição de suas características e condimentos. Mas
 dependendo do cliente, os condimentos de um tipo de café podem ser incrementados indefinidamente, e dinamicamente. Isto irá
