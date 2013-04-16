@@ -4,7 +4,7 @@ public class Column extends Composite{
 		super( val ); 
 	}
 	
-	public void traverse() {
+	public void transverse() {
 		System.out.print( "Col" );
 	    super.transverse();
 	}

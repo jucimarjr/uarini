@@ -4,7 +4,7 @@ public class Row extends Composite{
 		super( val ); 
 	}   
 	
-	public void traverse() {
+	public void transverse() {
 	    System.out.print( "Row" );
 	    super.transverse();
 	}
