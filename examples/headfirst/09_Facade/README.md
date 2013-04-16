@@ -1,7 +1,7 @@
 FACADE
 ======
 
-Definição pela GOF(Gang of Four): "Oferecer uma interface única para um conjunto de interfaces de um sibsistema. Facade define uma
+Definição pela GOF(Gang of Four): "Oferecer uma interface única para um conjunto de interfaces de um subsistema. Facade define uma
                                    interface de nível mais elevado que torna o subsistema mais fácil de usar."
 
 No exemplo do Home Theather, foi verificado que para que fosse possível apenas assistir um filme, era necessário realizar diversas
