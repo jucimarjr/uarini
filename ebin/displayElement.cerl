@@ -1,6 +1,0 @@
--interface(displayElement).
--export([display/0]).
-
-methods.
-
-display().
