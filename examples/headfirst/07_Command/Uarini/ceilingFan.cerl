@@ -1,0 +1,41 @@
+-class(ceilingFan).
+-export([new/1, high/0, medium/0, low/0, off/0, get_speed/0]).
+-constructor([new/1]).
+
+attributes.
+
+High;
+Medium;
+Low;
+Off;
+Location;
+Speed.
+
+methods.
+
+new(Location) ->
+	self::Location = Location,
+	self::High = 3,
+	self::Medium = 2,
+	self::Low = 1,
+	self::Off = 0,
+	self::Speed = self::Off.
+
+high() ->
+	self::Speed = self::High,
+	io:format("~p ceiling fan is on high~n", [self::Location]).
+
+medium() ->
+	self::Speed = self::Medium,
+	io:format("~p ceiling fan is on medium~n", [self::Location]).
+
+low() ->
+	self::Speed = self::Low,
+	io:format("~p ceiling fan is on low~n", [self::Location]).
+
+off() ->
+	self::Speed = self::Off,
+	io:format("~p ceiling fan is off", [self::Location]).
+
+get_speed() ->
+	self::Speed.

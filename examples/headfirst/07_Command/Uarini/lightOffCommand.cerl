@@ -1,11 +1,12 @@
 -class(lightOffCommand).
 -implements(command).
--export([new/1, execute/0]).
+-export([new/1, execute/0, undo/0]).
 -constructor([new/1]).
 
 attributes.
 
-Light.
+Light;
+Level.
 
 methods.
 
@@ -14,4 +15,9 @@ new(Light) ->
 	
 execute() ->
 	Temp = self::Light,
+	self::Level = Temp::get_level(),
 	Temp::off().
+
+undo() ->
+	Temp = self::Light,
+	Temp::dim(self::Level).
