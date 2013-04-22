@@ -1,0 +1,7 @@
+-interface(iterator).
+-export([has_next/0, next/0]).
+
+methods.
+
+has_next().
+next().

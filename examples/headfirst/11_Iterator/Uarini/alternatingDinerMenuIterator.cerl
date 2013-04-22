@@ -1,0 +1,33 @@
+-class(alternatingDinerMenuIterator).
+-implements(iterator).
+-export([new/1, next/0, has_next/0, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+List;
+Position.
+
+methods.
+
+new(List) ->
+	self::List = List,
+	self::Position = calendar:day_of_the_week(date()).
+	
+next() ->
+	MenuItem = lists:nth(self::Position, self::List),
+	self::Position = self::Position + 2,
+	self::MenuItem.
+	
+has_next() ->
+	Pos = self::Position,
+	Lst = self::List,
+	if 
+		(Pos >= length(Lst)) ->
+			false;
+		true ->
+			true
+	end.
+	
+to_string() ->
+	"Alternating Diner Menu Iterator". 

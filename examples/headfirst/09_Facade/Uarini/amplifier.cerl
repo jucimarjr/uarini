@@ -1,0 +1,47 @@
+-class(amplifier).
+-export([new/1, on/0, off/0, set_stereo_sound/0]).
+-export([set_surround_sound/0, set_volume/1, set_tuner/1, set_dvd/1]).
+-export([set_cd/1, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+Description;
+Tuner;
+Dvd;
+Cd.
+
+methods.
+
+new(Description) ->
+	self::Description = Description.
+	
+on() ->
+	io:format("~p on~n", [self::Description]).
+	
+off() ->
+	io:format("~p off~n", [self::Description]).
+	
+set_stereo_sound() ->
+	io:format("~p stereo mode on~n", [self::Description]).
+	
+set_surround_sound() ->
+	io:format("~p surround sound on (5 speakers, 1 subwoofer)~n", [self::Description]).
+	
+set_volume(Level) ->
+	io:format("~p setting volume to ~p~n", [self::Description, Level]).
+	
+set_tuner(Tuner) ->
+	io:format("~p setting tuner to ~p~n", [self::Description, self::Dvd]),
+	self::Tuner = Tuner.
+	
+set_dvd(Dvd) ->
+	io:format("~p setting DVD player to ~p~n", [self::Description, Dvd::to_string()]),
+	self::Dvd = Dvd.
+	
+set_cd(Cd) ->
+	io:format("~p setting CD player to ~p~n", [self::Description, Cd::to_string()]),
+	self::Cd = Cd.
+	
+to_string() ->
+	self::Description.

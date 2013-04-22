@@ -1,0 +1,97 @@
+-class(waitress).
+-export([new/2, print_menu/0, print_menu/1]).
+-export([print_vegetarian_menu/0, is_item_vegetarian/1]).
+-export([print_vegetarian_menu/1, is_vegetarian/2]).
+-constructor([new/2]).
+
+attributes.
+
+PancakeHouseMenu;
+DinerMenu.
+
+methods.
+
+new(PancakeHouseMenu,DinerMenu) ->
+	self::PancakeHouseMenu = PancakeHouseMenu,
+	self::DinerMenu = DinerMenu.
+
+print_menu() ->
+	Pancake = self::PancakeHouseMenu,
+	Diner = self::DinerMenu,
+	
+	PancakeIterator = Pancake::create_iterator(),
+	DinerIterator = Diner::create_iterator(),
+	
+	io:format("MENU~n----~nBREAKFAST~n"),
+	print_the_menu(Pancake::MenuItems),
+	io:format("~nLUNCH~n"),
+	print_the_menu(Diner::MenuItems).
+
+print_vegetarian_menu() ->
+	Pancake = self::PancakeHouseMenu,
+	Diner = self::DinerMenu,
+	IteratorPancake = Pancake::create_iterator(),
+	IteratorDiner = Diner::create_iterator(),
+	print_vegetarian_menu(IteratorPancake::MenuItems),
+	print_vegetarian_menu(IteratorDiner::MenuItems).
+	
+is_item_vegetarian(Name) ->
+	Pancake = self::PancakeHouseMenu,
+	BreakfastIterator = Pancake::create_iterator(),
+	
+	Dinner = self::DinerMenu,
+	DinnerIterator = Dinner::create_iterator(),
+	
+	ReturnBreakFast = is_vegetarian(Name,BreakfastIterator),
+	ReturnDinner = is_vegetarian(Name,DinnerIterator),
+	if
+		(ReturnBreakFast == true) ->
+			true;
+		(ReturnDinner == true) ->
+			true;
+		true ->
+			false
+	end.
+	
+print_vegetarian_menu(Iterator) ->
+	print_veg_menu(Iterator).
+	
+print_veg_menu([]) -> io:format("");
+print_veg_menu([Item|Rest]) ->
+	Result = Item::is_vegetarian(),
+	if
+		(Result == true) ->
+			io:format("~p, ",[Item::get_name()]),
+			io:format("~p -- ", [Item::get_price()]),
+			io:format("~p~n", [Item::get_description()]),
+			print_veg_menu(Rest);
+		true ->
+			print_veg_menu(Rest)
+	end.
+	
+is_vegetarian(Name,[]) -> false;
+is_vegetarian(Name,[Item|Rest]) ->
+	ItemName = Item::get_name(),
+	if 
+		(ItemName == Name) ->
+			CurrentItem = Item,
+			Result = CurrentItem::is_vegetarian(),
+			if
+				(Result == true) ->
+					true;
+				true ->
+					is_vegetarian(Name, Rest)
+			end;
+		true ->
+			is_vegetarian(Name, Rest)
+	end,
+	false.
+	
+class_methods.
+
+print_the_menu([]) -> io:format("");
+print_the_menu([Item|Rest]) ->
+	io:format("~p, ",[Item::get_name()]),
+	io:format("~p -- ", [Item::get_price()]),
+	io:format("~p~n", [Item::get_description()]),
+	print_the_menu(Rest).

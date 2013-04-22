@@ -1,0 +1,11 @@
+-class(houseBlend).
+-extends(beverage).
+-export([new/0, cost/0]).
+-constructor([new/0]).
+
+methods.
+
+new() ->
+	self::Description = "House Blend Coffee".
+	
+cost() -> 0.89.

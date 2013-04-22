@@ -1,0 +1,6 @@
+-interface(observer).
+-export([update/3]).
+
+methods.
+
+update(Temp, Humidity, Pressure).

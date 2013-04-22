@@ -1,0 +1,6 @@
+-interface(menu).
+-export([create_iterator/0]).
+
+methods.
+
+create_iterator().

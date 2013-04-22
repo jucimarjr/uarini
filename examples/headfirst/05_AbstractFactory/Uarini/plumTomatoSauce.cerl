@@ -1,0 +1,7 @@
+-class(plumTomatoSauce).
+-implements(sauce).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Tomato sauce with plum tomatoes".

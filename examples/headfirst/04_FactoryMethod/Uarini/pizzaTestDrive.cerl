@@ -1,0 +1,33 @@
+-class(pizzaTestDrive).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	NyStore = nyPizzaStore::new_(),
+	ChicagoStore = chicagoPizzaStore::new_(),
+	
+	Pizza1 = NyStore::order_pizza("cheese", nyPizzaStore),
+	io:format("Ethan ordered a ~p ~n", [Pizza1::get_name()]),
+	
+	Pizza2 = ChicagoStore::order_pizza("cheese", chicagoPizzaStore),
+	io:format("Joel ordered a ~p ~n", [Pizza2::get_name()]),
+	
+	Pizza3 = NyStore::order_pizza("clam", nyPizzaStore),
+	io:format("Ethan ordered a ~p ~n", [Pizza3::get_name()]),
+	
+	Pizza4 = ChicagoStore::order_pizza("clam", chicagoPizzaStore),
+	io:format("Joel ordered a ~p ~n", [Pizza4::get_name()]),
+	
+	Pizza5 = NyStore::order_pizza("pepperoni", nyPizzaStore),
+	io:format("Ethan ordered a ~p ~n", [Pizza5::get_name()]),
+	
+	Pizza6 = ChicagoStore::order_pizza("pepperoni", chicagoPizzaStore),
+	io:format("Joel ordered a ~p ~n", [Pizza6::get_name()]),
+	
+	Pizza7 = NyStore::order_pizza("veggie", nyPizzaStore),
+	io:format("Ethan ordered a ~p ~n", [Pizza7::get_name()]),
+	
+	Pizza8 = ChicagoStore::order_pizza("veggie", chicagoPizzaStore),
+	io:format("Joel ordered a ~p ~n", [Pizza8::get_name()]).
+	

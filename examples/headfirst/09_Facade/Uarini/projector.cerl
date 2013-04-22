@@ -1,0 +1,29 @@
+-class(projector).
+-export([new/2, on/0, off/0, widescreen_mode/0, tv_mode/0, to_string/0]).
+-constructor([new/2]).
+
+attributes.
+
+Description;
+DvdPlayer.
+
+methods.
+
+new(Description, DvdPlayer) ->
+	self::Description = Description,
+	self::DvdPlayer = DvdPlayer.
+	
+on() ->
+	io:format("~p on~n", [self::Description]).
+
+off() ->
+	io:format("~p off~n", [self::Description]).
+	
+widescreen_mode() ->
+	io:format("~p in widescreen mode (16x9 aspect ratio)~n", [self::Description]).
+	
+tv_mode() ->
+	io:format("~p in tv mode (4x3 aspect ratio)~n", [self::Description]).
+	
+to_string() ->
+	self::Description.

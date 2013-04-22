@@ -1,0 +1,23 @@
+-class(dimmerLightOnCommand).
+-implements(command).
+-export([new/1, execute/0, undo/0]).
+-constructor([new/1]).
+
+attributes.
+
+Light;
+PrevLevel.
+
+methods.
+
+new(Light) ->
+	self::Light = Light.
+
+execute() ->
+	Temp = self::Light,
+	self::PrevLevel = Temp::get_level(),
+	Temp::dim(75).
+
+undo() ->
+	Temp = self::Light,
+	Temp::dim(self::PrevLevel).

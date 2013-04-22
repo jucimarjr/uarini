@@ -1,0 +1,7 @@
+-interface(command).
+-export([execute/0, undo/0]).
+
+methods.
+
+execute().
+undo().

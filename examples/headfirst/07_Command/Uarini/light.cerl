@@ -1,0 +1,33 @@
+-class(light).
+-export([new/1, on/0, off/0, dim/1, get_level/0]).
+-constructor([new/1]).
+
+attributes.
+
+Location;
+Level.
+
+methods.
+
+new(Location) ->
+	self::Location = Location.
+
+on() ->
+	self::Level = 100,
+	io:format("Light is on ~n").
+
+off() ->
+	self::Level = 0,
+	io:format("Light is off ~n").
+
+dim(Level) ->
+	self::Level = Level,
+	if
+		(Level == 0) ->
+			off();
+		true ->
+			io:format("Light is dimmed to ~p % ~n", [Level])
+	end.
+
+get_level() ->
+	self::Level.

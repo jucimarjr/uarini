@@ -1,0 +1,7 @@
+-class(condimentDecorator).
+-extends(beverage).
+-export([get_description/0]).
+
+methods.
+
+get_description() -> null.

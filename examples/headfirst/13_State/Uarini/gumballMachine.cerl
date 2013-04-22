@@ -1,0 +1,111 @@
+-class(gumballMachine).
+-export([new/1, insert_quarter/0, eject_quarter/0, turn_crank/0]).
+-export([set_state/1, release_ball/0, refill/1, get_count/0, get_state/0]).
+-export([get_sold_out_state/0, get_no_quarter_state/0]).
+-export([get_has_quarter_state/0, get_sold_state/0, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+SoldOutState;
+NoQuarterState;
+HasQuarterState;
+SoldState;
+State;
+Count.
+
+methods.
+
+new(NumberGumballs) ->
+	self::SoldOutState = soldOutState::new({gumballMachine, ObjectID}),
+	self::NoQuarterState = noQuarterState::new({gumballMachine, ObjectID}),
+	self::HasQuarterState = hasQuarterState::new({gumballMachine, ObjectID}),
+	self::SoldState = soldState::new({gumballMachine, ObjectID}),
+	
+	self::State = self::SoldOutState,	
+	self::Count = NumberGumballs,
+	if
+		(NumberGumballs > 0) ->
+			self::State = self::NoQuarterState;
+		true ->
+			null
+	end.
+	
+insert_quarter() ->
+	Sta = self::State,
+	Sta::insert_quarter().
+	
+eject_quarter() ->
+	Sta = self::State,
+	Sta::eject_quarter().
+	
+turn_crank() ->
+	Sta = self::State,
+	Sta::turn_crank(),
+	Sta2 = self::State,
+	Sta2::dispense().
+	
+set_state(State) ->
+	self::State = State.
+	
+release_ball() ->
+	io:format("A Gumball comes rolling out the slot...~n"),
+	Cnt = self::Count,
+	if
+		(Cnt =/= 0) ->
+			self::Count = self::Count - 1;
+		true ->
+			null
+	end.
+	
+get_count() ->
+	self::Count.
+	
+refill(Count) ->
+	self::Count = Count,
+	self::State = self::NoQuarterState.
+	
+get_state() ->
+	self::State.
+	
+get_sold_out_state() ->
+	self::SoldOutState.
+	
+get_no_quarter_state() ->
+	self::NoQuarterState.
+	
+get_has_quarter_state() ->
+	self::HasQuarterState.
+	
+get_sold_state() ->
+	self::SoldState.
+	
+to_string() ->
+	io:format("~nMighty Gumball, Inc."),
+	io:format("~nJava-enabled Standing Gumball Model 2004"),
+	io:format("~nInventory ~p gumball", [self::Count]),
+	Cnt = self::Count,
+	if
+		(Cnt =/= 1) ->
+			io:format("s");
+		true ->
+			io:format("")
+	end,
+	io:format("~n"),
+	State = self::State,
+	io:format("Machine is ~p~n", [State::to_string()]).
+	
+%to_string() ->
+%	Result = "~nMighty Gumball, Inc.",
+%	Result2 = Result ++ "~nJava-enabled Standing Gumball Model 2004",
+%	Result3 = Result2 ++ "~nInventory " ++ [self::Count] ++ " gumball",
+%	Cnt = self::Count,
+%	if
+%		(Cnt =/= 1) ->
+%			Result4 = Result3 ++ "s";
+%		true ->
+%			Result4 = Result3 ++ ""
+%	end,
+%	Result5 = Result4 ++ "~n",
+%	Result6 = Result5 ++ "Machine is " ++ [self::State] ++ "~n",
+%   Result6.

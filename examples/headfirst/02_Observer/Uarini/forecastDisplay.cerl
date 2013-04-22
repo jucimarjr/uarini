@@ -1,0 +1,36 @@
+-class(forecastDisplay).
+-implements([observer, displayElement]).
+-export([new/1, update/3, display/0]).
+-constructor([new/1]).
+
+attributes.
+
+CurrentPressure;
+LastPressure;
+WeatherData.
+
+methods.
+
+new(WeatherData) ->
+	self::CurrentPressure = 29.92,
+	self::WeatherData = WeatherData,
+	Temp = self::WeatherData,
+	Temp::register_observer({forecastDisplay, ObjectID}).
+	
+update(Temp, Humidity, Pressure) ->
+	self::LastPressure = self::CurrentPressure,
+	self::CurrentPressure = Pressure,
+	display().
+	
+display() ->
+	io:format("Forecast: "),
+	CrtPressure = self::CurrentPressure,
+	LstPressure = self::LastPressure,
+	if
+		(CrtPressure > LstPressure) ->
+			io:format("Improving weather on the way!~n");
+		(CrtPressure == LstPressure) ->
+			io:format("More of the same ~n");
+		(CrtPressure < LstPressure) ->
+			io:format("Watch out for cooler, rainy weather... ~n")
+	end.

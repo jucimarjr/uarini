@@ -1,0 +1,57 @@
+-class(remoteControlWithUndo).
+-export([new/0, set_command/3, on_button_was_pushed/1, off_button_was_pushed/1]).
+-export([undo_button_was_pushed/0, to_string/0]).
+-constructor([new/0]).
+
+attributes.
+
+OnCommands;
+OffCommands;
+UndoCommand.
+
+methods.
+
+new() ->
+	NoCommand = noCommand:new_(),
+	self::OnCommands = [NoCommand,NoCommand,NoCommand,NoCommand,NoCommand,NoCommand,NoCommand],
+	self::OffCommands = [NoCommand,NoCommand,NoCommand,NoCommand,NoCommand,NoCommand,NoCommand],
+	self::UndoCommand = NoCommand.
+
+set_command(Slot, OnCommand, OffCommand) ->
+	self::OnCommands = aux_insert_command(Slot, OnCommand, self::OnCommands),
+	self::OffCommands = aux_insert_command(Slot, OffCommand, self::OffCommands).
+
+aux_insert_command(0,Element,[_|List]) ->
+	[Element|List];
+aux_insert_command(Index,Element,[Head|List]) ->
+	[Head] ++ aux_insert_command(Index-1, Element, List).
+	
+on_button_was_pushed(Slot) ->
+	Temp = aux_get_element(Slot, self::OnCommands),
+	Temp::execute(),
+	self::UndoCommand = Temp.
+
+off_button_was_pushed(Slot) ->
+	Temp = aux_get_element(Slot, self::OffCommands),
+	Temp::execute(),
+	self::UndoCommand = Temp.
+
+aux_get_element(0,[Head|List]) ->
+	Head;
+aux_get_element(Element, [_|List]) ->
+	aux_get_element(Element-1, List).
+
+undo_button_was_pushed() ->
+	Temp = self::UndoCommand,
+	Temp::undo().
+
+to_string() ->
+	io:format("~n------ Remote Control ------~n"),
+	io:format("[slot 0] ~p ~p~n", [aux_get_element(0, self::OnCommands), aux_get_element(0, self::OffCommands)]),
+	io:format("[slot 1] ~p ~p~n", [aux_get_element(1, self::OnCommands), aux_get_element(1, self::OffCommands)]),
+	io:format("[slot 2] ~p ~p~n", [aux_get_element(2, self::OnCommands), aux_get_element(2, self::OffCommands)]),
+	io:format("[slot 3] ~p ~p~n", [aux_get_element(3, self::OnCommands), aux_get_element(3, self::OffCommands)]),
+	io:format("[slot 4] ~p ~p~n", [aux_get_element(4, self::OnCommands), aux_get_element(4, self::OffCommands)]),
+	io:format("[slot 5] ~p ~p~n", [aux_get_element(5, self::OnCommands), aux_get_element(5, self::OffCommands)]),
+	io:format("[slot 6] ~p ~p~n", [aux_get_element(6, self::OnCommands), aux_get_element(6, self::OffCommands)]),
+	io:format("[undo] ~p~n~n", [self::UndoCommand]).

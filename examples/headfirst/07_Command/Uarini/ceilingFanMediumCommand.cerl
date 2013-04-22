@@ -1,0 +1,39 @@
+-class(ceilingFanMediumCommand).
+-implements(command).
+-export([new/1, execute/0, undo/0]).
+-constructor([new/1]).
+
+attributes.
+
+CeilingFan;
+PrevSpeed.
+
+methods.
+
+new(CeilingFan) ->
+	self::CeilingFan = CeilingFan.
+
+execute() ->
+	Temp = self::CeilingFan,
+	self::PrevSpeed = Temp::get_speed(),
+	Temp::medium().
+
+undo() ->
+	PrevS = self::PrevSpeed,
+	Temp = self::CeilingFan,
+	High = Temp::High,
+	Medium = Temp::Medium,
+	Low = Temp::Low,
+	Off = Temp::Off,
+	if
+		(PrevS == High) ->
+			Temp::high();
+		(PrevS == Medium) ->
+			Temp::medium();
+		(PrevS == Low) ->
+			Temp::low();
+		(PrevS == Off) ->
+			Temp::off();
+		true ->
+			io:format("")
+	end.

@@ -1,0 +1,104 @@
+-class(homeTheaterFacade).
+-export([new/8, watch_movie/1, end_movie/0, listen_to_cd/1, end_cd/0]).
+-export([listen_to_radio/1, end_radio/0]).
+-constructor([new/8]).
+
+attributes.
+
+Amp;
+Tuner;
+Dvd;
+Cd;
+Projector;
+Lights;
+Screen;
+Popper.
+
+methods.
+
+new(Amp,Tuner,Dvd,Cd,Projector,Screen,Lights,Popper) ->
+	self::Amp = Amp,
+	self::Tuner = Tuner,
+	self::Dvd = Dvd,
+	self::Cd = Cd,
+	self::Projector = Projector,
+	self::Screen = Screen,
+	self::Lights = Lights,
+	self::Popper = Popper.
+	
+watch_movie(Movie) ->
+	io:format("Get ready to watch a movie...~n"),
+	Temp1 = self::Popper,
+	Temp1::on(),
+	Temp1::pop(),
+	Temp2 = self::Lights,
+	Temp2::dim(10),
+	Temp3 = self::Screen,
+	Temp3::down(),
+	Temp4 = self::Projector,
+	Temp4::on(),
+	Temp4::widescreen_mode(),
+	Temp5 = self::Amp,
+	Temp5::on(),
+	Temp5::set_dvd(self::Dvd),
+	Temp5::set_surround_sound(),
+	Temp5::set_volume(5),
+	Temp6 = self::Dvd,
+	Temp6::on(),
+	Temp6::play(Movie).
+	
+end_movie() ->
+	io:format("Shutting movie theater down...~n"),
+	Temp1 = self::Popper,
+	Temp1::off(),
+	Temp2 = self::Lights,
+	Temp2::on(),
+	Temp3 = self::Screen,
+	Temp3::up(),
+	Temp4 = self::Projector,
+	Temp4::off(),
+	Temp5 = self::Amp,
+	Temp5::off(),
+	Temp6 = self::Dvd,
+	Temp6::stop(),
+	Temp6::eject(),
+	Temp6::off().
+	
+listen_to_cd(CdTitle) ->
+	io:format("Get ready for an audiopile experience...~n"),
+	Temp1 = self::Lights,
+	Temp1::on(),
+	Temp2 = self::Amp,
+	Temp2::on(),
+	Temp2::set_volume(5),
+	Temp2::set_cd(),
+	Temp2::set_stereo_sound(),
+	Temp3 = self::Cd,
+	Temp3::on(),
+	Temp3::play(CdTitle).
+	
+end_cd() ->
+	io:format("Shutting down CD...~n"),
+	Temp1 = self::Amp,
+	Temp1::off(),
+	Temp1::set_cd(self::Cd),
+	Temp2 = self::Cd,
+	Temp2::eject(),
+	Temp2::off().
+	
+listen_to_radio(Frequency) ->
+	io:format("Tunning in the airwaves...~n"),
+	Temp1 = self::Tuner,
+	Temp1::on(),
+	Temp1::set_frequency(Frequency),
+	Temp2 = self::Amp,
+	Temp2::on(),
+	Temp2::set_volume(5),
+	Temp2::set_tuner(self::Tuner).
+	
+end_radio() ->
+	io:format("Shutting down the tuner...~n"),
+	Temp1 = self::Tuner,
+	Temp1::off(),
+	Temp2 = self::Amp,
+	Temp2::off().

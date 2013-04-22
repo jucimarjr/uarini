@@ -1,0 +1,11 @@
+-class(tea).
+-extends(caffeineBeverage).
+-export([brew/0, add_condiments/0]).
+
+methods.
+
+brew() ->
+	io:format("Steeping the tea~n").
+	
+add_condiments() ->
+	io:format("Adding Lemon~n").

@@ -1,0 +1,16 @@
+-class(weatherStation).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	WeatherData = weatherData::new(),
+	
+	HeatIndexDisplay = heatIndexDisplay::new(WeatherData),
+	ForecastDisplay = forecastDisplay::new(WeatherData),
+	StatisticsDisplay = statisticsDisplay::new(WeatherData),
+	CurrentConditions = currentConditionsDisplay::new(WeatherData),
+	
+	WeatherData::set_measurements(80, 65, 30.4),
+	WeatherData::set_measurements(82, 70, 29.2),
+	WeatherData::set_measurements(78, 90, 29.2).

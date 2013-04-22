@@ -1,0 +1,50 @@
+-class(weatherData).
+-implements(subject).
+-export([new/0, measurements_changed/0, set_measurements/3, get_temperature/0, get_humidity/0]).
+-export([register_observer/1, remove_observer/1, notify_observers/0, get_pressure/0]).
+-constructor([new/0]).
+
+attributes.
+
+Observers;
+Temperature;
+Humidity;
+Pressure.
+
+methods.
+
+new() ->
+	self::Observers = [].
+	
+register_observer(Observer) ->
+	self::Observers = [Observer | self::Observers].
+	
+remove_observer(Observer) ->
+	lists:delete(Observer, self::Observers).
+	
+notify_observers() ->
+	Observers = self::Observers,
+	notify_aux(Observers).
+
+notify_aux([]) -> ok;
+notify_aux([Obs | Observers]) ->
+	Obs::update(self::Temperature, self::Humidity, self::Pressure),
+	notify_aux(Observers).
+	
+measurements_changed() ->
+	notify_observers().
+	
+set_measurements(Temperature, Humidity, Pressure) ->
+	self::Temperature = Temperature,
+	self::Humidity = Humidity,
+	self::Pressure = Pressure,
+	measurements_changed().
+	
+get_temperature() ->
+	self::Temperature.
+	
+get_humidity() ->
+	self::Humidity.
+	
+get_pressure() ->
+	self::Pressure.

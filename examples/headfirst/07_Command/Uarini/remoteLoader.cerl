@@ -1,0 +1,42 @@
+-class(remoteLoader).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	RemoteControl = remoteControlWithUndo::new(),
+
+	LivingRoomLight = light::new("Living Room"),
+
+	LivingRoomLightOn = lightOnCommand::new(LivingRoomLight),
+
+	LivingRoomLightOff = lightOffCommand::new(LivingRoomLight),
+
+	RemoteControl::set_command(0, LivingRoomLightOn, LivingRoomLightOff),
+
+	RemoteControl::on_button_was_pushed(0),
+	RemoteControl::off_button_was_pushed(0),
+	RemoteControl::to_string(),
+	RemoteControl::undo_button_was_pushed(),
+	RemoteControl::off_button_was_pushed(0),
+	RemoteControl::on_button_was_pushed(0),
+	RemoteControl::to_string(),
+	RemoteControl::undo_button_was_pushed(),
+
+	CeilingFan = ceilingFan::new("Living Room"),
+
+	CeilingFanMedium = ceilingFanMediumCommand::new(CeilingFan),
+	CeilingFanHigh = ceilingFanHighCommand::new(CeilingFan),
+	CeilingFanOff = ceilingFanOffCommand::new(CeilingFan),
+
+	RemoteControl::set_command(0, CeilingFanMedium, CeilingFanOff),
+	RemoteControl::set_command(1, CeilingFanHigh, CeilingFanOff),
+
+	RemoteControl::on_button_was_pushed(0),
+	RemoteControl::off_button_was_pushed(0),
+	RemoteControl::to_string(),
+	RemoteControl::undo_button_was_pushed(),
+
+	RemoteControl::on_button_was_pushed(1),
+	RemoteControl::to_string(),
+	RemoteControl::undo_button_was_pushed().

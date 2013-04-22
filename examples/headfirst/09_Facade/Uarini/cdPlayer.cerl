@@ -1,0 +1,41 @@
+-class(cdPlayer).
+-exports([new/2, on/0, off/0, eject/0, play/1, stop/0, pause/0, to_string/0]).
+-constructor([new/2]).
+
+attributes.
+
+Description;
+CurrentTrack;
+Amplifier;
+Title.
+
+methods.
+
+new(Description, Amplifier) ->
+	self::Description = Description,
+	self::Amplifier = Amplifier.
+	
+on() ->
+	io:format("~p on~n", [self::Description]).
+	
+off() -> 
+	io:format("~p off~n", [self::Description]).
+	
+eject() ->
+	self::Title = "No title",
+	io:format("~p eject~n", [self::Description]).
+	
+play(Title) ->
+	self::Title = Title,
+	self::CurrentTrack = 0,
+	io:format("~p playing ~p~n", [self::Description, self::Title]).
+
+stop() ->
+	self::CurrentTrack = 0,
+	io:format("~p stopped~n", [self::Description]).
+		
+pause() ->
+	io:format("~p paused \~p\~n", [self::Description, self::Title]).
+
+to_string() ->
+	self::Description.	

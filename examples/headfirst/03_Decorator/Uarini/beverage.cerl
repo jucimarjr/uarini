@@ -1,0 +1,13 @@
+-class(beverage).
+-export([get_description/0, cost/0]).
+
+attributes.
+
+Description.
+
+methods.
+
+get_description() ->
+	self::Description.
+	
+cost() -> null.

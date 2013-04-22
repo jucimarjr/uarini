@@ -1,0 +1,8 @@
+-interface(subject).
+-export([register_observer/1, remove_observer/1, notify_observers/0]).
+
+methods.
+
+register_observer(Observer).
+remove_observer(Observer).
+notify_observers().

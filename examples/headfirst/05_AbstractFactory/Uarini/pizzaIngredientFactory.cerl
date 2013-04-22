@@ -1,0 +1,12 @@
+-interface(pizzaIngredientFactory).
+-export([create_dough/0, create_sauce/0, create_cheese/0]).
+-export([create_veggies/0, create_pepperoni/0, create_clam/0]).
+
+methods.
+
+create_dough().
+create_sauce().
+create_cheese().
+create_veggies().
+create_pepperoni().
+create_clam().

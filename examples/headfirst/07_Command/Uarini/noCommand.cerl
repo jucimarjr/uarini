@@ -1,0 +1,8 @@
+-class(noCommand).
+-implements(command).
+-export([execute/0, undo/0]).
+
+methods.
+
+execute() -> ok.
+undo() -> ok.

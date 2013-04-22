@@ -1,0 +1,33 @@
+-class(chicagoPizzaIngredientFactory).
+-implements(pizzaIngredientFactory).
+-export([create_dough/0, create_sauce/0, create_cheese/0]).
+-export([create_veggies/0, create_pepperoni/0, create_clam/0]).
+
+methods.
+
+create_dough() ->
+	Return = thickCrustDough::new_(),
+	Return.
+	
+create_sauce() ->
+	Return = plumTomatoSauce::new_(),
+	Return.
+	
+create_cheese() ->
+	Return = mozzarellaCheese::new_(),
+	Return.
+	
+create_veggies() ->
+	Olives = blackOlives::new_(),
+	Spinach = spinach::new_(),
+	Eggplant = eggplant::new_(),
+	Veggies = [Olives, Spinach, Eggplant],
+	Veggies.
+	
+create_pepperoni() ->
+	Return = slicedPepperoni::new_(),
+	Return.
+	
+create_clam() ->
+	Return = frozenClams::new_(),
+	Return.

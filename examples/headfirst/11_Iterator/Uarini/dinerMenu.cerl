@@ -1,0 +1,46 @@
+-class(dinerMenu).
+-implements(menu).
+-export([new/0, add_item/4, get_menu_items/0, create_iterator/0]).
+-constructor([new/0]).
+
+attributes.
+
+MaxItems;
+NumberOfItems;
+MenuItems.
+
+methods.
+
+new() ->
+	self::MenuItems = [],
+	add_item("Vegetarian BLT","(Fakin') Bacon with lettuce & tomato on whole wheat", true, 2.99),
+	add_item("BLT","Bacon with lettuce & tomato on whole wheat", false, 2.99),
+	add_item("Soup of the day","Soup of the day, with a side of potato salad", false, 3.29),
+	add_item("Hotdog","A hot dog, with saurkraut, relish, onions, topped with cheese",false, 3.05),
+	add_item("Steamed Veggies and Brown Rice","Steamed vegetables over brown rice", true, 3.99),
+	add_item("Pasta","Spaghetti with Marinara Sauce, and a slice of sourdough bread",true, 3.89).
+
+add_item(Name, Description, Vegetarian, Price) ->
+	Nbr = self::NumberOfItems,
+	if
+		(Nbr == []) ->
+			self::NumberOfItems = 1;
+		true ->
+			io:format("")
+	end,
+	Nbr2 = self::NumberOfItems,
+	if 
+		(Nbr2 > 6) ->
+			io:format("Sorry, menu is full! Can't add item to menu~n");
+		true ->
+			MenuItem = menuItem::new(Name,Description,Vegetarian,Price),
+			self::MenuItems = [MenuItem|self::MenuItems],
+			self::NumberOfItems = self::NumberOfItems + 1
+	end.
+	
+get_menu_items() ->
+	self::MenuItems.
+	
+create_iterator() ->
+	NewIterator = dinerMenuIterator::new(self::MenuItems),
+	NewIterator.

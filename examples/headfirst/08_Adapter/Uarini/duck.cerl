@@ -1,0 +1,7 @@
+-interface(duck).
+-export([quack/0, fly/0]).
+
+methods.
+
+quack().
+fly().

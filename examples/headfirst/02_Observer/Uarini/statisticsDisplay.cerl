@@ -1,0 +1,50 @@
+-class(statisticsDisplay).
+-implements([observer, displayElement]).
+-export([new/1, update/3, display/0]).
+-constructor([new/1]).
+
+attributes.
+
+MaxTemp;
+MinTemp;
+TempSum;
+NumReadings;
+WeatherData.
+
+methods.
+
+new(WeatherData) ->
+	self::MaxTemp = 0,
+	self::MinTemp = 200,
+	self::TempSum = 0,
+	self::NumReadings = 0,
+	self::WeatherData = WeatherData,
+	Temp = self::WeatherData,
+	Temp::register_observer({statisticsDisplay, ObjectID}).
+	
+update(Temp, Humidity, Pressure) ->
+	self::TempSum = self::TempSum + Temp,
+	self::NumReadings = self::NumReadings + 1,
+	
+	Maximum = self::MaxTemp,
+	Minimum = self::MinTemp,
+	
+	if
+		(Temp > Maximum) ->
+			self::MaxTemp = Temp;
+		true ->
+			io:format("")
+	end,
+	if
+		(Temp < Minimum) ->
+			self::MinTemp = Temp;
+		true ->
+			io:format("")
+	end,
+		
+	display().
+	
+display() ->
+	io:format("Avg/Max/Min temperature = ~p/~p/~p ~n", [(self::TempSum/self::NumReadings),
+														self::MaxTemp,self::MinTemp]).
+														

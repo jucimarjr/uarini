@@ -1,0 +1,34 @@
+-class(nyPizzaIngredientFactory).
+-implements(pizzaIngredientFactory).
+-export([create_dough/0, create_sauce/0, create_cheese/0]).
+-export([create_veggies/0, create_pepperoni/0, create_clam/0]).
+
+methods.
+
+create_dough() ->
+	Return = thinCrustDough::new_(),
+	Return.
+	
+create_sauce() ->
+	Return = marinaraSauce::new_(),
+	Return.
+	
+create_cheese() ->
+	Return = reggianoCheese::new_(),
+	Return.
+	
+create_veggies() ->
+	Garlic = garlic::new_(),
+	Onion = onion::new_(),
+	Mushroom = mushroom::new_(),
+	RedPepper = redPepper::new_(),
+	Veggies = [Garlic, Onion, Mushroom, RedPepper],
+	Veggies.
+	
+create_pepperoni() ->
+	Return = slicedPepperoni::new_(),
+	Return.
+	
+create_clam() ->
+	Return = freshClams::new_(),
+	Return.

@@ -1,0 +1,24 @@
+-class(popcornPopper).
+-export([new/1, on/0, off/0, pop/0, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+Description.
+
+methods.
+
+new(Description) ->
+	self::Description = Description.
+	
+on() ->
+	io:format("~p on~n", [self::Description]).
+	
+off() ->
+	io:format("~p off~n", [self::Description]).
+
+pop() ->
+	io:format("~p popping popcorn~n", [self::Description]).
+
+to_string() ->
+	self::Description.

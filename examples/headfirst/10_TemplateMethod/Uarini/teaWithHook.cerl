@@ -1,0 +1,24 @@
+-class(teaWithHook).
+-extends(caffeineBeverageWithHook).
+-export([brew/0, add_condiments/0, customer_wants_condiments/0]).
+
+methods.
+
+brew() ->
+	io:format("Steeping the tea~n").
+	
+add_condiments() ->
+	io:format("Adding Lemon~n").
+	
+customer_wants_condiments() ->
+	Answer = get_user_input(),
+	if 
+		(Answer == y) ->
+			true;
+		true ->
+			false
+	end.
+
+get_user_input() ->
+	{ok, Answer} = io:read('Would you like lemon with your tea(y/n)?'),
+	Answer.

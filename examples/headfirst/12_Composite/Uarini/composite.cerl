@@ -1,0 +1,30 @@
+-class(composite).
+-implements(component).
+-export([new/1, add/1, transverse/0]).
+-constructor([new/1]).
+
+attributes.
+
+Children;
+Total;
+Value.
+
+methods.
+
+new(Val) ->
+	self::Children = [],
+	self::Value = Val,
+	self::Total = 0.
+	
+add(C) ->
+	self::Children = self::Children ++ [C],
+	self::Total = self::Total + 1.
+	
+transverse() ->
+	io:format("~p   ", [self::Value]),
+	transverse_aux(self::Children).
+	
+transverse_aux([]) -> ok;
+transverse_aux([Child|Children]) ->
+	Child::transverse(),
+	transverse_aux(Children).

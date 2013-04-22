@@ -1,0 +1,35 @@
+-class(heatIndexDisplay).
+-implements([observer, displayElement]).
+-export([new/1, update/3, compute_heat_index/2, display/0]).
+-constructor([new/1]).
+
+attributes.
+
+HeatIndex;
+WeatherData.
+
+methods.
+
+new(WeatherData) ->
+	self::HeatIndex = 0,
+	self::WeatherData = WeatherData,
+	Temp = self::WeatherData,
+	Temp::register_observer({heatIndexDisplay, ObjectID}).
+	
+update(T, Rh, Pressure) ->
+	self::HeatIndex = compute_heat_index(T, Rh),
+	display().
+	
+compute_heat_index(T, Rh) ->
+	Index = ((16.923 + (0.185212 * T) + (5.37941 * Rh) - (0.100254 * T * Rh)
+		+ (0.00941695 * (T * T)) + (0.00728898 * (Rh*Rh))
+		+ (0.000345372 * (T * T * Rh)) - (0.000814971 * (T * Rh * Rh))+
+		(0.0000102102 * (T * T * Rh * Rh)) - (0.000038646 * (T * T * T)) + (0.0000291583 *
+		(Rh * Rh * Rh)) + (0.00000142721 * (T * T * T * Rh)) +
+		(0.000000197483 * (T * Rh * Rh * Rh)) - (0.0000000218429 * (T * T * T * Rh * Rh))+
+		0.000000000843296 * (T * T * Rh * Rh * Rh)) -
+		(0.0000000000481975 * (T * T * T * Rh * Rh * Rh))),
+	Index.
+	
+display() ->
+	io:format("Heat index is ~p~n", [self::HeatIndex]).

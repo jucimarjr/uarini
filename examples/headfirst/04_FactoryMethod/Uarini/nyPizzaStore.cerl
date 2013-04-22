@@ -1,0 +1,23 @@
+-class(nyPizzaStore).
+-extends(pizzaStore).
+-export([create_pizza/1]).
+
+methods.
+
+create_pizza(Item) ->
+	if
+		(Item == "cheese") ->
+			Pizza = nyStyleCheesePizza::new(),
+			Pizza;
+		(Item == "veggie") ->
+			Pizza = nyStyleVeggiePizza::new(),
+			Pizza;
+		(Item == "clam") ->
+			Pizza = nyStyleClamPizza::new(),
+			Pizza;
+		(Item == "pepperoni") ->
+			Pizza = nyStylePepperoniPizza::new(),
+			Pizza;
+		true ->
+			null
+	end.

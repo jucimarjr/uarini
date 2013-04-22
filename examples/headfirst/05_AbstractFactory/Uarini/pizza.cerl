@@ -1,0 +1,86 @@
+-class(pizza).
+-export([prepare/0, bake/0, cut/0, box/0, set_name/1]).
+-export([get_name/0, to_string/1]).
+
+attributes.
+
+Name;
+Dough;
+Sauce;
+Veggies;
+Cheese;
+Pepperoni;
+Clam.
+
+methods.
+
+prepare() -> null.
+
+bake() ->
+	io:format("Bake for 25 minutes at 350 ~n").
+	
+cut() ->
+	io:format("Cutting the pizza into diagonal slices ~n").
+	
+box() ->
+	io:format("Place pizza in official PizzaStore box ~n").
+	
+set_name(Name) ->
+	self::Name = Name.
+	
+get_name() -> 
+	self::Name.
+	
+to_string(String) ->
+	io:format("---- ~p ----~n", [self::Name]),
+	Dou = self::Dough,
+	if 
+		(Dou =/= []) ->
+			io:format("~p~n", [Dou::to_string()]);
+		true ->
+			io:format("")
+	end,
+	Sau = self::Sauce,
+	if 
+		(Sau =/= []) ->
+			io:format("~p~n", [Sau::to_string()]);
+		true ->
+			io:format("")
+	end,
+	Che = self::Cheese,
+	if 
+		(Che =/= []) ->
+			io:format("~p~n", [Che::to_string()]);
+		true ->
+			io:format("")
+	end,
+	Veg = self::Veggies,
+	if 
+		(Veg =/= []) ->
+			print_veggies(Veg);
+		true ->
+			io:format("")
+	end,
+	Cla = self::Clam,
+	if 
+		(Cla =/= []) ->
+			io:format("~p~n", [Cla::to_string()]);
+		true ->
+			io:format("")
+	end,
+	Pep = self::Pepperoni,
+	if 
+		(Pep =/= []) ->
+			io:format("~p~n", [Pep::to_string()]);
+		true ->
+			io:format("")
+	end,
+	io:format("~n~n").
+	
+print_veggies([]) -> 
+	io:format("");
+print_veggies([LastVeggie]) ->
+	io:format("~p~n", [LastVeggie::to_string()]);
+print_veggies([Veg|Veggies]) ->
+	io:format("~p, ", [Veg::to_string()]),
+	print_veggies(Veggies).

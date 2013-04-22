@@ -1,0 +1,22 @@
+-class(pepperoniPizza).
+-extends(pizza).
+-export([new/1, prepare/0]).
+-constructor([new/1]).
+
+attributes.
+
+IngredientFactory.
+
+methods.
+
+new(IngredientFactory) ->
+	self::IngredientFactory = IngredientFactory.
+	
+prepare() ->
+	io:format("Preparing ~p~n", [self::Name]),
+	Ingredient = self::IngredientFactory,
+	self::Dough = Ingredient::create_dough(),
+	self::Sauce = Ingredient::create_sauce(),
+	self::Cheese = Ingredient::create_cheese(),
+	self::Veggies = Ingredient::create_veggies(),
+	self::Pepperoni = Ingredient::create_pepperoni().

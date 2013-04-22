@@ -1,0 +1,11 @@
+-class(coffee).
+-extends(caffeineBeverage).
+-export([brew/0, add_condiments/0]).
+
+methods.
+
+brew() ->
+	io:format("Dripping Coffee through filter~n").
+	
+add_condiments() ->
+	io:format("Adding Sugar and Milk~n").

@@ -1,0 +1,22 @@
+-class(caffeineBeverage).
+-export([prepare_recipe/1, brew/0, add_condiments/0]).
+-export([boil_water/0, pour_in_cup/0]).
+
+methods.
+
+prepare_recipe(Class) ->
+	Object = {Class, ObjectID},
+	Object::boil_water(),
+	Object::brew(),
+	Object::pour_in_cup(),
+	Object::add_condiments().
+	
+brew() -> null.
+
+add_condiments() -> null.
+
+boil_water() ->
+	io:format("Boiling water~n").
+	
+pour_in_cup() ->
+	io:format("Pouring into cup~n").

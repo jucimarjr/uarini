@@ -1,0 +1,21 @@
+-class(screen).
+-export([new/1, up/0, down/0, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+Description.
+
+methods.
+
+new(Description) ->
+	self::Description = Description.
+	
+up() ->
+	io:format("~p going up~n", [self::Description]).
+	
+down() ->
+	io:format("~p going down~n", [self::Description]).
+	
+to_string() ->
+	self::Description.

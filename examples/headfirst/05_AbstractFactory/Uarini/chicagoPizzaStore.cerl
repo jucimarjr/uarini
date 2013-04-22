@@ -1,0 +1,24 @@
+-class(chicagoPizzaStore).
+-extends(pizzaStore).
+-exports([create_pizza/1]).
+
+methods.
+
+create_pizza(Item) ->
+	IngredientFactory = chicagoPizzaIngredientFactory::new_(),
+	
+	if
+		(Item == "cheese") ->
+			Pizza = cheesePizza::new(IngredientFactory),
+			Pizza::set_name("Chicago Style Cheese Pizza");
+		(Item == "veggie") ->
+			Pizza = veggiePizza::new(IngredientFactory),
+			Pizza::set_name("Chicago Style Veggie Pizza");
+		(Item == "clam") ->
+			Pizza = clamPizza::new(IngredientFactory),
+			Pizza::set_name("Chicago Style Clam Pizza");
+		(Item == "pepperoni") ->
+			Pizza = pepperoniPizza::new(IngredientFactory),
+			Pizza::set_name("Chicago Style Pepperoni Pizza")
+	end,
+	Pizza.

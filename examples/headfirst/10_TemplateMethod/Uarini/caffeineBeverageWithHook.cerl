@@ -1,0 +1,31 @@
+-class(caffeineBeverageWithHook).
+-export([prepare_recipe/1, brew/0, add_condiments/0]).
+-export([boil_water/0, pour_in_cup/0, customer_wants_condiments/0]).
+
+methods.
+
+prepare_recipe(Class) ->
+	Object = {Class, ObjectID},
+	Object::boil_water(),
+	Object::brew(),
+	Object::pour_in_cup(),
+	Return = Object::customer_wants_condiments(),
+	if 
+		(Return == true) ->
+			Object::add_condiments();
+		true ->
+			io:format("")
+	end.
+			
+brew() -> null.
+
+add_condiments() -> null.
+
+boil_water() ->
+	io:format("Boiling water~n").
+	
+pour_in_cup() ->
+	io:format("Pouring into cup~n").
+	
+customer_wants_condiments() ->
+	true.

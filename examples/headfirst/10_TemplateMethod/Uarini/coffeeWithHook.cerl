@@ -1,0 +1,24 @@
+-class(coffeeWithHook).
+-extends(caffeineBeverageWithHook).
+-export([brew/0, add_condiments/0, customer_wants_condiments/0]).
+
+methods.
+
+brew() ->
+	io:format("Dripping Coffee through filter~n").
+	
+add_condiments() ->
+	io:format("Adding Sugar and Milk~n").
+	
+customer_wants_condiments() ->
+	Answer = get_user_input(),
+	if 
+		(Answer == y) ->
+			true;
+		true ->
+			false
+	end.
+
+get_user_input() ->
+	{ok, Answer} = io:read('Would you like milk and sugar with your coffee(y/n)?'),
+	Answer.

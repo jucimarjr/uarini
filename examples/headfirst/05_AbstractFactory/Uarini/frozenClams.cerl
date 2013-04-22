@@ -1,0 +1,7 @@
+-class(frozenClams).
+-implements(clams).
+-export([to_string/0]).
+
+methods.
+
+to_string() -> "Frozen Clams from Chesapeake Bay".

@@ -1,0 +1,18 @@
+-class(pizzaStore).
+-export([create_pizza/1, order_pizza/2]).
+
+methods.
+
+create_pizza(Item) -> null.
+
+order_pizza(Type, String) ->
+	Object = {String, ObjectID},
+
+	Pizza = Object::create_pizza(Type),
+	io:format("--- Making a ~p --- ~n", [Pizza::get_name()]),
+	Pizza::prepare(),
+	Pizza::bake(),
+	Pizza::cut(),
+	Pizza::box(),
+	Pizza. 
+	

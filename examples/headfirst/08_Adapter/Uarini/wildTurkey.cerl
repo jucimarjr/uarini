@@ -1,0 +1,11 @@
+-class(wildTurkey).
+-implements(turkey).
+-export([gobble/0, fly/0]).
+
+methods.
+
+gobble() ->
+	io:format("Gobble gobble ~n").
+	
+fly() ->
+	io:format("I'm flying a short distance ~n").

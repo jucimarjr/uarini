@@ -1,0 +1,23 @@
+-class(duckTestDrive).
+-export([main/0, test_duck/1]).
+
+class_methods.
+
+main() ->
+	Duck = mallardDuck::new_(),
+	Turkey = wildTurkey::new_(),
+	TurkeyAdapter = turkeyAdapter::new(Turkey),
+	
+	io:format("The turkey says... ~n"),
+	Turkey::gobble(),
+	Turkey::fly(),
+	
+	io:format("~nThe Duck says... ~n"),
+	test_duck(Duck),
+	
+	io:format("~nThe TurkeyAdapter says... ~n"),
+	test_duck(TurkeyAdapter).
+	
+test_duck(Duck) ->
+	Duck::quack(),
+	Duck::fly().

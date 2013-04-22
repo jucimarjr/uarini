@@ -1,0 +1,67 @@
+-class(chocolateBoiler).
+-export([new/0, get_instance/0, fill/0, drain/0, boil/0]).
+-export([is_empty/0, is_boiled/0]).
+-constructor([new/0]).
+
+attributes.
+
+Empty;
+Boiled;
+UniqueInstance.
+
+methods.
+
+new() ->
+	self::Empty = true,
+	self::Boiled = false.
+	
+fill() ->
+	Return = is_empty(),
+	if
+		(Return == true) ->
+			self::Empty = false,
+			self::Boiled = false;
+		true ->
+			io:format("")
+	end.
+	
+drain() ->
+	RetEmpty = is_empty(),
+	RetBoiled = is_boiled(),
+	if
+		( (RetEmpty == false) and (RetBoiled == false) ) ->
+			self::Empty = true;
+		true ->
+			io:format("")
+	end.
+	
+boil() ->
+	RetEmpty = is_empty(),
+	RetBoiled = is_boiled(),
+	if
+		( (RetEmpty == false) and (RetBoiled == false) ) ->
+			self::Boiled = true;
+		true ->
+			io:format("")
+	end.
+
+is_empty() ->
+	self::Empty.
+	
+is_boiled() ->
+	self::Boiled.
+
+get_instance() ->
+	ListOfProcesses = erlang:registered(),
+	Return = lists:member(unique_instance, ListOfProcesses),
+	if
+		(Return == false) ->
+			io:format("Creating unique instance of Chocolate Boiler ~n"),
+			self::UniqueInstance = chocolateBoiler::new(),
+			erlang:register(unique_instance, ObjectID);
+		true ->
+			io:format("")
+	end,
+	io:format("Returning instance of Chocolate Boiler ~n"),
+	Unique = {chocolateBoiler, whereis(unique_instance)},
+	Unique::UniqueInstance.

@@ -1,0 +1,25 @@
+-class(currentConditionsDisplay).
+-implements([observer,displayElement]).
+-export([new/1, update/3, display/0]).
+-constructor([new/1]).
+
+attributes.
+
+Temperature;
+Humidity;
+WeatherData.
+
+methods.
+
+new(WeatherData) ->
+	self::WeatherData = WeatherData,
+	Temp = self::WeatherData,
+	Temp::register_observer({currentConditionsDisplay, ObjectID}).
+	
+update(Temperature, Humidity, Pressure) ->
+	self::Temperature = Temperature,
+	self::Humidity = Humidity,
+	display().
+	
+display() ->
+	io:format("Current conditions: ~p F degrees and ~p % humidity ~n", [self::Temperature, self::Humidity]).

@@ -1,0 +1,36 @@
+-class(pizza).
+-export([prepare/0, bake/0, cut/0, box/0, get_name/0]).
+
+attributes.
+
+Name;
+Dough;
+Sauce;
+Toppings.
+
+methods.
+
+prepare() ->
+	io:format("Preparing ~p ~n", [self::Name]),
+	io:format("Tossing dough... ~n"),
+	io:format("Adding Sauce... ~n"),
+	io:format("Adding toppings: ~n"),
+	Tops = self::Toppings,
+	prepare_aux(Tops).
+	
+prepare_aux([]) -> null;	
+prepare_aux([Top|Toppings]) ->
+	io:format("   ~p~n", [Top]),
+	prepare_aux(Toppings).
+	
+bake() ->
+	io:format("Bake for 25 minutes at 350 ~n").
+	
+cut() ->
+	io:format("Cutting the pizza into diagonal slices ~n").
+	
+box() ->
+	io:format("Place pizza in official PizzaStore box ~n").
+	
+get_name() ->
+	self::Name.	

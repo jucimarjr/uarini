@@ -1,0 +1,16 @@
+-class(row).
+-extends(composite).
+-export([new/1, transverse/0]).
+-constructor([new/1]).
+
+methods.
+
+new(Val) ->
+	%super::new(Val).
+	self::Children = [],
+	self::Value = Val,
+	self::Total = 0.
+	
+transverse() ->
+	io:format("Row"),
+	super::transverse().

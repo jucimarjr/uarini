@@ -1,0 +1,38 @@
+-class(soldState).
+-implements(state).
+-export([new/1]).
+-export([dispense/0, insert_quarter/0, eject_quarter/0, turn_crank/0, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+GumballMachine.
+
+methods.
+
+new(GumballMachine) ->
+	self::GumballMachine = GumballMachine.
+	
+insert_quarter() ->
+	io:format("Please wait, we're already giving you a gumball~n").
+	
+eject_quarter() ->
+	io:format("Sorry, you already turned the quarter~n").
+		
+turn_crank() ->
+	io:format("Turning twice doesn't get you another gumball~n").
+		
+dispense() ->
+	GBMachine = self::GumballMachine,
+	GBMachine::release_ball(),
+	Cnt = GBMachine::get_count(),
+	if
+		(Cnt > 0) ->
+			GBMachine::set_state(GBMachine::get_no_quarter_state());
+		true ->
+			io:format("Oops, out of gumballs!~n"),
+			GBMachine::set_state(GBMachine::get_sold_out_state())
+	end.
+		
+to_string() ->
+	"Dispensing a gumball".
