@@ -23,7 +23,7 @@
 Nonterminals
 form
 
-oo_attributes oo_attribute % ooe
+oo_attributes_1 oo_attributes oo_attribute oo_methods % ooe
 
 attribute attr_val
 function function_clauses function_clause
@@ -66,7 +66,7 @@ char integer float atom string var
 '<<' '>>'
 '!' '=' '::' '..' '...'
 
-'class_attributes' 'class_methods' % oo_markup
+'class_attributes' 'class_methods' 'attributes' 'methods' % oo_markup
 
 'spec' 'callback' % helper
 dot.
@@ -76,22 +76,35 @@ Expect 2.
 Rootsymbol form.
 
 form -> attribute dot : '$1'.
-form -> function dot : '$1'.
 form -> rule dot : '$1'.
-form -> 'class_attributes' dot : '$1'.
-form -> 'class_methods' dot : '$1'.
-form -> oo_attributes dot :
-	[H|_] = '$1',
-	L = ?line(H),
-	{oo_attributes, L, '$1'}.
 
-oo_attributes -> oo_attribute : ['$1'].
+form ->
+    'class_attributes' dot oo_attributes_1 :
+        {class_attributes, ?line('$1'), '$3'}.
+form ->
+    'attributes' dot oo_attributes_1 :
+        {attributes, ?line('$1'), '$3'}.
+form ->
+    'class_methods' dot oo_methods :
+        {class_methods, ?line('$1'), '$3'}.
+form ->
+    'methods' dot oo_methods :
+        {methods, ?line('$1'),'$3'}.
+
+oo_attributes_1 -> '$empty' : [].
+oo_attributes_1 -> oo_attribute dot : ['$1'].
+oo_attributes_1 -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
+
+oo_attributes -> oo_attribute dot : ['$1'].
 oo_attributes -> oo_attribute ';' oo_attributes : ['$1'|'$3'].
 
-oo_attribute -> var                : build_oo_attribute('$1').
-oo_attribute -> atom var           : build_oo_attribute('$1', '$2').
-oo_attribute -> var '=' expr      : build_oo_attribute({'$1', {initial_value, '$3'}}).
-oo_attribute -> atom var '=' expr : build_oo_attribute('$1', {match,?line('$3'),'$2','$4'}).
+oo_attribute ->
+    var : build_oo_attribute('$1').
+oo_attribute ->
+    var '=' expr : build_oo_attribute('$1', '$3').
+
+oo_methods -> function dot oo_methods : ['$1'|'$3'].
+oo_methods -> '$empty' : [].
 
 attribute -> '-' atom     attr_val : build_attribute('$2', '$3').
 
@@ -1138,9 +1151,8 @@ abstract_method({clause,Line,Name,Args,Guards,[]}) ->
 abstract_method(FunNode) ->
     FunNode.
 
-build_oo_attribute(Var) ->
-   NoType = {atom, ?line(Var), 'NoType'},
-   build_oo_attribute(NoType, Var).
+build_oo_attribute(Name) ->
+   {oo_attribute, ?line(Name), Name}.
 
-build_oo_attribute(Type, Var) ->
-   {oo_attribute, ?line(Type), Type, Var}.
+build_oo_attribute(Name, Value) ->
+   {oo_attribute, ?line(Name), Name, Value}.

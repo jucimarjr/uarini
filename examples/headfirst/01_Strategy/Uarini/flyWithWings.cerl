@@ -2,7 +2,7 @@
 -implements(flyBehaviour).
 -export([fly/0]).
 
-class_methods.
+methods.
 
 fly() ->
 	io:format("I'm flying!!~n").

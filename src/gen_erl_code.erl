@@ -6,7 +6,7 @@
 %% Objetivo : traduz as expressoes em Uarini para Erlang
 
 -module(gen_erl_code).
--export([match_param/1, match_expr/1]).
+-export([match_pattern/1, match_expr/1]).
 -include("../include/uarini_define.hrl").
 
 -import(gen_ast,
@@ -21,8 +21,9 @@
 %% de Uarini para Erlang
 
 %% clausula que ignora transformacao (parametro ja esta em Erlang)
-match_param(Parameter) ->
-	Parameter.
+%% TODO: pprocurar por expressoas do ooe, invalidas em padroes
+match_pattern(Pattern) ->
+	Pattern.
 
 %%-----------------------------------------------------------------------------
 %% Faz o match de uma expressao no corpo de uma clausula de uma funcao
@@ -47,13 +48,54 @@ match_expr({oo_remote, _, _, _} = Expr) ->
 match_expr({op, Ln, '!', LeftExpr, RightExpr}) ->
 	{op, Ln, '!', transform_inner_expr(LeftExpr), transform_inner_expr(RightExpr)};
 
+%% if
+match_expr({'if', Ln, Clauses}) ->
+	transform_if(Ln, Clauses);
+
+%% case
+match_expr({'case', Ln, CaseExpr, Clauses}) ->
+	transform_case(Ln, CaseExpr, Clauses);
+
+%% list comprehension
+match_expr({lc, Ln, Expr, GenOrFilterList}) ->
+	transform_lc(Ln, Expr, GenOrFilterList);
+
 %% operacoes aritimeticas, como +, -, ++, etc.
 match_expr({op, _, _, _, _} = Expr) ->
 	transform_inner_expr(Expr);
 
+%% blocos begin ... end
+match_expr({block, Ln, Body}) ->
+	{block, Ln, lists:map(fun match_expr/1, Body)};
+
+%% catch
+match_expr({'catch', Ln, Expr}) ->
+	{'catch', Ln, match_expr(Expr)};
+
+%% receive
+match_expr({'receive', Ln, Clauses}) ->
+	{'receive', Ln, lists:map(fun transform_case_clause/1, Clauses)};
+
+%% receive ... after
+match_expr({'receive', Ln, Clauses, AfterExpr, AfterBody}) ->
+	{'receive', Ln,
+		lists:map(fun transform_case_clause/1, Clauses),
+		match_expr(AfterExpr),
+		lists:map(fun match_expr/1, AfterBody)};
+
+%% try ... catch (tratar diferentes tipos de catch_clause!
+%% match_expr({'try', Ln, Body, [], Clauses, []}) ->
+%% 	transform_try(Ln, Body, Clauses).	
+
 %% clausula que ignora a transformacao (expressao ja esta em Erlang)
 match_expr(Expression) ->
 	Expression.
+
+%%-----------------------------------------------------------------------------
+%% Faz o match de uma expressao do tipo Guard
+match_guard(Guard) ->
+	uarini_errors:check_guard(Guard),
+	Guard.
 
 %%-----------------------------------------------------------------------------
 %% atribuicao
@@ -116,7 +158,7 @@ transform_inner_expr({oo_remote, Ln1, {atom, _, Name} = _WrongObjectVar, _}) ->
 transform_inner_expr({call, _, _, _} = Expr) ->
 	create_call(Expr);
 
-%% operacoes aritimeticas, como +, -, ++, etc.
+%% operacoes aritimeticas, como 1+2, 4-2, [H] ++ Lista, etc.
 transform_inner_expr({op, Line, Op, LeftExp, RightExp}) ->
 	{op, Line, Op, transform_inner_expr(LeftExp), transform_inner_expr(RightExp)};
 
@@ -138,6 +180,23 @@ transform_inner_expr({tuple, Ln, Elements}) ->
 transform_inner_expr({'fun', Ln, {clauses, ClauseList}}) ->
 	transform_fun(Ln, ClauseList);
 
+%% if
+transform_inner_expr({'if', Ln, Clauses}) ->
+	transform_if(Ln, Clauses);
+
+%% case
+transform_inner_expr({'case', Ln, CaseExpr, Clauses}) ->
+	transform_case(Ln, CaseExpr, Clauses);
+
+%% list comprehension
+transform_inner_expr({lc, Ln, Expr, GenOrFilterList}) ->
+	transform_lc(Ln, Expr, GenOrFilterList);
+
+%% blocos begin ... end
+transform_inner_expr({block, Ln, Body}) ->
+	{block, Ln, lists:map(fun match_expr/1, Body)};
+
+%% qualquer outra expressão não tratada pelo uarini
 transform_inner_expr(Expr) -> Expr.
 
 %%-----------------------------------------------------------------------------
@@ -149,7 +208,10 @@ create_call({call, Ln1, FuncLocation, ArgList}) ->
 			{call, Ln1, TransfFuncLocation, TransfArgList};
 
 		{object, ObjectVarName, FuncName} ->
-			create_object_call(Ln1, ObjectVarName, FuncName, ArgList);
+			create_object_call(Ln1, var(Ln1, ObjectVarName), FuncName, ArgList);
+
+		{object_expr, LocationExpr, FuncName} ->
+			create_object_call(Ln1, LocationExpr, FuncName, ArgList);
 
 		{object_direct, FuncName} ->
 			create_object_direct_call(Ln1, FuncName, ArgList);
@@ -163,9 +225,9 @@ create_call({call, Ln1, FuncLocation, ArgList}) ->
 
 %% chamadas de funcao Objecto::funcao(Args)
 %% para metodo de objeto
-create_object_call(Ln, ObjectVarName, FuncName, ArgList) ->
-	TransfClassName = gen_ast:element(Ln, 1, var(Ln, ObjectVarName)),
-	TransfObjectID  = gen_ast:element(Ln, 2, var(Ln, ObjectVarName)),
+create_object_call(Ln, ObjectVar, FuncName, ArgList) ->
+	TransfClassName = gen_ast:element(Ln, 1, ObjectVar),
+	TransfObjectID  = gen_ast:element(Ln, 2, ObjectVar),
 
 	TransfArgListTemp = [transform_inner_expr(Arg) || Arg <- ArgList],
 	TransfArgList = [TransfObjectID | TransfArgListTemp],
@@ -201,6 +263,13 @@ create_super_call(Ln, SuperClassName, FuncName, ArgList) ->
 %%   {normal, TransfLoc} - caso a traducao seja direta
 %%   object              - caso seja metodo de objeto, que eh tratado diferente
 %%
+
+%% chamadas (self::Objeto)::funcao(Args) ou (expressao)::funcao(Args)
+%% ou (expressao_que_resulta_em_objeto::funcao(Args)
+get_func_loc({oo_remote, _Ln1, {oo_remote, _Ln2, _, _}=Loc, FuncName}, _) ->
+	TransfLoc = transform_inner_expr(Loc),
+	{object_expr, TransfLoc, FuncName};	
+
 %% chamadas Objeto::funcao(Args)
 get_func_loc({oo_remote, _Ln, {var, _, ObjectVarName}, FuncName}, _ArgList) ->
 	{object, ObjectVarName, FuncName};
@@ -348,6 +417,60 @@ transform_fun(Ln, ClauseList) ->
 	{'fun', Ln, {clauses, TransfClauseList}}.
 
 transform_fun_clause({clause, Ln, ArgList, [], ExprList}) ->
-	TransfArgList = lists:map(fun match_param/1, ArgList),
+	TransfArgList = lists:map(fun match_pattern/1, ArgList),
 	TransfExprList = lists:map(fun match_expr/1, ExprList),
 	{clause, Ln, TransfArgList, [], TransfExprList}.
+
+%%-----------------------------------------------------------------------------
+%% transforma expressoes dentro do if cond -> exprs; cond -> expr end
+transform_if(Ln, Clauses) ->
+	TransfClauses = lists:map(fun transform_if_clause/1, Clauses),
+	{'if', Ln, TransfClauses}.
+
+transform_if_clause({clause, Ln, [], ExprCond, ExprBody}) ->
+	TransfCond = match_guard(ExprCond),
+	TransfBody = lists:map(fun match_expr/1, ExprBody),
+	{clause, Ln, [], TransfCond, TransfBody}.
+
+%%-----------------------------------------------------------------------------
+%% transforma expressoes dentro do case
+transform_case(Ln, CaseExpr, Clauses) ->
+	TransfCaseExpr = match_expr(CaseExpr),
+	TransfClauses = lists:map(fun transform_case_clause/1, Clauses),
+	{'case', Ln, TransfCaseExpr, TransfClauses}.
+
+transform_case_clause({clause, Ln, [Pattern], [], Body}) ->
+	TransfPattern = match_pattern(Pattern),
+	TransfBody = lists:map(fun match_expr/1, Body),
+	{clause, Ln, [TransfPattern], [], TransfBody}.
+
+%%-----------------------------------------------------------------------------
+%% transforma expressoes dentro de list comprehensions
+transform_lc(Ln, Expr, GenOrFilterList) ->
+	TransfExpr = match_expr(Expr),
+	TransfGenOrFilterList = lists:map(fun transform_gen_or_filter/1, GenOrFilterList),
+	{lc, Ln, TransfExpr, TransfGenOrFilterList}.
+
+%% caso seja um gerador
+transform_gen_or_filter({generate, Ln, Pattern, Expr}) ->
+	TransfPattern = match_pattern(Pattern),
+	TransfExpr = match_expr(Expr),
+	{generate, Ln, TransfPattern, TransfExpr};
+
+%% caso seja um filtro
+transform_gen_or_filter(Expr) ->
+	match_expr(Expr).
+
+%%-----------------------------------------------------------------------------
+%% transforma expressoes com try ... catch
+%% adiado, pois eh necessario tratar os diferentes tipos de catch_clause
+
+%% transform_try(Ln, Body, Clauses) ->
+%% 	TransfBody = lists:map(fun match_expr/1, Body),
+%% 	TransfClauses = lists:map(fun transform_catch_clause/1, Clauses),
+%% 	{'try', Ln, Body, [], Clauses, []}.
+
+%% transform_catch_clause(
+
+%%-----------------------------------------------------------------------------
+%%

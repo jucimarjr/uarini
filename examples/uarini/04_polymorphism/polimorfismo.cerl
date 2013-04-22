@@ -1,6 +1,5 @@
 -class(polimorfismo).
 -export([main/0]).
--static([main/0,imprimir_imposto/1]).
 
 class_methods.
 

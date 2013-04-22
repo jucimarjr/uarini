@@ -27,7 +27,6 @@ debug: ERLC += +debug_info
 debug: compile
 
 ebin/uarini.beam: $(INCLUDE_DIR)/*.hrl src/*.erl
-	@ echo Compiling Parser ...
 	@ mkdir -p $(EBIN_DIR)
 	@ echo Compiling Erlang source...
 	@ $(ERLC) -o $(EBIN_DIR) src/*.erl

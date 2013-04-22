@@ -36,7 +36,6 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	OOFunctions = DefaultConstructor ++ ParentMethods,
 
 	{FunctionList, OtherForms} = get_erl_forms(AST),
-
 	FunctionList2 = OOFunctions ++ FunctionList,
 
 	ExportList = st:get_export_list(ErlangModuleName),
@@ -44,6 +43,7 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 
 	ErlangModule =
 		create_module(ErlangModuleName, FunctionList2, ExportList2, OtherForms),
+%io:format("AFF: ~p\n\n", [ErlangModule]),
 
 	case st:get_errors() of
 		[] ->
@@ -113,17 +113,20 @@ match_erl_form([Form | UariniForms], FunctionList, OtherForms) ->
 		{attribute, _Line, static, _Functions} ->
 			match_erl_form(UariniForms, FunctionList, OtherForms);
 
-		{class_attributes, _Line} ->
-			[_Attributes | UariniForms_rest] = UariniForms,
-			match_erl_form(UariniForms_rest, FunctionList, OtherForms);
-
-		{class_methods, _Line} ->
+		{class_attributes, _Line, _AttrList} ->
 			match_erl_form(UariniForms, FunctionList, OtherForms);
 
-		{function, Line, Name, Arity, Clauses} ->
-			st:put_scope(function, {Name, Arity}),
-			Transformed_Method = get_erl_function(Line, Name, Arity, Clauses),
-			N_FunctionList = [Transformed_Method | FunctionList],
+		{attributes, _Line, _AttrList} ->
+			match_erl_form(UariniForms, FunctionList, OtherForms);
+
+		{class_methods, _Line, MthdsList} ->
+			FunctionListTemp = lists:map(fun get_erl_function/1, MthdsList),
+			N_FunctionList = FunctionList ++ FunctionListTemp,
+			match_erl_form(UariniForms, N_FunctionList, OtherForms);
+
+		{methods, _Line, MthdsList} ->
+			FunctionListTemp = lists:map(fun get_erl_function/1, MthdsList),
+			N_FunctionList = FunctionList ++ FunctionListTemp,
 			match_erl_form(UariniForms, N_FunctionList, OtherForms);
 
 		_AnyOtherForm ->
@@ -134,7 +137,9 @@ match_erl_form([Form | UariniForms], FunctionList, OtherForms) ->
 %%-----------------------------------------------------------------------------
 %% Percorre as clausulas dos metodos/funcoes e converte as expressoes de Uarini
 %% para Erlang
-get_erl_function(Line, Name, Arity, Clauses) ->
+get_erl_function({function, Line, Name, Arity, Clauses}) ->
+	st:put_scope(function, {Name, Arity}),
+
 	Transformed_Clauses = lists:map(fun get_erl_clause/1, Clauses),
 
 	Scope = st:get_scope(),
@@ -177,7 +182,7 @@ get_erl_clause({clause, Line, ParamList, [], ExprList}) ->
 			{clause, Line, TransfParamList, [], TransfExprList2}
 	end.
 
-get_erl_param(Parameter) -> gen_erl_code:match_param(Parameter).
+get_erl_param(Parameter) -> gen_erl_code:match_pattern(Parameter).
 get_erl_expr(Expression) -> gen_erl_code:match_expr(Expression).
 
 create_user_constr_body(Line, Scope, TransfExprList) ->
@@ -185,7 +190,7 @@ create_user_constr_body(Line, Scope, TransfExprList) ->
 	AttrList = st:get_all_attr_info(ScopeClass),
 	NewArgs = [
 				tuple(Line, [atom(Line, AttrName), InitialExpr]) ||
-				{AttrName, {_Type, InitialExpr}} <- AttrList],
+				{AttrName, InitialExpr} <- AttrList],
 	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line, NewArgs)]),
 
 	NewObjectID_AST = match(Line, var(Line, "ObjectID"), NewAST),
@@ -208,7 +213,7 @@ create_default_constructor(ClassName, []) ->
 	AttrList = st:get_all_attr_info(ClassName),
 	NewArgs = [
 				tuple(Line, [atom(Line, AttrName), InitialExpr]) ||
-				{AttrName, {_Type, InitialExpr}} <- AttrList],
+				{AttrName, InitialExpr} <- AttrList],
 	NewAST = rcall(Line, ooe, new, [gen_ast:list(Line,  NewArgs)]),
 
 	NewObjectID_AST = match(Line, var(Line, "ObjectID"), NewAST),

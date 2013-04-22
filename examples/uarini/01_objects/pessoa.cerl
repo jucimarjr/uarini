@@ -1,16 +1,16 @@
 -class(pessoa).
--constructor([constructor/2]).
+-constructor([new/2]).
 -export([gastar/1, receber/1]).
 
-class_attributes.
+attributes.
 
 Nome;
 Nascimento;
 DinheiroNaCarteira.
 
-class_methods.
+methods.
 
-constructor(Nome, Nasc) ->  
+new(Nome, Nasc) ->  
     self::Nome = Nome,
     self::Nascimento = Nasc,
     self::DinheiroNaCarteira = 0.

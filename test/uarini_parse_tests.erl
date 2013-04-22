@@ -12,70 +12,64 @@
 -define(OK(ReturnValue), {ok, ReturnValue}).
 
 get_tokens(Source) ->
-    ?OK(Tokens, _Lines) = uarini_scan:string(Source),
-    Tokens.
+    ?OK(Tokens) = aleppo:scan_tokens(Source),
+    [begin
+         {L, _C} = element(2,T),
+         setelement(2, T, L)
+     end || T <- Tokens].
 
-uarini_tag_test() ->
+uarini_tag_test_() ->
     Exp1 = {attribute, 1, class, name},
     Exp2 = {attribute, 1, extends, name},
     Exp3 = {attribute, 1, interface, name},
     Exp4 = {attribute, 1, implements, [c1, c2, c3]},
     Exp5 = {attribute, 1, constructor, [{new,0},{new,1}]},
-    Exp6 = {attribute, 1, static,      [{getInstance,0}]},
 
     Form1 = uarini_parse:parse(get_tokens("-class(name).")),
     Form2 = uarini_parse:parse(get_tokens("-extends(name).")),
     Form3 = uarini_parse:parse(get_tokens("-interface(name).")),
     Form4 = uarini_parse:parse(get_tokens("-implements([c1,c2,c3]).")),
     Form5 = uarini_parse:parse(get_tokens("-constructor([new/0, new/1]).")),
-    Form6 = uarini_parse:parse(get_tokens("-static([getInstance/0]).")),
 
-    [?assertEqual(?OK(Exp1), Form1),
-     ?assertEqual(?OK(Exp2), Form2),
-     ?assertEqual(?OK(Exp3), Form3),
-     ?assertEqual(?OK(Exp4), Form4),
-     ?assertEqual(?OK(Exp5), Form5),
-     ?assertEqual(?OK(Exp6), Form6)].
+    [?_assertEqual(?OK(Exp1), Form1),
+     ?_assertEqual(?OK(Exp2), Form2),
+     ?_assertEqual(?OK(Exp3), Form3),
+     ?_assertEqual(?OK(Exp4), Form4),
+     ?_assertEqual(?OK(Exp5), Form5)].
 
-uarini_markup_test() ->
-    Exp1 = {class_attributes, 1},
-    Exp2 = {class_methods, 1},
+uarini_markup_test_() ->
+    Exp1 = {class_attributes, 1, []},
+    Exp2 = {class_methods, 1, []},
+    Exp3 = {attributes, 1, []},
+    Exp4 = {methods, 1, []},
 
     Form1 = uarini_parse:parse(get_tokens("class_attributes.")),
     Form2 = uarini_parse:parse(get_tokens("class_methods.")),
+    Form3 = uarini_parse:parse(get_tokens("attributes.")),
+    Form4 = uarini_parse:parse(get_tokens("methods.")),
 
-    [?assertEqual(?OK(Exp1), Form1),
-     ?assertEqual(?OK(Exp2), Form2)].
+    [?_assertEqual(?OK(Exp1), Form1),
+     ?_assertEqual(?OK(Exp2), Form2),
+     ?_assertEqual(?OK(Exp3), Form3),
+     ?_assertEqual(?OK(Exp4), Form4)].
 
-uarini_var_test() ->
-    Exp1 = {oo_attributes, 1,
-        [{oo_attribute, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}]},
-    Exp2 = {oo_attributes, 1,
-        [{oo_attribute, 1, {atom,1, car}, {var,1,'Fusca'}}]},
-    Exp3 = {oo_attributes, 1,
-        [{oo_attribute, 1, {atom,1,'NoType'}, {var,1,'MyVar'}}]},
-    Exp4 = {oo_attributes, 1,
-        [{oo_attribute, 1, {atom, 1,car}, {var,1,'Fusca'}}]},
-
-    Exp5 = {oo_attributes, 1,
+uarini_attribute_test_() ->
+    Exp1 = {attributes, 1,
                [{oo_attribute, 1,
-                    {atom,1, car}, {var,1,'Ferrari'}}]},
+                   {var, 1, 'MyVar'}}]},
 
-    Form1 = uarini_parse:parse(get_tokens("MyVar.")),
-    Form2 = uarini_parse:parse(get_tokens("car Fusca.")),
-    Form3 = uarini_parse:parse(get_tokens("MyVar.")),
-    Form4 = uarini_parse:parse(get_tokens("car Fusca.")),
-    Form5 = uarini_parse:parse(get_tokens("car Ferrari.")),
+    Exp2 = {class_attributes, 1,
+               [{oo_attribute, 1,
+                  {var,1,'X'}, {integer,1,4}},
+                {oo_attribute, 1,
+                  {var,1,'Y'}, {float,1,3.0}},
+                {oo_attribute, 1,
+                  {var,1,'Z'}, {integer,1,1}}]},
 
-    [?assertEqual(?OK(Exp1), Form1),
-     ?assertEqual(?OK(Exp2), Form2),
-     ?assertEqual(?OK(Exp3), Form3),
-     ?assertEqual(?OK(Exp4), Form4),
-     ?assertEqual(?OK(Exp5), Form5)].
+    Form1 = uarini_parse:parse(
+	get_tokens("attributes. MyVar.")),
+    Form2 = uarini_parse:parse(
+	get_tokens("class_attributes. X = 4; Y = 3.0; Z = 1.")),
 
-uarini_method_test() ->
-    Exp1 = {function,1, method,0,[{abst_clause, 1, []}]},
-
-    Form1 = uarini_parse:parse(get_tokens("method().")),
-
-    [?assertEqual(?OK(Exp1), Form1)].
+    [?_assertEqual(?OK(Exp1), Form1),
+     ?_assertEqual(?OK(Exp2), Form2)].

@@ -2,14 +2,14 @@
 -extends(ipva).
 -constructor([constructor/3]).
 
-class_attributes.
+attributes.
 
 Ano;
 Placa;
 VlrBase;
 QtdEixos.
 
-class_methods.
+methods.
 
 constructor(Ano, Placa, QtdEixos) ->
 	self::Ano = Ano,

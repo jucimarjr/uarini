@@ -3,14 +3,14 @@
 -export([calcularIpva/0]).
 -constructor([constructor/2]).
 
-class_attributes.
+attributes.
 
 Ano;
 Placa;
 VlrBase.
 %VlrBase = 1.20.
 
-class_methods.
+methods.
 
 constructor(Ano, Placa) ->
 	self::Ano = Ano,

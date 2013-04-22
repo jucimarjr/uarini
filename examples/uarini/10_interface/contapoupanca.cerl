@@ -3,11 +3,11 @@
 -constructor([new/1]).
 -export([depositar/1, sacar/1, getSaldo/0]).
 
-class_attributes.
+attributes.
 
 Saldo.
 
-class_methods.
+methods.
 
 new(ValorInicial) ->
 	self::Saldo = ValorInicial.

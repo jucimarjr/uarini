@@ -72,11 +72,9 @@ get_errors() ->
 %% Campos:  [Campo1, Campo2, ...]
 %%
 %% CampoN:
-%%		{Nome, CampoValue}
-%%			   |
-%%			   |> {Tipo, Modificadores}
+%%		{Nome, ValorInicial}
 %%
-%% ConstrutorN, ExportN, StaticN:
+%% ConstrutorN, ExportN:
 %%		{ nome_funcao, QtdParametros }
 %%
 %% Outros:

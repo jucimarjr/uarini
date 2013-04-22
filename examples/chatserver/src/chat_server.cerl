@@ -1,8 +1,5 @@
 -class(chat_server).
 -author('elmiliox@gmail.com').
--static(
-    [start/0, stop/0, join/2, unjoin/1, send/2, message_router/1,
-     send/1,  send_to/2]).
 -compile(export_all).
 
 class_methods.

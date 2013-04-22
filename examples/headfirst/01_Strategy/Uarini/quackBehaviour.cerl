@@ -1,6 +1,6 @@
 -interface(quackBehaviour).
 -export([quack/0]).
 
-class_methods.
+methods.
 
 quack().

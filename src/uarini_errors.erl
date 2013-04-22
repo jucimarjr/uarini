@@ -9,7 +9,7 @@
 %% Objetivo : Tratar as ocorrências de exceções
 
 -module(uarini_errors).
--export([handle_error/3, print_errors/2, check_interface/1]).
+-export([handle_error/3, print_errors/2, check_interface/1, check_guard/1]).
 
 handle_error(Line, Code, Args) ->
 	st:put_error(Line, Code, Args),
@@ -34,7 +34,11 @@ get_error_text(10, [Name]) ->
 get_error_text(11, [Name, Class]) ->
 	{"Method '~p' does not exist in class '~p'", [Name, Class]};
 get_error_text(12, []) ->
-	{"bad interface", []}.
+	{"bad interface", []};
+get_error_text(13, []) ->
+	{"class attributes not implemented yet", []};
+get_error_text(14, []) ->
+	{"ooe element is illegal in guard", []}.
 
 print_errors(_, []) ->
 	ok;
@@ -76,3 +80,28 @@ check_interface(ClassName, [Method | InterMethods], ClassMethods) ->
 			handle_error(null, 9, [Name, Arity, Modifiers, ClassName]),
 			check_interface(ClassName, InterMethods, ClassMethods)
 	end.
+
+%%----------------------------------------------------------------------------
+%% checa se determinado guard é válido
+check_guard({oo_remote, Ln,_,_}) ->
+	handle_error(Ln, 14, []);
+
+check_guard({call, _, {oo_remote, Ln,_,_}, _}) ->
+	handle_error(Ln, 14, []);
+
+check_guard({tuple, _, Elements}) ->
+	check_guard(Elements);
+
+check_guard({op, _, _, LeftExpr, RightExpr}) ->
+	check_guard(LeftExpr),
+	check_guard(RightExpr);
+
+check_guard({cons, _Line, Element, Tail}) ->
+	check_guard(Element),
+	check_guard(Tail);
+
+check_guard({op, _Line, _Op, RightExpr}) ->
+	check_guard(RightExpr);
+
+check_guard(_) ->
+	ok.

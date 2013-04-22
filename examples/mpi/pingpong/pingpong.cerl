@@ -1,7 +1,5 @@
 -class(pingpong).
 -export([run/2, run/3]).
--static([run/2, run/3, printResult/5,bandwidth_calc/2, error_report/2,
-time_microseg/0, generate_data/1, generate_data/2, finalize/1]).
 %%-include("conf.hrl").
 
 class_methods.
@@ -25,9 +23,9 @@ run(DataSize, R, OutFile) ->
 	P2 = procpong::new(Data, Self, R),
     SpawnEnd = time_microseg(),
     TimeStart = time_microseg(),
-    P1::send({init, self(), P2::Pid}),
-	finalize(P1::Pid),
-	finalize(P2::Pid),
+    P1::send({init, self(), P2::get_pid()}),
+	finalize(P1::get_pid()),
+	finalize(P2::get_pid()),
     TimeEnd = time_microseg(),
     TotalTime = TimeEnd - TimeStart,
     SpawnTime = SpawnEnd - SpawnStart,

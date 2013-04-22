@@ -2,7 +2,7 @@
 -implements(irelatorio).
 -export([getSql/0]).
 
-class_methods.
+methods.
 
 getSql() ->
 	"select * from clientes".

@@ -12,8 +12,8 @@ build() ->
 %%-----------------------------------------------------------------------------
 %% Extrai a Abstract Syntax Tree de um arquivo .cerl
 get_ast(ErlangClassFileName) ->
-	Tokens = get_tokens(ErlangClassFileName),
-    TokenFormList = split_forms(Tokens),
+	Tokens = ast:get_urn_tokens(ErlangClassFileName),
+    TokenFormList = ast:get_urn_forms_tokens(Tokens),
     ParseResultList = [uarini_parse:parse(T) || T <- TokenFormList],
     filter_result(ParseResultList, []).
 
@@ -25,7 +25,6 @@ filter_result([], ReverseForms) ->
 filter_result([{ok, F}|Result], RFs) ->
 	filter_result(Result, [F|RFs]);
 filter_result([{error,Msg}|_], _) ->
-	%erlang:error(Msg).
 	{error, Msg}.
 
 %%-----------------------------------------------------------------------------
@@ -39,36 +38,6 @@ get_raw_tokens(ErlangClassFileName) ->
     Tokens.
 
 %%-----------------------------------------------------------------------------
-%% Extrai a lista de Tokens Preprocessados de um arquivo
+%% Extrai a lista de Tokens preprocessados de um arquivo fonte
 get_tokens(ErlangClassFileName) ->
-    {ok, Tokens} = aleppo:scan_file(ErlangClassFileName),
-    [remove_column(T) || T <- Tokens, element(1, T) =/= eof].
-
-remove_column(TupleToken) ->
-    [Lexema|[{L,_C}|Etc]] = tuple_to_list(TupleToken),
-    list_to_tuple([Lexema|[L|Etc]]).
-
-%%-----------------------------------------------------------------------------
-%% Particiona o fluxo de token em subfluxos terminados pelo token dot
-split_forms(Tokens) ->
-    split_forms(Tokens, [], []).
-
-split_forms([], [], ReverseForms) ->
-    FormList = lists:reverse(ReverseForms),
-    FormList;
-split_forms([], ReverseFormTokens, ReverseForms) ->
-    Form = lists:reverse(ReverseFormTokens),
-    FormList = lists:reverse([Form|ReverseForms]),
-    FormList;
-split_forms(
-        [DotToken={dot,_}|Tokens],
-        ReverseFormTokens,
-        ReverseForms) ->
-    Form = lists:reverse([DotToken|ReverseFormTokens]),
-    split_forms(Tokens, [], [Form|ReverseForms]);
-split_forms(
-        [Token|Tokens],
-        ReverseFormTokens,
-        ReverseForms) ->
-    split_forms(Tokens, [Token|ReverseFormTokens], ReverseForms).
-
+    ast:get_urn_tokens(ErlangClassFileName).

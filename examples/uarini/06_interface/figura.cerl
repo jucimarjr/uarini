@@ -1,6 +1,6 @@
 -interface(figura).
 -export([calcularArea/0]).
 
-class_methods.
+methods.
 
-calcularArea() -> null.
+calcularArea().

@@ -1,7 +1,7 @@
 -class(empregado).
 -export([get_salario/0, calcular/0]).
 
-class_methods.
+methods.
 
 get_salario() -> -1.
 

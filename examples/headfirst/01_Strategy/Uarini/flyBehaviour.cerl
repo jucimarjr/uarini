@@ -1,6 +1,6 @@
 -interface(flyBehaviour).
 -export([fly/0]).
 
-class_methods.
+methods.
 
 fly().

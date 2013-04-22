@@ -1,12 +1,11 @@
 -class(main).
--static([main/0]).
 -export([main/0]).
 
 class_methods.
 
 main() ->
-	Con1 = dialup::constructor(),
-	Con2 = adsl::conectar(),
+	Con1 = dialup::new_(),
+	Con2 = adsl::new_(),
 	
 	Con = Con1,
 	Con::conectar(),

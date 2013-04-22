@@ -3,11 +3,11 @@
 -export([calcularArea/0, new/1]).
 -constructor([new/1]).
 
-class_attributes.
+attributes.
 
 Raio.
 
-class_methods.
+methods.
 
 new(Raio) ->
 	self::Raio = Raio.

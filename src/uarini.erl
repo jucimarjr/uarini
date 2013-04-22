@@ -59,7 +59,6 @@ get_erl_file_list([AST | Rest], ClassesInfo, ErlangFileList) ->
 	ErlangModuleName = get_erl_modulename(AST),
 	ErlangFileName = get_erl_filename(ErlangModuleName),
 
-	%%io:format("~ncompiling ~p~n", [ErlangModuleName]),
 	case core:transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) of
 		{ok, ErlangAST} ->
 			create_erl_file(ErlangAST, ErlangFileName),

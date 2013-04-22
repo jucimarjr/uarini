@@ -1,11 +1,11 @@
 -class(empregado).
 -export([get_salario/0, set_salario/1]).
 
-class_attributes.
+attributes.
 
 Salario.
 
-class_methods.
+methods.
 
 get_salario() ->
 	self::Salario.

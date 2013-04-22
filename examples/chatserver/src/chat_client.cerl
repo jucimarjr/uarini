@@ -2,12 +2,22 @@
 -author('elmiliox@gmail.com').
 -constructor([register/1]).
 -compile(export_all).
--static([handle_messages/1]).
-
-class_attributes.
-Nick.
 
 class_methods.
+
+handle_messages(Nickname) ->
+    receive
+        {printmsg, MessageBody} ->
+            io:format("~p received: ~p~n", [Nickname, MessageBody]),
+            handle_messages(Nickname);
+        stop ->
+            ok
+    end.
+
+attributes.
+Nick.
+
+methods.
 
 register(Nickname) ->
     self::Nick = Nickname,
@@ -26,12 +36,3 @@ send(Message) ->
 send_to(Addressee, Message) ->
     chat_server:send_to(Addressee, Message).
 
-
-handle_messages(Nickname) ->
-    receive
-        {printmsg, MessageBody} ->
-            io:format("~p received: ~p~n", [Nickname, MessageBody]),
-            handle_messages(Nickname);
-        stop ->
-            ok
-    end.
