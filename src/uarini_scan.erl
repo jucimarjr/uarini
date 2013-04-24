@@ -97,7 +97,7 @@
          comment     = false               :: boolean(),
          text        = false               :: boolean()}).
 
-%%----------------------------------------------------------------------------
+%%--------------------------------------------------------------------------
 
 -spec format_error(ErrorDescriptor) -> string() when
       ErrorDescriptor :: error_description().
@@ -1363,5 +1363,7 @@ reserved_word('xor') -> true;
 
 reserved_word('class_attributes') -> true;
 reserved_word('class_methods') -> true;
+reserved_word('attributes') -> true;
+reserved_word('methods') -> true;
 
 reserved_word(_) -> false.

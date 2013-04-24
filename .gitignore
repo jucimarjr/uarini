@@ -6,7 +6,6 @@ priv
 *.plt
 *.swp
 .DS_store
-uarini_scan.erl
 uarini_parse.erl
 aleppo_parser.erl
 .metadata/
