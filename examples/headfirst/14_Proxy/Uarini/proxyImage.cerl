@@ -1,0 +1,25 @@
+-class(proxyImage).
+-implements(image).
+-export([new/1, display_image/0]).
+-constructor([new/1]).
+
+attributes.
+
+Image;
+Filename.
+
+methods.
+
+new(Filename) ->
+	self::Filename = Filename.
+	
+display_image() ->
+	Temp = self::Image,
+	if
+		(Temp == []) ->
+			self::Image = realImage::new(self::Filename);
+		true ->
+			io:format("")
+	end,
+	Temp2 = self::Image,
+	Temp2::display_image().

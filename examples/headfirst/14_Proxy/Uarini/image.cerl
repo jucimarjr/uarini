@@ -1,0 +1,6 @@
+-interface(image).
+-export([display_image/0]).
+
+methods.
+
+display_image().

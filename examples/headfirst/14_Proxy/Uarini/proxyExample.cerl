@@ -1,0 +1,14 @@
+-class(proxyExample).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Image1 = proxyImage::new("HiRes_10MB_Photo1"),
+	Image2 = proxyImage::new("HiRes_10MB_Photo2"),
+	
+	Image1::display_image(),  %%loading necessary
+	Image1::display_image(),  %%loading unnecessary
+	Image2::display_image(),  %%loading necessary	
+	Image2::display_image(),  %%loading unnecessary
+	Image1::display_image().  %%loading unnecessary

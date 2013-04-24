@@ -1,0 +1,20 @@
+-class(realImage).
+-implements(image).
+-export([new/1, load_image_from_disk/0, display_image/0]).
+-constructor([new/1]).
+
+attributes.
+
+Filename.
+
+methods.
+
+new(Filename) ->
+	self::Filename = Filename,
+	load_image_from_disk().
+	
+load_image_from_disk() ->
+	io:format("Loading ~p~n",[self::Filename]).
+	
+display_image() ->
+	io:format("Displaying ~p~n", [self::Filename]).
