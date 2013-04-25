@@ -1,0 +1,11 @@
+-class(bridgePattern).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Vehicle1 = car::new(produce::new_(), assemble::new_()),
+	Vehicle1::manufacture(),
+	
+	Vehicle2 = bike::new(produce::new_(), assemble::new_()),
+	Vehicle2::manufacture().

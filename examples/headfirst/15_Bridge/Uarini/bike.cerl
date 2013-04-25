@@ -1,0 +1,17 @@
+-class(bike).
+-extends(vehicle).
+-export([new/2, manufacture/0]).
+-constructor([new/2]).
+
+methods.
+
+new(WorkShop1, WorkShop2) ->
+	self::WorkShop1 = WorkShop1, 
+	self::WorkShop2 = WorkShop2.
+	
+manufacture() ->
+	io:format("Bike "),
+	Work1 = self::WorkShop1,
+	Work2 = self::WorkShop2,
+	Work1::work(),
+	Work2::work().

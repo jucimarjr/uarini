@@ -1,0 +1,8 @@
+-class(assemble).
+-implements(workshop).
+-export([work/0]).
+
+methods.
+
+work() ->
+	io:format(" Assembled. ~n").

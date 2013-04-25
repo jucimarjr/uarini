@@ -1,0 +1,8 @@
+-class(produce).
+-implements(workshop).
+-export([work/0]).
+
+methods.
+
+work() ->
+	io:format(" Produced. ").

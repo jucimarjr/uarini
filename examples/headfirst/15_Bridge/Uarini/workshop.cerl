@@ -1,0 +1,6 @@
+-interface(workshop).
+-export([work/0]).
+
+methods.
+
+work().

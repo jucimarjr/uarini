@@ -1,0 +1,16 @@
+-class(vehicle).
+-export([new/2, manufacture/0]).
+-constructor([new/2]).
+
+attributes.
+
+WorkShop1;
+WorkShop2.
+
+methods.
+
+new(WorkShop1, WorkShop2) ->
+	self::WorkShop1 = WorkShop1,
+	self::WorkShop2 = WorkShop2.
+	
+manufacture() -> null.
