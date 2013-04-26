@@ -1,0 +1,7 @@
+-interface(chain).
+-export([set_next/1, process/1]).
+
+methods.
+
+set_next(NextInChain).
+process(Request).

@@ -1,0 +1,22 @@
+-class(negativeProcessor).
+-implements(chain).
+-export([set_next/1, process/1]).
+
+attributes.
+
+NextInChain.
+
+methods.
+
+set_next(C) ->
+	self::NextInChain = C.
+	
+process(Request) ->
+	Number = Request::get_number(),
+	if
+		(Number < 0) ->
+			io:format("NegativeProcessor: ~p~n", [Number]);
+		true ->
+			Next = self::NextInChain,
+			Next::process(Request)
+	end.

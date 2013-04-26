@@ -1,0 +1,15 @@
+-class(number).
+-export([new/1, get_number/0]).
+-constructor([new/1]).
+
+attributes.
+
+Number.
+
+methods.
+
+new(Number) ->
+	self::Number = Number.
+	
+get_number() ->
+	self::Number.

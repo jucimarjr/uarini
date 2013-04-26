@@ -1,0 +1,19 @@
+-class(testChain).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	%%Configure chain of Responsibility
+	C1 = negativeProcessor::new_(),
+	C2 = zeroProcessor::new_(),
+	C3 = positiveProcessor::new_(),
+	C1::set_next(C2),
+	C2::set_next(C3),
+	
+	%%Calling chain of responsibility
+	C1::process(number::new(99)),
+	C1::process(number::new(-30)),
+	C1::process(number::new(0)),
+	C1::process(number::new(100)).
+	
