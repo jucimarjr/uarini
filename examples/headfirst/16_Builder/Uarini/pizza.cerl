@@ -1,0 +1,22 @@
+-class(pizza).
+-export([set_dough/1, set_sauce/1, set_topping/1, show_ingredients/0]).
+
+attributes.
+
+Dough;
+Sauce;
+Topping.
+
+methods.
+
+set_dough(Dough) ->
+	self::Dough = Dough.
+	
+set_sauce(Sauce) ->
+	self::Sauce = Sauce.
+	
+set_topping(Topping) ->
+	self::Topping = Topping.
+	
+show_ingredients() ->
+	io:format("Ingredients: ~p, ~p, ~p~n", [self::Dough, self::Sauce, self::Topping]).

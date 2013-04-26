@@ -1,0 +1,23 @@
+-class(spicyPizzaBuilder).
+-extends(pizzaBuilder).
+-export([build_dough/0, build_sauce/0, build_topping/0, to_string/0]).
+
+methods.
+
+build_dough() ->
+	io:format("Setting pan baked dough...~n"),
+	Temp = self::Pizza,
+	Temp::set_dough("pan baked").
+	
+build_sauce() ->
+	io:format("Setting hot sauce...~n"),
+	Temp = self::Pizza,
+	Temp::set_sauce("hot").
+	
+build_topping() ->
+	io:format("Setting pepperoni+salami toppings...~n"),
+	Temp = self::Pizza,
+	Temp::set_topping("pepperoni+salami").
+
+to_string() ->
+	io:format("Spicy Pizza built!~n").

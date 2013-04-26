@@ -1,0 +1,25 @@
+-class(builderExample).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Waiter = waiter::new_(),
+	HawaiianPizzaBuilder = hawaiianPizzaBuilder::new_(),
+	SpicyPizzaBuilder = spicyPizzaBuilder::new_(),
+	
+	io:format("   Preparing to build Hawaiian Pizza...~n"),
+	Waiter::set_pizza_builder(HawaiianPizzaBuilder),
+	Waiter::construct_pizza(),
+	
+	Pizza1 = Waiter::get_pizza(),
+	io:format("~p ", [HawaiianPizzaBuilder::to_string()]),
+	Pizza1::show_ingredients(),
+	
+	io:format("~n   Preparing to build Spicy Pizza...~n"),
+	Waiter::set_pizza_builder(SpicyPizzaBuilder),
+	Waiter::construct_pizza(),
+	
+	Pizza2 = Waiter::get_pizza(),
+	io:format("~p ", [SpicyPizzaBuilder::to_string()]),
+	Pizza2::show_ingredients().

@@ -1,0 +1,20 @@
+-class(pizzaBuilder).
+-export([get_pizza/0, create_new_pizza_product/0, build_dough/0, build_sauce/0, build_topping/0]).
+
+attributes.
+
+Pizza.
+
+methods.
+
+get_pizza() ->
+	self::Pizza.
+	
+create_new_pizza_product() ->
+	self::Pizza = pizza::new_().
+	
+build_dough() -> null.
+
+build_sauce() -> null.
+
+build_topping() -> null.

@@ -1,0 +1,23 @@
+-class(hawaiianPizzaBuilder).
+-extends(pizzaBuilder).
+-export([build_dough/0, build_sauce/0, build_topping/0, to_string/0]).
+
+methods.
+
+build_dough() ->
+	io:format("Setting cross dough...~n"),
+	Temp = self::Pizza,
+	Temp::set_dough("cross").
+	
+build_sauce() ->
+	io:format("Setting mild sauce...~n"),
+	Temp = self::Pizza,
+	Temp::set_sauce("mild").
+	
+build_topping() ->
+	io:format("Setting ham+pineapple toppings...~n"),
+	Temp = self::Pizza,
+	Temp::set_topping("ham+pineapple").
+
+to_string() ->
+	io:format("Hawaiian Pizza built!~n").

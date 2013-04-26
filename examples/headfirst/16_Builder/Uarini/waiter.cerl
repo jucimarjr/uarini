@@ -1,0 +1,23 @@
+-class(waiter).
+-export([set_pizza_builder/1, get_pizza/0, construct_pizza/0]).
+
+attributes.
+
+PizzaBuilder.
+
+methods.
+
+set_pizza_builder(Pb) ->
+	self::PizzaBuilder = Pb.
+	
+get_pizza() ->
+	Temp = self::PizzaBuilder,
+	Return = Temp::get_pizza(),
+	Return.
+	
+construct_pizza() ->
+	Temp = self::PizzaBuilder,
+	Temp::create_new_pizza_product(),
+	Temp::build_dough(),
+	Temp::build_sauce(),
+	Temp::build_topping().
