@@ -1,0 +1,33 @@
+-class(testFlyweight).
+-export([main/0]).
+
+class_methods.	
+
+main() ->
+	TeaRestroom = teaRestroom::new(),
+	
+	TeaRestroom::take_orders("chai", 2),
+	TeaRestroom::take_orders("chai", 2),
+	TeaRestroom::take_orders("camomile", 1),
+	TeaRestroom::take_orders("camomile", 1),
+	TeaRestroom::take_orders("earl grey", 1),
+	TeaRestroom::take_orders("camomile", 897),
+	TeaRestroom::take_orders("chai", 97),
+	TeaRestroom::take_orders("chai", 97),
+	TeaRestroom::take_orders("camomile", 3),
+	TeaRestroom::take_orders("earl grey", 3),
+	TeaRestroom::take_orders("chai", 3),
+	TeaRestroom::take_orders("earl grey", 96),
+	TeaRestroom::take_orders("camomile", 552),
+	TeaRestroom::take_orders("chai", 121),
+	TeaRestroom::take_orders("earl grey", 121),
+	
+	aux_serve_teas(TeaRestroom::OrdersMade, TeaRestroom::Flavors, TeaRestroom::Tables),
+	
+	io:format("~n"),
+	TeaRestroom::show_total_tea_flavors_made().
+	
+aux_serve_teas(0,_,_) -> ok;
+aux_serve_teas(Orders, [HF|ListFlavors], [HT|ListTables]) ->
+	HF::serve_tea(HT),
+	aux_serve_teas(Orders-1, ListFlavors, ListTables).

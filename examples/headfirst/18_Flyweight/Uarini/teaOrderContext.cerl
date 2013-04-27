@@ -1,0 +1,15 @@
+-class(teaOrderContext).
+-export([new/1, get_table/0]).
+-constructor([new/1]).
+
+attributes.
+
+TableNumber.
+
+methods.
+
+new(TableNumber) ->
+	self::TableNumber = TableNumber.
+	
+get_table() ->
+	self::TableNumber.

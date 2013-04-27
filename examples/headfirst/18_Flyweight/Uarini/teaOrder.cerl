@@ -1,0 +1,6 @@
+-class(teaOrder).
+-export([serve_tea/1]).
+
+methods.
+
+serve_tea(TeaOrderContext) -> null.

@@ -1,0 +1,63 @@
+-class(teaFlavorFactory).
+-export([new/0, get_tea_flavor/1, get_total_tea_flavors_made/0]).
+-constructor([new/0]).
+
+attributes.
+
+Flavors;
+TeasMade.
+
+methods.
+
+new() ->
+	self::Flavors = [],
+	self::TeasMade = 0.
+	
+get_tea_flavor(FlavorToGet) ->
+	TeasMade = self::TeasMade,
+	if
+		(TeasMade > 0) ->
+			{Return, Position} = aux_is_item(FlavorToGet, self::Flavors),
+			if
+				(Return == true) ->
+					Flavor = aux_get_item(Position, self::Flavors),
+					Flavor;
+				true ->
+					{NewList, PositionInserted} = aux_insert_new(FlavorToGet, self::Flavors),
+					Flavor = aux_get_item(PositionInserted, NewList),
+					self::Flavors = NewList,
+					self::TeasMade = self::TeasMade+1,
+					Flavor
+			end;
+		true ->
+			{NewList, PositionInserted} = aux_insert_new(FlavorToGet, self::Flavors),
+			Flavor = aux_get_item(PositionInserted, NewList),
+			self::Flavors = NewList,
+			self::TeasMade = self::TeasMade+1,
+			Flavor
+	end.
+
+get_total_tea_flavors_made() ->
+	self::TeasMade.	
+	
+aux_is_item(Item,List) -> aux_is_item(Item, List, 0).
+aux_is_item(_,[],_) -> {false, 0};
+aux_is_item(Item,[H|Rest],Position) ->
+	Flavor = H::get_flavor(),
+	if
+		(Item == Flavor) ->
+			{true, Position};
+		true ->
+			aux_is_item(Item, Rest, Position+1)
+	end. 
+	
+aux_get_item(0, [H|_]) -> H;
+aux_get_item(Position, [_|Rest]) -> aux_get_item(Position-1, Rest).
+
+aux_insert_new(FlavorToGet, List) ->
+	Index = aux_length(List),
+	NewFlavor = teaFlavor::new(FlavorToGet),
+	{List ++ [NewFlavor], Index}.
+	
+aux_length([]) -> 0;
+aux_length([H|Rest]) -> 1 + aux_length(Rest).

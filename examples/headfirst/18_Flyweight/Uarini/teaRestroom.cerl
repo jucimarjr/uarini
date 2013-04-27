@@ -1,0 +1,28 @@
+-class(teaRestroom).
+-export([new/0, take_orders/2, show_total_tea_flavors_made/0]).
+-constructor([new/0]).
+
+attributes.
+
+Flavors;
+Tables;
+OrdersMade;
+TeaFlavorFactory.
+
+methods.
+
+new() ->
+	self::Flavors = [],
+	self::Tables = [],
+	self::OrdersMade = 0,
+	self::TeaFlavorFactory = teaFlavorFactory::new().
+	
+take_orders(FlavorIn, Table) ->
+	Temp = self::TeaFlavorFactory,
+	self::Flavors = self::Flavors ++ [Temp::get_tea_flavor(FlavorIn)],
+	self::Tables = self::Tables ++ [teaOrderContext::new(Table)],
+	self::OrdersMade = self::OrdersMade + 1.
+	
+show_total_tea_flavors_made() ->
+	Temp = self::TeaFlavorFactory,
+	io:format("Total tea Flavor Objects made: ~p~n", [Temp::get_total_tea_flavors_made()]).

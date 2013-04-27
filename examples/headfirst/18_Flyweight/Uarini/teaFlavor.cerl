@@ -1,0 +1,19 @@
+-class(teaFlavor).
+-extends(teaOrder).
+-export([new/1, get_flavor/0, serve_tea/1]).
+-constructor([new/1]).
+
+attributes.
+
+TeaFlavor.
+
+methods.
+
+new(TeaFlavor) ->
+	self::TeaFlavor = TeaFlavor.
+	
+get_flavor() ->
+	self::TeaFlavor.
+	
+serve_tea(TeaOrderContext) ->
+	io:format("Serving tea flavor ~p to table number ~p~n", [self::TeaFlavor, TeaOrderContext::get_table()]).
