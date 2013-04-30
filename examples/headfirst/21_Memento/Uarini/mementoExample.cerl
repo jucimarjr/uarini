@@ -1,0 +1,21 @@
+-class(mementoExample).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Caretaker = caretaker::new(),
+	Originator = originator::new_(),
+	
+	Originator::set("State1"),
+	Originator::set("State2"),
+	Caretaker::add_memento(Originator::save_to_memento()),
+	Originator::set("State3"),
+	
+	Originator::restore_from_memento(Caretaker::get_memento(0)),
+	Originator::set("State4"),
+	
+	Caretaker::add_memento(Originator::save_to_memento()),
+	Originator::set("State5"),
+	
+	Originator::restore_from_memento(Caretaker::get_memento(1)).

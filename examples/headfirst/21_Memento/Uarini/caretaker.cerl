@@ -1,0 +1,19 @@
+-class(caretaker).
+-export([new/0, add_memento/1, get_memento/1]).
+-constructor([new/0]).
+
+attributes.
+
+SavedStates.
+
+methods.
+
+new() ->
+	self::SavedStates = [].
+	
+add_memento(M) ->
+	self::SavedStates = self::SavedStates ++ [M].
+	
+get_memento(Index) ->
+	Memento = lists:nth(Index+1, self::SavedStates),
+	Memento.
