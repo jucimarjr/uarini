@@ -1,0 +1,113 @@
+-class(evaluator).
+-implements(expression).
+-export([new/1, interpret/1]).
+-constructor([new/1]).
+
+attributes.
+
+SyntaxTree;
+ExpressionStack.
+
+methods.
+
+new(Expression) ->
+	self::ExpressionStack = [],
+	aux_evaluator(Expression),
+	self::SyntaxTree = aux_pop().
+
+interpret(Context) ->
+   Tree = self::SyntaxTree,
+   Tree::interpret(Context).  
+
+aux_evaluator([]) -> ok;
+aux_evaluator(Expression) ->
+	Token = lists:nth(1, Expression),
+	RestExpression = lists:nthtail(1, Expression),
+	if
+		(Token == 32) ->
+			aux_evaluator(RestExpression);
+      	(Token == 43) ->
+         	SubExpression = plus::new(aux_pop(), aux_pop()),
+         	aux_push(SubExpression),
+         	aux_evaluator(RestExpression);
+      	(Token == 45) ->
+         	Right = aux_pop(),
+         	Left = aux_pop(),
+         	SubExpression = minus::new(Left, Right),
+         	aux_push(SubExpression),
+         	aux_evaluator(RestExpression);
+      	true ->
+      		Token2 = aux_integer_to_char(Token),
+      		aux_push(variable::new(Token2)),
+         	aux_evaluator(RestExpression)
+   	end.
+
+aux_push(Item) -> 
+	self::ExpressionStack = [Item] ++ self::ExpressionStack.
+
+aux_pop() ->
+   Stack = self::ExpressionStack,
+   if
+      (Stack == []) ->
+         ok;
+      true ->
+         H = lists:nth(1, Stack),
+         self::ExpressionStack = lists:nthtail(1, Stack),
+         H
+   end.
+   
+aux_integer_to_char(Integer) ->
+	case Integer of
+		97 ->
+			a;
+		98 ->
+			b;
+		99 ->
+			c;
+		100 ->
+			d;
+		101 ->
+			e;
+		102 ->
+			f;
+		103 ->
+			g;
+		104 ->
+			h;
+		105 ->
+			i;
+		106 ->
+			j;
+		107 ->
+			k;
+		108 ->
+			l;
+		109 ->
+			m;
+		110 ->
+			n;
+		111 ->
+			o;
+		112 ->
+			p;
+		113 ->
+			q;
+		114 ->
+			r;
+		115 ->
+			s;
+		116 ->
+			t;
+		117 ->
+			u;
+		118 ->
+			v;			
+		119 ->
+			w;
+		120 ->
+			x;
+		121 ->
+			y;			
+		122 ->
+			z
+	end.

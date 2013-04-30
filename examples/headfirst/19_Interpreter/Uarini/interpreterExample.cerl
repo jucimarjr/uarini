@@ -1,0 +1,16 @@
+-class(interpreterExample).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	Expression = "w x z - +",
+	Sentence = evaluator::new(Expression),
+	Variables = orddict:new(),
+
+	Variables2 = orddict:store(w, number::new(5), Variables),
+	Variables3 = orddict:store(x, number::new(10), Variables2),
+	Variables4 = orddict:store(z, number::new(42), Variables3),
+	
+	Result = Sentence::interpret(Variables4),
+	io:format("Result of sentence is: ~p~n", [Result]).

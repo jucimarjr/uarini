@@ -1,0 +1,24 @@
+-class(variable).
+-implements(expression).
+-export([new/1, interpret/1]).
+-constructor([new/1]).
+
+attributes.
+
+Name.
+
+methods.
+
+new(Name) ->
+	self::Name = Name.
+	
+interpret(Variables) ->
+	Name = self::Name,
+	Return = orddict:find(Name, Variables),
+	if
+		(Return == error) ->
+			0;
+		true ->
+			{ok, Value} = Return,
+			Value::interpret(Variables)
+	end.

@@ -1,0 +1,20 @@
+-class(minus).
+-implements(expression).
+-export([new/2, interpret/1]).
+-constructor([new/2]).
+
+attributes.
+
+LeftOperand;
+RightOperand.
+
+methods.
+
+new(Left, Right) ->
+	self::LeftOperand = Left,
+	self::RightOperand = Right.
+	
+interpret(Variables) ->
+	Left = self::LeftOperand,
+	Right = self::RightOperand,
+	Left::interpret(Variables) - Right::interpret(Variables).

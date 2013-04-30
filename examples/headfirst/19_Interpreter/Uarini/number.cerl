@@ -1,0 +1,16 @@
+-class(number).
+-implements(expression).
+-export([new/1, interpret/1]).
+-constructor([new/1]).
+
+attributes.
+
+Number.
+
+methods.
+
+new(Number) ->
+	self::Number = Number.
+	
+interpret(Variables) ->
+	self::Number.

@@ -1,0 +1,6 @@
+-interface(expression).
+-export([interpret/1]).
+
+methods.
+
+interpret(Variables).
