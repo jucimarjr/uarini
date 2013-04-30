@@ -1,0 +1,23 @@
+-class(atcMediator).
+-implements(iatcMediator).
+-export([register_runway/1, register_flight/1, is_landing_ok/0, set_landing_status/1]).
+
+attributes.
+
+Flight;
+Runway;
+Land.
+
+methods.
+
+register_runway(Runway) ->
+	self::Runway = Runway.
+	
+register_flight(Flight) ->
+	self::Flight = Flight.
+	
+is_landing_ok() ->
+	self::Land.
+	
+set_landing_status(Status) ->
+	self::Land = Status.

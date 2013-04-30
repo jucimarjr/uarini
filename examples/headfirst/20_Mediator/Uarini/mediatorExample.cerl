@@ -1,0 +1,17 @@
+-class(mediatorExample).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	AtcMediator = atcMediator::new_(),
+	Sparrow101 = flight::new(AtcMediator),
+	MainRunway = runway::new(AtcMediator),
+	
+	AtcMediator::register_flight(Sparrow101),
+	AtcMediator::register_runway(MainRunway),
+	
+	Sparrow101::get_ready(),
+	Sparrow101::land(),
+	MainRunway::land(),
+	Sparrow101::land().

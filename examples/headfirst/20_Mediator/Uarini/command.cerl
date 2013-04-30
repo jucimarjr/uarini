@@ -1,0 +1,6 @@
+-interface(command).
+-export([land/0]).
+
+methods.
+
+land().

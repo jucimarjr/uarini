@@ -1,0 +1,9 @@
+-interface(iatcMediator).
+-export([register_runway/1, register_flight/1, is_landing_ok/0, set_landing_status/1]).
+
+methods.
+
+register_runway(Runway).
+register_flight(Flight).
+is_landing_ok().
+set_landing_status(Status).

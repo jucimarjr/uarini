@@ -1,0 +1,27 @@
+-class(flight).
+-implements(command).
+-export([new/1, land/0, get_ready/0]).
+-constructor([new/1]).
+
+attributes.
+
+AtcMediator.
+
+methods.
+
+new(AtcMediator) ->
+	self::AtcMediator = AtcMediator.
+	
+land() ->
+	AtcMed = self::AtcMediator,
+	Result = AtcMed::is_landing_ok(),
+	if
+		(Result == true) ->
+			io:format("Landing done....~n"),
+			AtcMed::set_landing_status(true);
+		true ->
+			io:format("Will wait to land....~n")
+	end.
+	
+get_ready() ->
+	io:format("Getting ready...~n").
