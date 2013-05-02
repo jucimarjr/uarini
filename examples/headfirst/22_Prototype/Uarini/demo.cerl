@@ -1,0 +1,22 @@
+-class(demo).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	io:format("Creating person 1...~n"),
+	Person1 = person::new("Fred"),
+	io:format("person1: ~p~n", [Person1::to_string()]),
+	
+	io:format("Cloning person 1 to become person 2...~n"),
+	Person2 = Person1::do_clone(),
+	io:format("person2: ~p~n", [Person2::to_string()]),
+
+	io:format("Creating dog 1...~n"),
+	Dog1 = dog::new("Wooof!"),
+	io:format("dog1: ~p~n", [Dog1::to_string()]),
+	
+	io:format("Cloning dog 1 to become dog 2...~n"),
+	Dog2 = Dog1::do_clone(),
+	io:format("dog2: ~p~n", [Dog2::to_string()]).
+	

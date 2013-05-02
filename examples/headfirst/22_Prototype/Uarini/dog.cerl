@@ -1,0 +1,20 @@
+-class(dog).
+-implements(prototype).
+-export([new/1, do_clone/0, to_string/0]).
+-constructor([new/1]).
+
+attributes.
+
+Sound.
+
+methods.
+
+new(Sound) ->
+	self::Sound = Sound.
+	
+do_clone() ->
+	dog::new(self::Sound).
+	
+to_string() ->
+	String = "This dog says " ++ self::Sound,
+	String.

@@ -1,0 +1,6 @@
+-interface(prototype).
+-export([do_clone/0]).
+
+methods.
+
+do_clone().
