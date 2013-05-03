@@ -1,0 +1,9 @@
+-class(body).
+-implements(carElement).
+-export([accept/1]).
+
+methods.
+
+accept(Visitor) ->
+    SelfObject = {body, ObjectID},
+    Visitor::visit(SelfObject).

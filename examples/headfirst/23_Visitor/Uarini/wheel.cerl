@@ -1,0 +1,20 @@
+-class(wheel).
+-implements(carElement).
+-export([new/1, get_name/0, accept/1]).
+-constructor([new/1]).
+
+attributes.
+
+Name.
+
+methods.
+
+new(Name) ->
+    self::Name = Name.
+
+get_name() ->
+    self::Name.
+
+accept(Visitor) ->
+    SelfObject = {wheel, ObjectID},
+    Visitor::visit(SelfObject).

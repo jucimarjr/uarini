@@ -1,0 +1,6 @@
+-interface(carElement).
+-export([accept/1]).
+
+methods.
+
+accept(Visitor).

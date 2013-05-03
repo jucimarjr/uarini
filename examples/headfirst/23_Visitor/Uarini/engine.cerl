@@ -1,0 +1,9 @@
+-class(engine).
+-implements(carElement).
+-export([accept/1]).
+
+methods.
+
+accept(Visitor) ->
+    SelfObject = {engine, ObjectID},
+    Visitor::visit(SelfObject).

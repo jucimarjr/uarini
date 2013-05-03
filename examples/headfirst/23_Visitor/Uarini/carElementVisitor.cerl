@@ -1,0 +1,6 @@
+-interface(carElementVisitor).
+-export([visit/1]).
+
+methods.
+
+visit(ObjectVisited).

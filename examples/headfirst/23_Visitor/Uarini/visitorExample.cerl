@@ -1,0 +1,9 @@
+-class(visitorExample).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+    Car = car::new(),
+    Car::accept(carElementPrintVisitor::new_()),
+    Car::accept(carElementDoVisitor::new_()).

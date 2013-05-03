@@ -1,0 +1,24 @@
+-class(car).
+-implements(carElement).
+-export([new/0, accept/1]).
+-constructor([new/0]).
+
+attributes.
+
+Elements.
+
+methods.
+
+new() ->
+    self::Elements = [wheel::new("front left"), wheel::new("front right"), wheel::new("back left"),
+                      wheel::new("back right"), body::new_(), engine::new_()].
+
+accept(Visitor) ->
+    SelfObject = {car, ObjectID},
+    aux_accept(self::Elements, Visitor),
+    Visitor::visit(SelfObject).
+
+aux_accept([],_) -> ok;
+aux_accept([H|Rest], Visitor) ->
+    H::accept(Visitor),
+    aux_accept(Rest, Visitor).

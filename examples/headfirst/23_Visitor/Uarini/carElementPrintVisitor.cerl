@@ -1,0 +1,20 @@
+-class(carElementPrintVisitor).
+-implements(carElementVisitor).
+-export([visit/1]).
+
+methods.
+
+visit(ObjectVisited) ->
+    {Class,_} = ObjectVisited,
+    if
+        (Class == wheel) ->
+            io:format("Visiting ~p wheel~n", [ObjectVisited::get_name()]);
+        (Class == engine) ->
+            io:format("Visiting engine~n");
+        (Class == body) ->
+            io:format("Visiting body~n");
+        (Class == car) ->
+            io:format("Visiting car~n");
+        true ->
+            ok
+    end.
