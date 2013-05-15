@@ -1,0 +1,44 @@
+-class(slave_sk).
+-compile(export_all).
+
+class_methods. %%--------------------------------------------------------------
+
+isReliable(Char) ->
+	if Char=="good guy"-> true;
+		true -> false
+	end.
+
+character() -> 
+	random:seed(now()),
+	lists:nth(random:uniform(2), ["good guy", "bad guy"]).
+
+slaveTrue(N) ->
+	random:seed(now()),
+	if random:uniform(2) == 1 -> master ! character()
+	end,
+  receive
+    die -> 
+		io:format("~p morreu~n",[N]),
+      exit({N,true}); % return slave number on exit
+    start -> 
+		io:format("~p Good Guy working ~n",[N]),
+		if random:uniform(2) == 1 -> slave(N);
+			true -> exit(ok)
+		end      
+  end.
+
+slaveFalse(N) ->
+	random:seed(now()),
+	if random:uniform(2) == 1 -> master ! character()
+	end,
+  receive
+    die -> 
+		io:format("~p morreu~n",[N]),
+      exit({N,true}); % return slave number on exit
+    start -> 
+		io:format("~p Bad Guy working  ~n",[N]),
+		if random:uniform(2) == 1 -> slave(N);
+			true -> exit(ok)
+		end      
+  end.
+

@@ -1,0 +1,45 @@
+-class(fork_sk).
+-export([new/4]).
+-constructor([new/4]).
+
+methods. %%--------------------------------------------------------------------
+%%BoolFun is a method that will judge the BFVariable, its input, and return true or false
+%%SkTrue and SkFalse are the skeletons to be called depending on that result ^
+	new(BoolFun, BFVariable, SkTrue, SkFalse) ->
+		register(master,spawn(fork_sk,start_slaves,[BoolFun, BFVariable, SkTrue, SkFalse,[]])).
+
+	stop() -> master ! stop.
+
+class_methods. %%--------------------------------------------------------------
+
+	lookup_Slave([{M, Slave}|T], N) -> if M == N -> Slave; true -> lookup_Slave(T, N) end.
+
+	stop_All(Slaves) ->
+	  lists:foreach(fun({_, Slave}) -> Slave ! die end, Slaves).
+
+	start_slaves(BoolFun, BFVariable, SkTrue, SkFalse,Slaves) ->
+		io:format("master made a decision ~n",[X]),
+		process_flag(trap_exit, true), %%se um slave morre ele manda um ultimo suspiro p/ esse processo
+		A = BoolFun(BFVariable),
+		if A == true -> master(BoolFun, SkTrue, SkFalse, [{0,true,spawn_link(fun() -> SkTrue(0) end)}]);
+			A == false -> master(BoolFun, SkTrue, SkFalse, [{0,false,spawn_link(fun() -> SkFalse(0) end)}])
+		end,
+		master(BoolFun, SkTrue, SkFalse, Slaves).
+
+	master(BoolFun, SkTrue, SkFalse, Slaves) ->
+		receive
+			stop -> stop_All(Slaves);
+			{'EXIT',_ , {N,Type}} ->
+				io:format("master:restarting dead slave ~w.~n",[N]),
+				if Type == true -> master(BoolFun, SkTrue, SkFalse, lists:keyreplace(N,1,Slaves,{0,true,spawn_link(fun() -> SkTrue(N) end)}));
+					Type == false -> master(BoolFun, SkTrue, SkFalse, lists:keyreplace(N,1,Slaves,{0,false,spawn_link(fun() -> SkFalse(N) end)}))
+				end;
+			BFVariable -> 
+				A = BoolFun(BFVariable),
+				N = lists:flatlength(Slaves),
+				if A == true -> master(BoolFun, SkTrue, SkFalse, [{N,true,spawn_link(fun() -> SkTrue(N) end)}|Slaves]);
+					A == false -> master(BoolFun, SkTrue, SkFalse, [{N,false,spawn_link(fun() -> SkFalse(N) end)}|Slaves])
+				end
+	   end.
+
+

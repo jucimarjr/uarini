@@ -1,0 +1,9 @@
+-class(fork_sk_test).
+-compile(export_all).
+
+class_methods.
+
+main() ->
+	Sk = fork_sk::new(fun slave_sk:isReliable/1,slave_sk:character(),slave_sk:slaveTrue/1,slave_sk:slaveFalse/1),
+	timer:sleep(2000),
+	Sk::stop().
