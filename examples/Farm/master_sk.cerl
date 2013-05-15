@@ -1,0 +1,40 @@
+-class(master_sk).
+-export([new/1]).
+-constructor([new/1]).
+
+methods. %%--------------------------------------------------------------------
+
+	new(N) ->
+		register(master,spawn(master_sk,start_slaves,[N,[]])).
+
+	stop() -> master ! stop.
+
+	to_slave(N, Msg) -> master ! {N, Msg}.
+
+class_methods. %%--------------------------------------------------------------
+
+	lookup_Slave([{M, Slave}|T], N) -> if M == N -> Slave; true -> lookup_Slave(T, N) end.
+
+	stop_All(Slaves) ->
+	  lists:foreach(fun({_, Slave}) -> Slave ! die end, Slaves).
+
+	start_slaves(0,Slaves) ->
+		io:format("master:got the slaves  ~n"),
+		process_flag(trap_exit, true), %%se um slave morre ele manda um ultimo suspiro p/ esse processo
+		master(Slaves);
+	start_slaves(N,Slaves) ->
+		start_slaves(N-1,[{N,spawn_link(slave_sk, slave,[N])} | Slaves]).
+
+	master(Slaves) ->
+		receive
+			stop -> stop_All(Slaves);
+			{'EXIT',_ , N} ->
+				io:format("master:restarting dead slave ~w.~n",[N]),
+				Slave = spawn_link(slave_sk, slave,[N]),
+				master(lists:keyreplace(N,1,Slaves,{N,Slave}));
+			{N, Msg} -> 
+		   	Slave = lookup_Slave(Slaves,N),
+				Slave ! Msg,
+		   	master(Slaves)
+	  end.
+

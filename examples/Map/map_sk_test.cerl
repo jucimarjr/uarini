@@ -1,0 +1,7 @@
+-class(map_sk_test).
+-compile(export_all).
+
+class_methods.
+
+main() ->
+	Sk = map_sk::new([1,2,3]).

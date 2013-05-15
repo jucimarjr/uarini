@@ -1,0 +1,13 @@
+-class(ms_sk_test).
+-compile(export_all).
+
+class_methods.
+
+main() ->
+	Sk = master_sk::new(3), 
+	Sk::to_slave(3,"faz a funçãoX"),  timer:sleep(1000), %%como o main e a aplicaçao são processos diferentes é preciso dar um tempo p/ executar...
+	Sk::to_slave(2,"faz a funçãoY"), timer:sleep(1000),
+	Sk::to_slave(1,"faz a funçãoZ"), timer:sleep(1000),
+	Sk::to_slave(2,die), timer:sleep(1000),
+	Sk::to_slave(2,"faz a funçãoW"), timer:sleep(1000),
+	Sk::stop().

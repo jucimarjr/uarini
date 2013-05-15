@@ -1,0 +1,19 @@
+-class(slave_sk).
+-compile(export_all).
+
+class_methods. %%--------------------------------------------------------------
+
+slave(N) ->
+  receive
+    die -> 
+		io:format("~p morreu~n",[N]),
+      exit(N); % return slave number on exit
+    Msg -> 
+      work(N,Msg),
+      slave(N)
+  end.
+
+%%yeah no other way, not as good as the PASM examples...when in use, change this code
+work(N,Msg) -> io:format("~p got the ""~p""...working now...'ll be seeing the mail box in a sec ~n",[N,Msg]).
+
+

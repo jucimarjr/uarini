@@ -1,0 +1,44 @@
+-class(pipe_sk).
+-export([new/1]).
+-constructor([new/1]).
+
+methods. %%--------------------------------------------------------------------
+
+	new(N) ->
+		register(master,spawn(pipe_sk,start_slaves,[0,N,[]])).
+
+	stop() -> master ! stop.
+
+	soma4(X) -> master ! {start,X}. 
+
+class_methods. %%--------------------------------------------------------------
+
+	stop_All(Slaves) ->
+	  lists:foreach(fun({Slave,_}) -> Slave ! die end, Slaves).
+
+	start_slaves(_,0,Slaves) ->
+		io:format("master:got the slaves  ~n"),
+		process_flag(trap_exit, true), %%se um slave morre ele manda um ultimo suspiro p/ esse processo
+		master(Slaves);
+	start_slaves(I,1,Slaves) ->
+		Name = list_to_atom(lists:flatten(io_lib:format("slave~p", [I]))),
+		register(Name,spawn_link(slave_sk, slave,[Name,last])),
+		start_slaves(I+1,0,[{Name,last} | Slaves]);
+	start_slaves(I,N,Slaves) ->
+		Name = list_to_atom(lists:flatten(io_lib:format("slave~p", [I]))),
+		Next = list_to_atom(lists:flatten(io_lib:format("slave~p", [I+1]))),
+		register(Name,spawn_link(slave_sk, slave,[Name,Next])),
+		start_slaves(I+1,N-1,[{Name,Next} | Slaves]).
+
+	master(Slaves) ->
+		receive
+			stop -> stop_All(Slaves);
+			{'EXIT',_ , {N,Next}} ->
+				io:format("master:restarting dead slave ~w.~n",[N]),
+				Slave = spawn_link(slave_sk, slave,[N,Next]),
+				master(lists:keyreplace(N,1,Slaves,{N,Slave}));
+			{start,Msg} -> 
+				slave0 ! Msg,
+		   	master(Slaves)
+	  end.
+
