@@ -1,0 +1,54 @@
+-class(slave_sk).
+-compile(export_all).
+
+class_methods. %%--------------------------------------------------------------
+
+%%to use  inheritance migth be nice
+petCat(N,Cat) ->
+	random:seed(now()),
+	case lists:nth(random:uniform(6), actions()) of
+    die -> 
+		io:format("~p died ~n",[Cat]),
+		exit({run,cat,Cat});  
+    run -> 
+		io:format("~p run away ~n",[Cat]),
+      exit({N,cat,Cat});  
+    speak -> 
+		io:format("~p: meow...meow~n",[Cat]),
+      petCat(N,Cat);
+	 eat -> 
+		io:format("~p is eating ~n",[Cat]),
+      petCat(N,Cat);  
+	 play -> 
+		io:format("~p is playing ~n",[Cat]),
+      petCat(N,Cat);  
+	 sleep -> 
+		io:format("~p is sleeping ~n",[Cat]),
+      petCat(N,Cat)  
+  end.
+
+
+petDog(N,Dog) ->
+	random:seed(now()),
+	case lists:nth(random:uniform(6), actions()) of
+    die -> 
+		io:format("~p died~n",[Dog]),
+      exit({run,dog,Dog});  
+    run -> 
+		io:format("~p run a way ~n",[Dog]),
+      exit({N,dog,Dog});  
+    speak -> 
+		io:format("~p: wof...wof~n",[Dog]),
+      petDog(N,Dog);
+	 eat -> 
+		io:format("~p is eating ~n",[Dog]),
+      petDog(N,Dog);  
+	 play -> 
+		io:format("~p is playing ~n",[Dog]),
+      petDog(N,Dog);  
+	 sleep -> 
+		io:format("~p is sleeping ~n",[Dog]),
+      petDog(N,Dog)  
+  end.
+
+actions() -> [die,run,speak,eat,play,sleep].

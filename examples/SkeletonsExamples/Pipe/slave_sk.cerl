@@ -13,11 +13,10 @@ slave(N,Next) ->
       slave(N,Next)
   end.
 
-%%yeah no other way, not as good as the PASM examples...when in use, change this code
 work(N,Msg,last) -> 
 	io:format("~p got the ""~p""... ~n Result: ""~p"" ~n",[N,Msg,Msg+1]);
 work(N,Msg,Next) -> 
 	io:format("~p got the ""~p""...working now... ~n",[N,Msg]),
-	Next ! Msg+1.
+	Next ! Msg+1. %%plus 1 to the result received from the last slave
 
 

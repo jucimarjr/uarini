@@ -1,7 +1,9 @@
 -class(map_sk).
 -export([new/1]).
 -constructor([new/1]).
-
+%%this code intended to replicate the behaviour of the Skeleton Map
+%%used to deal with large codes, it breakes it, sends its parts to the designed processes and then reassembles it
+%%here we recceive a list and give back the list of the doubles
 methods. %%--------------------------------------------------------------------
 
 	new(N) ->
@@ -19,10 +21,10 @@ class_methods. %%--------------------------------------------------------------
 
 	start_slaves(X,[],Slaves,Tam) ->
 		io:format("master:got ~p slaves  ~n",[X]),
-		process_flag(trap_exit, true), %%se um slave morre ele manda um ultimo suspiro p/ esse processo
+		process_flag(trap_exit, true),
 		start_works(Slaves),
 		master(Slaves,[],Tam);
-	start_slaves(X,[H|T],Slaves,Tam) ->
+	start_slaves(X,[H|T],Slaves,Tam) -> %%dividing the data
 		start_slaves(X+1,T,[{X,spawn_link(slave_sk, slave,[X,H])} | Slaves],Tam).
 
 	start_works(Slaves) ->
@@ -44,7 +46,7 @@ class_methods. %%--------------------------------------------------------------
 				Slave = spawn_link(slave_sk, slave,[N]),
 				master(lists:keyreplace(N,1,Slaves,{N,Slave}),Result,Tam);
 			{N, Msg} -> 
-		   	master(Slaves,[{N,Msg}|Result],Tam)
+		   	master(Slaves,[{N,Msg}|Result],Tam) %%reassembling 
 	  end.
 
 

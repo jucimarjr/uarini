@@ -2,6 +2,9 @@
 -export([new/1]).
 -constructor([new/1]).
 
+%%this code intended to replicat the behaviour of the Skeleton Pipe
+%%by receiveng a data [a number X] creating linked chain of X processes and produce the final result
+%%the sum of a number + the number of processes
 methods. %%--------------------------------------------------------------------
 
 	new(N) ->
@@ -9,7 +12,7 @@ methods. %%--------------------------------------------------------------------
 
 	stop() -> master ! stop.
 
-	soma4(X) -> master ! {start,X}. 
+	soma(X) -> master ! {start,X}. 
 
 class_methods. %%--------------------------------------------------------------
 
@@ -18,7 +21,7 @@ class_methods. %%--------------------------------------------------------------
 
 	start_slaves(_,0,Slaves) ->
 		io:format("master:got the slaves  ~n"),
-		process_flag(trap_exit, true), %%se um slave morre ele manda um ultimo suspiro p/ esse processo
+		process_flag(trap_exit, true), 
 		master(Slaves);
 	start_slaves(I,1,Slaves) ->
 		Name = list_to_atom(lists:flatten(io_lib:format("slave~p", [I]))),
@@ -30,6 +33,7 @@ class_methods. %%--------------------------------------------------------------
 		register(Name,spawn_link(slave_sk, slave,[Name,Next])),
 		start_slaves(I+1,N-1,[{Name,Next} | Slaves]).
 
+	%%to keep the list of slaves is a matter of safety
 	master(Slaves) ->
 		receive
 			stop -> stop_All(Slaves);

@@ -1,0 +1,7 @@
+-class(reduce_sk_test).
+-compile(export_all).
+
+class_methods.
+
+main() ->
+	Sk = reduce_sk::new([{dog,"Maroca"},{cat,"Berenice"},{cat,"Bernadette"},{dog,"Pingo"},{dog,"Gota"}]).

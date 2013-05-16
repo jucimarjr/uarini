@@ -1,0 +1,54 @@
+-class(reduce_sk).
+-export([new/1]).
+-constructor([new/1]).
+
+%%this code try to replicate the skeleton Reduce behaviour
+%% by first getting a data structur [this example is a list of pet and its names]
+%% breaking it between the designed process they should go through [this case random action of the pets]
+%% when they finish the result is merged [here it was just collected...]
+methods. %%--------------------------------------------------------------------
+
+	new(Data) ->
+		register(master,spawn(reduce_sk,start_slaves,[Data,[],0])).
+
+	stop() -> master ! stop.
+
+class_methods. %%--------------------------------------------------------------
+
+	stop_All(Slaves) ->
+	  lists:foreach(fun({_, Slave}) -> exit(Slave,kill) end, Slaves).
+
+	start_slaves([],Slaves,N) ->
+		io:format("master:got ~p pets  ~n",[N]),
+		master(Slaves,N,[]);
+	start_slaves([{Type,Name}|T],Slaves,N) -> %%breaking the data
+		process_flag(trap_exit, true), 
+		case Type of
+			dog -> start_slaves(T,[{N,spawn_link(slave_sk, petDog,[N,Name])} | Slaves],N+1);
+			cat -> start_slaves(T,[{N,spawn_link(slave_sk, petCat,[N,Name])} | Slaves],N+1)
+		end.
+
+	%in the end, to keep a list of childs is just a matter of safety....
+	master(Slaves,FinishedSlaves,Result) ->
+		if FinishedSlaves < 1 -> %%check if everything is finished
+			io:format("~n~p~n",[Result]),
+			stop_All(Slaves),
+			exit(kill);
+			true -> true
+		end,
+		receive
+			{'EXIT',_ , {run,Type,Name}} -> 
+		   	master(Slaves,FinishedSlaves-1,[{Type,Name}|Result]); %%this is the place that the merge should happen
+			{'EXIT',_ , {N,Type,Name}} -> %%when they crash proposerly they can be restarted 
+				io:format("master:retriving runaway pet ~p ~p.~n",[Type,Name]),
+				case Type of
+					dog -> 
+							Slave = spawn_link(slave_sk, petDog,[N,Name]),
+							master(lists:keyreplace(N,1,Slaves,{N, Slave}),FinishedSlaves,Result);
+					cat -> 
+							Slave = spawn_link(slave_sk, petCat,[N,Name]),
+							master(lists:keyreplace(N,1,Slaves,{N, Slave}),FinishedSlaves,Result)
+				end;
+			{'EXIT',_ , ok} -> ok; 
+			stop -> stop_All(Slaves) 	
+	  end.

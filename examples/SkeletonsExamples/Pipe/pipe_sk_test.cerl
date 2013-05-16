@@ -1,0 +1,9 @@
+-class(pipe_sk_test).
+-compile(export_all).
+
+class_methods.
+
+main() ->
+	Sk = pipe_sk::new(4), 
+	Sk::soma(5),  timer:sleep(1000), %% here we send the main process to sleep
+	Sk::stop(). %% because otherwise the stop comand would come in the way of the completion

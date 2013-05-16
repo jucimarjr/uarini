@@ -2,10 +2,14 @@
 -export([new/1]).
 -constructor([new/1]).
 
+%%this trys to replciate the Skeleton Farm behaviour
+%% the skeleton usually is set first with a number os processes doing different or concurrent tasks
+%% and send the received data to the one designed to receive its kind
+%% here each process receives a messages and says it does something with it
 methods. %%--------------------------------------------------------------------
 
 	new(N) ->
-		register(master,spawn(master_sk,start_slaves,[N,[]])).
+		register(master,spawn(master_sk,start_slaves,[N,[]])). 
 
 	stop() -> master ! stop.
 
@@ -20,11 +24,12 @@ class_methods. %%--------------------------------------------------------------
 
 	start_slaves(0,Slaves) ->
 		io:format("master:got the slaves  ~n"),
-		process_flag(trap_exit, true), %%se um slave morre ele manda um ultimo suspiro p/ esse processo
+		process_flag(trap_exit, true), 
 		master(Slaves);
-	start_slaves(N,Slaves) ->
+	start_slaves(N,Slaves) -> %%creating the processes
 		start_slaves(N-1,[{N,spawn_link(slave_sk, slave,[N])} | Slaves]).
 
+	%%to keep the list o slaves is matter of safety
 	master(Slaves) ->
 		receive
 			stop -> stop_All(Slaves);

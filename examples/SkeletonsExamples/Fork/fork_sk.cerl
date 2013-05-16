@@ -2,6 +2,13 @@
 -export([new/4]).
 -constructor([new/4]).
 
+
+%% intended to replicate the behaviour of the fork skeleton
+%% here we start a master slave set and depending on the results [messages send to the master]
+%% the new data is going through one of two processes, but could be more
+%% this examples if the result is false, a bad guy is created, if true, a good a guy
+%% and each time a new character is born, another one migth be started [randomly]
+%% as well as it can die [randomly]
 methods. %%--------------------------------------------------------------------
 %%BoolFun is a method that will judge the BFVariable, its input, and return true or false
 %%SkTrue and SkFalse are the skeletons to be called depending on that result ^
