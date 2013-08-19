@@ -1,0 +1,51 @@
+-class(forkskeleton).
+-compile(export_all).
+-constructor([new/1]).
+
+
+%% intended to replicate the behaviour of the fork skeleton
+%% here we start a master slave set and depending on the results [messages send to the master]
+%% the new data is going through one of two processes, but could be mare
+%% this examples if the result is false, a bad guy is created, if true, a good a guy
+%% and each time a new character is born, another one migth be started [randomly]
+%% as well as it can die [randomly]
+
+methods. %%--------------------------------------------------------------------
+%%BoolFun is a method that will judge the BFVariable, its input, and return true or false
+%%SkTrue and SkFalse are the skeletons to be called depending on that result ^
+	new(BoolFun) ->
+		register(masterfork,spawn(forkskeleton,start_slaves,[BoolFun,[]])).
+
+	stop() -> masterfork ! stop.
+
+class_methods. %%--------------------------------------------------------------
+
+	lookup_Slave([{M,_, Slave}|T], N) -> if M == N -> Slave; true -> lookup_Slave(T, N) end.
+
+	stop_All(Slaves) ->
+	  lists:foreach(fun({_,_, Slave}) -> Slave ! die end, Slaves).
+
+	start_slaves(BoolFun, Slaves) ->
+		io:format("master made a decision ~n",[]),
+		process_flag(trap_exit, true), %%se um slave morre ele manda um ultimo suspiro p/ esse processo
+		if BoolFun == true -> master(true, [{0,true,spawn_link(fun() -> forkslave:slaveTrue(0) end)}]);
+			BoolFun == false -> master(false, [{0,false,spawn_link(fun() -> forkslave:slaveFalse(0) end)}])
+		end,
+		master(BoolFun, Slaves).
+
+	master(BoolFun, Slaves) ->
+		receive
+			stop -> stop_All(Slaves);
+			{'EXIT',_ , ok} -> ok;
+			{'EXIT',_ , {N,Type}} ->
+				io:format("master:restarting dead slave ~w.~n",[N]),
+				if Type == true -> master(BoolFun, lists:keyreplace(N,1,Slaves,{N,true,spawn_link(fun() -> forkslave:slaveTrue(N) end)}));
+					Type == false -> master(BoolFun, lists:keyreplace(N,1,Slaves,{N,false,spawn_link(fun() -> forkslave:slaveFalse(N) end)}))
+				end;
+			true -> 
+					N = lists:flatlength(Slaves),
+					master(BoolFun, [{N,true,spawn_link(fun() -> forkslave:slaveTrue(N) end)}|Slaves]);
+			false ->
+					N = lists:flatlength(Slaves),
+					master(BoolFun, [{N,false,spawn_link(fun() -> forkslave:slaveFalse(N) end)}|Slaves])
+	   end.

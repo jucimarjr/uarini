@@ -1,0 +1,16 @@
+-class(skeletons).
+-compile(export_all).
+
+methods.
+
+create(farm,N) ->
+			farmskeleton::new(N);
+create(fork,B) ->
+			forkskeleton::new(B);
+create(map,C) ->
+			mapskeleton::new(C);
+create(pipe,P) ->
+			pipeskeleton::new(P);
+create(reduce,L) ->
+			reduceskeleton::new(L).
+

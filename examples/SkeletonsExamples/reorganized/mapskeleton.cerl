@@ -1,0 +1,51 @@
+-class(mapskeleton).
+-compile(export_all).
+-constructor([new/1]).
+
+%%this code intended to replicate the behaviour of the Skeleton Map
+%%used to deal with large codes, it breakes it, sends its parts to the designed processes and then reassembles it
+%%here we recceive a list and give back the list of the doubles
+methods. %%--------------------------------------------------------------------
+
+	new(N) ->
+		Tam = lists:flatlength(N),
+		register(mastermap,spawn(mapskeleton,start_slaves,[0,N,[],Tam])).
+
+	stop() -> mastermap ! stop.
+
+class_methods. %%--------------------------------------------------------------
+
+	lookup_Slave([{M, Slave}|T], N) -> if M == N -> Slave; true -> lookup_Slave(T, N) end.
+
+	stop_All(Slaves) ->
+	  lists:foreach(fun({_, Slave}) -> Slave ! die end, Slaves).
+
+	start_slaves(X,[],Slaves,Tam) ->
+		io:format("master:got ~p slaves  ~n",[X]),
+		process_flag(trap_exit, true),
+		start_works(Slaves),
+		master(Slaves,[],Tam);
+	start_slaves(X,[H|T],Slaves,Tam) -> %%dividing the data
+		start_slaves(X+1,T,[{X,spawn_link(mapslave, slave,[X,H])} | Slaves],Tam).
+
+	start_works(Slaves) ->
+		  lists:foreach(fun({_, Slave}) -> Slave ! start end, Slaves).
+
+	master(Slaves,Result,Tam) ->
+		Temp = lists:flatlength(Result) ,
+		if Tam == Temp ->
+			FinalR = [B || {_,B} <- lists:keysort(1, Result)],
+			io:format("~n~p~n",[FinalR]),
+			stop_All(Slaves),
+			exit(kill);
+			true -> true
+		end,
+		receive
+			stop -> stop_All(Slaves);
+			{'EXIT',_ , N} ->
+				io:format("master:restarting dead slave ~w.~n",[N]),
+				Slave = spawn_link(mapslave, slave,[N]),
+				master(lists:keyreplace(N,1,Slaves,{N,Slave}),Result,Tam);
+			{N, Msg} -> 
+		   	master(Slaves,[{N,Msg}|Result],Tam) %%reassembling 
+	  end.

@@ -1,0 +1,41 @@
+-class(test).
+-export([main/0]).
+
+class_methods.
+
+main() ->
+	S = skeletons::new_(),
+
+	io:format("~n FARM SKELETON ~n",[]),
+	Farm = S::create(farm,3),
+	Farm::to_slave(3,"faz a funçãoX"), timer:sleep(1000), %%como o main e a aplicaçao são processos diferentes é preciso dar um tempo p/ executar...
+	Farm::to_slave(2,"faz a funçãoY"), timer:sleep(1000),
+	Farm::to_slave(1,"faz a funçãoZ"), timer:sleep(1000),
+	Farm::to_slave(2,die), timer:sleep(1000),
+	Farm::to_slave(2,"faz a funçãoW"), timer:sleep(1000),
+	Farm::stop(),
+
+%%
+	timer:sleep(5000),
+	io:format("~n MAP SKELETON (vetor [1,2,3] x 2) ~n",[]),
+	Map = S::create(map,[1,2,3]),
+
+%%
+	timer:sleep(5000),
+	io:format("~n PIPE SKELETON  ~n",[]),
+	Pipe = S::create(pipe,4), 
+	Pipe::soma(5),  timer:sleep(2000), %% here we send the main process to sleep
+	Pipe::stop(), %% because otherwise the stop comand would come in the way of the completion
+
+%%
+	timer:sleep(5000),
+	io:format("~n REDUCE SKELETON ~n",[]),
+	Reduce = S::create(reduce,[{dog,"Maroca"},{cat,"Berenice"},{cat,"Bernadette"},{dog,"Pingo"},{dog,"Gota"}]),
+
+%%
+	timer:sleep(5000),
+	io:format("~n FORK SKELETON ~n",[]),
+	Fork = S::create(fork,false),
+	timer:sleep(1000), %%sleep otherwise
+	Fork::stop(). %%would stop too soon
+

@@ -1,0 +1,18 @@
+-class(farmslave).
+-compile(export_all).
+
+class_methods. %%--------------------------------------------------------------
+
+slavemain(N) ->
+  receive
+    die -> 
+		io:format("~p morreu~n",[N]),
+      exit(N); % return slave number on exit
+    Msg -> 
+      work(N,Msg),
+      slavemain(N)
+  end.
+
+work(N,Msg) -> io:format("~p got the ""~p""...working now...'ll be seeing the mail box in a sec ~n",[N,Msg]).
+
+

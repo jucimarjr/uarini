@@ -1,0 +1,46 @@
+-class(farmskeleton).
+-compile(export_all).
+-constructor([new/1]).
+
+%%this trys to replciate the Skeleton Farm behaviour
+%% the skeleton usually is set first with a number os processes doing different or concurrent tasks
+%% and send the received data to the one designed to receive its kind
+%% here each process receives a messages and says it does something with it
+methods. %%--------------------------------------------------------------------
+
+	new(N) ->
+		register(masterfarm,spawn(farmskeleton,start_slaves,[N,[]])). 
+
+	to_slave(N, Msg) -> masterfarm ! {N, Msg}.
+
+	stop() -> masterfarm ! stop.
+
+
+class_methods. %%--------------------------------------------------------------
+
+	lookup_Slave([{M, Slave}|T], N) -> if M == N -> Slave; true -> lookup_Slave(T, N) end.
+
+	stop_All(Slaves) ->
+	  lists:foreach(fun({_, Slave}) -> Slave ! die end, Slaves).
+
+	start_slaves(0,Slaves) ->
+		io:format("master:got the slaves  ~n"),
+		process_flag(trap_exit, true), 
+		master(Slaves);
+	start_slaves(N,Slaves) -> %%creating the processes
+		start_slaves(N-1,[{N,spawn_link(farmslave, slavemain,[N])} | Slaves]).
+
+	%%to keep the list o slaves is matter of safety
+	master(Slaves) ->
+		receive
+			stop -> stop_All(Slaves);
+			{'EXIT',_ , N} ->
+				io:format("master:restarting dead slave ~w.~n",[N]),
+				Slave = spawn_link(farmslave, slavemain,[N]),
+				master(lists:keyreplace(N,1,Slaves,{N,Slave}));
+			{N, Msg} -> 
+		   	Slave = lookup_Slave(Slaves,N),
+				Slave ! Msg,
+		   	master(Slaves)
+	  end.
+	
