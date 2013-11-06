@@ -7,8 +7,6 @@ main() ->
 	PancakeHouseMenu = pancakeHouseMenu::new(),
 	DinerMenu = dinerMenu::new(),
 	
-	io:format("PancakeHouseMenu: ~p~n", [PancakeHouseMenu]),
-	io:format("DinerMenu: ~p~n", [DinerMenu]),
 	Waitress = waitress::new(PancakeHouseMenu, DinerMenu),
 	
 	Waitress::print_menu().
