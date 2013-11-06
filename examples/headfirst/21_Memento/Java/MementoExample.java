@@ -1,3 +1,6 @@
+//Este fonte foi retirado de: http://sourcemaking.com/design_patterns/memento/java/1
+//Ultimo acesso em Agosto de 2013
+
 public class MementoExample {
 	public static void main(String[] args) {
 		Caretaker caretaker = new Caretaker();

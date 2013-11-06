@@ -1,3 +1,6 @@
+//Este fonte foi retirado de: http://en.wikibooks.org/wiki/Computer_Science_Design_Patterns/Visitor
+//Ultimo acesso em Agosto de 2013
+
 public class CarElementDoVisitor implements CarElementVisitor {
 	public void visit(Wheel wheel) {
 		System.out.println("Kicking my " + wheel.getName() + " wheel");

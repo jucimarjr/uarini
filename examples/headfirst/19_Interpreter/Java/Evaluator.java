@@ -1,3 +1,6 @@
+//Este fonte foi retirado de: http://en.wikibooks.org/wiki/Computer_Science_Design_Patterns/Interpreter
+//Ultimo acesso em Agosto de 2013
+
 public class Evaluator implements Expression {
 	private Expression syntaxTree;
 	Stack<Expression> expressionStack = new Stack<Expression>();

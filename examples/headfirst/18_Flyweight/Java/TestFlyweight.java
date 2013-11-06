@@ -1,3 +1,6 @@
+//Este fonte foi retirado de: http://www.fluffycat.com/Java-Design-Patterns/Flyweight/
+//Ultimo acesso em Agosto de 2013
+
 class TestFlyweight {
 
 	public static void main(String[] args) {

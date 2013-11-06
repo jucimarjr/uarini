@@ -1,3 +1,6 @@
+//Este fonte foi retirado de: http://sourcemaking.com/design_patterns/builder/java/2
+//Ultimo acesso em Agosto de 2013
+
 public class BuilderExample {
 	  public static void main(String[] args) {
 		    Waiter waiter = new Waiter();

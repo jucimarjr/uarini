@@ -1,3 +1,6 @@
+//Este fonte foi retirado de: http://www.fluffycat.com/Java-Design-Patterns/Flyweight/
+//Ultimo acesso em Agosto de 2013
+
 public class TeaRestroom {
 	TeaFlavor[] flavors = new TeaFlavor[100];
 	TeaOrderContext[] tables = new TeaOrderContext[100];

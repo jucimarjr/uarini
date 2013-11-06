@@ -1,3 +1,6 @@
+//Este fonte foi retirado de: http://javapapers.com/design-patterns/bridge-design-pattern/
+//Ultimo acesso em Agosto de 2013
+
 public abstract class Vehicle {
 	  protected Workshop workShop1;
 	  protected Workshop workShop2;
