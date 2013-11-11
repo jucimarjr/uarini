@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://sourcemaking.com/design_patterns/builder/java/2
+%% Ultimo acesso em Agosto de 2013
 -class(pizza).
 -export([set_dough/1, set_sauce/1, set_topping/1, show_ingredients/0]).
 

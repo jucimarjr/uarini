@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://javapapers.com/design-patterns/chain-of-responsibility-design-pattern/
+%% Ultimo acesso em Agosto de 2013
 -class(number).
 -export([new/1, get_number/0]).
 -constructor([new/1]).

@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(gumballMachine).
 -export([new/1, insert_quarter/0, eject_quarter/0, turn_crank/0]).
 -export([set_state/1, release_ball/0, refill/1, get_count/0, get_state/0]).

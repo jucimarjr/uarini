@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(tuner).
 -export([new/2, on/0, off/0, set_frequency/1]).
 -export([set_am/0, set_fm/0, to_string/0]).

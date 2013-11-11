@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(pizza).
 -export([prepare/0, bake/0, cut/0, box/0, set_name/1]).
 -export([get_name/0, to_string/1]).

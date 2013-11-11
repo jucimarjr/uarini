@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(amplifier).
 -export([new/1, on/0, off/0, set_stereo_sound/0]).
 -export([set_surround_sound/0, set_volume/1, set_tuner/1, set_dvd/1]).

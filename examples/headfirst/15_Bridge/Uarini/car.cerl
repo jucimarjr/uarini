@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://javapapers.com/design-patterns/bridge-design-pattern/
+%% Ultimo acesso em Agosto de 2013
 -class(car).
 -extends(vehicle).
 -export([new/2, manufacture/0]).

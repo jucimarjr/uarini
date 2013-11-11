@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://en.wikibooks.org/wiki/Computer_Science_Design_Patterns/Visitor
+%% Ultimo acesso em Agosto de 2013
 -class(body).
 -implements(carElement).
 -export([accept/1]).

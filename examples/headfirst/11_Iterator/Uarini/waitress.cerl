@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(waitress).
 -export([new/2, print_menu/0, print_menu/1]).
 -export([print_vegetarian_menu/0, is_item_vegetarian/1]).

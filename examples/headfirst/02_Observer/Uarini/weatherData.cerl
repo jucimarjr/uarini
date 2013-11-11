@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(weatherData).
 -implements(subject).
 -export([new/0, measurements_changed/0, set_measurements/3, get_temperature/0, get_humidity/0]).

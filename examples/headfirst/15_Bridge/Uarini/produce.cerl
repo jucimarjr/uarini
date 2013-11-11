@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://javapapers.com/design-patterns/bridge-design-pattern/
+%% Ultimo acesso em Agosto de 2013
 -class(produce).
 -implements(workshop).
 -export([work/0]).

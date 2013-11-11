@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://www.fluffycat.com/Java-Design-Patterns/Flyweight/
+%% Ultimo acesso em Agosto de 2013
 -class(teaFlavor).
 -extends(teaOrder).
 -export([new/1, get_flavor/0, serve_tea/1]).

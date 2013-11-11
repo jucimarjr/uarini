@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://sourcemaking.com/design_patterns/builder/java/2
+%% Ultimo acesso em Agosto de 2013
 -class(spicyPizzaBuilder).
 -extends(pizzaBuilder).
 -export([build_dough/0, build_sauce/0, build_topping/0, to_string/0]).

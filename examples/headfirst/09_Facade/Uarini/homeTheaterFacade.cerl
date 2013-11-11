@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(homeTheaterFacade).
 -export([new/8, watch_movie/1, end_movie/0, listen_to_cd/1, end_cd/0]).
 -export([listen_to_radio/1, end_radio/0]).

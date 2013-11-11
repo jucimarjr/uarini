@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(chocolateBoiler).
 -export([new/0, get_instance/0, fill/0, drain/0, boil/0]).
 -export([is_empty/0, is_boiled/0]).

@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://www.fluffycat.com/Java-Design-Patterns/Flyweight/
+%% Ultimo acesso em Agosto de 2013
 -class(teaRestroom).
 -export([new/0, take_orders/2, show_total_tea_flavors_made/0]).
 -constructor([new/0]).

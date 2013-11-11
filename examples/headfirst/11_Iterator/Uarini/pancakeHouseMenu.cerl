@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(pancakeHouseMenu).
 -implements(menu).
 -export([new/0, add_item/4, get_menu_items/0, create_iterator/0, to_string/0]).

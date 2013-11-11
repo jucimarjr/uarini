@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://sourcemaking.com/design_patterns/memento/java/1
+%% Ultimo acesso em Agosto de 2013
 -class(caretaker).
 -export([new/0, add_memento/1, get_memento/1]).
 -constructor([new/0]).

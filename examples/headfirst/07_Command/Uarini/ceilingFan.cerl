@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(ceilingFan).
 -export([new/1, high/0, medium/0, low/0, off/0, get_speed/0]).
 -constructor([new/1]).

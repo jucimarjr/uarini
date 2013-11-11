@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://sourcemaking.com/design_patterns/memento/java/1
+%% Ultimo acesso em Agosto de 2013
 -class(originator).
 -export([set/1, save_to_memento/0, restore_from_memento/1]).
 

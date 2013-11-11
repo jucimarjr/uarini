@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://www.avajava.com/tutorials/lessons/prototype-pattern.html
+%% Ultimo acesso em Agosto de 2013
 -class(demo).
 -export([main/0]).
 

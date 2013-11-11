@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: http://www.fluffycat.com/Java-Design-Patterns/Flyweight/
+%% Ultimo acesso em Agosto de 2013
 -class(teaOrder).
 -export([serve_tea/1]).
 

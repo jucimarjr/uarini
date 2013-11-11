@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -interface(pizzaIngredientFactory).
 -export([create_dough/0, create_sauce/0, create_cheese/0]).
 -export([create_veggies/0, create_pepperoni/0, create_clam/0]).

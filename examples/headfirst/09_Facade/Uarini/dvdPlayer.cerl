@@ -1,3 +1,5 @@
+%% Fonte implementado a partir de: Livro Head First Design Patterns. 
+%% Autores: Freeman, E., Freeman, E., Sierra, K., and Bates, B. (2004).O'Reilly Media Inc., 01st ed.
 -class(dvdPlayer).
 -export([new/2, on/0, off/0, eject/0, play/1, stop/0, pause/0]).
 -export([set_two_channel_audio/0, set_surround_audio/0, to_string/0]).
