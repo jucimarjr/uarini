@@ -1,5 +1,5 @@
--module(threadring).
--export([run/1, ring_node/1]).
+-module(sendrecv).
+-export([run/1]).
 
 -include("conf.hrl").
 -import(persist, [createOrOpen_file/1]).
@@ -29,7 +29,8 @@ run([DataSizeStr, RepStr, QtdProcsStr]) ->
 
 create_procs(QtdProcs) ->
     lists:foldl(
-      fun(_Id, RightPeer) -> spawn(threadring, ring_node, [RightPeer]) end, 
+      fun(_Id, RightPeer) -> ObjProc = proc:new(RightPeer),
+			ooe:lookup_attr(element(2, ObjProc), 'Pid') end,
       self(), 
       lists:seq(QtdProcs, 2, -1)
      ).
@@ -40,11 +41,4 @@ sender_ring_node(Data, Rep, Second) ->
     receive
 	Data ->
 	    sender_ring_node(Data, Rep-1, Second)
-    end.
-
-ring_node(RightPeer) ->
-    receive
-	Data ->
-	    RightPeer ! Data,
-	    ring_node(RightPeer)
     end.

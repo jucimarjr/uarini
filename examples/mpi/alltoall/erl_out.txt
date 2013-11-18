@@ -1,3 +1,0 @@
-#bytes     #repetitions    #processes      t_min[µsec]      t_max[µsec]      t_avg[µsec]      spawn_time[µsec]
-1000     | 13            | 14            | 1887            | 1905            | 1894            | 33              |
-10       | 10            | 140           | 124279          | 127827          | 125615          | 267             |

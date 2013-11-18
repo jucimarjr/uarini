@@ -1,9 +1,10 @@
--module(threadring).
+-class(sendrecv).
 -export([run/1]).
-
 -include("conf.hrl").
 -import(persist, [createOrOpen_file/1]).
 -import(medicoes, [printResult/6, generate_data/1, time_microseg/0]).
+
+class_methods.
 
 run([DataSizeStr, RepStr, QtdProcsStr]) ->
     DataSize = list_to_integer(DataSizeStr),
@@ -23,14 +24,13 @@ run([DataSizeStr, RepStr, QtdProcsStr]) ->
     TotalTime = ExecEnd - ExecStart,
     SpawnTime = SpawnEnd - SpawnStart,
 
-    OutFile = createOrOpen_file(?OUT_PATH),
+    OutFile = createOrOpen_file("./out_erl_sendrecv.txt"),
     printResult(Data, Rep, QtdProcs, TotalTime, SpawnTime, OutFile),
     erlang:halt().
 
 create_procs(QtdProcs) ->
     lists:foldl(
-      fun(_Id, RightPeer) -> ObjProc = proc:new(RightPeer),
-			ooe:lookup_attr(element(2, ObjProc), 'Pid') end,
+      fun(_Id, RightPeer) -> ObjProc =  proc::new(RightPeer), ObjProc::get_pid() end, 
       self(), 
       lists:seq(QtdProcs, 2, -1)
      ).
