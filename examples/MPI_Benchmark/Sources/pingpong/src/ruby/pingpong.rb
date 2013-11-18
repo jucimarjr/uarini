@@ -95,7 +95,7 @@ class PingPong
 	end
 
 	def start
-	   	t = Thread.new do
+		t = Thread.new do
 			array = Array.new(@tamMsg, 1)
 
 			p1 = ProcPing.new("1", array, @qtdMsg)

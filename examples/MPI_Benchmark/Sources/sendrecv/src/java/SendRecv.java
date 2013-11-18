@@ -1,90 +1,80 @@
-import java.util.Arrays;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ExecutorService;
 
-
-public class SendRecv implements Runnable{
-
-	String OUT_LOCATION;
-	private int DataSize;
-	private int Proc;
-	private int Rep;
-	private int Count;
-
-	private BlockingQueue<Integer> mailbox = new LinkedBlockingQueue<Integer>();
-
-	public SendRecv(String outLocayion, int DataSize, int Proc, int Rep){
-		this.OUT_LOCATION = outLocayion;
-		this.DataSize = DataSize;
-		this.Proc = Proc;
-		this.Rep = Rep;
-		this.Count = 0;
-	}
+public class SendRecv extends Node{
+	private final String OUT_LOCATION;
+	private final int NUM_PROC;
+	private final int NUM_REP;
+	private final int TAM_MSG;
 	
+	private volatile byte[] msg;
+	
+	private ExecutorService executor;
+	
+	public SendRecv(String outLocation, int nos, int threads, int num_rep, int tamMsg, ExecutorService executor) {
+		super(null);
+		OUT_LOCATION = outLocation;
+		NUM_PROC = nos;
+		NUM_REP = num_rep;
+		TAM_MSG = tamMsg;
+		this.executor = executor;
+	}
+
 	public long getTimeMicro() {
 		return System.nanoTime() / 1000;
 	}
-	
-	private long sum(long[] list){
-		long result = 0;
-		for(long elem : list){
-			result += elem;
-		}
-		return result;
-	}
-	
-	public void sendMessage(Integer j){
-		mailbox.add(j);
-	}
-	
-	public Integer receiveMessage() throws InterruptedException{
-		return mailbox.take();
-	}
 
-	public void run() {		
-		long spawnStart, spawnEnd, timeSpawn, execStart, timeMin, timeMax, timeAvg;
-		long[] endTimeList, timeList;
+	public byte[] generateData(int tamDados) {
+		byte[] dado = new byte[tamDados];
+		return dado;
+	}
+	
+	public void spawnAndConnectNodes() {
+		int n = NUM_PROC;
+		Node[] nodes = new Node[n];
 		
-		Node[] nodes = new Node[Proc];		
+		nodes[0] = this;
 		
-		spawnStart = getTimeMicro();		
-		for(int i = 0; i< Proc; i++){
-			nodes[i] = new Node(Rep, DataSize, this);
+		nodes[n-1] = new Node(nodes[0]);
+		executor.execute(nodes[n-1]);
+		
+		for (int i = n-2; i > 0; i--) {
+			nodes[i] = new Node(nodes[i+1]);
+			executor.execute(nodes[i]);
 		}
+		nodes[0].connect(nodes[1]);
+	}
+	
+	private void senderNodeMode(){
+		try {
+			for (int i = 1; i <= NUM_REP; i++) {
+				this.getNextNode().send(msg);
 
-		for(int i = 0; i < Proc-1; i++){
-			nodes[i].setRightPeer(nodes[i+1]);
+				@SuppressWarnings("unused")
+				byte[] receivedMsg = recv();
+			}
+		} catch (InterruptedException e) {
+			System.out.println("Thread interrompida!!!");
 		}
-		nodes[Proc-1].setRightPeer(nodes[0]);
-		spawnEnd = getTimeMicro();
-		timeSpawn = spawnEnd - spawnStart;;
+	}
+	
+	public void run(){
+		long timeStart, timeEnd, timeSpawn, timeExec;
+
+		msg = generateData(TAM_MSG);
+
+		timeStart = getTimeMicro();
+		spawnAndConnectNodes();
+		timeEnd = getTimeMicro();
+
+		timeSpawn = timeEnd - timeStart;
+
+		timeStart = getTimeMicro();
+		senderNodeMode();
+		timeEnd = getTimeMicro();
+
+		timeExec = timeEnd - timeStart;
 		
-		execStart = getTimeMicro();
-		for(int i = 0; i< Proc; i++){
-			nodes[i].start();
-		}
-		endTimeList = new long[Proc];
-		try{
-			while(Count != Proc ){
-				receiveMessage();
-				endTimeList[Count] = getTimeMicro(); 
-				Count++;			
-			}	
-		}
-		catch(InterruptedException e){
-			System.out.println("Thread Interrompida!!");
-		}
-		
-		timeList = new long[Proc];
-		for (int i=0; i < Proc; i++){
-			timeList[i] = endTimeList[i] - execStart;
-		}
-		Arrays.sort(timeList);
-		timeMin = timeList[0];
-		timeMax = timeList[Proc-1];
-		timeAvg = sum(timeList)/timeList.length;
-		System.out.println("passou");
-		Salvar.writeResultAlltoall(OUT_LOCATION,DataSize, Rep, Proc,timeMin,timeMax,timeAvg, timeSpawn);		
+		Salvar.writeResultMulti(OUT_LOCATION, TAM_MSG, NUM_PROC, NUM_REP, timeExec, timeSpawn);			
 		System.exit(0);
 	}
 }

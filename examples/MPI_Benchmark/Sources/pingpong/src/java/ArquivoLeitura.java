@@ -1,4 +1,3 @@
-
 import java.io.*;
 
 public class ArquivoLeitura{
@@ -7,13 +6,11 @@ public class ArquivoLeitura{
 	BufferedReader in = null;
 
 	public boolean abrir(String local) {
-      try{
-		fileStream = new FileReader(local);
-        in = new BufferedReader(fileStream);
-        return true;
-        
+		try{
+			fileStream = new FileReader(local);
+			in = new BufferedReader(fileStream);
+			return true;
 		}catch (Exception e){
-			//System.err.println("Error: " + e.getMessage());
 			return false;
 		}
 	}
@@ -41,7 +38,6 @@ public class ArquivoLeitura{
 		try {
 			return in.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -49,11 +45,9 @@ public class ArquivoLeitura{
 	
 	public void fechar(){
 		try {
-			in.close();
-	
+			in.close();	
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
-	}
-	
+	}	
 }

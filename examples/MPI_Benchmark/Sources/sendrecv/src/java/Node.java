@@ -1,55 +1,38 @@
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Node extends Thread{
-
-	int REP;
-	int DATA;
-	Node RightPeer;	
-	SendRecv finalize;
+public class Node implements Runnable {
+	private Node nextNode;
+	private BlockingQueue<byte[]> mailbox = new LinkedBlockingQueue<byte[]>();
 	
-	private BlockingQueue<Message> mailbox = new LinkedBlockingQueue<Message>();
-
-	public Node(int REP, int DATA, SendRecv finalize) {
-		this.REP = REP;
-		this.DATA = DATA;
-		this.finalize = finalize;
+	public Node(Node nextNode) {
+		this.nextNode = nextNode;
 	}
 
-	public void setRightPeer(Node rightPeer) {
-		RightPeer = rightPeer;
+	public Node getNextNode(){
+		return this.nextNode;
+	}
+	
+	public void connect(Node node) {
+		this.nextNode = node;
 	}
 
-	public Node getRightPeer() {
-		return RightPeer;
+	public void send(byte[] m) {
+		mailbox.add(m);
 	}
 
-	public void sendMessage(Message m){
-		RightPeer.mailbox.add(m);
-	}
-
-	public Message receiveMessage() throws InterruptedException{
-		return mailbox.take();
+	public byte[] recv() throws InterruptedException {
+		byte[] msg = mailbox.take();
+		return msg;
 	}
 
 	public void run() {
-		Message m = new Message(this, DATA);		
-		sendMessage(m);
-		try{
-			while(true){
-				Message msg = receiveMessage();
-				if(msg.Proc == this){
-					REP = REP -1;
-				}
-				if(REP == 0){
-					finalize.sendMessage(new Integer(1));
-				}
-				else {
-					sendMessage(msg);
-				}
+		try {
+			while (true) {
+				byte[] msg = recv();
+				nextNode.send(msg);
 			}
-		}
-		catch(InterruptedException e){
+		} catch (InterruptedException e) {
 			System.out.println("Thread Interrompida!!");
 		}
 	}

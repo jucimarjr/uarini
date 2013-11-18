@@ -1,3 +1,4 @@
+
 import java.io.*;
 
 public class ArquivoEscrita {
@@ -6,13 +7,11 @@ public class ArquivoEscrita {
 	private BufferedWriter out = null;
 
 	public boolean abrir(String local) {
-      try{
-		fileStream = new FileWriter(local);
-        out = new BufferedWriter(fileStream);
-        return true;
-        
-		}catch (Exception e){
-			//System.err.println("Error: " + e.getMessage());
+		try {
+			fileStream = new FileWriter(local);
+			out = new BufferedWriter(fileStream);
+			return true; 
+		} catch (Exception e){
 			return false;
 		}
 	}
@@ -27,11 +26,9 @@ public class ArquivoEscrita {
 	
 	public void fechar(){
 		try {
-			out.close();
-	
+			out.close();	
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
-	}
-	
+	}	
 }

@@ -1,8 +1,6 @@
 public class PingPing extends Thread{
 
 	private final int QTD_PROC_TOTAL = 2;
-	// a medida que os processos finalizarem
-	// qtdTerminados é incrementados
 	private int qtdProcTerminados = 0;
 	
 	private long timeSpawn;
@@ -24,32 +22,25 @@ public class PingPing extends Thread{
 	public void run() {
 		byte[] dado = generateData(tamDados);
 
-		// cria os processos
-		
 		timeStart = timeMicroSeg();
 		ProcPing p1 = new ProcPing("1", dado, this, qtdRept);
 		ProcPing p2 = new ProcPing("2", dado, this, qtdRept);
 		timeEnd = timeMicroSeg();
 
-		// armazena tempo de criação
 		timeSpawn = timeEnd - timeStart;
 		
-		// inicia execução dos processos
 		timeStart = timeMicroSeg();
-		p1.setPeer(p2); // seta o par
+		p1.setPeer(p2);
 		p1.start();
-		p2.setPeer(p1); // seta o par
+		p2.setPeer(p1);
 		p2.start();
 		
 		dormirAteTerminar();
 
-		// após todos terminarem, executa a prox linha
-		timeEnd = timeMicroSeg(); // captura tempo atual
+		timeEnd = timeMicroSeg();
 
-		//FINALIZA TESTE
-		timeExec = timeEnd - timeStart; // armazena tempo de execução
+		timeExec = timeEnd - timeStart;
 		
-		// escreve a saída
 		Salvar.writeResultPeer(outLocation, tamDados, qtdRept, timeExec, timeSpawn);
 	}
 
@@ -75,8 +66,5 @@ public class PingPing extends Thread{
 
 	private long timeMicroSeg() {
 		return System.nanoTime()/1000;
-		//return (Calendar.getInstance().getTimeInMillis() * 1000);
-
 	}
-
 }

@@ -22,7 +22,6 @@ public class ProcPing extends Thread {
 	}
 
 	private void recv() {
-		// verifica mailbox até ter mensagem
 		while (true) {
 			synchronized (this) {
 				if (mailbox != null) {
@@ -35,10 +34,7 @@ public class ProcPing extends Thread {
 
 	public void run() {
 		for (int i = 1; i <= qtdMsg; i++) {
-//			System.out.println("-------REPETICAO " + i + "---------\n");
 			send(dado);
-//			System.out.println("Proc " + this.getName() + ": ping enviado!\n"
-//					+ "Esperando pong...\n");
 			recv();
 		}
 		parent.acordar();

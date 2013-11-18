@@ -1,2 +1,2 @@
 import compiler
-compiler.compileFile('sendrecv.py')
+compiler.compileFile('threadring.py')

@@ -21,33 +21,25 @@ public class PingPong extends Thread{
 	public void run() {
 		byte[] dado = generateData(tamDados);
 
-		// cria os processos
-		
 		timeStart = timeMicroSeg();
 		ProcPing ping = new ProcPing("1", dado, this, qtdRept);
 		ProcPong pong = new ProcPong("2", dado, qtdRept);
 		timeEnd = timeMicroSeg();
 
-		// armazena tempo de criação
 		timeSpawn = timeEnd - timeStart;
 		
-		// inicia execução dos processos
 		timeStart = timeMicroSeg();
 		
-		ping.setPeer(pong); // seta o par
+		ping.setPeer(pong);
 		ping.start();
-		pong.setPeer(ping); // seta o par
+		pong.setPeer(ping);
 		pong.start();
 		
 		dormirAteTerminar();
+		timeEnd = timeMicroSeg();
 
-		// após todos terminarem, executa a prox linha
-		timeEnd = timeMicroSeg(); // captura tempo atual
-
-		//FINALIZA TESTE
-		timeExec = timeEnd - timeStart; // armazena tempo de execução
+		timeExec = timeEnd - timeStart;
 		
-		// escreve a saída
 		Salvar.writeResultPeer(outLocation, tamDados, qtdRept, timeExec, timeSpawn);
 	}
 
@@ -73,7 +65,5 @@ public class PingPong extends Thread{
 
 	private long timeMicroSeg() {
 		return System.nanoTime()/1000;
-		//return (Calendar.getInstance().getTimeInMillis() * 1000); 
 	}
-
 }

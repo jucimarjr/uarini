@@ -3,9 +3,9 @@ public class Salvar {
 	
 	public static void writeResultAlltoall(String outLocation, int tamDados, int qtdRept, int qtdProcs, long timeMin, long timeMax, long timeAvg, long timeSpawn){
 		String header = String.format("%-10s\t %-15s\t %-15s\t %-17s\t %-17s\t %-17s\t %-17s\t%n",
-									  "#bytes", "#repetitions", "#processes", "t_min[usec]", "t_max[usec]", "t_avg[usec]", "spawn_time[usec]");
+										"#bytes", "#repetitions", "#processes", "t_min[usec]", "t_max[usec]", "t_avg[usec]", "spawn_time[usec]");
 		String result = String.format("%-9d\t %-14d\t %-14d\t %-16d\t %-16d\t %-16d\t %-16d\t%n",
-									  tamDados, qtdRept, qtdProcs, timeMin, timeMax, timeAvg,timeSpawn);
+										tamDados, qtdRept, qtdProcs, timeMin, timeMax, timeAvg,timeSpawn);
 		
 		writeResult(outLocation, header, result);		
 	}
@@ -49,7 +49,7 @@ public class Salvar {
 			arqOut.escrever(strOut);
 			arqOut.fechar();
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}

@@ -1,5 +1,4 @@
 public class ProcPong extends Thread {
-	// public String mailbox = new String();
 	public boolean espera = false;
 	public byte[] mailbox;
 	private ProcPing peer;
@@ -21,12 +20,9 @@ public class ProcPong extends Thread {
 	}
 	
 	private void recv() {
-		// verifica mailbox até ter mensagem
 		while (true) {
 			synchronized (this) {
 				if (mailbox != null) {
-//					System.out.println("MSG: " + printByteArray(mailbox));
-//					mailbox[0] = 1;
 					mailbox = null;
 					break;
 				}
@@ -37,18 +33,6 @@ public class ProcPong extends Thread {
 	public void run() {
 		for (int i = 1; i <= qtdMsg; i++) {
 			recv();
-//			System.out.println("Proc " + this.getName() + ": ping recebido!\n"
-//					+ "Enviando pong...\n");
 			send(dado);
 		}
 	}
-	
-//	private String printByteArray(byte[] bytes){
-//		String out = new String();
-//		for (int i = 0; i < bytes.length; i++) {
-//			out += Byte.toString(bytes[i]);
-//		}
-//		return out;
-//	}
-	
-}
