@@ -19,8 +19,8 @@ run(DataSize, R, OutFile) ->
     Data = generate_data(DataSize),
     Self = self(),
     SpawnStart = time_microseg(),
-    P1 = procpong::new(Data, Self, R),
-	P2 = procpong::new(Data, Self, R),
+    P1 = proc::new(Data, Self, R),
+	P2 = proc::new(Data, Self, R),
     SpawnEnd = time_microseg(),
     TimeStart = time_microseg(),
     P1::send({init, self(), P2::get_pid()}),
@@ -96,7 +96,7 @@ time_microseg() ->
 %% formata a msg de erro
 error_report(Msg, Reason) ->
 	io:format("%%%%%%%%%%%%%% ERRO %%%%%%%%%%%%%%\n" ++
-				     "Msg: ~w\n" ++
-				     "Reason: ~w\n\n", [Msg, Reason]).
+				     "Msg: ~s\n" ++
+				     "Reason: ~s\n\n", [Msg, Reason]).
 
 
