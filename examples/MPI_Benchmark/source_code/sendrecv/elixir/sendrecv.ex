@@ -3,11 +3,11 @@ defmodule SendRecv do
   MPI Benchmark [SendRecv] in elixir by Filipe Varjão <frgv@cin.ufpe.br>
   """
  
-  def run(data_size_str, rep_str, qtd_procs_str) do
+  def run(data_size, rep, qtd_procs) do
  
-    data_size = binary_to_integer(data_size_str)
-    rep =  binary_to_integer(rep_str)
-    qtd_procs = binary_to_integer(qtd_procs_str)
+    data_size = data_size
+    rep =  rep
+    qtd_procs = qtd_procs
  
     data = generate_data(data_size)
  
@@ -23,7 +23,7 @@ defmodule SendRecv do
     spawn_time = spawn_end - spawn_start
  
     # PRINT RESULT
-    IO.puts "bytes #{data_size_str} | repetitions #{rep} | exec_time[µsec] #{total_time} | MBytes/sec #{spawn_time} | spawn_time #{bandwidth_calc(data_size, total_time)}"
+    IO.puts "bytes #{data_size} | repetitions #{rep} | exec_time[µsec] #{total_time} | MBytes/sec #{spawn_time} | spawn_time #{bandwidth_calc(data_size, total_time)}"
  
   end
  
@@ -72,5 +72,4 @@ defmodule SendRecv do
     (ms * 1.0e+12) + (s * 1.0e+6) + us
   end
 end
- 
-IO.inspect SendRecv.run("5", "100", "2")
+
