@@ -29,7 +29,7 @@ run([DataSizeStr, RepStr, QtdProcsStr]) ->
 
 create_procs(QtdProcs) ->
 	lists:foldl(
-	fun(_Id, RightPeer) -> spawn(threadring, ring_node, [RightPeer]) end, 
+	fun(_Id, RightPeer) -> spawn(?MODULE, ring_node, [RightPeer]) end, 
 		self(), 
 		lists:seq(QtdProcs, 2, -1)).
 
