@@ -9,9 +9,11 @@ defmodule Pingping do
 
     spawnStart = time_microseg()
 
-    p1 = spawn(fn -> pingping(data, self, r) end)
-    p2 = spawn(fn -> pingping(data, self, r) end)
-
+    parent = self()
+ 
+    p1 = spawn(fn -> pingping(data, parent, r) end)
+    p2 = spawn(fn -> pingping(data, parent, r) end)
+ 
     spawnEnd = time_microseg()
     timeStart = time_microseg()
     send(p1, {:init, self, p2})
@@ -31,7 +33,7 @@ defmodule Pingping do
 
   def pingping(data, pid, r) do
     receive do
-      {:init, pid, peer} ->
+      {:init, ^pid, peer} ->
         send(peer, {self, data})
         pingping(data, pid, r - 1)
       {peer, data} ->
@@ -39,10 +41,10 @@ defmodule Pingping do
         pingping(data, pid, r - 1)
     end
   end
-
-  def finalize(_p1) do
+ 
+  def finalize(p1) do
     receive do
-      {:finish, _p1} ->
+      {:finish, ^p1} ->
         :ok
     end
   end
