@@ -50,7 +50,7 @@ defmodule SendRecv do
   def sender_ring_node(data, rep, second) do
     second |> send(data)
     receive do
-      data ->
+      ^data ->
         sender_ring_node(data, rep - 1, second)
     end
   end
