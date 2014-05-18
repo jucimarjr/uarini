@@ -50,6 +50,7 @@ Terminals
     '==' '/=' '=<' '<' '>=' '>' '=:=' '=/=' '<='
     '<<' '>>'
     '!' '=' '::' '..'
+    'class_attributes' 'class_methods' 'attributes' 'methods' % oo_markup
     dot.
 
 Rootsymbol File.
@@ -201,3 +202,7 @@ ExpressionToken -> '!' : '$1'.
 ExpressionToken -> '=' : '$1'.
 ExpressionToken -> '::' : '$1'.
 ExpressionToken -> '..' : '$1'.
+ExpressionToken -> 'class_attributes' : '$1'.
+ExpressionToken -> 'class_methods' : '$1'.
+ExpressionToken -> 'attributes' : '$1'.
+ExpressionToken -> 'methods' : '$1'.

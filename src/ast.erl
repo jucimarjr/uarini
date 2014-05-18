@@ -31,11 +31,13 @@ get_urn_forms(FileName) ->
 %%-----------------------------------------------------------------------------
 %% Extrai a lista de Tokens de um arquivo .cerl
 get_urn_tokens(FileName) ->
-    {ok, Tokens} = aleppo:scan_file(FileName),
+    {ok, Tokens} = aleppo:process_file(FileName),
     [begin
-        {L, _C} = element(2, T),
-        setelement(2, T, L)
-     end|| T <- Tokens, element(1, T) =/= eof].
+        case element(2, T) of
+          L when is_integer(L) -> T;
+          {L, _C} -> setelement(2, T, L)
+        end
+     end || T <- Tokens, element(1, T) =/= eof].
 
 %%-----------------------------------------------------------------------------
 %% Quebra os forms de um fluxo de Tokens identificados por 'dot'

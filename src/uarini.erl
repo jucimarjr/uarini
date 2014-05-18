@@ -76,7 +76,7 @@ remove_interfaces(ASTList) -> remove_interfaces(ASTList, []).
 remove_interfaces([], NewASTList) -> lists:reverse(NewASTList);
 remove_interfaces([AST | ASTList], NewASTList) ->
 	case AST of
-		[{attribute, _Line, interface, _InterName} | _ ] ->
+		[_File|[{attribute, _Line, interface, _InterName} | _ ]] ->
 			remove_interfaces(ASTList, NewASTList);
 		_ ->
 			remove_interfaces(ASTList, [AST | NewASTList])
@@ -99,10 +99,9 @@ get_erl_filename(ErlangModuleName) ->
 %% Extrai o nome do modulo erlang partir dos forms do uarini
 %% o nome do modulo Erlang gerado eh o nome da classe
 get_erl_modulename(AST) ->
-	case AST of
-		[{attribute, _Line, class, ClassName} | _ ] ->
-			ClassName
-	end.
+	[_File|[Class|_]] = AST,
+	{attribute, _Line, class, ClassName} = Class,
+	ClassName.
 
 %%-----------------------------------------------------------------------------
 %% Cria o arquivo .erl no sistema de arquivos
