@@ -5,15 +5,15 @@
 %% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
 %% Objetivo : Utilitários para o compilador
 
--module(uarini_utils).
+-module(ooe_utils).
 -compile(export_all).
 
--include("../include/uarini_define.hrl").
+-include("../include/ooe_define.hrl").
 
 %%-----------------------------------------------------------------------------
 %% Compila vários códigos em OOE dependentes e gera .beam's correspondentes
 compile(FileNameList) ->
-	case catch(uarini:compile(FileNameList)) of
+	case catch(ooe:compile(FileNameList)) of
 		{'EXIT', Reason} ->
 			io:format("*******ERROR!~n"),
 			io:format("***Reason:~n~p", [Reason]);
@@ -85,7 +85,7 @@ print_erl_ast(FileName) ->
 	end.
 
 %%-----------------------------------------------------------------------------
-%% traduz expressões em uarini e gera árvore sintática do erlang resultante
+%% traduz expressões em ooerlang e gera árvore sintática do erlang resultante
 get_erl_ast(FileName) ->
 	AST = ast:get_urn_ast(FileName),
 	[{class, {_Line, {name, ClassName}, _ClassBody}}] = AST,

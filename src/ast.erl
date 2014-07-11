@@ -7,7 +7,7 @@
 
 -module(ast).
 -export([get_urn_tokens/1, get_urn_forms/1, get_class_info/1, get_urn_forms_tokens/1]).
--include("../include/uarini_define.hrl").
+-include("../include/ooe_define.hrl").
 
 %%-----------------------------------------------------------------------------
 %% Extrai a Uarini Abstract Syntax Tree de um arquivo .cerl
@@ -15,14 +15,14 @@ get_urn_forms(FileName) ->
 	Tokens = get_urn_tokens(FileName),
 	lists:map(
 		fun(Ts) ->
-			case uarini_parse:parse(Ts) of
+			case ooe_parse:parse(Ts) of
 				{ok, Form} ->
 					Form;
-				{error, {Ln, uarini_parse, ErrorList}} ->
+				{error, {Ln, ooe_parse, ErrorList}} ->
 					io:format("*****temporary syntax error print*****\n"
 								"'~p'#~p: ~p\n\n\n\n", [filename:basename(FileName), Ln, ErrorList]),
 					error
-					%% uarini_errors:handle_error(Ln, 15,
+					%% ooe_errors:handle_error(Ln, 15,
 					%% 	[FileName, lists:flatten(ErrorList)]),
 			end
 		end,
@@ -198,7 +198,7 @@ match_form({attribute, _, export, ExportList}) ->
 	{export, ExportList};
 
 match_form({class_attributes, Ln, _AttrList}) ->
-	uarini_errors:handle_error(Ln, 13, []),
+	ooe_errors:handle_error(Ln, 13, []),
 	nop;
 
 match_form({attributes, _Ln, AttrList}) ->

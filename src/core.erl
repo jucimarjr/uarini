@@ -3,17 +3,17 @@
 %%			Emiliano Firmino ( elmiliox@gmail.com )
 %%			Rodrigo Bernardino ( rbbernardino@gmail.com )
 %% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
-%% Objetivo : Módulo central do compilador, traduz as expressoes em uarini  
+%% Objetivo : Módulo central do compilador, traduz as expressoes em ooe
 
 -module(core).
 -export([transform_uast_to_east/3]).
--include("../include/uarini_define.hrl").
+-include("../include/ooe_define.hrl").
 
 -import(gen_ast, [match/3, var/2, rcall/4, atom/2, tuple/2]).
 
 %%-----------------------------------------------------------------------------
 %% Converte o uast em east.
-%%   uast -> arvore sintatica do uarini.
+%%   uast -> arvore sintatica do ooe.
 %%   east -> arvore sintatica do erlang.
 transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	%% io:format("core: compilando \"~p\"...\n", [ErlangModuleName]),
@@ -29,7 +29,7 @@ transform_uast_to_east(AST, ErlangModuleName, ClassesInfo) ->
 	ConstrList = st:get_all_constr_info(ErlangModuleName),
 
 	st:merge_parent_members(ClassesInfo),
-	uarini_errors:check_interface(ErlangModuleName),
+	ooe_errors:check_interface(ErlangModuleName),
 	st:insert_default_constructors(ClassesInfo),
 
 	DefaultConstructor = create_default_constructor(ErlangModuleName, ConstrList),
@@ -87,7 +87,7 @@ filter_object_mthd([FunctionInfo | ExportList], NewExportList ) ->
 
 %%-----------------------------------------------------------------------------
 %% Filtra os forms, deixando apenas os especificos do erlang
-%%    os forms do uarini sao tratados ao guardar as info das classes na ST
+%%    os forms do ooerlang sao tratados ao guardar as info das classes na ST
 %%    eles representam os atributos e os metodos
 %%    ExportList vem da info das classes, por isso eh ignorado
 get_erl_forms(UariniForms) ->

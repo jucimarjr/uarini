@@ -6,7 +6,7 @@
 %% Objetivo : Criacao e manipulacao das variaveis
 
 -module(st).
--include("../include/uarini_define.hrl").
+-include("../include/ooe_define.hrl").
 -export(
 	[
 		%% criar / zerar dicionário

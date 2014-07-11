@@ -7,14 +7,14 @@
 
 -module(gen_erl_code).
 -export([match_pattern/1, match_expr/1]).
--include("../include/uarini_define.hrl").
+-include("../include/ooe_define.hrl").
 
 -import(gen_ast,
 	[
 		match/3, rcall/4, integer/2, call/3, var/2, atom/2
 	]).
 
--import(uarini_errors, [handle_error/3]).
+-import(ooe_errors, [handle_error/3]).
 
 %%-----------------------------------------------------------------------------
 %% Faz o match de uma expressao nos parametros de uma clausula de uma funcao
@@ -94,7 +94,7 @@ match_expr(Expression) ->
 %%-----------------------------------------------------------------------------
 %% Faz o match de uma expressao do tipo Guard
 match_guard(Guard) ->
-	uarini_errors:check_guard(Guard),
+	ooe_errors:check_guard(Guard),
 	Guard.
 
 %%-----------------------------------------------------------------------------
@@ -152,7 +152,7 @@ transform_inner_expr({oo_remote, Ln1, {var, _,_} = ObjectVar, ObjectAttr}) ->
 
 %% classe::Atributo  # ERRO
 transform_inner_expr({oo_remote, Ln1, {atom, _, Name} = _WrongObjectVar, _}) ->
-	uarini_errors:handle_error(Ln1, 10, [Name]);
+	ooe_errors:handle_error(Ln1, 10, [Name]);
 
 %% chamadas de funcao
 transform_inner_expr({call, _, _, _} = Expr) ->
@@ -196,7 +196,7 @@ transform_inner_expr({lc, Ln, Expr, GenOrFilterList}) ->
 transform_inner_expr({block, Ln, Body}) ->
 	{block, Ln, lists:map(fun match_expr/1, Body)};
 
-%% qualquer outra expressão não tratada pelo uarini
+%% qualquer outra expressão não tratada pelo ooerlang
 transform_inner_expr(Expr) -> Expr.
 
 %%-----------------------------------------------------------------------------

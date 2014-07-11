@@ -18,7 +18,7 @@
 %% %CopyrightEnd%
 %%
 
-%% Definition of the Erlang grammar.
+%% Definition of the Erlang grammar extended to support ooErlang extension.
 
 Nonterminals
 form

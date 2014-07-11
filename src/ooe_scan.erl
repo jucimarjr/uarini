@@ -47,7 +47,7 @@
 %%
 %% Must watch using × \327, very close to x \170.
 
--module(uarini_scan).
+-module(ooe_scan).
 
 %%% External exports
 
@@ -92,7 +92,7 @@
 -type error_info() :: {location(), module(), error_description()}.
 
 %%% Local record.
--record(uarini_scan,
+-record(ooe_scan,
         {resword_fun = fun reserved_word/1 :: resword_fun(),
          ws          = false               :: boolean(),
          comment     = false               :: boolean(),
@@ -149,11 +149,11 @@ string(String, {Line,Column}, Options) when ?STRING(String),
     string1(String, options(Options), Line, Column, []).
 
 -type char_spec() :: string() | 'eof'.
--type cont_fun() :: fun((char_spec(), #uarini_scan{}, line(), column(),
+-type cont_fun() :: fun((char_spec(), #ooe_scan{}, line(), column(),
                          tokens(), any()) -> any()).
--opaque return_cont() :: {uarini_scan_continuation,
+-opaque return_cont() :: {ooe_scan_continuation,
                           string(), column(), tokens(), line(),
-                          #uarini_scan{}, any(), cont_fun()}.
+                          #ooe_scan{}, any(), cont_fun()}.
 -type tokens_result() :: {'ok', Tokens :: tokens(), EndLocation :: location()}
                        | {'eof', EndLocation :: location()}
                        | {'error', ErrorInfo :: error_info(),
@@ -180,7 +180,7 @@ tokens([], CharSpec, Line, Options) when ?ALINE(Line) ->
 tokens([], CharSpec, {Line,Column}, Options) when ?ALINE(Line),
                                                   ?COLUMN(Column) ->
     tokens1(CharSpec, options(Options), Line, Column, [], fun scan/6, []);
-tokens({uarini_scan_continuation,Cs,Col,Toks,Line,St,Any,Fun},
+tokens({ooe_scan_continuation,Cs,Col,Toks,Line,St,Any,Fun},
        CharSpec, _Loc, _Opts) ->
     tokens1(Cs++CharSpec, St, Line, Col, Toks, Fun, Any).
 
@@ -345,7 +345,7 @@ options(Opts0) when is_list(Opts0) ->
     Comment = proplists:get_bool(return_comments, Opts),
     WS = proplists:get_bool(return_white_spaces, Opts),
     Txt = proplists:get_bool(text, Opts),
-    #uarini_scan{resword_fun = RW_fun,
+    #ooe_scan{resword_fun = RW_fun,
               comment     = Comment,
               ws          = WS,
               text        = Txt};
@@ -421,7 +421,7 @@ set_attr(T1, T2, T3) ->
 tokens1(Cs, St, Line, Col, Toks, Fun, Any) when ?STRING(Cs); Cs =:= eof ->
     case Fun(Cs, St, Line, Col, Toks, Any) of
         {more,{Cs0,Ncol,Ntoks,Nline,Nany,Nfun}} ->
-            {more,{uarini_scan_continuation,Cs0,Ncol,Ntoks,Nline,St,Nany,Nfun}};
+            {more,{ooe_scan_continuation,Cs0,Ncol,Ntoks,Nline,St,Nany,Nfun}};
         {ok,Toks0,eof,Nline,Ncol} ->
             Res = case Toks0 of
                       [] ->
@@ -456,11 +456,11 @@ string1(Cs, St, Line, Col, Toks) ->
 scan(Cs, St, Line, Col, Toks, _) ->
     scan1(Cs, St, Line, Col, Toks).
 
-scan1([$\s|Cs], St, Line, Col, Toks) when St#uarini_scan.ws ->
+scan1([$\s|Cs], St, Line, Col, Toks) when St#ooe_scan.ws ->
     scan_spcs(Cs, St, Line, Col, Toks, 1);
 scan1([$\s|Cs], St, Line, Col, Toks) ->
     skip_white_space(Cs, St, Line, Col, Toks, 1);
-scan1([$\n|Cs], St, Line, Col, Toks) when St#uarini_scan.ws ->
+scan1([$\n|Cs], St, Line, Col, Toks) when St#ooe_scan.ws ->
     scan_newline(Cs, St, Line, Col, Toks);
 scan1([$\n|Cs], St, Line, Col, Toks) ->
     skip_white_space(Cs, St, Line+1, new_column(Col, 1), Toks, 0);
@@ -488,7 +488,7 @@ scan1([$;|Cs], St, Line, Col, Toks) ->
 scan1([$_=C|Cs], St, Line, Col, Toks) ->
     scan_variable(Cs, St, Line, Col, Toks, [C]);
 %% More punctuation characters below.
-scan1([$\%|Cs], St, Line, Col, Toks) when not St#uarini_scan.comment ->
+scan1([$\%|Cs], St, Line, Col, Toks) when not St#ooe_scan.comment ->
     skip_comment(Cs, St, Line, Col, Toks, 1);
 scan1([$\%=C|Cs], St, Line, Col, Toks) ->
     scan_comment(Cs, St, Line, Col, Toks, [C]);
@@ -512,18 +512,18 @@ scan1([$'|Cs], St, Line, Col, Toks) -> %' Emacs
     scan_qatom(Cs, St, Line, incr_column(Col, 1), Toks, State0);
 scan1([$$|Cs], St, Line, Col, Toks) ->
     scan_char(Cs, St, Line, Col, Toks);
-scan1([$\r|Cs], St, Line, Col, Toks) when St#uarini_scan.ws ->
+scan1([$\r|Cs], St, Line, Col, Toks) when St#ooe_scan.ws ->
     white_space_end(Cs, St, Line, Col, Toks, 1, "\r");
 scan1([C|Cs], St, Line, Col, Toks) when C >= $ß, C =< $ÿ, C =/= $÷ ->
     scan_atom(Cs, St, Line, Col, Toks, [C]);
 scan1([C|Cs], St, Line, Col, Toks) when C >= $À, C =< $Þ, C /= $× ->
     scan_variable(Cs, St, Line, Col, Toks, [C]);
-scan1([$\t|Cs], St, Line, Col, Toks) when St#uarini_scan.ws ->
+scan1([$\t|Cs], St, Line, Col, Toks) when St#ooe_scan.ws ->
     scan_tabs(Cs, St, Line, Col, Toks, 1);
 scan1([$\t|Cs], St, Line, Col, Toks) ->
     skip_white_space(Cs, St, Line, Col, Toks, 1);
 scan1([C|Cs], St, Line, Col, Toks) when ?WHITE_SPACE(C) ->
-    case St#uarini_scan.ws of
+    case St#ooe_scan.ws of
         true ->
             scan_white_space(Cs, St, Line, Col, Toks, [C]);
         false ->
@@ -650,7 +650,7 @@ scan_atom(Cs0, St, Line, Col, Toks, Ncs0) ->
         {Wcs,Cs} ->
             case catch list_to_atom(Wcs) of
                 Name when is_atom(Name) ->
-                    case (St#uarini_scan.resword_fun)(Name) of
+                    case (St#ooe_scan.resword_fun)(Name) of
                         true ->
                             tok2(Cs, St, Line, Col, Toks, Wcs, Name);
                         false ->
@@ -759,7 +759,7 @@ scan_nl_tabs(Cs, St, Line, Col, Toks, N) ->
 %% Note: returning {more,Cont} is meaningless here; one could just as
 %% well return several tokens. But since tokens() scans up to a full
 %% stop anyway, nothing is gained by not collecting all white spaces.
-scan_nl_white_space([$\n|Cs], #uarini_scan{text = false}=St, Line, no_col=Col,
+scan_nl_white_space([$\n|Cs], #ooe_scan{text = false}=St, Line, no_col=Col,
                     Toks0, Ncs) ->
     Toks = [{white_space,Line,lists:reverse(Ncs)}|Toks0],
     scan_newline(Cs, St, Line+1, Col, Toks);
@@ -772,7 +772,7 @@ scan_nl_white_space([C|Cs], St, Line, Col, Toks, Ncs) when ?WHITE_SPACE(C) ->
     scan_nl_white_space(Cs, St, Line, Col, Toks, [C|Ncs]);
 scan_nl_white_space([]=Cs, _St, Line, Col, Toks, Ncs) ->
     {more,{Cs,Col,Toks,Line,Ncs,fun scan_nl_white_space/6}};
-scan_nl_white_space(Cs, #uarini_scan{text = false}=St, Line, no_col=Col,
+scan_nl_white_space(Cs, #ooe_scan{text = false}=St, Line, no_col=Col,
                     Toks, Ncs) ->
     scan1(Cs, St, Line+1, Col, [{white_space,Line,lists:reverse(Ncs)}|Toks]);
 scan_nl_white_space(Cs, St, Line, Col, Toks, Ncs0) ->
@@ -781,7 +781,7 @@ scan_nl_white_space(Cs, St, Line, Col, Toks, Ncs0) ->
     Token = {white_space,Attrs,Ncs},
     scan1(Cs, St, Line+1, new_column(Col, length(Ncs)), [Token|Toks]).
 
-newline_end(Cs, #uarini_scan{text = false}=St, Line, no_col=Col,
+newline_end(Cs, #ooe_scan{text = false}=St, Line, no_col=Col,
             Toks, _N, Ncs) ->
     scan1(Cs, St, Line+1, Col, [{white_space,Line,Ncs}|Toks]);
 newline_end(Cs, St, Line, Col, Toks, N, Ncs) ->
@@ -940,9 +940,9 @@ scan_qatom(Cs, St, Line, Col, Toks, {Wcs,Str,Line0,Col0,Uni0}) ->
             end
     end.
 
-scan_string0(Cs, #uarini_scan{text=false}, Line, no_col=Col, Q, [], Wcs, Uni) ->
+scan_string0(Cs, #ooe_scan{text=false}, Line, no_col=Col, Q, [], Wcs, Uni) ->
     scan_string_no_col(Cs, Line, Col, Q, Wcs, Uni);
-scan_string0(Cs, #uarini_scan{text=true}, Line, no_col=Col, Q, Str, Wcs, Uni) ->
+scan_string0(Cs, #ooe_scan{text=true}, Line, no_col=Col, Q, Str, Wcs, Uni) ->
     scan_string1(Cs, Line, Col, Q, Str, Wcs, Uni);
 scan_string0(Cs, _St, Line, Col, Q, [], Wcs, Uni) ->
     scan_string_col(Cs, Line, Col, Q, Wcs, Uni);
@@ -1215,25 +1215,25 @@ scan_comment(Cs, St, Line, Col, Toks, Ncs0) ->
     Ncs = lists:reverse(Ncs0),
     tok3(Cs, St, Line, Col, Toks, comment, Ncs, Ncs).
 
-tok2(Cs, #uarini_scan{text = false}=St, Line, no_col=Col, Toks, _Wcs, P) ->
+tok2(Cs, #ooe_scan{text = false}=St, Line, no_col=Col, Toks, _Wcs, P) ->
     scan1(Cs, St, Line, Col, [{P,Line}|Toks]);
 tok2(Cs, St, Line, Col, Toks, Wcs, P) ->
     Attrs = attributes(Line, Col, St, Wcs),
     scan1(Cs, St, Line, incr_column(Col, length(Wcs)), [{P,Attrs}|Toks]).
 
-tok2(Cs, #uarini_scan{text = false}=St, Line, no_col=Col, Toks, _Wcs, P, _N) ->
+tok2(Cs, #ooe_scan{text = false}=St, Line, no_col=Col, Toks, _Wcs, P, _N) ->
     scan1(Cs, St, Line, Col, [{P,Line}|Toks]);
 tok2(Cs, St, Line, Col, Toks, Wcs, P, N) ->
     Attrs = attributes(Line, Col, St, Wcs),
     scan1(Cs, St, Line, incr_column(Col, N), [{P,Attrs}|Toks]).
 
-tok3(Cs, #uarini_scan{text = false}=St, Line, no_col=Col, Toks, Item, _S, Sym) ->
+tok3(Cs, #ooe_scan{text = false}=St, Line, no_col=Col, Toks, Item, _S, Sym) ->
     scan1(Cs, St, Line, Col, [{Item,Line,Sym}|Toks]);
 tok3(Cs, St, Line, Col, Toks, Item, String, Sym) ->
     Token = {Item,attributes(Line, Col, St, String),Sym},
     scan1(Cs, St, Line, incr_column(Col, length(String)), [Token|Toks]).
 
-tok3(Cs, #uarini_scan{text = false}=St, Line, no_col=Col, Toks, Item,
+tok3(Cs, #ooe_scan{text = false}=St, Line, no_col=Col, Toks, Item,
      _String, Sym, _Length) ->
     scan1(Cs, St, Line, Col, [{Item,Line,Sym}|Toks]);
 tok3(Cs, St, Line, Col, Toks, Item, String, Sym, Length) ->
@@ -1250,13 +1250,13 @@ scan_error(Error, ErrorLoc, EndLoc, Rest) ->
 
 -compile({inline,[attributes/4]}).
 
-attributes(Line, no_col, #uarini_scan{text = false}, _String) ->
+attributes(Line, no_col, #ooe_scan{text = false}, _String) ->
     Line;
-attributes(Line, no_col, #uarini_scan{text = true}, String) ->
+attributes(Line, no_col, #ooe_scan{text = true}, String) ->
     [{line,Line},{text,String}];
-attributes(Line, Col, #uarini_scan{text = false}, _String) ->
+attributes(Line, Col, #ooe_scan{text = false}, _String) ->
     {Line,Col};
-attributes(Line, Col, #uarini_scan{text = true}, String) ->
+attributes(Line, Col, #ooe_scan{text = true}, String) ->
     [{line,Line},{column,Col},{text,String}].
 
 location(Line, no_col) ->

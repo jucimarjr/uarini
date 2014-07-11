@@ -8,7 +8,7 @@
 %% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
 %% Objetivo : Tratar as ocorrências de exceções
 
--module(uarini_errors).
+-module(ooe_errors).
 -export([handle_error/3, print_errors/2, check_interface/1, check_guard/1]).
 
 handle_error(Line, Code, Args) ->

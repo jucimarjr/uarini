@@ -3,15 +3,15 @@
 %%			Emiliano Firmino ( elmiliox@gmail.com )
 %%			Rodrigo Bernardino ( rbbernardino@gmail.com )
 %% Orientador : Prof Jucimar Jr ( jucimar.jr@gmail.com )
-%% Objetivo : Módulo API para compilar arquivos uarini
+%% Objetivo : Módulo API para compilar arquivos ooerlang
 
--module(uarini).
+-module(ooec).
 -export([compile/1, get_version/0]).
 
--include("../include/uarini_define.hrl").
+-include("../include/ooe_define.hrl").
 
 %%-----------------------------------------------------------------------------
-%% Interface com o usuario final. Compila 1 arquivo uarini, gera o .beam
+%% Interface com o usuario final. Compila 1 arquivo ooerlang, gera o .beam
 compile({beam, UariniFileName}) ->
 	[ErlangFile] = get_erl_file_list([{UariniFileName, UariniFileName}]),
 
@@ -19,7 +19,7 @@ compile({beam, UariniFileName}) ->
 	compile:file(ErlangFile);
 
 %%-----------------------------------------------------------------------------
-%% Interface com o usuario final. Compila vários arquivos uarini dependentes
+%% Interface com o usuario final. Compila vários arquivos ooerlang dependentes
 compile(FileNameList) ->
 	ErlangFileList = get_erl_file_list(FileNameList),
 
@@ -29,7 +29,7 @@ compile(FileNameList) ->
 		%% io:format("~ncompiling ~p~n", [ErlangFile]),
 		case ErlangFile of
 			{error, ClassName, Errors} ->
-				uarini_errors:print_errors(ClassName, Errors),
+				ooe_errors:print_errors(ClassName, Errors),
 				{error, ClassName};
 
 			_ ->
@@ -83,7 +83,7 @@ remove_interfaces([AST | ASTList], NewASTList) ->
 	end.
 
 %%-----------------------------------------------------------------------------
-%% Mostra a versao, autores e ano do ooErlang ( uarini ).
+%% Mostra a versao, autores e ano do ooErlang.
 get_version() ->
 	io:format("Uarini - A OOP extension for Erlang Compiler ~n"),
 	io:format("Version: ~p~n", [?VSN]),
@@ -96,7 +96,7 @@ get_erl_filename(ErlangModuleName) ->
 	"./" ++ atom_to_list(ErlangModuleName) ++ ".erl".
 
 %%-----------------------------------------------------------------------------
-%% Extrai o nome do modulo erlang partir dos forms do uarini
+%% Extrai o nome do modulo erlang partir dos forms do ooerlang
 %% o nome do modulo Erlang gerado eh o nome da classe
 get_erl_modulename(AST) ->
 	[_File|[Class|_]] = AST,

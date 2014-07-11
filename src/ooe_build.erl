@@ -1,12 +1,12 @@
--module(uarini_build).
+-module(ooe_build).
 -export([build/0,get_tokens/1,get_ast/1,get_raw_tokens/1]).
 
 %%-----------------------------------------------------------------------------
 %%Gera os analisadores lexico e sintatico e compila o compilador
 build() ->
-	yecc:file(uarini_parse),
-	compile:file(uarini_scan),
-	compile:file(uarini_parse),
+	yecc:file(ooe_parse),
+	compile:file(ooe_scan),
+	compile:file(ooe_parse),
 	ok.
 
 %%-----------------------------------------------------------------------------
@@ -14,7 +14,7 @@ build() ->
 get_ast(ErlangClassFileName) ->
 	Tokens = ast:get_urn_tokens(ErlangClassFileName),
     TokenFormList = ast:get_urn_forms_tokens(Tokens),
-    ParseResultList = [uarini_parse:parse(T) || T <- TokenFormList],
+    ParseResultList = [ooe_parse:parse(T) || T <- TokenFormList],
     filter_result(ParseResultList, []).
 
 
@@ -34,7 +34,7 @@ get_raw_tokens(ErlangClassFileName) ->
     %% Remove EOF token
     %%lists:sublist(Tokens, length(Tokens)-1).
     {ok, Source} = file:read_file(ErlangClassFileName),
-    {ok, Tokens, _Lines} = uarini_scan:string( binary_to_list(Source) ),
+    {ok, Tokens, _Lines} = ooe_scan:string( binary_to_list(Source) ),
     Tokens.
 
 %%-----------------------------------------------------------------------------

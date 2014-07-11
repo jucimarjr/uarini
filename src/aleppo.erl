@@ -9,7 +9,7 @@
         macro_dict = dict:new()
     }).
 
--define(SCANNER, uarini_scan).
+-define(SCANNER, ooe_scan).
 
 process_file(FileName) ->
     ModuleName = list_to_atom(filename:rootname(filename:basename(FileName))),
