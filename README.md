@@ -18,7 +18,7 @@ How to Install?
 $ cd $OOERLANG_SOURCE_DIR
 $ make
 ```
-3. configure $PATH
+3. configure PATH
 ```shell
 # in .bashrc add:
 export OOE_HOME=<PATH_TO_OOERLANG_DIR>
