@@ -6,8 +6,9 @@ priv
 *.plt
 *.swp
 .DS_store
-ooe_parse.erl
-aleppo_parser.erl
+src/ooe_parse.erl
+src/aleppo_parser.erl
+test/ebin/
 .metadata/
 *.log
 *.dump
